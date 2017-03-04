@@ -1,22 +1,76 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{b3768301-443f-4d9a-9405-ff018cb39694}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{b25ec161-0a1d-4426-a24e-95db84728c1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Geometry">
+      <UniqueIdentifier>{622964e4-8860-4481-a4cc-0c5c651ed43a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{07d3057d-e9a2-44af-b83c-da5933ad498e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test">
+      <UniqueIdentifier>{6a3d73ef-3510-4dec-a3af-6e5b37307c9e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Window.cpp">
+      <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>Math\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Rectangle.cpp">
+      <Filter>Math\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatformerGame.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Window.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>Math\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>Math\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Math\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatformerGame.h">
+      <Filter>Test</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

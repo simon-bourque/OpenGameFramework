@@ -23,6 +23,15 @@
     <Filter Include="Resource">
       <UniqueIdentifier>{ee30c9da-e19c-447b-9280-765f3e327d7c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\Shader">
+      <UniqueIdentifier>{2b3025a4-bbc3-4351-8c6b-4b9a61a0ab0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Renderer">
+      <UniqueIdentifier>{f82a7231-b77e-4ec7-9dd3-e417e68d1fc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Memory">
+      <UniqueIdentifier>{59709d3f-eeac-4ef2-b259-4280548847df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp">
@@ -33,9 +42,6 @@
     </ClCompile>
     <ClCompile Include="Rectangle.cpp">
       <Filter>Math\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="Log.cpp">
-      <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Core</Filter>
@@ -62,7 +68,22 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Uniform.cpp">
+      <Filter>Graphics\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderProgram.cpp">
+      <Filter>Graphics\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Buffer.cpp">
+      <Filter>Graphics\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexArrayObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -78,9 +99,6 @@
       <Filter>Math\Geometry</Filter>
     </ClInclude>
     <ClInclude Include="Core.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Log.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Types.h">
@@ -105,6 +123,24 @@
     <ClInclude Include="Camera.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h" />
+    <ClInclude Include="Resources.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Uniform.h">
+      <Filter>Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderProgram.h">
+      <Filter>Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Buffer.h">
+      <Filter>Graphics\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexArrayObject.h" />
   </ItemGroup>
 </Project>

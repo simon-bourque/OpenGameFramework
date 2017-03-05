@@ -4,10 +4,10 @@
 #include <string>
 
 #include "Types.h"
-#include "Log.h"
+#include "Logging.h"
 
 #ifdef DEBUG_BUILD
-	#define DEBUG_LOG(msg) log(msg)
+	#define DEBUG_LOG(msg) printToConsole(msg)
 #else
 	#define DEBUG_LOG(msg)
 #endif

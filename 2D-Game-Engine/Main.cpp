@@ -1,6 +1,7 @@
 
 #include "PlatformerGame.h"
 
+#include "Core.h"
 #include <iostream>
 
 int main() {
@@ -9,7 +10,7 @@ int main() {
 	game.run();
 
 	//int pause;
-	//std::cin >> pause;
+	//cin >> pause;
 
 	return 0;
 }

@@ -4,7 +4,7 @@
 #include <iostream>
 #include <ctime>
 
-void log(const string& message) {
+void printToConsole(const string& message) {
 
 	static time_t currentTimeRaw = 0;
 	static struct tm currentTime;

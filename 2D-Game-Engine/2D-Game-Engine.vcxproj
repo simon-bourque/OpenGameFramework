@@ -120,9 +120,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Log.cpp" />
+    <ClCompile Include="Logging.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Matrix3f.cpp" />
     <ClCompile Include="PlatformerGame.cpp" />
@@ -130,26 +131,34 @@
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="Resources.cpp" />
+    <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Shape.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Uniform.cpp" />
+    <ClCompile Include="VertexArrayObject.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Buffer.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Log.h" />
+    <ClInclude Include="Logging.h" />
     <ClInclude Include="Matrix3f.h" />
     <ClInclude Include="PlatformerGame.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="RawImage.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RenderSystem.h" />
+    <ClInclude Include="Resources.h" />
+    <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Types.h" />
+    <ClInclude Include="Uniform.h" />
+    <ClInclude Include="VertexArrayObject.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

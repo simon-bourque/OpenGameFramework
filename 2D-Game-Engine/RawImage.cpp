@@ -52,7 +52,7 @@ RawImage RawImage::getSubImage(uint32 x, uint32 y, uint32 width, uint32 height) 
 				dataPtr++;
 			}
 
-			delete pixel;
+			delete[] pixel;
 		}
 	}
 

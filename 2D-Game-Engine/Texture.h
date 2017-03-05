@@ -11,17 +11,17 @@ class Texture
 {
 public:
 
-	enum class Target {
+	enum Target : GLenum {
 		TEXTURE_2D = GL_TEXTURE_2D,
 		TEXTURE_2D_ARRAY = GL_TEXTURE_2D_ARRAY
 	};
 
-	enum class Filter {
+	enum Filter : GLint {
 		NEAREST_NEIGHBOR = GL_NEAREST,
 		LINEAR = GL_LINEAR
 	};
 
-	enum class Wrap {
+	enum Wrap : GLint {
 		REPEAT = GL_REPEAT,
 		MIRRORED_REPEAT = GL_MIRRORED_REPEAT,
 		CLAMP_TO_EDGE = GL_CLAMP_TO_EDGE,

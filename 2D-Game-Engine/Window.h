@@ -3,7 +3,7 @@
 
 #include "Core.h"
 
-class GLFWwindow;
+struct GLFWwindow;
 
 class Window
 {
@@ -25,9 +25,13 @@ public:
 
 	void setTitle(const string& title);
 	void swapBuffers() const;
-	bool shouldClose() const;
+	int32 shouldClose() const;
 
 	static void pollEvents();
+
+	// Prevent copying of window
+	Window(const Window&) = delete;
+	Window& operator=(const Window&) = delete;
 };
 
 #endif

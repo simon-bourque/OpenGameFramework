@@ -3,16 +3,18 @@
 #include <GLFW/glfw3.h>
 #include <exception>
 
-// Temp include
-#include <iostream>
-
 Window::Window(string title, int32 width, int32 height) : m_title(title), m_width(width), m_height(height) {
 
-	glfwSetErrorCallback([](int32 error, const char* desc) -> void { cout << desc << endl; });
+	glfwSetErrorCallback([](int32 error, const char* desc) -> void { DEBUG_LOG(desc); });
 
 	if (!glfwInit()) {
 		throw runtime_error("Failed to initialize GLFW.");
 	}
+
+	glfwDefaultWindowHints();
+
+	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 	m_handle = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
 	if (!m_handle)
@@ -22,6 +24,7 @@ Window::Window(string title, int32 width, int32 height) : m_title(title), m_widt
 	}
 
 	glfwMakeContextCurrent(m_handle);
+
 	glfwSwapInterval(1);
 
 	// Center window
@@ -56,7 +59,7 @@ void Window::swapBuffers() const {
 	glfwSwapBuffers(m_handle);
 }
 
-bool Window::shouldClose() const {
+int32 Window::shouldClose() const {
 	return glfwWindowShouldClose(m_handle);
 }
 

@@ -20,6 +20,9 @@
     <Filter Include="Test">
       <UniqueIdentifier>{6a3d73ef-3510-4dec-a3af-6e5b37307c9e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{ee30c9da-e19c-447b-9280-765f3e327d7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp">
@@ -43,6 +46,23 @@
     <ClCompile Include="PlatformerGame.cpp">
       <Filter>Test</Filter>
     </ClCompile>
+    <ClCompile Include="RawImage.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSystem.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Matrix3f.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -72,5 +92,19 @@
     <ClInclude Include="PlatformerGame.h">
       <Filter>Test</Filter>
     </ClInclude>
+    <ClInclude Include="RawImage.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h" />
+    <ClInclude Include="Matrix3f.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h" />
   </ItemGroup>
 </Project>

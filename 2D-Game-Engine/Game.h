@@ -4,16 +4,19 @@
 #include "Core.h"
 
 class Window;
+class RenderSystem;
+class Rectangle;
 
 class Game
 {
 private:
 	Window* m_window;
+	RenderSystem* m_renderSystem;
 
 	bool m_shutdown;
 	int32 m_fps;
 public:
-	Game(string title, int32 width, int32 height);
+	Game(string title, int32 width, int32 height, const Rectangle& viewPort);
 	virtual ~Game();
 
 	void run();

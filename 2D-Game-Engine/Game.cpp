@@ -2,19 +2,26 @@
 
 #include <GLFW/glfw3.h>
 
+#include "Rectangle.h"
+#include "Camera.h"
 #include "Window.h"
+#include "RenderSystem.h"
 
-Game::Game(string title, int32 width, int32 height) : m_shutdown(false), m_fps(0) {
-	DEBUG_LOG("Initializing game.");
+Game::Game(string title, int32 width, int32 height, const Rectangle& viewPort) : m_shutdown(false), m_fps(0) {
+	DEBUG_LOG("Initializing game");
 
-	DEBUG_LOG("Initializing window.");
+	DEBUG_LOG("Initializing window");
 	m_window = new Window(title, width, height);
+
+	DEBUG_LOG("Initializing render system");
+	m_renderSystem = new RenderSystem(Camera(viewPort));
 }
 
 
 Game::~Game() {
-	DEBUG_LOG("Destroying game.");
+	DEBUG_LOG("Destroying game");
 	delete m_window;
+	delete m_renderSystem;
 }
 
 void Game::run() {
@@ -24,7 +31,7 @@ void Game::run() {
 	float64 delta = 0;
 	float64 currentTime = 0;
 
-	DEBUG_LOG("Entering loop.");
+	DEBUG_LOG("Entering loop");
 
 	while (!m_window->shouldClose() && !m_shutdown) {
 
@@ -51,6 +58,7 @@ void Game::run() {
 			frames++;
 		}
 	}
+	DEBUG_LOG("Shutting down");
 }
 
 void Game::tick(float32 delta) {
@@ -58,5 +66,5 @@ void Game::tick(float32 delta) {
 }
 
 void Game::render() {
-
+	glClear(GL_COLOR_BUFFER_BIT);
 }

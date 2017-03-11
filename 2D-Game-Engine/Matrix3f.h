@@ -19,10 +19,10 @@ struct Matrix3f
 	float32 det() const;
 	Matrix3f inverse() const;
 
-	Matrix3f operator+(const Matrix3f& m);
-	Matrix3f operator-(const Matrix3f& m);
-	Matrix3f operator*(const Matrix3f& m);
-	Matrix3f operator*(float32 s);
+	Matrix3f operator+(const Matrix3f& m) const;
+	Matrix3f operator-(const Matrix3f& m) const;
+	Matrix3f operator*(const Matrix3f& m) const;
+	Matrix3f operator*(float32 s) const;
 
 	static Matrix3f translation(float32 dx, float32 dy);
 	static Matrix3f scale(float32 sx, float32 sy);

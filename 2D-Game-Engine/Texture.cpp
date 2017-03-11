@@ -3,13 +3,16 @@
 #include "RawImage.h"
 
 Texture::Texture(Target target, GLenum unit) : m_target(target), m_unit(unit) {
-	GLuint* name = 0;
-	glGenTextures(1, name);
-	m_name = *name;
+	GLuint name = 0;
+	glGenTextures(1, &name);
+	m_name = name;
 }
 
 Texture::~Texture() {
+	bind();
 	glDeleteTextures(1, &m_name);
+	m_name = 0;
+	unbind();
 }
 
 void Texture::bind() const {

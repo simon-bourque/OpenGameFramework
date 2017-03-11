@@ -1,5 +1,7 @@
 #include "RenderSystem.h"
 
+#include "SpriteRenderer.h"
+
 #include <GL/glew.h>
 
 #include <sstream>
@@ -50,9 +52,12 @@ RenderSystem::RenderSystem(const Camera& camera) : m_camera(camera) {
 
 	//GL11.glEnable(GL13.GL_MULTISAMPLE);
 	glClearColor(0.0f, 0.0f,1.0f, 1.0f);
+
+	m_spriteRenderer = new SpriteRenderer(this);
 }
 
 
 RenderSystem::~RenderSystem() {
 	glUseProgram(0);
+	delete m_spriteRenderer;
 }

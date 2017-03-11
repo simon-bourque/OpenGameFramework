@@ -83,7 +83,15 @@
     <ClCompile Include="Buffer.cpp">
       <Filter>Graphics\Memory</Filter>
     </ClCompile>
-    <ClCompile Include="VertexArrayObject.cpp" />
+    <ClCompile Include="VertexArrayObject.cpp">
+      <Filter>Graphics\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Graphics\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -141,6 +149,14 @@
     <ClInclude Include="Buffer.h">
       <Filter>Graphics\Memory</Filter>
     </ClInclude>
-    <ClInclude Include="VertexArrayObject.h" />
+    <ClInclude Include="VertexArrayObject.h">
+      <Filter>Graphics\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Graphics\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

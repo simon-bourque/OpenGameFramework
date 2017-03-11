@@ -45,7 +45,7 @@ Matrix3f Matrix3f::inverse() const {
 	return tmp;
 }
 
-Matrix3f Matrix3f::operator+(const Matrix3f& m) {
+Matrix3f Matrix3f::operator+(const Matrix3f& m) const {
 	Matrix3f tmp;
 	tmp.m00 = m00 + m.m00;
 	tmp.m01 = m01 + m.m01;
@@ -59,7 +59,7 @@ Matrix3f Matrix3f::operator+(const Matrix3f& m) {
 	return tmp;
 }
 
-Matrix3f Matrix3f::operator-(const Matrix3f& m) {
+Matrix3f Matrix3f::operator-(const Matrix3f& m) const {
 	Matrix3f tmp;
 	tmp.m00 = m00 - m.m00;
 	tmp.m01 = m01 - m.m01;
@@ -73,7 +73,7 @@ Matrix3f Matrix3f::operator-(const Matrix3f& m) {
 	return tmp;
 }
 
-Matrix3f Matrix3f::operator*(const Matrix3f& m) {
+Matrix3f Matrix3f::operator*(const Matrix3f& m) const {
 	Matrix3f tmp;
 	// First row
 	tmp.m00 = m00 * m.m00 + m01 * m.m10 + m02 * m.m20;
@@ -93,7 +93,7 @@ Matrix3f Matrix3f::operator*(const Matrix3f& m) {
 	return tmp;
 }
 
-Matrix3f Matrix3f::operator*(float32 s) {
+Matrix3f Matrix3f::operator*(float32 s) const {
 	Matrix3f tmp;
 	tmp.m00 = m00 * s;
 	tmp.m01 = m01 * s;

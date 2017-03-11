@@ -26,6 +26,8 @@ public:
 	virtual void init() = 0;
 
 	void shutdown() { m_shutdown = true; };
+
+	RenderSystem* getRenderSystem() const { return m_renderSystem; };
 };
 
 #endif

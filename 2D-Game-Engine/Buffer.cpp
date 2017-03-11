@@ -8,7 +8,10 @@ Buffer::Buffer(Target target) : m_target(target) {
 
 
 Buffer::~Buffer() {
+	bind();
 	glDeleteBuffers(1, &m_handle);
+	m_handle = 0;
+	unbind();
 }
 
 void Buffer::bind() const {

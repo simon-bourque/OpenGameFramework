@@ -11,7 +11,10 @@ VertexArrayObject::~VertexArrayObject() {
 		delete buffer;
 	}
 
+	bind();
 	glDeleteVertexArrays(1, &m_handle);
+	m_handle = 0;
+	unbind();
 }
 
 void VertexArrayObject::addArrayBuffer(GLuint attribIndex, GLvoid* data, GLsizeiptr dataSize, GLint vertexSize, GLenum type, Buffer::Usage usage) {

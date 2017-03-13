@@ -6,9 +6,13 @@
 #include "Core.h"
 
 class RawImage;
+class RenderSystem;
 
 class Texture
 {
+
+	friend class RenderSystem;
+
 public:
 
 	enum Target : GLenum {
@@ -41,9 +45,6 @@ public:
 	void unbind() const;
 
 	GLuint getName() const { return m_name; };
-
-	static Texture* Texture::createTexture2D(const RawImage& img, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT);
-	static Texture* Texture::createTexture2DArray(RawImage* imgs, uint32 layers, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT);
 
 	// Prevent copying of texture
 	Texture(const Texture&) = delete;

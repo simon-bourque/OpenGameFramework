@@ -1,11 +1,11 @@
 #include "Game.h"
 
+#include "RenderSystem.h"
 #include <GLFW/glfw3.h>
+#include "Window.h"
 
 #include "Rectangle.h"
 #include "Camera.h"
-#include "Window.h"
-#include "RenderSystem.h"
 
 Game::Game(string title, int32 width, int32 height, const Rectangle& viewPort) : m_shutdown(false), m_fps(0) {
 	DEBUG_LOG("Initializing game");

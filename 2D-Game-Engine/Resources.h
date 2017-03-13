@@ -7,5 +7,6 @@ class RawImage;
 
 string loadSrc(string file);
 RawImage loadImage(string file);
+string loadLevel(string file);
 
 #endif

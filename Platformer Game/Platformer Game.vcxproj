@@ -19,19 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{65F11ED5-654D-45FB-9A33-AB13E6E201B1}</ProjectGuid>
-    <RootNamespace>My2DGameEngine</RootNamespace>
+    <ProjectGuid>{5F9853E9-7EA1-4962-A05B-2DD3701C796A}</ProjectGuid>
+    <RootNamespace>PlatformerGame</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -74,23 +74,15 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GLEW_STATIC;DEBUG_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)2D-Game-Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Lib>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
-    <Lib>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
-      <Verbose>false</Verbose>
-    </Lib>
     <ProjectReference>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -107,25 +99,17 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)2D-Game-Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Lib>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
-    <Lib>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
-      <Verbose>false</Verbose>
-    </Lib>
     <ProjectReference>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -142,47 +126,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Buffer.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Logging.cpp" />
-    <ClCompile Include="Matrix3f.cpp" />
-    <ClCompile Include="RawImage.cpp" />
-    <ClCompile Include="Rectangle.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="RenderSystem.cpp" />
-    <ClCompile Include="Resources.cpp" />
-    <ClCompile Include="ShaderProgram.cpp" />
-    <ClCompile Include="Shape.cpp" />
-    <ClCompile Include="SpriteRenderer.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Transform.cpp" />
-    <ClCompile Include="Uniform.cpp" />
-    <ClCompile Include="VertexArrayObject.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ProjectReference Include="..\2D-Game-Engine\2D-Game-Engine.vcxproj">
+      <Project>{65f11ed5-654d-45fb-9a33-ab13e6e201b1}</Project>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Buffer.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Core.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="Logging.h" />
-    <ClInclude Include="Matrix3f.h" />
-    <ClInclude Include="Point.h" />
-    <ClInclude Include="RawImage.h" />
-    <ClInclude Include="Rectangle.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="RenderSystem.h" />
-    <ClInclude Include="Resources.h" />
-    <ClInclude Include="ShaderProgram.h" />
-    <ClInclude Include="Shape.h" />
-    <ClInclude Include="SpriteRenderer.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="Transform.h" />
-    <ClInclude Include="Types.h" />
-    <ClInclude Include="Uniform.h" />
-    <ClInclude Include="VertexArrayObject.h" />
-    <ClInclude Include="Window.h" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PlatformerGame.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PlatformerGame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

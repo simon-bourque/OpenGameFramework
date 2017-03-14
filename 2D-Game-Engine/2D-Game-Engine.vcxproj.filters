@@ -17,9 +17,6 @@
     <Filter Include="Core">
       <UniqueIdentifier>{07d3057d-e9a2-44af-b83c-da5933ad498e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Test">
-      <UniqueIdentifier>{6a3d73ef-3510-4dec-a3af-6e5b37307c9e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource">
       <UniqueIdentifier>{ee30c9da-e19c-447b-9280-765f3e327d7c}</UniqueIdentifier>
     </Filter>
@@ -45,12 +42,6 @@
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="PlatformerGame.cpp">
-      <Filter>Test</Filter>
     </ClCompile>
     <ClCompile Include="RawImage.cpp">
       <Filter>Resource</Filter>
@@ -114,9 +105,6 @@
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="PlatformerGame.h">
-      <Filter>Test</Filter>
     </ClInclude>
     <ClInclude Include="RawImage.h">
       <Filter>Resource</Filter>

@@ -5,6 +5,11 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2D-Game-Engine", "2D-Game-Engine\2D-Game-Engine.vcxproj", "{65F11ED5-654D-45FB-9A33-AB13E6E201B1}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Platformer Game", "Platformer Game\Platformer Game.vcxproj", "{5F9853E9-7EA1-4962-A05B-2DD3701C796A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{65F11ED5-654D-45FB-9A33-AB13E6E201B1} = {65F11ED5-654D-45FB-9A33-AB13E6E201B1}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +26,14 @@ Global
 		{65F11ED5-654D-45FB-9A33-AB13E6E201B1}.Release|x64.Build.0 = Release|x64
 		{65F11ED5-654D-45FB-9A33-AB13E6E201B1}.Release|x86.ActiveCfg = Release|Win32
 		{65F11ED5-654D-45FB-9A33-AB13E6E201B1}.Release|x86.Build.0 = Release|Win32
+		{5F9853E9-7EA1-4962-A05B-2DD3701C796A}.Debug|x64.ActiveCfg = Debug|x64
+		{5F9853E9-7EA1-4962-A05B-2DD3701C796A}.Debug|x64.Build.0 = Debug|x64
+		{5F9853E9-7EA1-4962-A05B-2DD3701C796A}.Debug|x86.ActiveCfg = Debug|Win32
+		{5F9853E9-7EA1-4962-A05B-2DD3701C796A}.Debug|x86.Build.0 = Debug|Win32
+		{5F9853E9-7EA1-4962-A05B-2DD3701C796A}.Release|x64.ActiveCfg = Release|x64
+		{5F9853E9-7EA1-4962-A05B-2DD3701C796A}.Release|x64.Build.0 = Release|x64
+		{5F9853E9-7EA1-4962-A05B-2DD3701C796A}.Release|x86.ActiveCfg = Release|Win32
+		{5F9853E9-7EA1-4962-A05B-2DD3701C796A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

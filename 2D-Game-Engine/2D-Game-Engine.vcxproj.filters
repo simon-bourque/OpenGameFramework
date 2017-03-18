@@ -92,6 +92,7 @@
     <ClCompile Include="Input.cpp">
       <Filter>Input</Filter>
     </ClCompile>
+    <ClCompile Include="Vector2f.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -161,5 +162,6 @@
     <ClInclude Include="Input.h">
       <Filter>Input</Filter>
     </ClInclude>
+    <ClInclude Include="Vector2f.h" />
   </ItemGroup>
 </Project>

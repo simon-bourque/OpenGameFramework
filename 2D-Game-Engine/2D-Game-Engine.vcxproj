@@ -160,6 +160,7 @@
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Uniform.cpp" />
+    <ClCompile Include="Vector2f.cpp" />
     <ClCompile Include="VertexArrayObject.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
@@ -185,6 +186,7 @@
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Uniform.h" />
+    <ClInclude Include="Vector2f.h" />
     <ClInclude Include="VertexArrayObject.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

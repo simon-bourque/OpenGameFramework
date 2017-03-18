@@ -66,7 +66,7 @@ ShaderProgram::ShaderProgram(const string& vertSrc, const string& fragSrc) {
 	GLint numUniforms = 0;
 	glGetProgramiv(m_programId, GL_ACTIVE_UNIFORMS, &numUniforms);
 
-	for (uint32 i = 0; i < numUniforms; i++) {
+	for (int32 i = 0; i < numUniforms; i++) {
 		//IntBuffer size = BufferUtils.createIntBuffer(1);
 		//IntBuffer type = BufferUtils.createIntBuffer(1);
 		//String name = GL20.glGetActiveUniform(programId, i, size, type);

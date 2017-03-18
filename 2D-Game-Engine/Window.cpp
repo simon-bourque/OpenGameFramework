@@ -3,6 +3,8 @@
 #include <GLFW/glfw3.h>
 #include <exception>
 
+#include "Input.h"
+
 Window::Window(string title, int32 width, int32 height) : m_title(title), m_width(width), m_height(height) {
 
 	glfwSetErrorCallback([](int32 error, const char* desc) -> void { DEBUG_LOG(desc); });
@@ -37,10 +39,13 @@ Window::Window(string title, int32 width, int32 height) : m_title(title), m_widt
 
 	glfwSetWindowUserPointer(m_handle, this);
 	glfwSetWindowSizeCallback(m_handle, windowSizeCallback);
+
+	m_input = new Input(this);
 }
 
 
 Window::~Window() {
+	delete m_input;
 	glfwTerminate();
 }
 

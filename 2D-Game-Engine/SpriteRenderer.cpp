@@ -10,14 +10,14 @@
 
 #include <GL/glew.h>
 
-const float32 const SpriteRenderer::SPRITE_VERTS[8] = {
+const float32 SpriteRenderer::SPRITE_VERTS[8] = {
 	-0.5f,-0.5f,
 	-0.5f,0.5f,
 	0.5f,-0.5f,
 	0.5f,0.5f
 };
 
-const float32 const SpriteRenderer::SPRITE_UV[8] = { 
+const float32 SpriteRenderer::SPRITE_UV[8] = { 
 	0.0f,1.0f,
 	0.0f,0.0f,
 	1.0f,1.0f,

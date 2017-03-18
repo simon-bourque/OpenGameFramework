@@ -27,6 +27,7 @@ public:
 
 	void shutdown() { m_shutdown = true; };
 
+	Window* getWindow() const { return m_window; };
 	RenderSystem* getRenderSystem() const { return m_renderSystem; };
 };
 

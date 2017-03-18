@@ -6,12 +6,11 @@
 #include "Core.h"
 
 class RawImage;
-class RenderSystem;
 
 class Texture
 {
 
-	friend class RenderSystem;
+	friend class TextureManager;
 
 public:
 
@@ -32,6 +31,10 @@ public:
 		CLAMP_TO_BORDER = GL_CLAMP_TO_BORDER
 	};
 
+	enum Unit : GLenum {
+		UNIT_0 = GL_TEXTURE0
+	};
+
 private:
 
 	GLuint m_name;
@@ -45,6 +48,8 @@ public:
 	void unbind() const;
 
 	GLuint getName() const { return m_name; };
+	Target getTarget() const { return m_target; };
+	GLenum getUnit() const { return m_unit; };
 
 	// Prevent copying of texture
 	Texture(const Texture&) = delete;

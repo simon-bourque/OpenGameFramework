@@ -19,8 +19,8 @@ private:
 
 	VertexArrayObject* m_spriteVAO;
 public:
-	static const float32 const SPRITE_VERTS[8];
-	static const float32 const SPRITE_UV[8];
+	static const float32 SPRITE_VERTS[8];
+	static const float32 SPRITE_UV[8];
 	static const int32 SPRITE_NUM_VERTICES;
 
 	SpriteRenderer(RenderSystem* rs);

@@ -77,7 +77,7 @@ string loadLevel(string file) {
 
 	ss << "TILES: " << numTiles << endl;
 
-	for (uint32 i = 0; i < numTiles; i++) {
+	for (int32 i = 0; i < numTiles; i++) {
 		float32 x = 0;
 		float32 y = 0;
 		int32 index = 0;
@@ -92,7 +92,7 @@ string loadLevel(string file) {
 	
 	ss << "COLLIDERS: " << numColliders << endl;
 
-	for (uint32 i = 0; i < numColliders; i++) {
+	for (int32 i = 0; i < numColliders; i++) {
 		float32 x = 0;
 		float32 y = 0;
 		float32 width = 0;
@@ -107,7 +107,7 @@ string loadLevel(string file) {
 	int32 stringLen = 0;
 	readInt(input, stringLen);
 
-	for (uint32 i = 0; i < stringLen; i++) {
+	for (int32 i = 0; i < stringLen; i++) {
 		char character = 0;
 		input.get(character);
 		ss << character;

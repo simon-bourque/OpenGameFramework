@@ -4,10 +4,11 @@
 #include "Core.h"
 
 struct GLFWwindow;
+class Input;
 
 class Window
 {
-
+	friend Input;
 	friend void windowSizeCallback(GLFWwindow* window, int32 width, int32 height);
 
 private:
@@ -16,12 +17,15 @@ private:
 	int32 m_height;
 
 	GLFWwindow* m_handle;
+
+	Input* m_input;
 public:
 	Window(string title, int32 width, int32 height);
 	virtual ~Window();
 
 	int32 getWidth() const { return m_width; };
 	int32 getHeight() const { return m_height; };
+	Input* getInput() const { return m_input; };
 
 	void setTitle(const string& title);
 	void swapBuffers() const;

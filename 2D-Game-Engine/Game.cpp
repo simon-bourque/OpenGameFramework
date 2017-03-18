@@ -7,13 +7,15 @@
 #include "Rectangle.h"
 #include "Camera.h"
 
-Game::Game(string title, int32 width, int32 height, const Rectangle& viewPort) : m_shutdown(false), m_fps(0) {
-	DEBUG_LOG("Initializing game");
+#include "Input.h"
 
-	DEBUG_LOG("Initializing window");
+Game::Game(string title, int32 width, int32 height, const Rectangle& viewPort) : m_shutdown(false), m_fps(0) {
+	DEBUG_LOG("Initializing game...");
+
+	DEBUG_LOG("Initializing window...");
 	m_window = new Window(title, width, height);
 
-	DEBUG_LOG("Initializing render system");
+	DEBUG_LOG("Initializing render system...");
 	m_renderSystem = new RenderSystem(Camera(viewPort));
 }
 

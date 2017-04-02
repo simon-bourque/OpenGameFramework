@@ -49,7 +49,7 @@ Window::~Window() {
 	glfwTerminate();
 }
 
-void windowSizeCallback(GLFWwindow* window, int32 width, int32 height) {
+static void windowSizeCallback(GLFWwindow* window, int32 width, int32 height) {
 	Window* windowPtr = (Window*)glfwGetWindowUserPointer(window);
 	windowPtr->m_width = width;
 	windowPtr->m_height = height;

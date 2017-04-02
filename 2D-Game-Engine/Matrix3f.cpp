@@ -1,20 +1,54 @@
 #include "Matrix3f.h"
 #include <math.h>
 
+Matrix3f::Matrix3f() : 
+	m00(1),
+	m01(0),
+	m02(0),
+	m10(0),
+	m11(1),
+	m12(0),
+	m20(0),
+	m21(0),
+	m22(1) 
+{}
+
+Matrix3f::Matrix3f(float32 m00, float32 m01, float32 m02, float32 m10, float32 m11, float32 m12, float32 m20, float32 m21, float32 m22) : 
+	m00(m00),
+	m01(m01),
+	m02(m02),
+	m10(m10),
+	m11(m11),
+	m12(m12),
+	m20(m20),
+	m21(m21),
+	m22(m22) 
+{}
+
+Matrix3f::Matrix3f(const float32 (&values)[9]) : 
+	m00(values[0]),
+	m01(values[1]),
+	m02(values[2]),
+	m10(values[3]),
+	m11(values[4]),
+	m12(values[5]),
+	m20(values[6]),
+	m21(values[7]),
+	m22(values[8])
+{}
+
 Matrix3f Matrix3f::transpose() const {
-	Matrix3f tmp;
-
-	tmp.m00 = m00;
-	tmp.m01 = m10;
-	tmp.m02 = m20;
-	tmp.m10 = m01;
-	tmp.m11 = m11;
-	tmp.m12 = m21;
-	tmp.m20 = m02;
-	tmp.m21 = m12;
-	tmp.m22 = m22;
-
-	return tmp;
+	return {
+		m00,
+		m10,
+		m20,
+		m01,
+		m11,
+		m21,
+		m02,
+		m12,
+		m22
+	};
 }
 
 float32 Matrix3f::det() const {
@@ -23,126 +57,130 @@ float32 Matrix3f::det() const {
 
 Matrix3f Matrix3f::inverse() const {
 	// TODO check if actually invertible
-	Matrix3f tmp;
 
 	float32 invDet = 1 / det();
 
-	// First row
-	tmp.m00 = (m11 * m22 - m12 * m21) * invDet;
-	tmp.m10 = (m20 * m12 - m10 * m22) * invDet;
-	tmp.m20 = (m10 * m21 - m20 * m11) * invDet;
-
-	// Second row
-	tmp.m01 = (m21 * m02 - m01 * m22) * invDet;
-	tmp.m11 = (m00 * m22 - m20 * m02) * invDet;
-	tmp.m21 = (m20 * m01 - m00 * m21) * invDet;
-
-	// Third row
-	tmp.m02 = (m01 * m12 - m11 * m02) * invDet;
-	tmp.m12 = (m10 * m02 - m00 * m12) * invDet;
-	tmp.m22 = (m00 * m11 - m10 * m01) * invDet;
-
-	return tmp;
+	return {
+		(m11 * m22 - m12 * m21) * invDet,
+		(m21 * m02 - m01 * m22) * invDet,
+		(m01 * m12 - m11 * m02) * invDet,
+		(m20 * m12 - m10 * m22) * invDet,
+		(m00 * m22 - m20 * m02) * invDet,
+		(m10 * m02 - m00 * m12) * invDet,
+		(m10 * m21 - m20 * m11) * invDet,
+		(m20 * m01 - m00 * m21) * invDet,
+		(m00 * m11 - m10 * m01) * invDet
+	};
 }
 
 Matrix3f Matrix3f::operator+(const Matrix3f& m) const {
-	Matrix3f tmp;
-	tmp.m00 = m00 + m.m00;
-	tmp.m01 = m01 + m.m01;
-	tmp.m02 = m02 + m.m02;
-	tmp.m10 = m10 + m.m10;
-	tmp.m11 = m11 + m.m11;
-	tmp.m12 = m12 + m.m12;
-	tmp.m20 = m20 + m.m20;
-	tmp.m21 = m21 + m.m21;
-	tmp.m22 = m22 + m.m22;
-	return tmp;
+	return {
+		m00 + m.m00,
+		m01 + m.m01,
+		m02 + m.m02,
+		m10 + m.m10,
+		m11 + m.m11,
+		m12 + m.m12,
+		m20 + m.m20,
+		m21 + m.m21,
+		m22 + m.m22
+	};
 }
 
 Matrix3f Matrix3f::operator-(const Matrix3f& m) const {
-	Matrix3f tmp;
-	tmp.m00 = m00 - m.m00;
-	tmp.m01 = m01 - m.m01;
-	tmp.m02 = m02 - m.m02;
-	tmp.m10 = m10 - m.m10;
-	tmp.m11 = m11 - m.m11;
-	tmp.m12 = m12 - m.m12;
-	tmp.m20 = m20 - m.m20;
-	tmp.m21 = m21 - m.m21;
-	tmp.m22 = m22 - m.m22;
-	return tmp;
+	return{
+		m00 - m.m00,
+		m01 - m.m01,
+		m02 - m.m02,
+		m10 - m.m10,
+		m11 - m.m11,
+		m12 - m.m12,
+		m20 - m.m20,
+		m21 - m.m21,
+		m22 - m.m22
+	};
 }
 
 Matrix3f Matrix3f::operator*(const Matrix3f& m) const {
-	Matrix3f tmp;
-	// First row
-	tmp.m00 = m00 * m.m00 + m01 * m.m10 + m02 * m.m20;
-	tmp.m01 = m00 * m.m01 + m01 * m.m11 + m02 * m.m21;
-	tmp.m02 = m00 * m.m02 + m01 * m.m12 + m02 * m.m22;
-
-	// Second row
-	tmp.m10 = m10 * m.m00 + m11 * m.m10 + m12 * m.m20;
-	tmp.m11 = m10 * m.m01 + m11 * m.m11 + m12 * m.m21;
-	tmp.m12 = m10 * m.m02 + m11 * m.m12 + m12 * m.m22;
-
-	// Third row
-	tmp.m20 = m20 * m.m00 + m21 * m.m10 + m22 * m.m20;
-	tmp.m21 = m20 * m.m01 + m21 * m.m11 + m22 * m.m21;
-	tmp.m22 = m20 * m.m02 + m21 * m.m12 + m22 * m.m22;
-
-	return tmp;
+	return {
+		m00 * m.m00 + m01 * m.m10 + m02 * m.m20,
+		m00 * m.m01 + m01 * m.m11 + m02 * m.m21,
+		m00 * m.m02 + m01 * m.m12 + m02 * m.m22,
+		m10 * m.m00 + m11 * m.m10 + m12 * m.m20,
+		m10 * m.m01 + m11 * m.m11 + m12 * m.m21,
+		m10 * m.m02 + m11 * m.m12 + m12 * m.m22,
+		m20 * m.m00 + m21 * m.m10 + m22 * m.m20,
+		m20 * m.m01 + m21 * m.m11 + m22 * m.m21,
+		m20 * m.m02 + m21 * m.m12 + m22 * m.m22
+	};
 }
 
 Matrix3f Matrix3f::operator*(float32 s) const {
-	Matrix3f tmp;
-	tmp.m00 = m00 * s;
-	tmp.m01 = m01 * s;
-	tmp.m02 = m02 * s;
-	tmp.m10 = m10 * s;
-	tmp.m11 = m11 * s;
-	tmp.m12 = m12 * s;
-	tmp.m20 = m20 * s;
-	tmp.m21 = m21 * s;
-	tmp.m22 = m22 * s;
-	return tmp;
+	return {
+		m00 * s,
+		m01 * s,
+		m02 * s,
+		m10 * s,
+		m11 * s,
+		m12 * s,
+		m20 * s,
+		m21 * s,
+		m22 * s
+	};
 }
 
 Matrix3f Matrix3f::translation(float32 dx, float32 dy) {
-	Matrix3f transform;
-
-	transform.m02 = dx;
-	transform.m12 = dy;
-
-	return transform;
+	return {
+		1.0f,
+		0.0f,
+		dx,
+		0.0f,
+		1.0f,
+		dy,
+		0.0f,
+		0.0f,
+		1.0f
+	};
 }
 
 Matrix3f Matrix3f::scale(float32 sx, float32 sy) {
-	Matrix3f transform;
-
-	transform.m00 = sx;
-	transform.m11 = sy;
-
-	return transform;
+	return {
+		sx,
+		0.0f,
+		0.0f,
+		0.0f,
+		sy,
+		0.0f,
+		0.0f,
+		0.0f,
+		1.0f
+	};
 }
 
 Matrix3f Matrix3f::rotation(float32 angle) {
-	Matrix3f transform;
-
-	transform.m00 = cos(angle);
-	transform.m01 = -sin(angle);
-	transform.m10 = sin(angle);
-	transform.m11 = cos(angle);
-
-	return transform;
+	return {
+		cos(angle),
+		-sin(angle),
+		0.0f,
+		sin(angle),
+		cos(angle),
+		0.0f,
+		0.0f,
+		0.0f,
+		1.0f
+	};
 }
 
 Matrix3f Matrix3f::orthographic(float32 l, float32 r, float32 t, float32 b, float32 n, float32 f) {
-	Matrix3f transform;
-
-	transform.m00 = 2 / (r - l);
-	transform.m11 = 2 / (t - b);
-	transform.m02 = -((r + l) / (r - l));
-	transform.m12 = -((t + b) / (t - b));
-
-	return transform;
+	return{
+		2 / (r - l),
+		0.0f,
+		2 / (t - b),
+		0.0f,
+		2 / (t - b),
+		-((t + b) / (t - b)),
+		0.0f,
+		0.0f,
+		1.0f
+	};
 }

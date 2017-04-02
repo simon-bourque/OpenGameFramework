@@ -13,6 +13,7 @@ class Input
 {
 	
 	friend void keyCallback(GLFWwindow* window, int32 key, int32 scancode, int32 action, int32 mods);
+	friend void cursorPositionCallback(GLFWwindow* window, float64 xPos, float64 yPos);
 
 public:
 
@@ -212,19 +213,62 @@ public:
 	};
 
 private:
-
-	struct KeyListener {
-		void* object;
-		void(*func)(void* object, int32 key, int32 scancode, int32 action, int32 mods);
+	struct KeyListenerBase {
+		virtual void operator()(int32 key, int32 scancode, int32 action, int32 mods) = 0;
 	};
 
-	vector<KeyListener> m_keyListeners;
+	struct CursorPositionListenerBase {
+		virtual void operator()(float64 xPos, float64 yPos) = 0;
+	};
+
+	template <typename T>
+	struct KeyListener : public KeyListenerBase {
+		T* object;
+		void(T::*method)(int32 key, int32 scancode, int32 action, int32 mods);
+		
+		void operator()(int32 key, int32 scancode, int32 action, int32 mods) {
+			(object->*method)(key, scancode, action, mods);
+		}
+	};
+
+	template <typename T>
+	struct CursorPositionListener : public CursorPositionListenerBase {
+		T* object;
+		void(T::*method)(float64 xPos, float64 yPos);
+
+		void operator()(float64 xPos, float64 yPos) {
+			(object->*method)(xPos, yPos);
+		}
+	};
+
+	vector<KeyListenerBase*> m_keyListeners;
+	vector<CursorPositionListenerBase*> m_cursorPositionListeners;
 public:
 	Input(Window* window);
 	virtual ~Input();
 
-	void addKeyListener(void* object, void(*func)(void* object, int32 key, int32 scancode, int32 action, int32 mods));
+	template <typename T>
+	void addKeyListener(T* object, void(T::*method)(int32 key, int32 scancode, int32 action, int32 mods));
+
+	template <typename T>
+	void addCursorPositionListener(T* object, void(T::*method)(float64 xPos, float64 yPos));
 };
+
+template <typename T>
+void Input::addKeyListener(T* object, void(T::*method)(int32 key, int32 scancode, int32 action, int32 mods)) {
+	KeyListener<T>* listener = new KeyListener<T>();
+	listener->object = object;
+	listener->method = method;
+	m_keyListeners.push_back(listener);
+}
+
+template <typename T>
+void Input::addCursorPositionListener(T* object, void(T::*method)(float64 xPos, float64 yPos)) {
+	CursorPositionListener<T>* listener = new CursorPositionListener<T>();
+	listener->object = object;
+	listener->method = method;
+	m_cursorPositionListeners.push_back(listener);
+}
 
 #endif
 

@@ -11,6 +11,8 @@
 
 #include "Core.h"
 
+#include <iostream>
+
 PlatformerGame::PlatformerGame() : Game("Platformer", 720, 576, Rectangle(20, 16)), up(false), down(false), left(false), right(false) {}
 
 
@@ -18,11 +20,10 @@ PlatformerGame::~PlatformerGame() {
 
 }
 
-void onKeyPressed(void* object, int key, int scancode, int action, int mods);
-
 void PlatformerGame::init() {
 	testTexture = getRenderSystem()->getTextureManager()->createTexture2D(loadImage("../res/texture/boxItem.png"), Texture::Filter::NEAREST_NEIGHBOR, Texture::Wrap::CLAMP_TO_EDGE, Texture::Wrap::CLAMP_TO_EDGE);
-	getWindow()->getInput()->addKeyListener(this, onKeyPressed);
+	getWindow()->getInput()->addKeyListener(this, &PlatformerGame::onKeyPress);
+	getWindow()->getInput()->addCursorPositionListener(this, &PlatformerGame::onMouseMove);
 }
 
 void PlatformerGame::tick(float32 delta) {
@@ -48,40 +49,42 @@ void PlatformerGame::render() {
 	getRenderSystem()->getSpriteRenderer()->renderSprite(&testT, testTexture, false, false);
 }
 
-void onKeyPressed(void* object, int32 key, int32 scancode, int32 action, int32 mods) {
-	PlatformerGame* pfGame = (PlatformerGame*)object;
-
+void PlatformerGame::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
 	if ((key == Input::KEY_UP || key == Input::KEY_W)) {
 		if (action == Input::PRESS) {
-			pfGame->up = true;
+			up = true;
 		}
 		if (action == Input::RELEASE) {
-			pfGame->up = false;
+			up = false;
 		}
 	}
 	if ((key == Input::KEY_DOWN || key == Input::KEY_S)) {
 		if (action == Input::PRESS) {
-			pfGame->down = true;
+			down = true;
 		}
 		if (action == Input::RELEASE) {
-			pfGame->down = false;
+			down = false;
 		}
 	}
 	if ((key == Input::KEY_LEFT || key == Input::KEY_A)) {
 		if (action == Input::PRESS) {
-			pfGame->left = true;
+			left = true;
 		}
 		if (action == Input::RELEASE) {
-			pfGame->left = false;
+			left = false;
 		}
 	}
 	if ((key == Input::KEY_RIGHT || key == Input::KEY_D)) {
 		if (action == Input::PRESS) {
-			pfGame->right = true;
+			right = true;
 		}
 		if (action == Input::RELEASE) {
-			pfGame->right = false;
+			right = false;
 		}
 	}
+}
+
+void PlatformerGame::onMouseMove(float64 xPos, float64 yPos) {
+	cout << "<" << xPos << ", " << yPos << ">" << endl;
 }
 

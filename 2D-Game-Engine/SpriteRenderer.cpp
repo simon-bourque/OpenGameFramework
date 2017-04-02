@@ -55,19 +55,7 @@ void SpriteRenderer::renderSprite(const Transform* transform, const Texture* tex
 
 	Matrix3f finalMatrix = m_rs->getCamera().getViewProjectionMatrix() * transform->toMatrix();
 
-	float32 matrixData[] = {
-		finalMatrix.m00,
-		finalMatrix.m10,
-		finalMatrix.m20,
-		finalMatrix.m01,
-		finalMatrix.m11,
-		finalMatrix.m21,
-		finalMatrix.m02,
-		finalMatrix.m12,
-		finalMatrix.m22
-	};
-
-	glUniformMatrix3fv(m_spriteShaderProgram->getUniform("mvpMatrix").getLocation(), 1, false, matrixData);
+	glUniformMatrix3fv(m_spriteShaderProgram->getUniform("mvpMatrix").getLocation(), 1, true, finalMatrix.values);
 	glUniform1i(m_spriteShaderProgram->getUniform("horizontalFlip").getLocation(), (hFlip) ? GL_TRUE : GL_FALSE);
 	glUniform1i(m_spriteShaderProgram->getUniform("verticalFlip").getLocation(), (vFlip) ? GL_TRUE : GL_FALSE);
 	glUniform1i(m_spriteShaderProgram->getUniform("sprite").getLocation(), 0);

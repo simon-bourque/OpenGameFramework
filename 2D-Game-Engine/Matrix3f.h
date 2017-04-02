@@ -5,15 +5,24 @@
 
 struct Matrix3f
 {
-	float32 m00 = 1.0f;
-	float32 m01 = 0.0f;
-	float32 m02 = 0.0f;
-	float32 m10 = 0.0f;
-	float32 m11 = 1.0f;
-	float32 m12 = 0.0f;
-	float32 m20 = 0.0f;
-	float32 m21 = 0.0f;
-	float32 m22 = 1.0f;
+	union {
+		float32 values[9];
+		struct {
+			float32 m00;
+			float32 m01;
+			float32 m02;
+			float32 m10;
+			float32 m11;
+			float32 m12;
+			float32 m20;
+			float32 m21;
+			float32 m22;
+		};
+	};
+
+	Matrix3f();
+	Matrix3f(float32 m00, float32 m01, float32 m02, float32 m10, float32 m11, float32 m12, float32 m20, float32 m21, float32 m22);
+	Matrix3f(const float32 (&values)[9]);
 
 	Matrix3f transpose() const;
 	float32 det() const;

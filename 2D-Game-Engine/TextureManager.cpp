@@ -61,7 +61,7 @@ Texture* TextureManager::createTexture2DArray(RawImage* imgs, uint32 layers, Tex
 	glTexParameteri(tex->m_target, GL_TEXTURE_WRAP_T, textureWrapT);
 	tex->unbind();
 
-	delete data;
+	delete[] data;
 	m_textures.push_back(tex);
 
 	return tex;

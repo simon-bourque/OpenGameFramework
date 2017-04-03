@@ -5,6 +5,9 @@
 
 struct Vector2f
 {
+	const static Vector2f X_AXIS;
+	const static Vector2f Y_AXIS;
+
 	float32 x = 0;
 	float32 y = 0;
 

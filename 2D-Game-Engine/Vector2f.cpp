@@ -2,6 +2,9 @@
 
 #include <cmath>
 
+const Vector2f Vector2f::X_AXIS = Vector2f(1,0);
+const Vector2f Vector2f::Y_AXIS = Vector2f(0, 1);
+
 Vector2f::Vector2f() {}
 
 Vector2f::Vector2f(float32 x, float32 y) : x(x), y(y) {}

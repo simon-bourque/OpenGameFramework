@@ -19,4 +19,6 @@ TEST(Vector2fTest, VectorAddition) {
 	result = v2 + v3;
 	EXPECT_FLOAT_EQ(4.0f, result.x);
 	EXPECT_FLOAT_EQ(6.0f, result.y);
+	// TEST
+	EXPECT_FLOAT_EQ(7.0f, result.y);
 }

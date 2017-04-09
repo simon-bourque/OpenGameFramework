@@ -6,12 +6,12 @@
 #include "Transform.h"
 
 class Texture;
+class TileScene;
 
 class PlatformerGame : public Game
 {
 private:
-	Transform testT;
-	Texture* testTexture;
+	TileScene* scene;
 
 	bool up;
 	bool down;

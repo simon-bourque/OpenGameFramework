@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 
 #include "SpriteRenderer.h"
+#include "SceneRenderer.h"
 #include "RawImage.h"
 #include "TextureManager.h"
 
@@ -56,6 +57,7 @@ RenderSystem::RenderSystem(const Camera& camera) : m_camera(camera) {
 	glClearColor(0.0f, 0.0f,1.0f, 1.0f);
 
 	m_spriteRenderer = new SpriteRenderer(this);
+	m_sceneRenderer = new SceneRenderer(this);
 
 	m_textureManager = new TextureManager();
 }
@@ -64,5 +66,6 @@ RenderSystem::RenderSystem(const Camera& camera) : m_camera(camera) {
 RenderSystem::~RenderSystem() {
 	glUseProgram(0);
 	delete m_spriteRenderer;
+	delete m_sceneRenderer;
 	delete m_textureManager;
 }

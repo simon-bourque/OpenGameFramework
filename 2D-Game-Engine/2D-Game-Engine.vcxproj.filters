@@ -98,6 +98,12 @@
     <ClCompile Include="Color.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="SceneRenderer.cpp">
+      <Filter>Graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="TileScene.cpp" />
+    <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -173,5 +179,11 @@
     <ClInclude Include="Color.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="SceneRenderer.h">
+      <Filter>Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="TileScene.h" />
+    <ClInclude Include="Tile.h" />
   </ItemGroup>
 </Project>

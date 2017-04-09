@@ -22,8 +22,8 @@ Game::Game(string title, int32 width, int32 height, const Rectangle& viewPort) :
 
 Game::~Game() {
 	DEBUG_LOG("Destroying game");
-	delete m_window;
 	delete m_renderSystem;
+	delete m_window;
 }
 
 void Game::run() {

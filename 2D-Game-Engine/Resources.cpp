@@ -2,6 +2,12 @@
 #include "Core.h"
 
 #include "RawImage.h"
+#include "TileScene.h"
+#include "Tile.h"
+#include "Game.h"
+#include "RenderSystem.h"
+#include "TextureManager.h"
+#include "Texture.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
@@ -46,8 +52,32 @@ RawImage loadImage(string file) {
 	return RawImage(data, width, height, channels);
 }
 
-// Temp return a string representing the level
-string loadLevel(string file) {
+RawImage* loadImages(string file, int32 margin, int32 spacing, int32 tileWidth, int32 tileHeight, int32& imgCount) {
+	RawImage img = loadImage(file);
+
+	int32 numTilesPerWidth = (img.getWidth() - (margin * 2) + spacing) / (tileWidth + spacing);
+	int32 numTilesPerHeight = (img.getHeight() - (margin * 2) + spacing) / (tileHeight + spacing);
+
+	int32 maxWidth = (numTilesPerWidth * tileWidth) + (spacing * (numTilesPerWidth - 1)) + margin;
+	int32 maxHeight = (numTilesPerHeight * tileHeight) + (spacing * (numTilesPerHeight - 1)) + margin;
+
+	RawImage* imgs = new RawImage[numTilesPerWidth * numTilesPerHeight];
+
+	int32 tileCount = 0;
+	for (int32 y = margin; y < maxHeight; y += tileHeight + spacing) {
+		for (int32 x = margin; x < maxWidth; x += tileWidth + spacing) {
+
+			RawImage subImage = img.getSubImage(x, y, tileWidth, tileHeight);
+
+			imgs[tileCount++] = subImage;
+		}
+	}
+
+	imgCount = numTilesPerWidth * numTilesPerHeight;
+	return imgs;
+}
+
+TileScene* loadTileLevel(string file, Game* game) {
 	ifstream input(file);
 
 	if (!input) {
@@ -55,7 +85,6 @@ string loadLevel(string file) {
 		throw runtime_error("Failed to load level.");
 	}
 
-	stringstream ss;
 
 	// Load level bounds
 	float32 boundsX = 0;
@@ -67,16 +96,11 @@ string loadLevel(string file) {
 	readInt(input, boundsWidth);
 	readInt(input, boundsHeight);
 
-	ss << boundsX << ' ';
-	ss << boundsY << ' ';
-	ss << boundsWidth << ' ';
-	ss << boundsHeight << endl;
-
 	int32 numTiles = 0;
 	readInt(input, numTiles);
 
-	ss << "TILES: " << numTiles << endl;
-
+	
+	Tile* tiles = new Tile[numTiles];
 	for (int32 i = 0; i < numTiles; i++) {
 		float32 x = 0;
 		float32 y = 0;
@@ -84,13 +108,12 @@ string loadLevel(string file) {
 		readFloat(input, x);
 		readFloat(input, y);
 		readInt(input, index);
-		ss << "{" << x << ", " << y << ", " << index << "}" << endl;
+		
+		tiles[i] = { x, y, index };
 	}
 
 	int32 numColliders = 0;
 	readInt(input, numColliders);
-	
-	ss << "COLLIDERS: " << numColliders << endl;
 
 	for (int32 i = 0; i < numColliders; i++) {
 		float32 x = 0;
@@ -101,17 +124,22 @@ string loadLevel(string file) {
 		readFloat(input, y);
 		readFloat(input, width);
 		readFloat(input, height);
-		ss << "{" << x << ", " << y << ", " << width << ", " << height << "}" << endl;
 	}
 
 	int32 stringLen = 0;
 	readInt(input, stringLen);
 
+	char* texPath = new char[stringLen + 1];
+
 	for (int32 i = 0; i < stringLen; i++) {
 		char character = 0;
 		input.get(character);
-		ss << character;
+		texPath[i] = character;
 	}
+	texPath[stringLen] = '\0';
+
+	DEBUG_LOG("--- TILE SHEET PATH ---");
+	DEBUG_LOG(texPath);
 
 	int32 margin = 0;
 	int32 spacing = 0;
@@ -122,10 +150,21 @@ string loadLevel(string file) {
 	readInt(input, tileWidth);
 	readInt(input, tileHeight);
 
-	ss << endl << margin << ' ' << spacing << ' ' << tileWidth << ' ' << tileHeight;
+	int32 imgCount = 0;
+	//RawImage* imgs = loadImages(texPath, margin, spacing, tileWidth, tileHeight, imgCount);
+	RawImage* imgs = loadImages("../res/texture/tiles_spritesheet.png", margin, spacing, tileWidth, tileHeight, imgCount);
+
+	Texture* texture = game->getRenderSystem()->getTextureManager()->createTexture2DArray(imgs, imgCount, Texture::Filter::NEAREST_NEIGHBOR, Texture::Wrap::CLAMP_TO_EDGE, Texture::Wrap::CLAMP_TO_EDGE);
+
+	delete[] imgs;
 
 	input.close();
-	return ss.str();
+
+	TileScene* scene = new TileScene(tiles, numTiles, texture, Rectangle(boundsX, boundsY, boundsWidth, boundsHeight));
+
+	delete[] tiles;
+
+	return scene;
 }
 
 // TODO ensure correct endianness

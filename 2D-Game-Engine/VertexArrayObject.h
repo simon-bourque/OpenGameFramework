@@ -18,6 +18,7 @@ public:
 	virtual ~VertexArrayObject();
 
 	void addArrayBuffer(GLuint attribIndex, const GLvoid* data, GLsizeiptr dataSize, GLint vertexSize, GLenum type, Buffer::Usage usage);
+	void addArrayBuffer(Buffer* buffer);
 
 	void enableAttribute(GLuint index);
 	void disableAttribute(GLuint index);

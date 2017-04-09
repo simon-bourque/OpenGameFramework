@@ -5,9 +5,11 @@
 const Vector2f Vector2f::X_AXIS = Vector2f(1,0);
 const Vector2f Vector2f::Y_AXIS = Vector2f(0, 1);
 
-Vector2f::Vector2f() {}
+Vector2f::Vector2f() : x(0), y(0) {}
 
 Vector2f::Vector2f(float32 x, float32 y) : x(x), y(y) {}
+
+Vector2f::Vector2f(const float32(&values)[2]) : x(values[0]), y(values[1]) {}
 
 float32 Vector2f::dot(const Vector2f& v) const {
 	return (x * v.x) + (y * v.y);

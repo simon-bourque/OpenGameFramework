@@ -8,11 +8,17 @@ struct Vector2f
 	const static Vector2f X_AXIS;
 	const static Vector2f Y_AXIS;
 
-	float32 x = 0;
-	float32 y = 0;
+	union {
+		float32 values[2];
+		struct {
+			float32 x;
+			float32 y;
+		};
+	};
 
 	Vector2f();
 	Vector2f(float32 x, float32 y);
+	Vector2f(const float32 (&values)[2]);
 
 	float32 dot(const Vector2f& v) const;
 	

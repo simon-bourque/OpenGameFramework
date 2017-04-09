@@ -38,7 +38,7 @@ private:
 	GLuint m_handle;
 	Target m_target;
 public:
-	Buffer(Target target);
+	explicit Buffer(Target target);
 	virtual ~Buffer();
 
 	void bufferData(GLvoid* data, GLsizeiptr size, Usage usage);

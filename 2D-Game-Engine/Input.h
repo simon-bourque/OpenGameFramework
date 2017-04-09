@@ -244,7 +244,7 @@ private:
 	vector<KeyListenerBase*> m_keyListeners;
 	vector<CursorPositionListenerBase*> m_cursorPositionListeners;
 public:
-	Input(Window* window);
+	explicit Input(Window* window);
 	virtual ~Input();
 
 	template <typename T>

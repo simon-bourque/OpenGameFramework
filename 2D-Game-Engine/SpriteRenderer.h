@@ -23,7 +23,7 @@ public:
 	static const float32 SPRITE_UV[8];
 	static const int32 SPRITE_NUM_VERTICES;
 
-	SpriteRenderer(RenderSystem* rs);
+	explicit SpriteRenderer(RenderSystem* rs);
 	virtual ~SpriteRenderer();
 
 	void renderSprite(const Transform* transform, const Texture* texture, bool hFlip, bool vFlip) const;

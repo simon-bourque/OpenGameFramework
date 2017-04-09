@@ -7,7 +7,7 @@ class Renderer
 {
 protected:
 	RenderSystem* m_rs;
-	Renderer(RenderSystem* rs);
+	explicit Renderer(RenderSystem* rs);
 public:
 	virtual ~Renderer();
 };

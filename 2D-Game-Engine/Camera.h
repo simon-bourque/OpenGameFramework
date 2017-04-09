@@ -15,7 +15,7 @@ private:
 	Matrix3f m_projectionMatrix;
 	Matrix3f m_viewProjectionMatrix;
 public:
-	Camera(const Rectangle& viewPort);
+	explicit Camera(const Rectangle& viewPort);
 	Camera(const Transform& transform, const Rectangle& viewPort);
 	~Camera();
 

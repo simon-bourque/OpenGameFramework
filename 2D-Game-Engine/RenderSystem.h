@@ -17,7 +17,7 @@ private:
 
 	TextureManager* m_textureManager;
 public:
-	RenderSystem(const Camera& camera);
+	explicit RenderSystem(const Camera& camera);
 	~RenderSystem();
 
 	Camera& getCamera() { return m_camera; };

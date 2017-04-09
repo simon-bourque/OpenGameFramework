@@ -10,6 +10,9 @@ protected:
 	explicit Renderer(RenderSystem* rs);
 public:
 	virtual ~Renderer();
+
+	Renderer(const Renderer&) = delete;
+	Renderer& operator=(const Renderer&) = delete;
 };
 
 #endif

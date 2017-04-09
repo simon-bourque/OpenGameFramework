@@ -63,5 +63,5 @@ TEST(Vector2fTest, VectorDot) {
 
 	EXPECT_FLOAT_EQ(0.0f, v1.dot(v1));
 	EXPECT_FLOAT_EQ(11.0f, v2.dot(v3));
-	EXPECT_FLOAT_EQ(9.0f, v4.dot(v2));
+	EXPECT_FLOAT_EQ(7.0f, v4.dot(v2));
 }

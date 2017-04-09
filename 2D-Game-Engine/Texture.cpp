@@ -2,7 +2,7 @@
 
 #include "RawImage.h"
 
-Texture::Texture(Target target, GLenum unit) : m_target(target), m_unit(unit) {
+Texture::Texture(Target target, Unit unit) : m_target(target), m_unit(unit) {
 	GLuint name = 0;
 	glGenTextures(1, &name);
 	m_name = name;
@@ -14,10 +14,10 @@ Texture::~Texture() {
 }
 
 void Texture::bind() const {
-	glActiveTexture(m_unit);
-	glBindTexture(m_target, m_name);
+	glActiveTexture(static_cast<GLenum>(m_unit));
+	glBindTexture(static_cast<GLenum>(m_target), m_name);
 }
 
 void Texture::unbind() const {
-	glBindTexture(m_target, 0);
+	glBindTexture(static_cast<GLenum>(m_target), 0);
 }

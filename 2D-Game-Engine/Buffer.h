@@ -6,7 +6,7 @@
 class Buffer
 {
 public:
-	enum Target : GLenum {
+	enum class Target : GLenum {
 		ARRAY_BUFFER = GL_ARRAY_BUFFER,
 		ATOMIC_COUNTER_BUFFER = GL_ATOMIC_COUNTER_BUFFER,
 		COPY_READ_BUFFER = GL_COPY_READ_BUFFER,
@@ -23,7 +23,7 @@ public:
 		UNIFORM_BUFFER = GL_UNIFORM_BUFFER
 	};
 
-	enum Usage : GLenum {
+	enum class Usage : GLenum {
 		STREAM_DRAW = GL_STREAM_DRAW,
 		STREAM_READ = GL_STREAM_READ,
 		STREAM_COPY = GL_STREAM_COPY,
@@ -41,7 +41,7 @@ public:
 	explicit Buffer(Target target);
 	virtual ~Buffer();
 
-	void bufferData(GLvoid* data, GLsizeiptr size, Usage usage);
+	void bufferData(const GLvoid* data, GLsizeiptr size, Usage usage);
 	void vertexAttributePointer(GLuint index, GLint vertexSize, GLenum type, GLboolean normalized, GLsizei stride, GLvoid* pointer);
 
 	void bind() const;

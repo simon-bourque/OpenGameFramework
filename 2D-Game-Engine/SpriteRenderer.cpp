@@ -33,8 +33,8 @@ SpriteRenderer::SpriteRenderer(RenderSystem* rs) : Renderer(rs) {
 
 	m_spriteVAO = new VertexArrayObject();
 	m_spriteVAO->bind();
-	m_spriteVAO->addArrayBuffer(0, (void*)SPRITE_VERTS, sizeof(float32) * 8, 2, GL_FLOAT, Buffer::Usage::STATIC_DRAW);
-	m_spriteVAO->addArrayBuffer(1, (void*)SPRITE_UV, sizeof(float32) * 8, 2, GL_FLOAT, Buffer::Usage::STATIC_DRAW);
+	m_spriteVAO->addArrayBuffer(0, SPRITE_VERTS, sizeof(float32) * 8, 2, GL_FLOAT, Buffer::Usage::STATIC_DRAW);
+	m_spriteVAO->addArrayBuffer(1, SPRITE_UV, sizeof(float32) * 8, 2, GL_FLOAT, Buffer::Usage::STATIC_DRAW);
 	m_spriteVAO->unbind();
 }
 

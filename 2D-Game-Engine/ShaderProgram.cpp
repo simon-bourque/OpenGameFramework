@@ -5,51 +5,17 @@
 ShaderProgram::ShaderProgram(const string& vertSrc, const string& fragSrc) {
 	// TODO handle shader compilation error
 	GLint vertShaderId = glCreateShader(GL_VERTEX_SHADER);
-	
-	const GLchar* vertSrcPtr = vertSrc.c_str();
-	
-	glShaderSource(vertShaderId, 1, &vertSrcPtr, nullptr);
-	glCompileShader(vertShaderId);
-
-	GLint status = 0;
-	glGetShaderiv(vertShaderId, GL_COMPILE_STATUS, &status);
-	if (status == GL_FALSE) {
-		string msg("Failed to compile shader: ");
-
-		const static GLsizei logMax = 1024;
-		GLchar log[logMax];
-		GLsizei charsWritten = 0;
-		glGetShaderInfoLog(vertShaderId, logMax, &charsWritten, log);
-		
-		msg.append(log);
-		DEBUG_LOG(msg);
-	}
-
 	GLint fragShaderId = glCreateShader(GL_FRAGMENT_SHADER);
-	
-	const GLchar* fragSrcPtr = fragSrc.c_str();
 
-	glShaderSource(fragShaderId, 1, &fragSrcPtr, nullptr);
-	glCompileShader(fragShaderId);
-
-	glGetShaderiv(fragShaderId, GL_COMPILE_STATUS, &status);
-	if (status == GL_FALSE) {
-		string msg("Failed to compile shader: ");
-
-		const static GLsizei logMax = 1024;
-		GLchar log[logMax];
-		GLsizei charsWritten = 0;
-		glGetShaderInfoLog(fragShaderId, logMax, &charsWritten, log);
-
-		msg.append(log);
-		DEBUG_LOG(msg);
-	}
+	compileShader(vertShaderId, vertSrc);
+	compileShader(fragShaderId, fragSrc);
 
 	m_programId = glCreateProgram();
 	glAttachShader(m_programId, vertShaderId);
 	glAttachShader(m_programId, fragShaderId);
 	glLinkProgram(m_programId);
 
+	GLint status = 0;
 	glGetProgramiv(m_programId, GL_LINK_STATUS, &status);
 	if (status == GL_FALSE) {
 		string msg("Failed to link program: ");
@@ -67,11 +33,7 @@ ShaderProgram::ShaderProgram(const string& vertSrc, const string& fragSrc) {
 	glGetProgramiv(m_programId, GL_ACTIVE_UNIFORMS, &numUniforms);
 
 	for (int32 i = 0; i < numUniforms; i++) {
-		//IntBuffer size = BufferUtils.createIntBuffer(1);
-		//IntBuffer type = BufferUtils.createIntBuffer(1);
-		//String name = GL20.glGetActiveUniform(programId, i, size, type);
-		//int location = GL20.glGetUniformLocation(programId, name);
-		//uniforms.put(name, new Uniform(name, location, size.get(0), type.get(0)));
+
 		const static GLsizei nameMax = 1024;
 		GLchar name[nameMax];
 		GLsizei charsWritten = 0;
@@ -93,9 +55,29 @@ ShaderProgram::ShaderProgram(const string& vertSrc, const string& fragSrc) {
 	glDeleteShader(fragShaderId);
 }
 
-
 ShaderProgram::~ShaderProgram() {
 	glDeleteProgram(m_programId);
+}
+
+void ShaderProgram::compileShader(GLint shaderID, const string& src) {
+	const GLchar* srcCString = src.c_str();
+
+	glShaderSource(shaderID, 1, &srcCString, nullptr);
+	glCompileShader(shaderID);
+
+	GLint status = 0;
+	glGetShaderiv(shaderID, GL_COMPILE_STATUS, &status);
+	if (status == GL_FALSE) {
+		string msg("Failed to compile shader: ");
+
+		const static GLsizei logMax = 1024;
+		GLchar log[logMax];
+		GLsizei charsWritten = 0;
+		glGetShaderInfoLog(shaderID, logMax, &charsWritten, log);
+
+		msg.append(log);
+		DEBUG_LOG(msg);
+	}
 }
 
 const Uniform& ShaderProgram::getUniform(const string& name) const {

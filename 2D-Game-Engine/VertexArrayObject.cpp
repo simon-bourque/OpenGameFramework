@@ -17,7 +17,7 @@ VertexArrayObject::~VertexArrayObject() {
 	unbind();
 }
 
-void VertexArrayObject::addArrayBuffer(GLuint attribIndex, GLvoid* data, GLsizeiptr dataSize, GLint vertexSize, GLenum type, Buffer::Usage usage) {
+void VertexArrayObject::addArrayBuffer(GLuint attribIndex, const GLvoid* data, GLsizeiptr dataSize, GLint vertexSize, GLenum type, Buffer::Usage usage) {
 	Buffer* buffer = new Buffer(Buffer::Target::ARRAY_BUFFER);
 
 	buffer->bind();

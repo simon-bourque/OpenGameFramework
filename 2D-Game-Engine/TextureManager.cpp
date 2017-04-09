@@ -13,16 +13,16 @@ TextureManager::~TextureManager() {
 
 Texture* TextureManager::createTexture2D(const RawImage& img, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT) {	
 	
-	Texture* tex = new Texture(Texture::Target::TEXTURE_2D, GL_TEXTURE0);
+	Texture* tex = new Texture(Texture::Target::TEXTURE_2D, Texture::Unit::UNIT_0);
 	//Texture tex(name, Texture::TEXTURE_2D, Texture::UNIT_0);
 	tex->bind();
 	//glBindTexture(Texture::TEXTURE_2D, name);
 	
-	glTexImage2D(tex->m_target, 0, GL_RGBA, img.getWidth(), img.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, img.getData());
-	glTexParameteri(tex->m_target, GL_TEXTURE_MIN_FILTER, filtering);
-	glTexParameteri(tex->m_target, GL_TEXTURE_MAG_FILTER, filtering);
-	glTexParameteri(tex->m_target, GL_TEXTURE_WRAP_S, textureWrapS);
-	glTexParameteri(tex->m_target, GL_TEXTURE_WRAP_T, textureWrapT);
+	glTexImage2D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, img.getWidth(), img.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, img.getData());
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filtering));
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filtering));
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(textureWrapS));
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(textureWrapT));
 
 	//glBindTexture(Texture::Target::TEXTURE_2D, 0);
 	tex->unbind();
@@ -49,16 +49,16 @@ Texture* TextureManager::createTexture2DArray(RawImage* imgs, uint32 layers, Tex
 		}
 	}
 	
-	Texture* tex = new Texture(Texture::Target::TEXTURE_2D_ARRAY, GL_TEXTURE0);
+	Texture* tex = new Texture(Texture::Target::TEXTURE_2D_ARRAY, Texture::Unit::UNIT_0);
 	//Texture tex(name, Texture::Target::TEXTURE_2D_ARRAY, Texture::UNIT_0);
 
 	tex->bind();
-	glTexImage3D(tex->m_target, 0, GL_RGBA, width, height, layers, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+	glTexImage3D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, width, height, layers, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
-	glTexParameteri(tex->m_target, GL_TEXTURE_MIN_FILTER, filtering);
-	glTexParameteri(tex->m_target, GL_TEXTURE_MAG_FILTER, filtering);
-	glTexParameteri(tex->m_target, GL_TEXTURE_WRAP_S, textureWrapS);
-	glTexParameteri(tex->m_target, GL_TEXTURE_WRAP_T, textureWrapT);
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filtering));
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filtering));
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(textureWrapS));
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(textureWrapT));
 	tex->unbind();
 
 	delete[] data;

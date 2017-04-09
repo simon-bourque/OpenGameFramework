@@ -15,15 +15,15 @@ Buffer::~Buffer() {
 }
 
 void Buffer::bind() const {
-	glBindBuffer(m_target, m_handle);
+	glBindBuffer(static_cast<GLenum>(m_target), m_handle);
 }
 
 void Buffer::unbind() const {
-	glBindBuffer(m_target, 0);
+	glBindBuffer(static_cast<GLenum>(m_target), 0);
 }
 
-void Buffer::bufferData(GLvoid* data, GLsizeiptr size, Usage usage) {
-	glBufferData(m_target, size, data, usage);
+void Buffer::bufferData(const GLvoid* data, GLsizeiptr size, Usage usage) {
+	glBufferData(static_cast<GLenum>(m_target), size, data, static_cast<GLenum>(usage));
 }
 
 void Buffer::vertexAttributePointer(GLuint index, GLint vertexSize, GLenum type, GLboolean normalized, GLsizei stride, GLvoid* pointer) {

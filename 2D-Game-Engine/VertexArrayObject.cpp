@@ -29,6 +29,10 @@ void VertexArrayObject::addArrayBuffer(GLuint attribIndex, const GLvoid* data, G
 	enableAttribute(attribIndex);
 }
 
+void VertexArrayObject::addArrayBuffer(Buffer* buffer) {
+	m_buffers.push_back(buffer);
+}
+
 void VertexArrayObject::enableAttribute(GLuint index) {
 	glEnableVertexAttribArray(index);
 }

@@ -10,8 +10,7 @@ class VertexArrayObject;
 struct Transform;
 class Texture;
 
-class SpriteRenderer : public Renderer
-{
+class SpriteRenderer : public Renderer {
 private:
 	ShaderProgram* m_spriteShaderProgram;
 	ShaderProgram* m_animSpriteShaderProgram;

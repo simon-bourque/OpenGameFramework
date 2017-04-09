@@ -43,7 +43,7 @@ Texture* TextureManager::createTexture2DArray(RawImage* imgs, uint32 layers, Tex
 
 	// TODO Ensure all images are the same size
 	for (uint32 i = 0; i < layers; i++) {
-		uint8* subImgData = imgs[layers].getData();
+		uint8* subImgData = imgs[i].getData();
 		for (uint32 j = 0; j < subImgSize; j++) {
 			data[(i * subImgSize) + j] = subImgData[j];
 		}

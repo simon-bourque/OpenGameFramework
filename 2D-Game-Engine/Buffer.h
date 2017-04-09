@@ -1,6 +1,8 @@
 #ifndef BUFFER_H
 #define BUFFER_H
 
+#include "Core.h"
+
 #include <GL/glew.h>
 
 class Buffer
@@ -43,9 +45,15 @@ public:
 
 	void bufferData(const GLvoid* data, GLsizeiptr size, Usage usage);
 	void vertexAttributePointer(GLuint index, GLint vertexSize, GLenum type, GLboolean normalized, GLsizei stride, GLvoid* pointer);
+	void vertexAttributeIPointer(GLuint index, GLint vertexSize, GLenum type, GLsizei stride, GLvoid* pointer);
+	void vertexAttributeDivisor(GLuint index, GLuint divisor);
 
 	void bind() const;
 	void unbind() const;
+
+#ifdef DEBUG_BUILD
+	void setDebugLabel(const string& label);
+#endif
 
 	// Prevent copying of buffer
 	Buffer(const Buffer&) = delete;

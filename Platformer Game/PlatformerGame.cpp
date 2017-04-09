@@ -8,6 +8,9 @@
 #include "TextureManager.h"
 #include "Window.h"
 #include "Input.h"
+#include "TileScene.h"
+#include "Resources.h"
+#include "SceneRenderer.h"
 
 #include "Core.h"
 
@@ -17,36 +20,38 @@ PlatformerGame::PlatformerGame() : Game("Platformer", 720, 576, Rectangle(20, 16
 
 
 PlatformerGame::~PlatformerGame() {
-
+	delete scene;
 }
 
 void PlatformerGame::init() {
-	testTexture = getRenderSystem()->getTextureManager()->createTexture2D(loadImage("../res/texture/boxItem.png"), Texture::Filter::NEAREST_NEIGHBOR, Texture::Wrap::CLAMP_TO_EDGE, Texture::Wrap::CLAMP_TO_EDGE);
 	getWindow()->getInput()->addKeyListener(this, &PlatformerGame::onKeyPress);
 	getWindow()->getInput()->addCursorPositionListener(this, &PlatformerGame::onMouseMove);
+	getRenderSystem()->getCamera().getTransform().translate(11.0f,-5.5f);
+	scene = loadTileLevel("../res/level/level_0.lvl", this);
 }
 
 void PlatformerGame::tick(float32 delta) {
 	Game::tick(delta);
 
+	const static float32 SPEED = 25.0f;
+
 	if (up) {
-		getRenderSystem()->getCamera().getTransform().translate(0.0f, -0.1f);
+		getRenderSystem()->getCamera().getTransform().translate(0.0f, SPEED * delta);
 	}
 	if (down) {
-		getRenderSystem()->getCamera().getTransform().translate(0.0f, 0.1f);
+		getRenderSystem()->getCamera().getTransform().translate(0.0f, -SPEED * delta);
 	}
 	if (left) {
-		getRenderSystem()->getCamera().getTransform().translate(0.1f, 0.0f);
+		getRenderSystem()->getCamera().getTransform().translate(-SPEED * delta, 0.0f);
 	}
 	if (right) {
-		getRenderSystem()->getCamera().getTransform().translate(-0.1f, 0.0f);
+		getRenderSystem()->getCamera().getTransform().translate(SPEED * delta, 0.0f);
 	}
 }
 
 void PlatformerGame::render() {
 	Game::render();
-
-	getRenderSystem()->getSpriteRenderer()->renderSprite(&testT, testTexture, false, false);
+	scene->render(getRenderSystem());
 }
 
 void PlatformerGame::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {

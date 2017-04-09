@@ -1,5 +1,6 @@
 #include "RawImage.h"
 
+RawImage::RawImage() : m_data(nullptr), m_width(0), m_height(0), m_channels(0) {}
 
 RawImage::RawImage(uint8* data, uint32 width, uint32 height, uint8 channels) : m_data(data), m_width(width), m_height(height), m_channels(channels) {}
 
@@ -41,7 +42,7 @@ RawImage RawImage::getSubImage(uint32 x, uint32 y, uint32 width, uint32 height) 
 	uint8* dataPtr = data;
 
 	for (uint32 i = y; i < y + height; i++) {
-		for (uint32 j = x; i < x + width; j++) {
+		for (uint32 j = x; j < x + width; j++) {
 			
 			uint8* pixel = new uint8[m_channels];
 

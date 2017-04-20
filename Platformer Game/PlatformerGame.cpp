@@ -25,7 +25,6 @@ PlatformerGame::~PlatformerGame() {
 
 void PlatformerGame::init() {
 	getWindow()->getInput()->addKeyListener(this, &PlatformerGame::onKeyPress);
-	getWindow()->getInput()->addCursorPositionListener(this, &PlatformerGame::onMouseMove);
 	getRenderSystem()->getCamera().getTransform().translate(11.0f,-5.5f);
 	scene = loadTileLevel("../res/level/level_0.lvl", this);
 }
@@ -87,9 +86,5 @@ void PlatformerGame::onKeyPress(int32 key, int32 scancode, int32 action, int32 m
 			right = false;
 		}
 	}
-}
-
-void PlatformerGame::onMouseMove(float64 xPos, float64 yPos) {
-	cout << "<" << xPos << ", " << yPos << ">" << endl;
 }
 

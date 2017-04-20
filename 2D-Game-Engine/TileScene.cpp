@@ -44,17 +44,26 @@ TileScene::TileScene(Tile* tiles, int32 numberOfTiles, Texture* tileSheet, const
 	indexBuffer->bufferData(indices, sizeof(int32) * numberOfTiles, Buffer::Usage::STATIC_DRAW);
 	indexBuffer->vertexAttributeIPointer(2, 1, GL_INT, 0, nullptr);
 	indexBuffer->vertexAttributeDivisor(2, 1);
-#ifdef DEBUG_BUILD
-	indexBuffer->setDebugLabel("TILE_INDEX_BUFFER");
-#endif
 
 	m_tileVAO->enableAttribute(2);
 	m_tileVAO->addArrayBuffer(indexBuffer);
 
 	matrixBuffer->bind();
 	matrixBuffer->bufferData(matrices, sizeof(float32) * numberOfTiles * 9, Buffer::Usage::STATIC_DRAW);
+
 #ifdef DEBUG_BUILD
-	matrixBuffer->setDebugLabel("TILE_MATRIX_BUFFER");
+	static uint32 labelCount = 0;
+	
+	string indexLabel("TILE_INDEX_BUFFER_");
+	string matrixLabel("TILE_MATRIX_BUFFER_");
+
+	indexLabel.append(to_string(labelCount));
+	matrixLabel.append(to_string(labelCount));
+
+	indexBuffer->setDebugLabel(indexLabel);
+	matrixBuffer->setDebugLabel(matrixLabel);
+	
+	labelCount++;
 #endif
 
 	for (int i = 0; i < 3; i++) {

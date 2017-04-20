@@ -26,7 +26,6 @@ public:
 	virtual void tick(float32 delta) override;
 
 	void onKeyPress(int32 key, int32 scancode, int32 action, int32 mods);
-	void onMouseMove(float64 xPos, float64 yPos);
 };
 
 #endif

@@ -150,6 +150,7 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Logging.cpp" />
     <ClCompile Include="Matrix3f.cpp" />
+    <ClCompile Include="Platform.cpp" />
     <ClCompile Include="RawImage.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="Logging.h" />
     <ClInclude Include="Matrix3f.h" />
+    <ClInclude Include="Platform.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="RawImage.h" />
     <ClInclude Include="Rectangle.h" />

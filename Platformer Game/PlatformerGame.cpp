@@ -26,7 +26,7 @@ PlatformerGame::~PlatformerGame() {
 void PlatformerGame::init() {
 	getWindow()->getInput()->addKeyListener(this, &PlatformerGame::onKeyPress);
 	getRenderSystem()->getCamera().getTransform().translate(11.0f,-5.5f);
-	scene = loadTileLevel("../res/level/level_0.lvl", this);
+	scene = loadTileLevel("res/level/level_0.lvl", this);
 }
 
 void PlatformerGame::tick(float32 delta) {

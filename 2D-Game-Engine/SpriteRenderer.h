@@ -4,6 +4,8 @@
 #include "Renderer.h"
 #include "Core.h"
 
+#include <memory>
+
 class RenderSystem;
 class ShaderProgram;
 class VertexArrayObject;
@@ -12,11 +14,11 @@ class Texture;
 
 class SpriteRenderer : public Renderer {
 private:
-	ShaderProgram* m_spriteShaderProgram;
-	ShaderProgram* m_animSpriteShaderProgram;
-	ShaderProgram* m_spriteBatchShaderProgram;
+	unique_ptr<ShaderProgram> m_spriteShaderProgram;
+	unique_ptr<ShaderProgram> m_animSpriteShaderProgram;
+	unique_ptr<ShaderProgram> m_spriteBatchShaderProgram;
 
-	VertexArrayObject* m_spriteVAO;
+	unique_ptr<VertexArrayObject> m_spriteVAO;
 public:
 	static const float32 SPRITE_VERTS[8];
 	static const float32 SPRITE_UV[8];

@@ -5,6 +5,8 @@
 
 #include "Core.h"
 
+#include <memory>
+
 class RenderSystem;
 class ShaderProgram;
 class VertexArrayObject;
@@ -12,10 +14,10 @@ class Texture;
 
 class SceneRenderer : public Renderer {
 private:
-	ShaderProgram* m_backgroundShaderProgram;
-	ShaderProgram* m_tileShaderProgram;
+	unique_ptr<ShaderProgram> m_backgroundShaderProgram;
+	unique_ptr<ShaderProgram> m_tileShaderProgram;
 
-	VertexArrayObject* m_backgroundVAO;
+	unique_ptr<VertexArrayObject> m_backgroundVAO;
 public:
 	
 	static const float32 BACKGROUND_VERTS[8];

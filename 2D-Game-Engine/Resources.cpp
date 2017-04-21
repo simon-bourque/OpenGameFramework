@@ -23,7 +23,7 @@ string loadSrc(string file) {
 
 	if (!input) {
 		input.close();
-		throw runtime_error("Failed to load text from file.");
+		throw runtime_error("Failed to load source from file " + file);
 	}
 
 	stringstream ss;
@@ -82,7 +82,7 @@ TileScene* loadTileLevel(string file, Game* game) {
 
 	if (!input) {
 		input.close();
-		throw runtime_error("Failed to load level.");
+		throw runtime_error("Failed to load level " + file);
 	}
 
 
@@ -152,7 +152,7 @@ TileScene* loadTileLevel(string file, Game* game) {
 
 	int32 imgCount = 0;
 	//RawImage* imgs = loadImages(texPath, margin, spacing, tileWidth, tileHeight, imgCount);
-	RawImage* imgs = loadImages("../res/texture/tiles_spritesheet.png", margin, spacing, tileWidth, tileHeight, imgCount);
+	RawImage* imgs = loadImages("res/texture/tiles_spritesheet.png", margin, spacing, tileWidth, tileHeight, imgCount);
 
 	Texture* texture = game->getRenderSystem()->getTextureManager()->createTexture2DArray(imgs, imgCount, Texture::Filter::NEAREST_NEIGHBOR, Texture::Wrap::CLAMP_TO_EDGE, Texture::Wrap::CLAMP_TO_EDGE);
 

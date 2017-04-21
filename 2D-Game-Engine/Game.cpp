@@ -13,21 +13,21 @@ Game::Game(string title, int32 width, int32 height, const Rectangle& viewPort) :
 	DEBUG_LOG("Initializing game...");
 
 	DEBUG_LOG("Initializing window...");
-	m_window = new Window(title, width, height);
+	m_window.reset(new Window(title, width, height));
 
 	DEBUG_LOG("Initializing render system...");
-	m_renderSystem = new RenderSystem(Camera(viewPort));
+	m_renderSystem.reset(new RenderSystem(Camera(viewPort)));
 }
 
 
 Game::~Game() {
 	DEBUG_LOG("Destroying game");
-	delete m_renderSystem;
-	delete m_window;
 }
 
 void Game::run() {
+	
 	init();
+
 	int32 frames = 0;
 	float64 counter = 0;
 	float64 delta = 0;

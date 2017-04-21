@@ -27,11 +27,11 @@ const float32 SpriteRenderer::SPRITE_UV[8] = {
 const int32 SpriteRenderer::SPRITE_NUM_VERTICES = 4;
 
 SpriteRenderer::SpriteRenderer(RenderSystem* rs) : Renderer(rs) {
-	m_spriteShaderProgram = new ShaderProgram(loadSrc("../res/shader/default_vert.shader"), loadSrc("../res/shader/sprite_frag.shader"));
-	m_animSpriteShaderProgram = new ShaderProgram(loadSrc("../res/shader/default_vert.shader"), loadSrc("../res/shader/animsprite_frag.shader"));
-	m_spriteBatchShaderProgram = new ShaderProgram(loadSrc("../res/shader/instance_vert.shader"), loadSrc("../res/shader/instance_frag.shader"));
+	m_spriteShaderProgram.reset(new ShaderProgram(loadSrc("res/shader/default_vert.shader"), loadSrc("res/shader/sprite_frag.shader")));
+	m_animSpriteShaderProgram.reset(new ShaderProgram(loadSrc("res/shader/default_vert.shader"), loadSrc("res/shader/animsprite_frag.shader")));
+	m_spriteBatchShaderProgram.reset(new ShaderProgram(loadSrc("res/shader/instance_vert.shader"), loadSrc("res/shader/instance_frag.shader")));
 
-	m_spriteVAO = new VertexArrayObject();
+	m_spriteVAO.reset(new VertexArrayObject());
 	m_spriteVAO->bind();
 	m_spriteVAO->addArrayBuffer(0, SPRITE_VERTS, sizeof(float32) * 8, 2, GL_FLOAT, Buffer::Usage::STATIC_DRAW);
 	m_spriteVAO->addArrayBuffer(1, SPRITE_UV, sizeof(float32) * 8, 2, GL_FLOAT, Buffer::Usage::STATIC_DRAW);
@@ -39,12 +39,7 @@ SpriteRenderer::SpriteRenderer(RenderSystem* rs) : Renderer(rs) {
 }
 
 
-SpriteRenderer::~SpriteRenderer() {
-	delete m_spriteShaderProgram;
-	delete m_animSpriteShaderProgram;
-	delete m_spriteBatchShaderProgram;
-	delete m_spriteVAO;
-}
+SpriteRenderer::~SpriteRenderer() {}
 
 void SpriteRenderer::renderSprite(const Transform* transform, const Texture* texture, bool hFlip, bool vFlip) const {
 	glUseProgram(m_spriteShaderProgram->getProgramId());

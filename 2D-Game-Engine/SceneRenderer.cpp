@@ -24,10 +24,10 @@ const float32 SceneRenderer::BACKGROUND_UV[8] = {
 const int32 SceneRenderer::BACKGROUND_NUM_VERTICES = 4;
 
 SceneRenderer::SceneRenderer(RenderSystem* rs) : Renderer(rs) {
-	m_backgroundShaderProgram = new ShaderProgram(loadSrc("../res/shader/bg_vert.shader"), loadSrc("../res/shader/bg_frag.shader"));
-	m_tileShaderProgram = new ShaderProgram(loadSrc("../res/shader/tile_vert.shader"), loadSrc("../res/shader/tile_frag.shader"));
+	m_backgroundShaderProgram.reset(new ShaderProgram(loadSrc("res/shader/bg_vert.shader"), loadSrc("res/shader/bg_frag.shader")));
+	m_tileShaderProgram.reset(new ShaderProgram(loadSrc("res/shader/tile_vert.shader"), loadSrc("res/shader/tile_frag.shader")));
 
-	m_backgroundVAO = new VertexArrayObject();
+	m_backgroundVAO.reset(new VertexArrayObject());
 	m_backgroundVAO->bind();
 	m_backgroundVAO->addArrayBuffer(0, BACKGROUND_VERTS, sizeof(float32) * 8, 2, GL_FLOAT, Buffer::Usage::STATIC_DRAW);
 	m_backgroundVAO->addArrayBuffer(1, BACKGROUND_UV, sizeof(float32) * 8, 2, GL_FLOAT, Buffer::Usage::STATIC_DRAW);
@@ -35,11 +35,7 @@ SceneRenderer::SceneRenderer(RenderSystem* rs) : Renderer(rs) {
 }
 
 
-SceneRenderer::~SceneRenderer() {
-	delete m_backgroundShaderProgram;
-	delete m_tileShaderProgram;
-	delete m_backgroundVAO;
-}
+SceneRenderer::~SceneRenderer() {}
 
 void SceneRenderer::renderTiles(const VertexArrayObject* tileVAO, const Texture* tileSheet, int32 numberOfTiles) const {
 	glUseProgram(m_tileShaderProgram->getProgramId());

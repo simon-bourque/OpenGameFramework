@@ -56,16 +56,13 @@ RenderSystem::RenderSystem(const Camera& camera) : m_camera(camera) {
 	//GL11.glEnable(GL13.GL_MULTISAMPLE);
 	glClearColor(0.0f, 0.0f,1.0f, 1.0f);
 
-	m_spriteRenderer = new SpriteRenderer(this);
-	m_sceneRenderer = new SceneRenderer(this);
+	m_spriteRenderer.reset(new SpriteRenderer(this));
+	m_sceneRenderer.reset(new SceneRenderer(this));
 
-	m_textureManager = new TextureManager();
+	m_textureManager.reset(new TextureManager());
 }
 
 
 RenderSystem::~RenderSystem() {
 	glUseProgram(0);
-	delete m_spriteRenderer;
-	delete m_sceneRenderer;
-	delete m_textureManager;
 }

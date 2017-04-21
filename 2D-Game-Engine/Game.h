@@ -8,12 +8,14 @@
 class Window;
 class RenderSystem;
 class Rectangle;
+class SceneManager;
 
 class Game
 {
 private:
 	unique_ptr<Window> m_window;
 	unique_ptr<RenderSystem> m_renderSystem;
+	unique_ptr<SceneManager> m_sceneManager;
 
 	bool m_shutdown;
 	int32 m_fps;
@@ -29,8 +31,9 @@ public:
 
 	void shutdown() { m_shutdown = true; };
 
-	Window* getWindow() const { return m_window.get(); };
-	RenderSystem* getRenderSystem() const { return m_renderSystem.get(); };
+	Window& getWindow() { return *m_window; };
+	RenderSystem& getRenderSystem() { return *m_renderSystem; };
+	SceneManager& getSceneManager() { return *m_sceneManager; };
 };
 
 #endif

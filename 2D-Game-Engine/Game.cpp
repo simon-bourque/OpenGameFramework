@@ -9,6 +9,8 @@
 
 #include "Input.h"
 
+#include "SceneManager.h"
+
 Game::Game(string title, int32 width, int32 height, const Rectangle& viewPort) : m_shutdown(false), m_fps(0) {
 	DEBUG_LOG("Initializing game...");
 
@@ -17,6 +19,9 @@ Game::Game(string title, int32 width, int32 height, const Rectangle& viewPort) :
 
 	DEBUG_LOG("Initializing render system...");
 	m_renderSystem.reset(new RenderSystem(Camera(viewPort)));
+
+	DEBUG_LOG("Initializing scene manager...");
+	m_sceneManager.reset(new SceneManager());
 }
 
 
@@ -64,10 +69,11 @@ void Game::run() {
 }
 
 void Game::tick(float32 delta) {
-
+	m_sceneManager->tickCurrentScene(delta, this);
 }
 
 void Game::render() {
 	glClear(GL_COLOR_BUFFER_BIT);
 	m_renderSystem->getCamera().updateViewProjectionMatrix();
+	m_sceneManager->renderCurrentScene(*m_renderSystem);
 }

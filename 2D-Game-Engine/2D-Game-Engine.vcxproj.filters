@@ -116,6 +116,9 @@
     <ClCompile Include="Platform.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -205,6 +208,9 @@
     </ClInclude>
     <ClInclude Include="Platform.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

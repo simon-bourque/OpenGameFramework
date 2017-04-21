@@ -11,8 +11,6 @@ class TileScene;
 class PlatformerGame : public Game
 {
 private:
-	TileScene* scene;
-
 	bool up;
 	bool down;
 	bool left;

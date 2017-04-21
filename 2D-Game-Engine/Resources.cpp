@@ -18,8 +18,12 @@
 void readFloat(ifstream& input, float32& value);
 void readInt(ifstream& input, int32& value);
 
+const static string SHADER_PATH = "res/shader/";
+const static string TEXTURE_PATH = "res/texture/";
+const static string LEVEL_PATH = "res/level/";
+
 string loadSrc(string file) {
-	ifstream input(file);
+	ifstream input(SHADER_PATH + file);
 
 	if (!input) {
 		input.close();
@@ -47,7 +51,7 @@ RawImage loadImage(string file) {
 	int32 width = 0;
 	int32 height = 0;
 	int32 channels = 0;
-	uint8* data = stbi_load(file.c_str(), &width, &height, &channels, 4);
+	uint8* data = stbi_load((TEXTURE_PATH + file).c_str(), &width, &height, &channels, 4);
 	
 	return RawImage(data, width, height, channels);
 }
@@ -78,7 +82,7 @@ RawImage* loadImages(string file, int32 margin, int32 spacing, int32 tileWidth, 
 }
 
 TileScene* loadTileLevel(string file, Game* game) {
-	ifstream input(file);
+	ifstream input(LEVEL_PATH + file);
 
 	if (!input) {
 		input.close();
@@ -152,15 +156,15 @@ TileScene* loadTileLevel(string file, Game* game) {
 
 	int32 imgCount = 0;
 	//RawImage* imgs = loadImages(texPath, margin, spacing, tileWidth, tileHeight, imgCount);
-	RawImage* imgs = loadImages("res/texture/tiles_spritesheet.png", margin, spacing, tileWidth, tileHeight, imgCount);
+	RawImage* imgs = loadImages(texPath, margin, spacing, tileWidth, tileHeight, imgCount);
 
-	Texture* texture = game->getRenderSystem()->getTextureManager()->createTexture2DArray(imgs, imgCount, Texture::Filter::NEAREST_NEIGHBOR, Texture::Wrap::CLAMP_TO_EDGE, Texture::Wrap::CLAMP_TO_EDGE);
+	Texture& texture = game->getRenderSystem().getTextureManager()->createTexture2DArray(imgs, imgCount, Texture::Filter::NEAREST_NEIGHBOR, Texture::Wrap::CLAMP_TO_EDGE, Texture::Wrap::CLAMP_TO_EDGE);
 
 	delete[] imgs;
 
 	input.close();
 
-	TileScene* scene = new TileScene(tiles, numTiles, texture, Rectangle(boundsX, boundsY, boundsWidth, boundsHeight));
+	TileScene* scene = new TileScene(tiles, numTiles, &texture, Rectangle(boundsX, boundsY, boundsWidth, boundsHeight));
 
 	delete[] tiles;
 

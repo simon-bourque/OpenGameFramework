@@ -10,15 +10,15 @@ void Scene::tick(float32 delta, Game* game) {
 	// TODO update objects
 }
 
-void Scene::render(RenderSystem* rs) {
+void Scene::render(const RenderSystem& rs) {
 	renderBackgrounds(rs);
 	renderObjects(rs);
 }
 
-void Scene::renderObjects(RenderSystem* rs) {
+void Scene::renderObjects(const RenderSystem& rs) {
 	// TODO render objects
 }
 
-void Scene::renderBackgrounds(RenderSystem* rs) {
+void Scene::renderBackgrounds(const RenderSystem& rs) {
 	// TODO render backgrounds
 }

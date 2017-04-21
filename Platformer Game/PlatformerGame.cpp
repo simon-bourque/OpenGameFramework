@@ -11,6 +11,7 @@
 #include "TileScene.h"
 #include "Resources.h"
 #include "SceneRenderer.h"
+#include "SceneManager.h"
 
 #include "Core.h"
 
@@ -19,14 +20,12 @@
 PlatformerGame::PlatformerGame() : Game("Platformer", 720, 576, Rectangle(20, 16)), up(false), down(false), left(false), right(false) {}
 
 
-PlatformerGame::~PlatformerGame() {
-	delete scene;
-}
+PlatformerGame::~PlatformerGame() {}
 
 void PlatformerGame::init() {
-	getWindow()->getInput()->addKeyListener(this, &PlatformerGame::onKeyPress);
-	getRenderSystem()->getCamera().getTransform().translate(11.0f,-5.5f);
-	scene = loadTileLevel("res/level/level_0.lvl", this);
+	getWindow().getInput()->addKeyListener(this, &PlatformerGame::onKeyPress);
+	getRenderSystem().getCamera().getTransform().translate(11.0f,-5.5f);
+	getSceneManager().loadTileLevel("level_0.lvl", this);
 }
 
 void PlatformerGame::tick(float32 delta) {
@@ -35,22 +34,21 @@ void PlatformerGame::tick(float32 delta) {
 	const static float32 SPEED = 25.0f;
 
 	if (up) {
-		getRenderSystem()->getCamera().getTransform().translate(0.0f, SPEED * delta);
+		getRenderSystem().getCamera().getTransform().translate(0.0f, SPEED * delta);
 	}
 	if (down) {
-		getRenderSystem()->getCamera().getTransform().translate(0.0f, -SPEED * delta);
+		getRenderSystem().getCamera().getTransform().translate(0.0f, -SPEED * delta);
 	}
 	if (left) {
-		getRenderSystem()->getCamera().getTransform().translate(-SPEED * delta, 0.0f);
+		getRenderSystem().getCamera().getTransform().translate(-SPEED * delta, 0.0f);
 	}
 	if (right) {
-		getRenderSystem()->getCamera().getTransform().translate(SPEED * delta, 0.0f);
+		getRenderSystem().getCamera().getTransform().translate(SPEED * delta, 0.0f);
 	}
 }
 
 void PlatformerGame::render() {
 	Game::render();
-	scene->render(getRenderSystem());
 }
 
 void PlatformerGame::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {

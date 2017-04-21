@@ -27,9 +27,9 @@ const float32 SpriteRenderer::SPRITE_UV[8] = {
 const int32 SpriteRenderer::SPRITE_NUM_VERTICES = 4;
 
 SpriteRenderer::SpriteRenderer(RenderSystem* rs) : Renderer(rs) {
-	m_spriteShaderProgram.reset(new ShaderProgram(loadSrc("res/shader/default_vert.shader"), loadSrc("res/shader/sprite_frag.shader")));
-	m_animSpriteShaderProgram.reset(new ShaderProgram(loadSrc("res/shader/default_vert.shader"), loadSrc("res/shader/animsprite_frag.shader")));
-	m_spriteBatchShaderProgram.reset(new ShaderProgram(loadSrc("res/shader/instance_vert.shader"), loadSrc("res/shader/instance_frag.shader")));
+	m_spriteShaderProgram.reset(new ShaderProgram(loadSrc("default_vert.shader"), loadSrc("sprite_frag.shader")));
+	m_animSpriteShaderProgram.reset(new ShaderProgram(loadSrc("default_vert.shader"), loadSrc("animsprite_frag.shader")));
+	m_spriteBatchShaderProgram.reset(new ShaderProgram(loadSrc("instance_vert.shader"), loadSrc("instance_frag.shader")));
 
 	m_spriteVAO.reset(new VertexArrayObject());
 	m_spriteVAO->bind();

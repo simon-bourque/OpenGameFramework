@@ -10,6 +10,8 @@
 
 #include "Windows.h"
 
+#include "Platform.h"
+
 int main() {
 	try {
 		PlatformerGame game;
@@ -18,10 +20,9 @@ int main() {
 	catch (runtime_error& ex) {
 		DEBUG_LOG("Exception occured.");
 		DEBUG_LOG(ex.what());
-		//system("pause");
+		displayErrorBox(ex.what());
 		return 1;
 	}
-
 	//system("pause");
 
 	return 0;

@@ -10,6 +10,7 @@
 #include "GameObject.h"
 #include "RawImage.h"
 #include "SpriteComponent.h"
+#include "RigidBodyComponent.h"
 
 #include "Core.h"
 
@@ -36,6 +37,21 @@ void PlatformerGame::init() {
 	gem2->addComponent(new SpriteComponent(gem2, gemTexture));
 	gem3->addComponent(new SpriteComponent(gem3, gemTexture));
 	gem4->addComponent(new SpriteComponent(gem4, gemTexture));
+
+	RigidBodyComponent* rb1 = new RigidBodyComponent(gem1, 60.0f);
+	RigidBodyComponent* rb2 = new RigidBodyComponent(gem2, 60.0f);
+	RigidBodyComponent* rb3 = new RigidBodyComponent(gem3, 60.0f);
+	RigidBodyComponent* rb4 = new RigidBodyComponent(gem4, 60.0f);
+
+	rb1->applyImpulse({ (float32)(((rand() % 2) ? 1:-1) * (rand() % 101 + 100)), (float32)(rand() % 101 + 100)});
+	rb2->applyImpulse({ (float32)(((rand() % 2) ? 1 : -1) * (rand() % 101 + 100)), (float32)(rand() % 101 + 100) });
+	rb3->applyImpulse({ (float32)(((rand() % 2) ? 1 : -1) * (rand() % 101 + 100)), (float32)(rand() % 101 + 100) });
+	rb4->applyImpulse({ (float32)(((rand() % 2) ? 1 : -1) * (rand() % 101 + 100)), (float32)(rand() % 101 + 100) });
+
+	gem1->addComponent(rb1);
+	gem2->addComponent(rb2);
+	gem3->addComponent(rb3);
+	gem4->addComponent(rb4);
 
 	getSceneManager().getCurrentScene().addGameObject(gem1);
 	getSceneManager().getCurrentScene().addGameObject(gem2);

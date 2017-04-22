@@ -1,13 +1,19 @@
 #include "Scene.h"
 
-
+#include "GameObject.h"
 
 Scene::Scene(const Rectangle& bounds) : m_bounds(bounds) {}
 
-Scene::~Scene() {}
+Scene::~Scene() {
+	for (GameObject* object : m_objects) {
+		delete object;
+	}
+}
 
 void Scene::tick(float32 delta, Game* game) {
-	// TODO update objects
+	for (GameObject* object : m_objects) {
+		object->tick(delta, game);
+	}
 }
 
 void Scene::render(const RenderSystem& rs) {
@@ -15,8 +21,14 @@ void Scene::render(const RenderSystem& rs) {
 	renderObjects(rs);
 }
 
+void Scene::addGameObject(GameObject* object) {
+	m_objects.push_back(object);
+}
+
 void Scene::renderObjects(const RenderSystem& rs) {
-	// TODO render objects
+	for (GameObject* object : m_objects) {
+		object->render(rs);
+	}
 }
 
 void Scene::renderBackgrounds(const RenderSystem& rs) {

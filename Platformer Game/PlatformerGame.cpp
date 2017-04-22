@@ -1,21 +1,17 @@
 #include "PlatformerGame.h"
 
-#include "Rectangle.h"
-#include "Resources.h"
-#include "RawImage.h"
-#include "RenderSystem.h"
-#include "SpriteRenderer.h"
 #include "TextureManager.h"
+#include "Rectangle.h"
+#include "RenderSystem.h"
 #include "Window.h"
 #include "Input.h"
-#include "TileScene.h"
 #include "Resources.h"
-#include "SceneRenderer.h"
 #include "SceneManager.h"
+#include "GameObject.h"
+#include "RawImage.h"
+#include "SpriteComponent.h"
 
 #include "Core.h"
-
-#include <iostream>
 
 PlatformerGame::PlatformerGame() : Game("Platformer", 720, 576, Rectangle(20, 16)), up(false), down(false), left(false), right(false) {}
 
@@ -26,6 +22,25 @@ void PlatformerGame::init() {
 	getWindow().getInput()->addKeyListener(this, &PlatformerGame::onKeyPress);
 	getRenderSystem().getCamera().getTransform().translate(11.0f,-5.5f);
 	getSceneManager().loadTileLevel("level_0.lvl", this);
+
+	RawImage* img = loadImage("gemRed.png");
+	Texture* gemTexture = getRenderSystem().getTextureManager()->createTexture2D(*img, Texture::Filter::NEAREST_NEIGHBOR);
+	delete img;
+
+	GameObject* gem1 = new GameObject(Transform(11.0f, -5.5f));
+	GameObject* gem2 = new GameObject(Transform(12.0f, -5.5f));
+	GameObject* gem3 = new GameObject(Transform(13.0f, -5.5f));
+	GameObject* gem4 = new GameObject(Transform(14.0f, -5.5f));
+
+	gem1->addComponent(new SpriteComponent(gem1, gemTexture));
+	gem2->addComponent(new SpriteComponent(gem2, gemTexture));
+	gem3->addComponent(new SpriteComponent(gem3, gemTexture));
+	gem4->addComponent(new SpriteComponent(gem4, gemTexture));
+
+	getSceneManager().getCurrentScene().addGameObject(gem1);
+	getSceneManager().getCurrentScene().addGameObject(gem2);
+	getSceneManager().getCurrentScene().addGameObject(gem3);
+	getSceneManager().getCurrentScene().addGameObject(gem4);
 }
 
 void PlatformerGame::tick(float32 delta) {

@@ -139,6 +139,9 @@
     <ClCompile Include="SpriteComponent.cpp">
       <Filter>Object\Component</Filter>
     </ClCompile>
+    <ClCompile Include="RigidBodyComponent.cpp">
+      <Filter>Object\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -244,6 +247,9 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="SpriteComponent.h">
+      <Filter>Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBodyComponent.h">
       <Filter>Object\Component</Filter>
     </ClInclude>
   </ItemGroup>

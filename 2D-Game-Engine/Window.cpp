@@ -1,6 +1,9 @@
 #include "Window.h"
 
+
+#include <GL\glew.h>
 #include <GLFW/glfw3.h>
+
 #include <exception>
 
 #include "Input.h"
@@ -53,6 +56,7 @@ static void windowSizeCallback(GLFWwindow* window, int32 width, int32 height) {
 	Window* windowPtr = (Window*)glfwGetWindowUserPointer(window);
 	windowPtr->m_width = width;
 	windowPtr->m_height = height;
+	glViewport(0, 0, width, height);
 }
 
 void Window::setTitle(const string& title) {

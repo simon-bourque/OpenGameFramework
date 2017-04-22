@@ -1,7 +1,5 @@
 #include "Texture.h"
 
-#include "RawImage.h"
-
 Texture::Texture(Target target, Unit unit) : m_target(target), m_unit(unit) {
 	GLuint name = 0;
 	glGenTextures(1, &name);

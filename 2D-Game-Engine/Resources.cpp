@@ -15,6 +15,8 @@
 #include <sstream>
 #include <fstream>
 
+#include <cstdlib>
+
 void readFloat(ifstream& input, float32& value);
 void readInt(ifstream& input, int32& value);
 
@@ -47,20 +49,24 @@ string loadSrc(string file) {
 	return ss.str();
 }
 
-RawImage loadImage(string file) {
+RawImage* loadImage(string file) {
 	int32 width = 0;
 	int32 height = 0;
 	int32 channels = 0;
 	uint8* data = stbi_load((TEXTURE_PATH + file).c_str(), &width, &height, &channels, 4);
 	
-	return RawImage(data, width, height, channels);
+	RawImage* img = new RawImage(data, width, height, channels);
+
+	free(data); // stb uses malloc
+
+	return img;
 }
 
 RawImage* loadImages(string file, int32 margin, int32 spacing, int32 tileWidth, int32 tileHeight, int32& imgCount) {
-	RawImage img = loadImage(file);
+	RawImage* img = loadImage(file);
 
-	int32 numTilesPerWidth = (img.getWidth() - (margin * 2) + spacing) / (tileWidth + spacing);
-	int32 numTilesPerHeight = (img.getHeight() - (margin * 2) + spacing) / (tileHeight + spacing);
+	int32 numTilesPerWidth = (img->getWidth() - (margin * 2) + spacing) / (tileWidth + spacing);
+	int32 numTilesPerHeight = (img->getHeight() - (margin * 2) + spacing) / (tileHeight + spacing);
 
 	int32 maxWidth = (numTilesPerWidth * tileWidth) + (spacing * (numTilesPerWidth - 1)) + margin;
 	int32 maxHeight = (numTilesPerHeight * tileHeight) + (spacing * (numTilesPerHeight - 1)) + margin;
@@ -71,11 +77,13 @@ RawImage* loadImages(string file, int32 margin, int32 spacing, int32 tileWidth, 
 	for (int32 y = margin; y < maxHeight; y += tileHeight + spacing) {
 		for (int32 x = margin; x < maxWidth; x += tileWidth + spacing) {
 
-			RawImage subImage = img.getSubImage(x, y, tileWidth, tileHeight);
+			RawImage subImage = img->getSubImage(x, y, tileWidth, tileHeight);
 
 			imgs[tileCount++] = subImage;
 		}
 	}
+
+	delete img;
 
 	imgCount = numTilesPerWidth * numTilesPerHeight;
 	return imgs;
@@ -158,15 +166,16 @@ TileScene* loadTileLevel(string file, Game* game) {
 	//RawImage* imgs = loadImages(texPath, margin, spacing, tileWidth, tileHeight, imgCount);
 	RawImage* imgs = loadImages(texPath, margin, spacing, tileWidth, tileHeight, imgCount);
 
-	Texture& texture = game->getRenderSystem().getTextureManager()->createTexture2DArray(imgs, imgCount, Texture::Filter::NEAREST_NEIGHBOR, Texture::Wrap::CLAMP_TO_EDGE, Texture::Wrap::CLAMP_TO_EDGE);
+	Texture* texture = game->getRenderSystem().getTextureManager()->createTexture2DArray(imgs, imgCount, Texture::Filter::NEAREST_NEIGHBOR);
 
 	delete[] imgs;
 
 	input.close();
 
-	TileScene* scene = new TileScene(tiles, numTiles, &texture, Rectangle(boundsX, boundsY, boundsWidth, boundsHeight));
+	TileScene* scene = new TileScene(tiles, numTiles, texture, Rectangle(boundsX, boundsY, boundsWidth, boundsHeight));
 
 	delete[] tiles;
+	delete[] texPath;
 
 	return scene;
 }

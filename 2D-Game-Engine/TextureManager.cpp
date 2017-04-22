@@ -11,7 +11,7 @@ TextureManager::~TextureManager() {
 	}
 }
 
-Texture& TextureManager::createTexture2D(const RawImage& img, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT) {	
+Texture* TextureManager::createTexture2D(const RawImage& img, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT) {	
 	
 	Texture* tex = new Texture(Texture::Target::TEXTURE_2D, Texture::Unit::UNIT_0);
 	//Texture tex(name, Texture::TEXTURE_2D, Texture::UNIT_0);
@@ -30,10 +30,10 @@ Texture& TextureManager::createTexture2D(const RawImage& img, Texture::Filter fi
 	//m_loadedTextures.push_back(tex);
 	m_textures.push_back(tex);
 
-	return *tex;
+	return tex;
 }
 
-Texture& TextureManager::createTexture2DArray(RawImage* imgs, uint32 layers, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT) {
+Texture* TextureManager::createTexture2DArray(RawImage* imgs, uint32 layers, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT) {
 
 	uint32 width = imgs[0].getWidth();
 	uint32 height = imgs[0].getHeight();
@@ -64,5 +64,5 @@ Texture& TextureManager::createTexture2DArray(RawImage* imgs, uint32 layers, Tex
 	delete[] data;
 	m_textures.push_back(tex);
 
-	return *tex;
+	return tex;
 }

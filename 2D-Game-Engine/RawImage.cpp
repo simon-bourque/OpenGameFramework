@@ -2,7 +2,14 @@
 
 RawImage::RawImage() : m_data(nullptr), m_width(0), m_height(0), m_channels(0) {}
 
-RawImage::RawImage(uint8* data, uint32 width, uint32 height, uint8 channels) : m_data(data), m_width(width), m_height(height), m_channels(channels) {}
+RawImage::RawImage(uint8* data, uint32 width, uint32 height, uint8 channels) : m_width(width), m_height(height), m_channels(channels) {
+	const uint32 dataSize = m_width * m_height * m_channels;
+	m_data = new uint8[dataSize];
+	
+	for (uint32 i = 0; i < dataSize; i++) {
+		m_data[i] = data[i];
+	}
+}
 
 RawImage::RawImage(const RawImage& img) : m_width(img.m_width), m_height(img.m_height), m_channels(img.m_channels) {
 	
@@ -57,7 +64,11 @@ RawImage RawImage::getSubImage(uint32 x, uint32 y, uint32 width, uint32 height) 
 		}
 	}
 
-	return RawImage(data, width, height, m_channels);
+	RawImage img(data, width, height, m_channels);
+
+	delete[] data;
+
+	return img;
 }
 
 RawImage& RawImage::operator=(const RawImage& img) {

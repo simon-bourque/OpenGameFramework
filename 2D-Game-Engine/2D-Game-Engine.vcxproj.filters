@@ -252,5 +252,8 @@
     <ClInclude Include="RigidBodyComponent.h">
       <Filter>Object\Component</Filter>
     </ClInclude>
+    <ClInclude Include="EngineAssert.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

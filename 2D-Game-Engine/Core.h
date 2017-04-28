@@ -9,7 +9,7 @@
 #ifdef DEBUG_BUILD
 	#define DEBUG_LOG(msg) printToConsole(msg)
 #else
-	#define DEBUG_LOG(msg)
+	#define DEBUG_LOG(msg) ((void)0)
 #endif
 
 using namespace std;

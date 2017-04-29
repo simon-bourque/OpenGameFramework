@@ -11,6 +11,10 @@
 
 #include "SceneManager.h"
 
+#ifdef DEBUG_BUILD
+#include "Debug.h"
+#endif
+
 Game::Game(string title, int32 width, int32 height, const Rectangle& viewPort) : m_shutdown(false), m_fps(0) {
 	DEBUG_LOG("Initializing game...");
 
@@ -22,6 +26,10 @@ Game::Game(string title, int32 width, int32 height, const Rectangle& viewPort) :
 
 	DEBUG_LOG("Initializing scene manager...");
 	m_sceneManager.reset(new SceneManager());
+
+#ifdef DEBUG_BUILD
+	m_debug.reset(new Debug(this));
+#endif
 }
 
 
@@ -76,4 +84,8 @@ void Game::render() {
 	glClear(GL_COLOR_BUFFER_BIT);
 	m_renderSystem->getCamera().updateViewProjectionMatrix();
 	m_sceneManager->renderCurrentScene(*m_renderSystem);
+
+#ifdef DEBUG_BUILD
+	m_debug->render();
+#endif
 }

@@ -10,12 +10,20 @@ class RenderSystem;
 class Rectangle;
 class SceneManager;
 
+#ifdef DEBUG_BUILD
+class Debug;
+#endif
+
 class Game
 {
 private:
 	unique_ptr<Window> m_window;
 	unique_ptr<RenderSystem> m_renderSystem;
 	unique_ptr<SceneManager> m_sceneManager;
+
+#ifdef DEBUG_BUILD
+	unique_ptr<Debug> m_debug;
+#endif
 
 	bool m_shutdown;
 	int32 m_fps;

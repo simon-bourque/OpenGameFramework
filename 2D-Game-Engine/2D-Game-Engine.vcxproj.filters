@@ -142,6 +142,9 @@
     <ClCompile Include="RigidBodyComponent.cpp">
       <Filter>Object\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Debug.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -253,6 +256,9 @@
       <Filter>Object\Component</Filter>
     </ClInclude>
     <ClInclude Include="EngineAssert.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug.h">
       <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>

@@ -78,6 +78,10 @@ void Game::run() {
 
 void Game::tick(float32 delta) {
 	m_sceneManager->tickCurrentScene(delta, this);
+
+#ifdef DEBUG_BUILD
+	m_debug->tick();
+#endif
 }
 
 void Game::render() {

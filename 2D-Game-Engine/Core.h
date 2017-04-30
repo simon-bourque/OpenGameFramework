@@ -2,6 +2,7 @@
 #define CORE_H
 
 #include <string>
+using std::string;
 
 #include "Types.h"
 #include "Logging.h"
@@ -11,7 +12,5 @@
 #else
 	#define DEBUG_LOG(msg) ((void)0)
 #endif
-
-using namespace std;
 
 #endif

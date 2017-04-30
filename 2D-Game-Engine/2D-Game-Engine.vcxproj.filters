@@ -41,6 +41,9 @@
     <Filter Include="Object\Component">
       <UniqueIdentifier>{9151830b-6ce9-4e14-92b2-049f86abf3b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\Text">
+      <UniqueIdentifier>{c821a8d2-3f18-4fa1-b351-6a85ecb97ff7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp">
@@ -144,6 +147,18 @@
     </ClCompile>
     <ClCompile Include="Debug.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Graphics\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Glyph.cpp">
+      <Filter>Graphics\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Graphics\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="TextRenderer.cpp">
+      <Filter>Graphics\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -260,6 +275,18 @@
     </ClInclude>
     <ClInclude Include="Debug.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Graphics\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Glyph.h">
+      <Filter>Graphics\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Graphics\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="TextRenderer.h">
+      <Filter>Graphics\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -57,8 +57,8 @@ TileScene::TileScene(Tile* tiles, int32 numberOfTiles, Texture* tileSheet, const
 	string indexLabel("TILE_INDEX_BUFFER_");
 	string matrixLabel("TILE_MATRIX_BUFFER_");
 
-	indexLabel.append(to_string(labelCount));
-	matrixLabel.append(to_string(labelCount));
+	indexLabel.append(std::to_string(labelCount));
+	matrixLabel.append(std::to_string(labelCount));
 
 	indexBuffer->setDebugLabel(indexLabel);
 	matrixBuffer->setDebugLabel(matrixLabel);

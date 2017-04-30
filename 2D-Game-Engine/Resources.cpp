@@ -8,6 +8,9 @@
 #include "RenderSystem.h"
 #include "TextureManager.h"
 #include "Texture.h"
+#include "Font.h"
+#include "Glyph.h"
+#include "Vector2f.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
@@ -16,23 +19,25 @@
 #include <fstream>
 
 #include <cstdlib>
+#include <map>
 
-void readFloat(ifstream& input, float32& value);
-void readInt(ifstream& input, int32& value);
+void readFloat(std::ifstream& input, float32& value);
+void readInt(std::ifstream& input, int32& value);
 
 const static string SHADER_PATH = "res/shader/";
 const static string TEXTURE_PATH = "res/texture/";
 const static string LEVEL_PATH = "res/level/";
+const static string FONT_PATH = "res/font/";
 
 string loadSrc(string file) {
-	ifstream input(SHADER_PATH + file);
+	std::ifstream input(SHADER_PATH + file);
 
 	if (!input) {
 		input.close();
-		throw runtime_error("Failed to load source from file " + file);
+		throw std::runtime_error("Failed to load source from file " + file);
 	}
 
-	stringstream ss;
+	std::stringstream ss;
 
 	while (!input.eof()) {
 		int8 character = input.get();
@@ -89,12 +94,112 @@ RawImage* loadImages(string file, int32 margin, int32 spacing, int32 tileWidth, 
 	return imgs;
 }
 
+Font* loadFont(string fontAtlas, string fontDesc, Game* game) {
+	RawImage* bitmap = loadImage(fontAtlas);
+	std::map<char, Glyph> characterMap;
+	Glyph invalidCharacter;
+
+	std::ifstream input(FONT_PATH + fontDesc);
+	
+	if (!input) {
+		delete bitmap;
+		input.close();
+		throw std::runtime_error("Failed to load font " + fontDesc);
+	}
+
+	string read;
+	// Ignore first 4 lines for now
+	getline(input, read);
+	getline(input, read);
+	getline(input, read);
+	getline(input, read);
+
+	// Extract number of characters
+	int32 numCharacters = stoi(read.substr(12));
+
+	DEBUG_LOG(std::to_string(numCharacters));
+	
+	for (uint32 i = 0; i < numCharacters; i++) {
+		
+		input >> read;
+		input >> read;
+		int32 asciiCode = stoi(read.substr(3));
+		DEBUG_LOG(std::to_string(asciiCode));
+
+		input >> read;
+		float32 x = stoi(read.substr(2)) / (float32)bitmap->getWidth();
+		input >> read;
+		float32 y = stoi(read.substr(2)) / (float32)bitmap->getHeight();
+		input >> read;
+		float32 width = stoi(read.substr(6)) / (float32)bitmap->getWidth();
+		input >> read;
+		float32 height = stoi(read.substr(7)) / (float32)bitmap->getHeight();
+		input >> read;
+		float32 xOffset = stoi(read.substr(8)) / (float32)bitmap->getWidth();
+		input >> read;
+		float32 yOffset = stoi(read.substr(8)) / (float32)bitmap->getHeight();
+		input >> read;
+		float32 xAdvance = stoi(read.substr(9)) / (float32)bitmap->getWidth();
+
+		input >> read;
+		input >> read;
+
+		// Compute text coords and vertices
+		float textCoords[12];
+		float vertices[12];
+
+		Vector2f bottomLeft(x, y + height);
+		Vector2f topLeft(x, y);
+		Vector2f bottomRight(x + width, y + height);
+		Vector2f topRight(x + width, y);
+
+		textCoords[0] = bottomLeft.x;
+		textCoords[1] = bottomLeft.y;
+		textCoords[2] = topLeft.x;
+		textCoords[3] = topLeft.y;
+		textCoords[4] = bottomRight.x;
+		textCoords[5] = bottomRight.y;
+		textCoords[6] = bottomRight.x;
+		textCoords[7] = bottomRight.y;
+		textCoords[8] = topLeft.x;
+		textCoords[9] = topLeft.y;
+		textCoords[10] = topRight.x;
+		textCoords[11] = topRight.y;
+
+		vertices[0] = 0; // bottom left x
+		vertices[1] = -height; // bottom left y
+		vertices[2] = 0; // top left x
+		vertices[3] = 0; // top left y
+		vertices[4] = width; // bottom right x
+		vertices[5] = -height; // bottom right y
+		vertices[6] = width; // bottom right x
+		vertices[7] = -height; // bottom right y
+		vertices[8] = 0; // top left x
+		vertices[9] = 0; // top left y
+		vertices[10] = width; // top right x
+		vertices[11] = 0; // top right y
+
+		if (asciiCode == -1) {
+			invalidCharacter = Glyph(i, width, height, xOffset, yOffset, xAdvance, textCoords, vertices);
+		}
+		else {
+			characterMap[asciiCode] = Glyph(i, width, height, xOffset, yOffset, xAdvance, textCoords, vertices);
+		}
+	}
+
+	Texture* bitmapTexture = game->getRenderSystem().getTextureManager()->createTexture2D(*bitmap, Texture::Filter::LINEAR);
+
+	input.close();
+	delete bitmap;
+	return new Font(bitmapTexture, invalidCharacter, characterMap);
+}
+
 TileScene* loadTileLevel(string file, Game* game) {
-	ifstream input(LEVEL_PATH + file);
+	std::ifstream input(LEVEL_PATH + file);
 
 	if (!input) {
 		input.close();
-		throw runtime_error("Failed to load level " + file);
+		throw std::runtime_error("Failed to load level " + file);
 	}
 
 
@@ -181,7 +286,7 @@ TileScene* loadTileLevel(string file, Game* game) {
 }
 
 // TODO ensure correct endianness
-void readFloat(ifstream& input, float32& value) {
+void readFloat(std::ifstream& input, float32& value) {
 	char b[4] = {0, 0, 0, 0};
 	
 	input.get(b[0]).get(b[1]).get(b[2]).get(b[3]);
@@ -189,7 +294,7 @@ void readFloat(ifstream& input, float32& value) {
 	memcpy(&value, b, 4);
 }
 
-void readInt(ifstream& input, int32& value) {
+void readInt(std::ifstream& input, int32& value) {
 	char b[4] = { 0, 0, 0, 0 };
 	
 	input.get(b[0]).get(b[1]).get(b[2]).get(b[3]);

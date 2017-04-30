@@ -5,7 +5,6 @@
 #include "Scene.h"
 
 #include "Core.h"
-#include <string>
 
 class Game;
 
@@ -13,7 +12,7 @@ class SceneManager
 {
 private:
 
-	unique_ptr<Scene> m_currentScene;
+	std::unique_ptr<Scene> m_currentScene;
 
 public:
 	SceneManager();

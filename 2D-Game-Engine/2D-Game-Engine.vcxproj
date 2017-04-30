@@ -147,8 +147,10 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="Font.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Glyph.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Logging.cpp" />
     <ClCompile Include="Matrix3f.cpp" />
@@ -168,6 +170,8 @@
     <ClCompile Include="Shape.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
+    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Tile.cpp" />
@@ -185,8 +189,10 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Core.h" />
+    <ClInclude Include="Font.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Glyph.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Logging.h" />
     <ClInclude Include="Matrix3f.h" />
@@ -207,6 +213,8 @@
     <ClInclude Include="Shape.h" />
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="SpriteRenderer.h" />
+    <ClInclude Include="Text.h" />
+    <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Tile.h" />

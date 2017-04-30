@@ -17,8 +17,8 @@ class GameObject
 private:
 	Transform m_transform;
 
-	vector<ObjectComponent*> m_components;
-	vector<RenderableComponent*> m_renderableComponents;
+	std::vector<ObjectComponent*> m_components;
+	std::vector<RenderableComponent*> m_renderableComponents;
 public:
 	GameObject();
 	explicit GameObject(const Transform& transform);

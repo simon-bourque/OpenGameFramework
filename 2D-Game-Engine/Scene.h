@@ -14,7 +14,7 @@ class Scene {
 private:
 	Rectangle m_bounds;
 
-	vector<GameObject*> m_objects;
+	std::vector<GameObject*> m_objects;
 protected:
 	void renderObjects(const RenderSystem& rs);
 	void renderBackgrounds(const RenderSystem& rs);

@@ -44,7 +44,7 @@ public:
 	virtual ~Buffer();
 
 	void bufferData(const GLvoid* data, GLsizeiptr size, Usage usage);
-	void vertexAttributePointer(GLuint index, GLint vertexSize, GLenum type, GLboolean normalized, GLsizei stride, GLvoid* pointer);
+	void vertexAttributePointer(GLuint index, GLint vertexSize, GLenum type, GLboolean normalized = GL_FALSE, GLsizei stride = 0, GLvoid* pointer = nullptr);
 	void vertexAttributeIPointer(GLuint index, GLint vertexSize, GLenum type, GLsizei stride, GLvoid* pointer);
 	void vertexAttributeDivisor(GLuint index, GLuint divisor);
 

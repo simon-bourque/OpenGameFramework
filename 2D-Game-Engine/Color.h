@@ -14,10 +14,15 @@ struct Color
 	const static Color MAGENTA;
 	const static Color YELLOW;
 
-	float32 r;
-	float32 g;
-	float32 b;
-	float32 a;
+	union {
+		float32 values[4];
+		struct {
+			float32 r;
+			float32 g;
+			float32 b;
+			float32 a;
+		};
+	};
 
 	Color();
 	Color(float32 r, float32 g, float32 b, float32 a = 1.0f);

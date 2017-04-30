@@ -4,6 +4,7 @@
 
 #include "SpriteRenderer.h"
 #include "SceneRenderer.h"
+#include "TextRenderer.h"
 #include "RawImage.h"
 #include "TextureManager.h"
 
@@ -13,7 +14,7 @@ RenderSystem::RenderSystem(const Camera& camera) : m_camera(camera) {
 	
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK) {
-		throw runtime_error("Failed to initialize GLEW.");
+		throw std::runtime_error("Failed to initialize GLEW.");
 	}
 
 	DEBUG_LOG(string((char*)glGetString(GL_VERSION)));
@@ -40,7 +41,7 @@ RenderSystem::RenderSystem(const Camera& camera) : m_camera(camera) {
 			decodedSeverity = "?";
 		}
 
-		stringstream ss;
+		std::stringstream ss;
 		ss << "[" << decodedSeverity << "] " << decodedMessage;
 		DEBUG_LOG(ss.str());
 
@@ -58,6 +59,7 @@ RenderSystem::RenderSystem(const Camera& camera) : m_camera(camera) {
 
 	m_spriteRenderer.reset(new SpriteRenderer(this));
 	m_sceneRenderer.reset(new SceneRenderer(this));
+	m_textRenderer.reset(new TextRenderer(this));
 
 	m_textureManager.reset(new TextureManager());
 }

@@ -11,7 +11,7 @@ class ShaderProgram
 {
 private:
 	GLuint m_programId;
-	map<string, Uniform> m_uniforms;
+	std::map<string, Uniform> m_uniforms;
 
 	void compileShader(GLint shaderID, const string& src);
 public:

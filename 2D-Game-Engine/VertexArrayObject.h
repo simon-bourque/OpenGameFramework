@@ -12,7 +12,7 @@ class VertexArrayObject
 {
 private:
 	GLuint m_handle;
-	vector<Buffer*> m_buffers;
+	std::vector<Buffer*> m_buffers;
 public:
 	VertexArrayObject();
 	virtual ~VertexArrayObject();

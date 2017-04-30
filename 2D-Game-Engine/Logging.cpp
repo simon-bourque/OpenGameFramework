@@ -17,5 +17,5 @@ void printToConsole(const string& message) {
 
 	strftime(dateStr, dateStrSize, "[%T] ", &currentTime);
 
-	cout << dateStr << message.c_str() << endl;
+	std::cout << dateStr << message.c_str() << std::endl;
 }

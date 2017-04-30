@@ -241,8 +241,8 @@ private:
 		}
 	};
 
-	vector<KeyListenerBase*> m_keyListeners;
-	vector<CursorPositionListenerBase*> m_cursorPositionListeners;
+	std::vector<KeyListenerBase*> m_keyListeners;
+	std::vector<CursorPositionListenerBase*> m_cursorPositionListeners;
 public:
 	explicit Input(Window* window);
 	virtual ~Input();

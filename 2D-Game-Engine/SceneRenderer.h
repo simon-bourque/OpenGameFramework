@@ -14,10 +14,10 @@ class Texture;
 
 class SceneRenderer : public Renderer {
 private:
-	unique_ptr<ShaderProgram> m_backgroundShaderProgram;
-	unique_ptr<ShaderProgram> m_tileShaderProgram;
+	std::unique_ptr<ShaderProgram> m_backgroundShaderProgram;
+	std::unique_ptr<ShaderProgram> m_tileShaderProgram;
 
-	unique_ptr<VertexArrayObject> m_backgroundVAO;
+	std::unique_ptr<VertexArrayObject> m_backgroundVAO;
 public:
 	
 	static const float32 BACKGROUND_VERTS[8];

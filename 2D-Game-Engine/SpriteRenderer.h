@@ -14,11 +14,11 @@ class Texture;
 
 class SpriteRenderer : public Renderer {
 private:
-	unique_ptr<ShaderProgram> m_spriteShaderProgram;
-	unique_ptr<ShaderProgram> m_animSpriteShaderProgram;
-	unique_ptr<ShaderProgram> m_spriteBatchShaderProgram;
+	std::unique_ptr<ShaderProgram> m_spriteShaderProgram;
+	std::unique_ptr<ShaderProgram> m_animSpriteShaderProgram;
+	std::unique_ptr<ShaderProgram> m_spriteBatchShaderProgram;
 
-	unique_ptr<VertexArrayObject> m_spriteVAO;
+	std::unique_ptr<VertexArrayObject> m_spriteVAO;
 public:
 	static const float32 SPRITE_VERTS[8];
 	static const float32 SPRITE_UV[8];

@@ -1,5 +1,7 @@
 #ifdef DEBUG_BUILD
 
+#include "Text.h"
+#include "TextRenderer.h"
 #include "Debug.h"
 
 #include "Game.h"
@@ -8,10 +10,17 @@
 #include "RenderSystem.h"
 #include "Camera.h"
 #include "Transform.h"
+#include "Font.h"
+#include "Color.h"
 
-Debug::Debug(Game* game) : m_game(game), m_debugMode(false) {
+#include "Resources.h"
+
+Debug::Debug(Game* game) : m_game(game), m_debugMode(false), m_renderPerf(false), m_zoomIn(false), m_zoomOut(false) {
 	// TODO add assert here
 	game->getWindow().getInput()->addKeyListener(this, &Debug::onKeyPress);
+
+	m_font.reset(loadFont("font3_0.png", "font3.fnt", game));
+	m_fpsText.reset(new Text("fps: 00", m_font.get(), Text::Usage::STREAM));
 }
 
 
@@ -20,6 +29,10 @@ Debug::~Debug() {}
 void Debug::tick() {
 	if (!m_debugMode) {
 		return;
+	}
+
+	if (m_renderPerf) {
+		m_fpsText->setText("fps: " + std::to_string(m_game->getFps()));
 	}
 	
 	if (m_zoomIn != m_zoomOut) {
@@ -47,6 +60,14 @@ void Debug::render() {
 	if (!m_debugMode) {
 		return;
 	}
+
+	if (m_renderPerf) {
+		renderPerf();
+	}
+}
+
+void Debug::renderPerf() const {
+	m_game->getRenderSystem().getTextRenderer()->renderText(m_fpsText.get(), -0.98f, 0.98f, Color::BLACK);
 }
 
 void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
@@ -63,9 +84,16 @@ void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
 
 	if (key == Input::KEY_KP_DECIMAL && action == Input::PRESS && m_debugMode) {
 		DEBUG_LOG("---------- SHORTCUTS ----------");
+		DEBUG_LOG("KP 0:\t\tToggle performance stats");
 		DEBUG_LOG("KP ADD:\t\tZoom in");
 		DEBUG_LOG("KP SUBTRACT:\t\tZoom out");
 		DEBUG_LOG("KP ENTER:\t\tReset zoom");
+	}
+
+	if (key == Input::KEY_KP_0) {
+		if (action == Input::PRESS) {
+			m_renderPerf = !m_renderPerf;
+		}
 	}
 
 	if (key == Input::KEY_KP_ADD) {

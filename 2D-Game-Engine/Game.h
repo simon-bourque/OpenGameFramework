@@ -17,12 +17,12 @@ class Debug;
 class Game
 {
 private:
-	unique_ptr<Window> m_window;
-	unique_ptr<RenderSystem> m_renderSystem;
-	unique_ptr<SceneManager> m_sceneManager;
+	std::unique_ptr<Window> m_window;
+	std::unique_ptr<RenderSystem> m_renderSystem;
+	std::unique_ptr<SceneManager> m_sceneManager;
 
 #ifdef DEBUG_BUILD
-	unique_ptr<Debug> m_debug;
+	std::unique_ptr<Debug> m_debug;
 #endif
 
 	bool m_shutdown;
@@ -42,6 +42,7 @@ public:
 	Window& getWindow() { return *m_window; };
 	RenderSystem& getRenderSystem() { return *m_renderSystem; };
 	SceneManager& getSceneManager() { return *m_sceneManager; };
+	int32 getFps() const { return m_fps; };
 };
 
 #endif

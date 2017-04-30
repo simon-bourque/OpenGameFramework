@@ -6,18 +6,26 @@
 
 #include "Core.h"
 
-class Game;
+#include <memory>
 
-class Debug
-{
+class Game;
+class Font;
+class Text;
+
+class Debug {
 private:
 	Game* m_game;
 
+	std::unique_ptr<Font> m_font;
+	std::unique_ptr<Text> m_fpsText;
+
 	bool m_debugMode;
+	bool m_renderPerf;
 
 	bool m_zoomIn;
 	bool m_zoomOut;
 
+	void renderPerf() const;
 	void onKeyPress(int32 key, int32 scancode, int32 action, int32 mods);
 public:
 	Debug(Game* game);

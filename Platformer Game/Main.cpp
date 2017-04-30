@@ -17,7 +17,7 @@ int main() {
 		PlatformerGame game;
 		game.run();
 	}
-	catch (runtime_error& ex) {
+	catch (std::runtime_error& ex) {
 		DEBUG_LOG("Exception occured.");
 		DEBUG_LOG(ex.what());
 		displayErrorBox(ex.what());

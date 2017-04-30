@@ -10,7 +10,7 @@ class RawImage;
 class TextureManager
 {
 private:
-	vector<Texture*> m_textures;
+	std::vector<Texture*> m_textures;
 public:
 	TextureManager();
 	virtual ~TextureManager();

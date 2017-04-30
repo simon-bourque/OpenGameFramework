@@ -8,6 +8,7 @@
 
 class SpriteRenderer;
 class SceneRenderer;
+class TextRenderer;
 class RawImage;
 class TextureManager;
 
@@ -16,10 +17,11 @@ class RenderSystem
 private:
 	Camera m_camera;
 	
-	unique_ptr<SpriteRenderer> m_spriteRenderer;
-	unique_ptr<SceneRenderer> m_sceneRenderer;
+	std::unique_ptr<SpriteRenderer> m_spriteRenderer;
+	std::unique_ptr<SceneRenderer> m_sceneRenderer;
+	std::unique_ptr<TextRenderer> m_textRenderer;
 
-	unique_ptr<TextureManager> m_textureManager;
+	std::unique_ptr<TextureManager> m_textureManager;
 public:
 	explicit RenderSystem(const Camera& camera);
 	~RenderSystem();
@@ -28,6 +30,7 @@ public:
 
 	SpriteRenderer* getSpriteRenderer() const { return m_spriteRenderer.get(); };
 	SceneRenderer* getSceneRenderer() const { return m_sceneRenderer.get(); };
+	TextRenderer* getTextRenderer() const { return m_textRenderer.get(); };
 	TextureManager* getTextureManager() const { return m_textureManager.get(); };
 };
 

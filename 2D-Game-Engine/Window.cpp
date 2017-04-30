@@ -13,7 +13,7 @@ Window::Window(string title, int32 width, int32 height) : m_title(title), m_widt
 	glfwSetErrorCallback([](int32 error, const char* desc) -> void { DEBUG_LOG(desc); });
 
 	if (!glfwInit()) {
-		throw runtime_error("Failed to initialize GLFW.");
+		throw std::runtime_error("Failed to initialize GLFW.");
 	}
 
 	glfwDefaultWindowHints();
@@ -25,7 +25,7 @@ Window::Window(string title, int32 width, int32 height) : m_title(title), m_widt
 	if (!m_handle)
 	{
 		glfwTerminate();
-		throw runtime_error("Failed to initialize window.");
+		throw std::runtime_error("Failed to initialize window.");
 	}
 
 	glfwMakeContextCurrent(m_handle);

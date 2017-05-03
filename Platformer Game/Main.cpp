@@ -8,11 +8,12 @@
 #include "Vector2f.h"
 #include "Matrix3f.h"
 
-#include "Windows.h"
+#include "EngineAssert.h"
 
 #include "Platform.h"
 
 int main() {
+	ASSERT(false, "Test message");
 	try {
 		PlatformerGame game;
 		game.run();

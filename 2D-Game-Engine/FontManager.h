@@ -4,8 +4,8 @@
 #include "Core.h"
 
 #include "ResourceManager.h"
+#include "Font.h"
 
-class Font;
 class Game;
 
 class FontManager : public ResourceManager<Font> {

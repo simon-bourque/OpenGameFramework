@@ -16,8 +16,8 @@ class Debug {
 private:
 	Game* m_game;
 
-	std::unique_ptr<Font> m_font;
-	std::unique_ptr<Text> m_fpsText;
+	Text* m_fpsText;
+	Text* m_debugOnText;
 
 	bool m_debugMode;
 	bool m_renderPerf;

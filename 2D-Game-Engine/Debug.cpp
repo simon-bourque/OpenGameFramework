@@ -12,15 +12,19 @@
 #include "Transform.h"
 #include "Font.h"
 #include "Color.h"
+#include "FontManager.h"
+#include "TextManager.h"
 
 #include "Resources.h"
+#include "EngineAssert.h"
 
 Debug::Debug(Game* game) : m_game(game), m_debugMode(false), m_renderPerf(false), m_zoomIn(false), m_zoomOut(false) {
-	// TODO add assert here
+	ASSERT(game, "Game should not be null");
 	game->getWindow().getInput()->addKeyListener(this, &Debug::onKeyPress);
 
-	m_font.reset(loadFont("font3_0.png", "font3.fnt", game));
-	m_fpsText.reset(new Text("fps: 00", m_font.get(), Text::Usage::STREAM));
+	Font* font = game->getRenderSystem().getFontManager()->createFont("font3", game);
+	m_fpsText = game->getRenderSystem().getTextManager()->createText("debug_fps_text_0", "fps: 00", font, Text::Usage::STREAM);
+	m_debugOnText = game->getRenderSystem().getTextManager()->createText("debug_debug_on_text_0", "Debug Mode ON", font, Text::Usage::STATIC);
 }
 
 
@@ -60,6 +64,7 @@ void Debug::render() {
 	if (!m_debugMode) {
 		return;
 	}
+	m_game->getRenderSystem().getTextRenderer()->renderText(m_debugOnText, -0.98f, -0.93f, Color::RED);
 
 	if (m_renderPerf) {
 		renderPerf();
@@ -67,7 +72,7 @@ void Debug::render() {
 }
 
 void Debug::renderPerf() const {
-	m_game->getRenderSystem().getTextRenderer()->renderText(m_fpsText.get(), -0.98f, 0.98f, Color::BLACK);
+	m_game->getRenderSystem().getTextRenderer()->renderText(m_fpsText, -0.98f, 0.98f, Color::BLACK);
 }
 
 void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {

@@ -7,6 +7,8 @@
 #include "TextRenderer.h"
 #include "RawImage.h"
 #include "TextureManager.h"
+#include "FontManager.h"
+#include "TextManager.h"
 
 #include <sstream>
 
@@ -62,6 +64,8 @@ RenderSystem::RenderSystem(const Camera& camera) : m_camera(camera) {
 	m_textRenderer.reset(new TextRenderer(this));
 
 	m_textureManager.reset(new TextureManager());
+	m_fontManager.reset(new FontManager());
+	m_textManager.reset(new TextManager());
 }
 
 

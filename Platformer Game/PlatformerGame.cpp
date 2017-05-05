@@ -24,9 +24,7 @@ void PlatformerGame::init() {
 	getRenderSystem().getCamera().getTransform().translate(11.0f,-5.5f);
 	getSceneManager().loadTileLevel("level_0.lvl", this);
 
-	RawImage* img = loadImage("gemRed.png");
-	Texture* gemTexture = getRenderSystem().getTextureManager()->createTexture2D(*img, Texture::Filter::NEAREST_NEIGHBOR);
-	delete img;
+	Texture* gemTexture = getRenderSystem().getTextureManager()->createTexture2D("gemRed.png", Texture::Filter::NEAREST_NEIGHBOR);
 
 	GameObject* gem1 = new GameObject(Transform(11.0f, -5.5f));
 	GameObject* gem2 = new GameObject(Transform(12.0f, -5.5f));

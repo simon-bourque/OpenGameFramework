@@ -274,13 +274,7 @@ TileScene* loadTileLevel(string file, Game* game) {
 	readInt(input, tileWidth);
 	readInt(input, tileHeight);
 
-	int32 imgCount = 0;
-	//RawImage* imgs = loadImages(texPath, margin, spacing, tileWidth, tileHeight, imgCount);
-	RawImage* imgs = loadImages(texPath, margin, spacing, tileWidth, tileHeight, imgCount);
-
-	Texture* texture = game->getRenderSystem().getTextureManager()->createTexture2DArray(imgs, imgCount, Texture::Filter::NEAREST_NEIGHBOR);
-
-	delete[] imgs;
+	Texture* texture = game->getRenderSystem().getTextureManager()->createTexture2DArray(texPath, margin, spacing, tileWidth, tileHeight, Texture::Filter::NEAREST_NEIGHBOR);
 
 	input.close();
 

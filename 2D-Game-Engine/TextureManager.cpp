@@ -1,24 +1,23 @@
 #include "TextureManager.h"
 
 #include "RawImage.h"
+#include "Resources.h"
 
 TextureManager::TextureManager() {}
 
 
-TextureManager::~TextureManager() {
-	for (Texture* tex : m_textures) {
-		delete tex;
-	}
-}
+TextureManager::~TextureManager() {}
 
-Texture* TextureManager::createTexture2D(const RawImage& img, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT) {	
+Texture* TextureManager::createTexture2D(const string& name, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT) {	
 	
+	RawImage* img = loadImage(name);
+
 	Texture* tex = new Texture(Texture::Target::TEXTURE_2D, Texture::Unit::UNIT_0);
 	//Texture tex(name, Texture::TEXTURE_2D, Texture::UNIT_0);
 	tex->bind();
 	//glBindTexture(Texture::TEXTURE_2D, name);
 	
-	glTexImage2D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, img.getWidth(), img.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, img.getData());
+	glTexImage2D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, img->getWidth(), img->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, img->getData());
 	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filtering));
 	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filtering));
 	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(textureWrapS));
@@ -28,13 +27,17 @@ Texture* TextureManager::createTexture2D(const RawImage& img, Texture::Filter fi
 	tex->unbind();
 	//Texture tex(name, Texture::TEXTURE_2D, Texture::UNIT_0);
 	//m_loadedTextures.push_back(tex);
-	m_textures.push_back(tex);
+	//m_textures.push_back(tex);
+	m_loadedResources[name] = tex;
 
+	delete img;
 	return tex;
 }
 
-Texture* TextureManager::createTexture2DArray(RawImage* imgs, uint32 layers, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT) {
+Texture* TextureManager::createTexture2DArray(const string& name, int32 margin, int32 spacing, int32 tileWidth, int32 tileHeight, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT) {
 
+	int32 layers = 0;
+	RawImage* imgs = loadImages(name, margin, spacing, tileWidth, tileHeight, layers);
 	uint32 width = imgs[0].getWidth();
 	uint32 height = imgs[0].getHeight();
 	uint32 subImgSize = width * height * imgs[0].getChannels();
@@ -61,8 +64,10 @@ Texture* TextureManager::createTexture2DArray(RawImage* imgs, uint32 layers, Tex
 	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(textureWrapT));
 	tex->unbind();
 
+	delete[] imgs;
 	delete[] data;
-	m_textures.push_back(tex);
+	//m_textures.push_back(tex);
+	m_loadedResources[name] = tex;
 
 	return tex;
 }

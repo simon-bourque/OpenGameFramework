@@ -16,9 +16,7 @@ Font* FontManager::createFont(const string& name, Game* game) {
 	img.append(".png");
 	desc.append(".fnt");
 
-	RawImage* rawImg = loadImage(img);
-	Texture* tex = game->getRenderSystem().getTextureManager()->createTexture2D(*rawImg, Texture::Filter::LINEAR);
-	delete rawImg;
+	Texture* tex = game->getRenderSystem().getTextureManager()->createTexture2D(img, Texture::Filter::LINEAR);
 
 	Glyph invalidCharacter;
 	uint32 size = 0;

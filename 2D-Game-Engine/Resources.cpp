@@ -94,59 +94,69 @@ RawImage* loadImages(string file, int32 margin, int32 spacing, int32 tileWidth, 
 	return imgs;
 }
 
-Font* loadFont(string fontAtlas, string fontDesc, Game* game) {
-	RawImage* bitmap = loadImage(fontAtlas);
-	std::map<char, Glyph> characterMap;
-	Glyph invalidCharacter;
+std::pair<char, Glyph>* loadFont(const string& file, uint32& charMapSize, Glyph& invalidCharacter) {
 
-	std::ifstream input(FONT_PATH + fontDesc);
+	std::ifstream input(FONT_PATH + file);
 	
 	if (!input) {
-		delete bitmap;
 		input.close();
-		throw std::runtime_error("Failed to load font " + fontDesc);
+		throw std::runtime_error("Failed to load font " + file);
 	}
 
 	string read;
-	// Ignore first 4 lines for now
+	// Ignore first line
 	getline(input, read);
+
+	// Extract atlas width and height
+	input >> read;
+	input >> read;
+	input >> read;
+
+	input >> read;
+	float32 imgWidth = stoi(read.substr(7));
+	input >> read;
+	float32 imgHeight = stoi(read.substr(7));
 	getline(input, read);
-	getline(input, read);
+
+	// Ignore next line
 	getline(input, read);
 
 	// Extract number of characters
+	getline(input, read);
 	int32 numCharacters = stoi(read.substr(12));
 
-	DEBUG_LOG(std::to_string(numCharacters));
+	// TODO handle not having a invalid character
+	charMapSize = numCharacters - 1;
+	std::pair<char, Glyph>* characterMap = new std::pair<char, Glyph>[charMapSize];
 	
+	uint32 charMapCounter = 0;
 	for (uint32 i = 0; i < numCharacters; i++) {
 		
 		input >> read;
 		input >> read;
 		int32 asciiCode = stoi(read.substr(3));
-		DEBUG_LOG(std::to_string(asciiCode));
 
 		input >> read;
-		float32 x = stoi(read.substr(2)) / (float32)bitmap->getWidth();
+		float32 x = stoi(read.substr(2)) / imgWidth;
 		input >> read;
-		float32 y = stoi(read.substr(2)) / (float32)bitmap->getHeight();
+		float32 y = stoi(read.substr(2)) / imgHeight;
 		input >> read;
-		float32 width = stoi(read.substr(6)) / (float32)bitmap->getWidth();
+		float32 width = stoi(read.substr(6)) / imgWidth;
 		input >> read;
-		float32 height = stoi(read.substr(7)) / (float32)bitmap->getHeight();
+		float32 height = stoi(read.substr(7)) / imgHeight;
 		input >> read;
-		float32 xOffset = stoi(read.substr(8)) / (float32)bitmap->getWidth();
+		float32 xOffset = stoi(read.substr(8)) / imgWidth;
 		input >> read;
-		float32 yOffset = stoi(read.substr(8)) / (float32)bitmap->getHeight();
+		float32 yOffset = stoi(read.substr(8)) / imgHeight;
 		input >> read;
-		float32 xAdvance = stoi(read.substr(9)) / (float32)bitmap->getWidth();
+		float32 xAdvance = stoi(read.substr(9)) / imgWidth;
 
 		input >> read;
 		input >> read;
 
 		// Compute text coords and vertices
-		float textCoords[12];
-		float vertices[12];
+		float32 textCoords[12];
+		float32 vertices[12];
 
 		Vector2f bottomLeft(x, y + height);
 		Vector2f topLeft(x, y);
@@ -183,15 +193,12 @@ Font* loadFont(string fontAtlas, string fontDesc, Game* game) {
 			invalidCharacter = Glyph(i, width, height, xOffset, yOffset, xAdvance, textCoords, vertices);
 		}
 		else {
-			characterMap[asciiCode] = Glyph(i, width, height, xOffset, yOffset, xAdvance, textCoords, vertices);
+			characterMap[charMapCounter++] = std::pair<char, Glyph>(asciiCode, Glyph(i, width, height, xOffset, yOffset, xAdvance, textCoords, vertices));
 		}
 	}
 
-	Texture* bitmapTexture = game->getRenderSystem().getTextureManager()->createTexture2D(*bitmap, Texture::Filter::LINEAR);
-
 	input.close();
-	delete bitmap;
-	return new Font(bitmapTexture, invalidCharacter, characterMap);
+	return characterMap;
 }
 
 TileScene* loadTileLevel(string file, Game* game) {

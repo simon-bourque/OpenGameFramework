@@ -4,6 +4,7 @@
 #include "Core.h"
 
 #include <map>
+#include <utility>
 #include "Glyph.h"
 
 class Texture;
@@ -15,7 +16,7 @@ private:
 	Glyph m_invalidCharacter;
 public:
 	Font(Texture* bitmap, const Glyph& invalidCharacter);
-	Font(Texture* bitmap, const Glyph& invalidCharacter, const std::map<char, Glyph>& glyphMap);
+	Font(Texture* bitmap, const Glyph& invalidCharacter, std::pair<char, Glyph>* characterMap, uint32 characterMapSize);
 
 	Texture* getBitmap() const { return m_bitmap; };
 

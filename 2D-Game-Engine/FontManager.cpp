@@ -1,7 +1,10 @@
 #include "FontManager.h"
 
 #include "Resources.h"
-
+#include "Game.h"
+#include "RenderSystem.h"
+#include "TextureManager.h"
+#include "RawImage.h"
 
 FontManager::FontManager() {}
 
@@ -13,7 +16,17 @@ Font* FontManager::createFont(const string& name, Game* game) {
 	img.append(".png");
 	desc.append(".fnt");
 
-	Font* font = loadFont(img, desc, game);
+	RawImage* rawImg = loadImage(img);
+	Texture* tex = game->getRenderSystem().getTextureManager()->createTexture2D(*rawImg, Texture::Filter::LINEAR);
+	delete rawImg;
+
+	Glyph invalidCharacter;
+	uint32 size = 0;
+	std::pair<char, Glyph>* map = loadFont(desc, size, invalidCharacter);
+	
+	Font* font = new Font(tex, invalidCharacter, map, size);
+	delete[] map;
+
 	m_loadedResources[name] = font;
 
 	return font;

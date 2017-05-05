@@ -7,7 +7,7 @@
 class RawImage;
 class TileScene;
 class Game;
-class Glyph;
+struct Glyph;
 class Font;
 
 string loadSrc(string file);

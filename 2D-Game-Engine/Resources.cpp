@@ -12,6 +12,7 @@
 #include "Glyph.h"
 #include "Vector2f.h"
 
+#define STBI_FAILURE_USERMSG
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
 
@@ -59,10 +60,15 @@ RawImage* loadImage(string file) {
 	int32 height = 0;
 	int32 channels = 0;
 	uint8* data = stbi_load((TEXTURE_PATH + file).c_str(), &width, &height, &channels, 4);
-	
+
+	if (!data) {
+		const char* reason = stbi_failure_reason();
+		throw std::runtime_error("Failed to load texture " + file + ": " + reason);
+	}
+
 	RawImage* img = new RawImage(data, width, height, channels);
 
-	free(data); // stb uses malloc
+	stbi_image_free(data);
 
 	return img;
 }

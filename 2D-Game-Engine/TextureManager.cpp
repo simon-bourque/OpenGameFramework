@@ -2,6 +2,7 @@
 
 #include "RawImage.h"
 #include "Resources.h"
+#include "Buffer.h"
 
 TextureManager::TextureManager() {}
 
@@ -67,6 +68,17 @@ Texture* TextureManager::createTexture2DArray(const string& name, int32 margin, 
 	delete[] imgs;
 	delete[] data;
 	//m_textures.push_back(tex);
+	m_loadedResources[name] = tex;
+
+	return tex;
+}
+
+Texture* TextureManager::createTextureBuffer(const string& name, Buffer* buffer) {
+	Texture* tex = new Texture(Texture::Target::TEXTURE_BUFFER, Texture::Unit::UNIT_1);
+	tex->bind();
+	glTexBuffer(static_cast<GLenum>(tex->m_target), GL_R32F, buffer->getHandle());
+	tex->unbind();
+
 	m_loadedResources[name] = tex;
 
 	return tex;

@@ -51,6 +51,8 @@ public:
 	void bind() const;
 	void unbind() const;
 
+	GLuint getHandle() const { return m_handle; };
+
 #ifdef DEBUG_BUILD
 	void setDebugLabel(const string& label);
 #endif

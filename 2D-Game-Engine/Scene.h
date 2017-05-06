@@ -16,14 +16,14 @@ private:
 
 	std::vector<GameObject*> m_objects;
 protected:
-	void renderObjects(const RenderSystem& rs);
-	void renderBackgrounds(const RenderSystem& rs);
+	void renderObjects(RenderSystem* rs);
+	void renderBackgrounds(RenderSystem* rs);
 public:
 	Scene(const Rectangle& bounds);
 	virtual ~Scene();
 
 	virtual void tick(float32 delta, Game* game);
-	virtual void render(const RenderSystem& rs);
+	virtual void render(RenderSystem* rs);
 
 	void addGameObject(GameObject* object);
 

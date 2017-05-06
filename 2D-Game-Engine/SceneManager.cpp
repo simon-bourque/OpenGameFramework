@@ -19,6 +19,6 @@ void SceneManager::tickCurrentScene(float32 delta, Game* game) {
 	m_currentScene->tick(delta, game);
 }
 
-void SceneManager::renderCurrentScene(const RenderSystem& rs) {
+void SceneManager::renderCurrentScene(RenderSystem* rs) {
 	m_currentScene->render(rs);
 }

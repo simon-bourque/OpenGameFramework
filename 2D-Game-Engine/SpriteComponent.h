@@ -26,7 +26,7 @@ public:
 	void setVerticalFlip(bool verticalFlip) { m_verticalFlip = verticalFlip; }
 
 	virtual void tick(float32 delta, Game* game) override;
-	virtual void render(const RenderSystem& rs) override;
+	virtual void render(RenderSystem* rs) override;
 };
 
 #endif

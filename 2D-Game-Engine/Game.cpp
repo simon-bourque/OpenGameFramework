@@ -87,7 +87,7 @@ void Game::tick(float32 delta) {
 void Game::render() {
 	glClear(GL_COLOR_BUFFER_BIT);
 	m_renderSystem->getCamera().updateViewProjectionMatrix();
-	m_sceneManager->renderCurrentScene(*m_renderSystem);
+	m_sceneManager->renderCurrentScene(m_renderSystem.get());
 
 #ifdef DEBUG_BUILD
 	m_debug->render();

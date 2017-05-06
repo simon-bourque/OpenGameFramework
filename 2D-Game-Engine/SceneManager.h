@@ -20,7 +20,7 @@ public:
 
 	void loadTileLevel(const string& file, Game* game);
 	void tickCurrentScene(float32 delta, Game* game);
-	void renderCurrentScene(const RenderSystem& rs);
+	void renderCurrentScene(RenderSystem* rs);
 
 	const Scene& getCurrentScene() const { return *m_currentScene; };
 	Scene& getCurrentScene() { return *m_currentScene; };

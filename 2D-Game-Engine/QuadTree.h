@@ -24,6 +24,8 @@ private:
 	void addToQuadrant(const Rectangle& rect, std::vector<Rectangle>& bucket);
 public:
 	QuadTree(const Rectangle& bounds, uint32 bucketSize = 1);
+	QuadTree(const QuadTree& qt);
+	QuadTree(QuadTree&& qt);
 	virtual ~QuadTree();
 
 	const Rectangle& getBounds() const { return m_bounds; };
@@ -31,6 +33,9 @@ public:
 
 	void insert(const Rectangle& rect);
 	void retrieve(const Rectangle& rect, std::vector<Rectangle>& list) const;
+
+	QuadTree& operator=(const QuadTree& qt);
+	QuadTree& operator=(QuadTree&& qt);
 };
 
 #endif

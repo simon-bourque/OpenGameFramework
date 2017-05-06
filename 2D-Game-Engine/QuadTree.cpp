@@ -13,6 +13,40 @@ QuadTree::QuadTree(const Rectangle& bounds, uint32 bucketSize) :
 	m_southEast(nullptr)
 {}
 
+QuadTree::QuadTree(const QuadTree& qt) : m_bounds(qt.m_bounds), m_bucket(qt.m_bucket), m_bucketSize(qt.m_bucketSize) {
+	if (qt.isSplit()) {
+		m_northWest = new QuadTree(*qt.m_northWest);
+		m_northEast = new QuadTree(*qt.m_northEast);
+		m_southWest = new QuadTree(*qt.m_southWest);
+		m_southEast = new QuadTree(*qt.m_southEast);
+	}
+	else {
+		m_northWest = nullptr;
+		m_northEast = nullptr;
+		m_southWest = nullptr;
+		m_southEast = nullptr;
+	}
+}
+
+QuadTree::QuadTree(QuadTree&& qt) : m_bounds(qt.m_bounds), m_bucket(qt.m_bucket), m_bucketSize(qt.m_bucketSize) {
+	if (qt.isSplit()) {
+		m_northWest = qt.m_northWest;
+		m_northEast = qt.m_northEast;
+		m_southWest = qt.m_southWest;
+		m_southEast = qt.m_southEast;
+		qt.m_northWest = nullptr;
+		qt.m_northEast = nullptr;
+		qt.m_southWest = nullptr;
+		qt.m_southEast = nullptr;
+	}
+	else {
+		m_northWest = nullptr;
+		m_northEast = nullptr;
+		m_southWest = nullptr;
+		m_southEast = nullptr;
+	}
+}
+
 
 QuadTree::~QuadTree() {
 	delete m_northWest;
@@ -116,4 +150,50 @@ int8 QuadTree::getQuadrant(const Rectangle& rect) const {
 	else {
 		return -1;
 	}
+}
+
+QuadTree& QuadTree::operator=(const QuadTree& qt) {
+	m_bounds = qt.m_bounds;
+	m_bucket = qt.m_bucket;
+	m_bucketSize = qt.m_bucketSize;
+	
+	if (qt.isSplit()) {
+		m_northWest = new QuadTree(*qt.m_northWest);
+		m_northEast = new QuadTree(*qt.m_northEast);
+		m_southWest = new QuadTree(*qt.m_southWest);
+		m_southEast = new QuadTree(*qt.m_southEast);
+	}
+	else {
+		m_northWest = nullptr;
+		m_northEast = nullptr;
+		m_southWest = nullptr;
+		m_southEast = nullptr;
+	}
+
+	return *this;
+}
+
+QuadTree& QuadTree::operator=(QuadTree&& qt) {
+	m_bounds = qt.m_bounds;
+	m_bucket = qt.m_bucket;
+	m_bucketSize = qt.m_bucketSize;
+
+	if (qt.isSplit()) {
+		m_northWest = qt.m_northWest;
+		m_northEast = qt.m_northEast;
+		m_southWest = qt.m_southWest;
+		m_southEast = qt.m_southEast;
+		qt.m_northWest = nullptr;
+		qt.m_northEast = nullptr;
+		qt.m_southWest = nullptr;
+		qt.m_southEast = nullptr;
+	}
+	else {
+		m_northWest = nullptr;
+		m_northEast = nullptr;
+		m_southWest = nullptr;
+		m_southEast = nullptr;
+	}
+
+	return *this;
 }

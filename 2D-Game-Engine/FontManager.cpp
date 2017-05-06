@@ -1,22 +1,21 @@
 #include "FontManager.h"
 
 #include "Resources.h"
-#include "Game.h"
 #include "RenderSystem.h"
 #include "TextureManager.h"
 #include "RawImage.h"
 
-FontManager::FontManager() {}
+FontManager::FontManager(RenderSystem* rs) : ResourceManager(rs) {}
 
 FontManager::~FontManager() {}
 
-Font* FontManager::createFont(const string& name, Game* game) {
+Font* FontManager::createFont(const string& name) {
 	string img = name;
 	string desc = name;
 	img.append(".png");
 	desc.append(".fnt");
 
-	Texture* tex = game->getRenderSystem().getTextureManager()->createTexture2D(img, Texture::Filter::LINEAR);
+	Texture* tex = m_rs->getTextureManager()->createTexture2D(img, Texture::Filter::LINEAR);
 
 	Glyph invalidCharacter;
 	uint32 size = 0;

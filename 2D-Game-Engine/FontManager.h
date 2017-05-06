@@ -6,14 +6,14 @@
 #include "ResourceManager.h"
 #include "Font.h"
 
-class Game;
+class RenderSystem;
 
 class FontManager : public ResourceManager<Font> {
 public:
-	FontManager();
+	FontManager(RenderSystem* rs);
 	virtual ~FontManager();
 
-	Font* createFont(const string& name, Game* game);
+	Font* createFont(const string& name);
 };
 
 #endif

@@ -63,9 +63,9 @@ RenderSystem::RenderSystem(const Camera& camera) : m_camera(camera) {
 	m_sceneRenderer.reset(new SceneRenderer(this));
 	m_textRenderer.reset(new TextRenderer(this));
 
-	m_textureManager.reset(new TextureManager());
-	m_fontManager.reset(new FontManager());
-	m_textManager.reset(new TextManager());
+	m_textureManager.reset(new TextureManager(this));
+	m_fontManager.reset(new FontManager(this));
+	m_textManager.reset(new TextManager(this));
 }
 
 

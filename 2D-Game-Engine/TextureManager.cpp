@@ -4,7 +4,7 @@
 #include "Resources.h"
 #include "Buffer.h"
 
-TextureManager::TextureManager() {}
+TextureManager::TextureManager(RenderSystem* rs) : ResourceManager(rs) {}
 
 
 TextureManager::~TextureManager() {}
@@ -37,7 +37,7 @@ Texture* TextureManager::createTexture2D(const string& name, Texture::Filter fil
 
 Texture* TextureManager::createTexture2DArray(const string& name, int32 margin, int32 spacing, int32 tileWidth, int32 tileHeight, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT) {
 
-	int32 layers = 0;
+	uint32 layers = 0;
 	RawImage* imgs = loadImages(name, margin, spacing, tileWidth, tileHeight, layers);
 	uint32 width = imgs[0].getWidth();
 	uint32 height = imgs[0].getHeight();

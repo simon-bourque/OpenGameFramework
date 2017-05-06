@@ -67,7 +67,7 @@ RawImage* loadImage(string file) {
 	return img;
 }
 
-RawImage* loadImages(string file, int32 margin, int32 spacing, int32 tileWidth, int32 tileHeight, int32& imgCount) {
+RawImage* loadImages(string file, int32 margin, int32 spacing, int32 tileWidth, int32 tileHeight, uint32& imgCount) {
 	RawImage* img = loadImage(file);
 
 	int32 numTilesPerWidth = (img->getWidth() - (margin * 2) + spacing) / (tileWidth + spacing);
@@ -123,7 +123,7 @@ std::pair<char, Glyph>* loadFont(const string& file, uint32& charMapSize, Glyph&
 
 	// Extract number of characters
 	getline(input, read);
-	int32 numCharacters = stoi(read.substr(12));
+	uint32 numCharacters = stoi(read.substr(12));
 
 	// TODO handle not having a invalid character
 	charMapSize = numCharacters - 1;

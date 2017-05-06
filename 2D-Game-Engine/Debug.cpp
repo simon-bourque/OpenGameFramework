@@ -22,7 +22,7 @@ Debug::Debug(Game* game) : m_game(game), m_debugMode(false), m_renderPerf(false)
 	ASSERT(game, "Game should not be null");
 	game->getWindow().getInput()->addKeyListener(this, &Debug::onKeyPress);
 
-	Font* font = game->getRenderSystem().getFontManager()->createFont("font3", game);
+	Font* font = game->getRenderSystem().getFontManager()->createFont("font3");
 	m_fpsText = game->getRenderSystem().getTextManager()->createText("debug_fps_text_0", "fps: 00", font, Text::Usage::STREAM);
 	m_debugOnText = game->getRenderSystem().getTextManager()->createText("debug_debug_on_text_0", "Debug Mode ON", font, Text::Usage::STATIC);
 }
@@ -95,7 +95,7 @@ void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
 		DEBUG_LOG("KP ENTER:\t\tReset zoom");
 	}
 
-	if (key == Input::KEY_KP_0) {
+	if (key == Input::KEY_KP_0 && m_debugMode) {
 		if (action == Input::PRESS) {
 			m_renderPerf = !m_renderPerf;
 		}

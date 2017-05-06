@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Graphics">
       <UniqueIdentifier>{b3768301-443f-4d9a-9405-ff018cb39694}</UniqueIdentifier>
     </Filter>
@@ -43,6 +39,12 @@
     </Filter>
     <Filter Include="Graphics\Text">
       <UniqueIdentifier>{c821a8d2-3f18-4fa1-b351-6a85ecb97ff7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{6856c682-12ef-463d-a777-553c6fb0a967}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics\Collision">
+      <UniqueIdentifier>{0922d887-8dd7-44cf-b635-136246a96f84}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +170,9 @@
     </ClCompile>
     <ClCompile Include="TextManager.cpp">
       <Filter>Graphics\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadTree.cpp">
+      <Filter>Physics\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -305,6 +310,9 @@
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadTree.h">
+      <Filter>Physics\Collision</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -45,3 +45,12 @@ void Rectangle::setY(float32 y) {
 	m_bottomLeft.y = y - m_halfHeight;
 	m_bottomRight.y = y - m_halfHeight;
 }
+
+bool Rectangle::intersects(const Rectangle& rect) const {
+	return (
+		m_topLeft.x < rect.m_topRight.x &&
+		m_topRight.x > rect.m_topLeft.x &&
+		m_topLeft.y > rect.m_bottomLeft.y &&
+		m_bottomLeft.y < rect.m_topLeft.y
+		);
+}

@@ -2,6 +2,7 @@
 
 const Color Color::BLACK = createColorHexRGB(0x000000);
 const Color Color::WHITE = createColorHexRGB(0xFFFFFF);
+const Color Color::GREY = createColorHexRGB(0x808080);
 const Color Color::RED = createColorHexRGB(0xFF0000);
 const Color Color::GREEN = createColorHexRGB(0x00FF00);
 const Color Color::BLUE = createColorHexRGB(0x0000FF);

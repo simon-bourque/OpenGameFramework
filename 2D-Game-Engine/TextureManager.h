@@ -5,11 +5,15 @@
 #include "Texture.h"
 #include "ResourceManager.h"
 
+#include <memory>
+
 class RenderSystem;
 class RawImage;
 class Buffer;
 
 class TextureManager : public ResourceManager<Texture> {
+private:
+	std::unique_ptr<Texture> m_defaultTexture;
 public:
 	TextureManager(RenderSystem* rs);
 	virtual ~TextureManager();

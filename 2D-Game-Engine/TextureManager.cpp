@@ -3,15 +3,48 @@
 #include "RawImage.h"
 #include "Resources.h"
 #include "Buffer.h"
+#include "Color.h"
 
-TextureManager::TextureManager(RenderSystem* rs) : ResourceManager(rs) {}
+TextureManager::TextureManager(RenderSystem* rs) : ResourceManager(rs) {
+	const Color& red = Color::RED;
+	const Color& grey = Color::GREY;
+	float32 data[16] = {
+		red.r, red.g, red.b, red.a,
+		grey.r, grey.g, grey.b, grey.a,
+		grey.r, grey.g, grey.b, grey.a,
+		red.r, red.g, red.b, red.a};
+
+	Texture::Filter filtering = Texture::Filter::NEAREST_NEIGHBOR;
+	Texture::Wrap textureWrapS = Texture::Wrap::CLAMP_TO_EDGE;
+	Texture::Wrap textureWrapT = Texture::Wrap::CLAMP_TO_EDGE;
+
+	Texture* tex = new Texture(Texture::Target::TEXTURE_2D, Texture::Unit::UNIT_0);
+	tex->bind();
+
+	glTexImage2D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, 2, 2, 0, GL_RGBA, GL_FLOAT, data);
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filtering));
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filtering));
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(textureWrapS));
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(textureWrapT));
+
+	tex->unbind();
+
+	m_defaultTexture.reset(tex);
+}
 
 
 TextureManager::~TextureManager() {}
 
 Texture* TextureManager::createTexture2D(const string& name, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT) {	
-	
-	RawImage* img = loadImage(name);
+
+	RawImage* img = nullptr;
+	try {
+		img = loadImage(name);
+	}
+	catch (std::runtime_error& ex) {
+		DEBUG_LOG(ex.what());
+		return m_defaultTexture.get();
+	}
 
 	Texture* tex = new Texture(Texture::Target::TEXTURE_2D, Texture::Unit::UNIT_0);
 	//Texture tex(name, Texture::TEXTURE_2D, Texture::UNIT_0);

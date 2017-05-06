@@ -7,6 +7,7 @@ struct Color
 {
 	const static Color BLACK;
 	const static Color WHITE;
+	const static Color GREY;
 	const static Color RED;
 	const static Color GREEN;
 	const static Color BLUE;

@@ -29,7 +29,7 @@ public:
 	virtual ~QuadTree();
 
 	const Rectangle& getBounds() const { return m_bounds; };
-	bool isSplit() const { return m_northWest; };
+	bool isSplit() const { return m_northWest != nullptr; };
 
 	void insert(const Rectangle& rect);
 	void retrieve(const Rectangle& rect, std::vector<Rectangle>& list) const;

@@ -38,6 +38,8 @@ public:
 	void setHeight(float32 height);
 	virtual void setX(float32 x) override;
 	virtual void setY(float32 y) override;
+
+	bool intersects(const Rectangle& rect) const;
 };
 
 #endif

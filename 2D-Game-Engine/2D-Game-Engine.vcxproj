@@ -158,6 +158,7 @@
     <ClCompile Include="Matrix3f.cpp" />
     <ClCompile Include="ObjectComponent.cpp" />
     <ClCompile Include="Platform.cpp" />
+    <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="RawImage.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="RenderableComponent.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="ObjectComponent.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="QuadTree.h" />
     <ClInclude Include="RawImage.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RenderableComponent.h" />

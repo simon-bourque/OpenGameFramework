@@ -19,7 +19,7 @@ public:
 	TileScene(Tile* tiles, int32 numberOfTiles, Texture* tileSheet, const Rectangle& bounds);
 	virtual ~TileScene();
 
-	virtual void render(const RenderSystem& rs) override;
+	virtual void render(RenderSystem* rs) override;
 };
 
 #endif

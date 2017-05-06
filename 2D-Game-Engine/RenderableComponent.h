@@ -15,7 +15,7 @@ public:
 	bool isVisible() const { return m_visible; };
 	void setVisible(bool visible) { m_visible = visible; };
 
-	virtual void render(const RenderSystem& rs) = 0;
+	virtual void render(RenderSystem* rs) = 0;
 };
 
 #endif

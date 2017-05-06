@@ -25,7 +25,7 @@ public:
 	~GameObject();
 
 	void tick(float32 delta, Game* game);
-	void render(const RenderSystem& rs);
+	void render(RenderSystem* rs);
 
 	void addComponent(ObjectComponent* component);
 	void addComponent(RenderableComponent* component);

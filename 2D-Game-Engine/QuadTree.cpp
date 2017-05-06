@@ -156,6 +156,13 @@ QuadTree& QuadTree::operator=(const QuadTree& qt) {
 	m_bounds = qt.m_bounds;
 	m_bucket = qt.m_bucket;
 	m_bucketSize = qt.m_bucketSize;
+
+	if (isSplit()) {
+		delete m_northWest;
+		delete m_northEast;
+		delete m_southWest;
+		delete m_southEast;
+	}
 	
 	if (qt.isSplit()) {
 		m_northWest = new QuadTree(*qt.m_northWest);
@@ -177,6 +184,13 @@ QuadTree& QuadTree::operator=(QuadTree&& qt) {
 	m_bounds = qt.m_bounds;
 	m_bucket = qt.m_bucket;
 	m_bucketSize = qt.m_bucketSize;
+
+	if (isSplit()) {
+		delete m_northWest;
+		delete m_northEast;
+		delete m_southWest;
+		delete m_southEast;
+	}
 
 	if (qt.isSplit()) {
 		m_northWest = qt.m_northWest;

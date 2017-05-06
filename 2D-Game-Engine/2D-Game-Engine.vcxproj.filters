@@ -46,6 +46,9 @@
     <Filter Include="Physics\Collision">
       <UniqueIdentifier>{0922d887-8dd7-44cf-b635-136246a96f84}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\Animation">
+      <UniqueIdentifier>{9a7b9efe-6788-4e27-a257-50a31905339b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp">
@@ -174,6 +177,13 @@
     <ClCompile Include="QuadTree.cpp">
       <Filter>Physics\Collision</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimState.cpp">
+      <Filter>Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatorComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -314,6 +324,15 @@
     <ClInclude Include="QuadTree.h">
       <Filter>Physics\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="Delegate.h" />
+    <ClInclude Include="Delegate.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimState.h">
+      <Filter>Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatorComponent.h" />
   </ItemGroup>
 </Project>

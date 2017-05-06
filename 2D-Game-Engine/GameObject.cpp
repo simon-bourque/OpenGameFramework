@@ -29,7 +29,7 @@ void GameObject::tick(float32 delta, Game* game) {
 	}
 }
 
-void GameObject::render(const RenderSystem& rs) {
+void GameObject::render(RenderSystem* rs) {
 	for (RenderableComponent* component : m_renderableComponents) {
 		if (component->isVisible()) {
 			component->render(rs);

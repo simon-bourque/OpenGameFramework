@@ -314,5 +314,6 @@
     <ClInclude Include="QuadTree.h">
       <Filter>Physics\Collision</Filter>
     </ClInclude>
+    <ClInclude Include="Delegate.h" />
   </ItemGroup>
 </Project>

@@ -2,7 +2,7 @@
 
 
 
-TextManager::TextManager() {}
+TextManager::TextManager(RenderSystem* rs) : ResourceManager(rs) {}
 
 TextManager::~TextManager() {}
 

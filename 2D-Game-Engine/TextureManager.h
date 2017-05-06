@@ -5,12 +5,13 @@
 #include "Texture.h"
 #include "ResourceManager.h"
 
+class RenderSystem;
 class RawImage;
 class Buffer;
 
 class TextureManager : public ResourceManager<Texture> {
 public:
-	TextureManager();
+	TextureManager(RenderSystem* rs);
 	virtual ~TextureManager();
 
 	Texture* createTexture2D(const string& name, Texture::Filter filtering, Texture::Wrap textureWrapS = Texture::Wrap::CLAMP_TO_EDGE, Texture::Wrap textureWrapT = Texture::Wrap::CLAMP_TO_EDGE);

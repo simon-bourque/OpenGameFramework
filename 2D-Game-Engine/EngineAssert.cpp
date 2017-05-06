@@ -165,7 +165,7 @@ bool showAssertDialogWindows(const string& msg, const string& fileName, uint32 l
 	nchar = MultiByteToWideChar(CP_ACP, 0, cString, -1, newString, size);
 
 	stringPtr = (LPWSTR)longPtr;
-	for (int32 i = 0; i < size; i++) {
+	for (uint32 i = 0; i < size; i++) {
 		*stringPtr++ = newString[i];
 	}
 	//for (stringPtr = (LPWSTR)longPtr; *stringPtr++ = (WCHAR)*newString++;);

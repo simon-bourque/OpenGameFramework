@@ -55,7 +55,7 @@ void Text::buildBuffers(const string& text) {
 	float32* textCoordData = new float32[numData];
 
 	float32 cursorX = 0;
-	for (int32 i = 0; i < m_numCharacters; i++) {
+	for (uint32 i = 0; i < m_numCharacters; i++) {
 		const Glyph& glyph = m_font->getCharacterMapping(text[i]);
 
 		float32 finalXOffset = cursorX + glyph.xOffset;

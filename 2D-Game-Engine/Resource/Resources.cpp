@@ -124,13 +124,13 @@ RawImage* loadImages(const string& imgFile, const string& infoFile, uint32& numb
 		input >> line;
 		input >> line;
 		input >> line;
-		uint32 x = stoi(line);
+		uint32 x = stoul(line);
 		input >> line;
-		uint32 y = stoi(line);
+		uint32 y = stoul(line);
 		input >> line;
-		uint32 width = stoi(line);
+		uint32 width = stoul(line);
 		input >> line;
-		uint32 height = stoi(line);
+		uint32 height = stoul(line);
 
 		imgs[i] = img->getSubImage(x, y, width, height);
 	}
@@ -160,9 +160,9 @@ std::pair<char, Glyph>* loadFont(const string& file, uint32& charMapSize, Glyph&
 	input >> read;
 
 	input >> read;
-	float32 imgWidth = stoi(read.substr(7));
+	float32 imgWidth = stof(read.substr(7));
 	input >> read;
-	float32 imgHeight = stoi(read.substr(7));
+	float32 imgHeight = stof(read.substr(7));
 	getline(input, read);
 
 	// Ignore next line
@@ -170,7 +170,7 @@ std::pair<char, Glyph>* loadFont(const string& file, uint32& charMapSize, Glyph&
 
 	// Extract number of characters
 	getline(input, read);
-	uint32 numCharacters = stoi(read.substr(12));
+	uint32 numCharacters = stoul(read.substr(12));
 
 	// TODO handle not having a invalid character
 	charMapSize = numCharacters - 1;
@@ -184,19 +184,19 @@ std::pair<char, Glyph>* loadFont(const string& file, uint32& charMapSize, Glyph&
 		int32 asciiCode = stoi(read.substr(3));
 
 		input >> read;
-		float32 x = stoi(read.substr(2)) / imgWidth;
+		float32 x = stof(read.substr(2)) / imgWidth;
 		input >> read;
-		float32 y = stoi(read.substr(2)) / imgHeight;
+		float32 y = stof(read.substr(2)) / imgHeight;
 		input >> read;
-		float32 width = stoi(read.substr(6)) / imgWidth;
+		float32 width = stof(read.substr(6)) / imgWidth;
 		input >> read;
-		float32 height = stoi(read.substr(7)) / imgHeight;
+		float32 height = stof(read.substr(7)) / imgHeight;
 		input >> read;
-		float32 xOffset = stoi(read.substr(8)) / imgWidth;
+		float32 xOffset = stof(read.substr(8)) / imgWidth;
 		input >> read;
-		float32 yOffset = stoi(read.substr(8)) / imgHeight;
+		float32 yOffset = stof(read.substr(8)) / imgHeight;
 		input >> read;
-		float32 xAdvance = stoi(read.substr(9)) / imgWidth;
+		float32 xAdvance = stof(read.substr(9)) / imgWidth;
 
 		input >> read;
 		input >> read;

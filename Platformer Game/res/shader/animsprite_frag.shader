@@ -17,7 +17,7 @@ void main() {
 	vec4 textureColor = texture(diffuseTextureAtlas, vec3(
 		(horizontalFlip) ? (1.0 - textureCoord.x) : textureCoord.x,
 		(verticalFlip) ? (1.0 - textureCoord.y) : textureCoord.y,
-		currentFrame;
+		currentFrame
 	));
 	//if (horizontalFlip) {
 		//textureColor = texture(diffuseTextureAtlas, vec3((1.0 - textureCoord.x), textureCoord.y, currentFrame));

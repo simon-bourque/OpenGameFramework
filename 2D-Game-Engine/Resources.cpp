@@ -100,6 +100,45 @@ RawImage* loadImages(string file, int32 margin, int32 spacing, int32 tileWidth, 
 	return imgs;
 }
 
+RawImage* loadImages(const string& imgFile, const string& infoFile, uint32& numberOfImages) {
+	RawImage* img = loadImage(imgFile);
+
+	std::ifstream input(TEXTURE_PATH + infoFile);
+
+	if (!input) {
+		delete img;
+		input.close();
+		throw std::runtime_error("Failed to load texture " + imgFile);
+	}
+
+	string line;
+	uint32 numberOfFrames = 0;
+	input >> numberOfFrames;
+	numberOfImages = numberOfFrames;
+
+	RawImage* imgs = new RawImage[numberOfFrames];
+
+	for (uint32 i = 0; i < numberOfFrames; i++) {
+		input >> line;
+		input >> line;
+		input >> line;
+		uint32 x = stoi(line);
+		input >> line;
+		uint32 y = stoi(line);
+		input >> line;
+		uint32 width = stoi(line);
+		input >> line;
+		uint32 height = stoi(line);
+
+		imgs[i] = img->getSubImage(x, y, width, height);
+	}
+
+	input.close();
+	delete img;
+
+	return imgs;
+}
+
 std::pair<char, Glyph>* loadFont(const string& file, uint32& charMapSize, Glyph& invalidCharacter) {
 
 	std::ifstream input(FONT_PATH + file);

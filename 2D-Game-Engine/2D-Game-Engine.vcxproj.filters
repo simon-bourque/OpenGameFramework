@@ -186,6 +186,12 @@
     <ClCompile Include="AnimatorComponent.cpp">
       <Filter>Object\Component</Filter>
     </ClCompile>
+    <ClCompile Include="SpriteAnimState.cpp">
+      <Filter>Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteSequenceAnimState.cpp">
+      <Filter>Graphics\Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -337,6 +343,12 @@
     </ClInclude>
     <ClInclude Include="AnimatorComponent.h">
       <Filter>Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteAnimState.h">
+      <Filter>Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteSequenceAnimState.h">
+      <Filter>Graphics\Animation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

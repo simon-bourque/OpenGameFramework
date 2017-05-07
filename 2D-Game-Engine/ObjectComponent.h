@@ -16,6 +16,9 @@ public:
 	ObjectComponent(GameObject* parentObject);
 	virtual ~ObjectComponent();
 
+	const GameObject& getParentObject() const { return *m_parentObject; };
+	GameObject& getParentObject() { return *m_parentObject; };
+
 	bool isActive() const { return m_active; };
 	void setActive(bool active) { m_active = active; };
 

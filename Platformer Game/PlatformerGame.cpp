@@ -11,6 +11,10 @@
 #include "RawImage.h"
 #include "SpriteComponent.h"
 #include "RigidBodyComponent.h"
+#include "AnimatorComponent.h"
+#include "AnimState.h"
+#include "SpriteSequenceAnimState.h"
+#include "Animation.h"
 
 #include "Core.h"
 
@@ -55,6 +59,27 @@ void PlatformerGame::init() {
 	getSceneManager().getCurrentScene().addGameObject(gem2);
 	getSceneManager().getCurrentScene().addGameObject(gem3);
 	getSceneManager().getCurrentScene().addGameObject(gem4);
+
+	// ##################### ANIM TEST #############################################################
+	GameObject* animTestObj = new GameObject(Transform(3.5f, -7.5f));
+	
+	uint32* frames = new uint32[11]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+	uint32* frames2 = new uint32[11]{5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+	float32* delays = new float32[11]{0.05f, 0.05f, 0.05f, 0.05f, 0.05f, 0.05f, 0.05f, 0.05f, 0.05f, 0.05f, 0.05f};
+	
+	Animation animation(frames, delays, 11);
+
+	Texture* animTex = getRenderSystem().getTextureManager()->createTexture2DArray("p1_spritesheet.png", "p1_spritesheet.txt", frames2, 11, Texture::Filter::NEAREST_NEIGHBOR);
+	
+	AnimState* animState = new SpriteSequenceAnimState(animTex, animation);
+	AnimatorComponent* animComp = new AnimatorComponent(animTestObj, "WALK", animState);
+	animTestObj->addComponent(animComp);
+
+	getSceneManager().getCurrentScene().addGameObject(animTestObj);
+
+	delete[] frames;
+	delete[] frames2;
+	delete[] delays;
 }
 
 void PlatformerGame::tick(float32 delta) {

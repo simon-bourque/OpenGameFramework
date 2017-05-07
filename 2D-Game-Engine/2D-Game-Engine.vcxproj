@@ -174,8 +174,10 @@
     <ClCompile Include="SceneRenderer.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Shape.cpp" />
+    <ClCompile Include="SpriteAnimState.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
+    <ClCompile Include="SpriteSequenceAnimState.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="TextManager.cpp" />
     <ClCompile Include="TextRenderer.cpp" />
@@ -225,8 +227,10 @@
     <ClInclude Include="SceneRenderer.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="Shape.h" />
+    <ClInclude Include="SpriteAnimState.h" />
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="SpriteRenderer.h" />
+    <ClInclude Include="SpriteSequenceAnimState.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="TextManager.h" />
     <ClInclude Include="TextRenderer.h" />

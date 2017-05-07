@@ -6,6 +6,7 @@
 
 class Texture;
 class RenderSystem;
+class AnimatorComponent;
 
 class AnimState {
 protected:
@@ -16,7 +17,7 @@ public:
 
 	virtual void onEnter() = 0;
 	virtual void tick(float32 delta) = 0;
-	virtual void render(RenderSystem* rs) = 0;
+	virtual void render(RenderSystem* rs, const AnimatorComponent& component) = 0;
 };
 
 #endif

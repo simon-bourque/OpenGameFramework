@@ -99,15 +99,9 @@ RawImage& RawImage::operator=(RawImage&& img) {
 		m_channels = img.m_channels;
 
 		delete[] m_data;
+		m_data = img.m_data;
 
-		const uint32 dataSize = m_width * m_height * m_channels;
-		m_data = new uint8[dataSize];
-
-		for (uint32 i = 0; i < dataSize; i++) {
-			m_data[i] = img.m_data[i];
-		}
-
-		delete[] img.m_data;
+		img.m_data = nullptr;
 		img.m_width = 0;
 		img.m_height = 0;
 		img.m_channels = 0;

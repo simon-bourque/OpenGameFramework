@@ -49,5 +49,5 @@ void AnimatorComponent::tick(float32 delta, Game* game) {
 }
 
 void AnimatorComponent::render(RenderSystem* rs) {
-	m_currentState->render(rs);
+	m_currentState->render(rs, *this);
 }

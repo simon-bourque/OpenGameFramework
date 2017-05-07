@@ -58,3 +58,23 @@ void SpriteRenderer::renderSprite(const Transform* transform, const Texture* tex
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, SPRITE_NUM_VERTICES);
 
 }
+
+void SpriteRenderer::renderAnimationFrame(const Transform& transform, uint32 frame, const Texture& texture, bool hFlip, bool vFlip) const {
+	glUseProgram(m_animSpriteShaderProgram->getProgramId());
+
+	m_spriteVAO->bind();
+
+	Matrix3f finalMatrix = m_rs->getCamera().getViewProjectionMatrix() * transform.toMatrix();
+
+	// Diffuse Texture
+	texture.bind();
+
+	glUniformMatrix3fv(m_animSpriteShaderProgram->getUniform("mvpMatrix").getLocation(), 1, true, finalMatrix.values);
+	glUniform1i(m_animSpriteShaderProgram->getUniform("diffuseTextureAtlas").getLocation(), 0);
+	glUniform1i(m_animSpriteShaderProgram->getUniform("currentFrame").getLocation(), frame);
+	glUniform1i(m_animSpriteShaderProgram->getUniform("horizontalFlip").getLocation(), (hFlip) ? GL_TRUE : GL_FALSE);
+	glUniform1i(m_animSpriteShaderProgram->getUniform("verticalFlip").getLocation(), (vFlip) ? GL_TRUE : GL_FALSE);
+
+
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, SPRITE_NUM_VERTICES);
+}

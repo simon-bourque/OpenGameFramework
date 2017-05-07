@@ -28,6 +28,7 @@ public:
 	virtual ~SpriteRenderer();
 
 	void renderSprite(const Transform* transform, const Texture* texture, bool hFlip, bool vFlip) const;
+	void renderAnimationFrame(const Transform& transform, uint32 frame, const Texture& texture, bool hFlip, bool vFlip) const;
 };
 
 #endif;

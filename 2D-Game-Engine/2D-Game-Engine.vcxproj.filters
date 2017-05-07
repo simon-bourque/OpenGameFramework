@@ -183,7 +183,9 @@
     <ClCompile Include="AnimState.cpp">
       <Filter>Graphics\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="AnimatorComponent.cpp" />
+    <ClCompile Include="AnimatorComponent.cpp">
+      <Filter>Object\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -333,6 +335,8 @@
     <ClInclude Include="AnimState.h">
       <Filter>Graphics\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="AnimatorComponent.h" />
+    <ClInclude Include="AnimatorComponent.h">
+      <Filter>Object\Component</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

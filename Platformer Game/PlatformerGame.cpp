@@ -1,22 +1,25 @@
 #include "PlatformerGame.h"
 
-#include "TextureManager.h"
-#include "Rectangle.h"
-#include "RenderSystem.h"
-#include "Window.h"
-#include "Input.h"
-#include "Resources.h"
-#include "SceneManager.h"
-#include "GameObject.h"
-#include "RawImage.h"
-#include "SpriteComponent.h"
-#include "RigidBodyComponent.h"
-#include "AnimatorComponent.h"
-#include "AnimState.h"
-#include "SpriteSequenceAnimState.h"
-#include "Animation.h"
+#include "Core/Core.h"
 
-#include "Core.h"
+#include "Graphics/TextureManager.h"
+#include "Graphics/RenderSystem.h"
+#include "Graphics/Window.h"
+
+#include "Math/Geometry/Rectangle.h"
+
+#include "Input/Input.h"
+
+#include "Scene/SceneManager.h"
+
+#include "Object/GameObject.h"
+#include "Object/Component/SpriteComponent.h"
+#include "Object/Component/RigidBodyComponent.h"
+#include "Object/Component/AnimatorComponent.h"
+
+#include "Graphics/Animation/AnimState.h"
+#include "Graphics/Animation/SpriteSequenceAnimState.h"
+#include "Graphics/Animation/Animation.h"
 
 PlatformerGame::PlatformerGame() : Game("Platformer", 720, 576, Rectangle(20, 16)), up(false), down(false), left(false), right(false) {}
 

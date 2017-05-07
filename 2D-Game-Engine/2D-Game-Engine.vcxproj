@@ -74,7 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)$(ProjectName);$(SolutionDir)dependencies/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;DEBUG_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -108,7 +108,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)$(ProjectName);$(SolutionDir)dependencies/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -143,107 +143,107 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="AnimatorComponent.cpp" />
-    <ClCompile Include="AnimState.cpp" />
-    <ClCompile Include="Buffer.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Color.cpp" />
-    <ClCompile Include="Debug.cpp" />
-    <ClCompile Include="EngineAssert.cpp" />
-    <ClCompile Include="Font.cpp" />
-    <ClCompile Include="FontManager.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Glyph.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="Logging.cpp" />
-    <ClCompile Include="Matrix3f.cpp" />
-    <ClCompile Include="ObjectComponent.cpp" />
-    <ClCompile Include="Platform.cpp" />
-    <ClCompile Include="QuadTree.cpp" />
-    <ClCompile Include="RawImage.cpp" />
-    <ClCompile Include="Rectangle.cpp" />
-    <ClCompile Include="RenderableComponent.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="RenderSystem.cpp" />
-    <ClCompile Include="Resources.cpp" />
-    <ClCompile Include="RigidBodyComponent.cpp" />
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="SceneRenderer.cpp" />
-    <ClCompile Include="ShaderProgram.cpp" />
-    <ClCompile Include="Shape.cpp" />
-    <ClCompile Include="SpriteAnimState.cpp" />
-    <ClCompile Include="SpriteComponent.cpp" />
-    <ClCompile Include="SpriteRenderer.cpp" />
-    <ClCompile Include="SpriteSequenceAnimState.cpp" />
-    <ClCompile Include="Text.cpp" />
-    <ClCompile Include="TextManager.cpp" />
-    <ClCompile Include="TextRenderer.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="Tile.cpp" />
-    <ClCompile Include="TileScene.cpp" />
-    <ClCompile Include="Transform.cpp" />
-    <ClCompile Include="Uniform.cpp" />
-    <ClCompile Include="Vector2f.cpp" />
-    <ClCompile Include="VertexArrayObject.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="Graphics\Animation\Animation.cpp" />
+    <ClCompile Include="Object\Component\AnimatorComponent.cpp" />
+    <ClCompile Include="Graphics\Animation\AnimState.cpp" />
+    <ClCompile Include="Graphics\Memory\Buffer.cpp" />
+    <ClCompile Include="Graphics\Camera.cpp" />
+    <ClCompile Include="Graphics\Color.cpp" />
+    <ClCompile Include="Core\Debug.cpp" />
+    <ClCompile Include="Core\EngineAssert.cpp" />
+    <ClCompile Include="Graphics\Text\Font.cpp" />
+    <ClCompile Include="Graphics\Text\FontManager.cpp" />
+    <ClCompile Include="Core\Game.cpp" />
+    <ClCompile Include="Object\GameObject.cpp" />
+    <ClCompile Include="Graphics\Text\Glyph.cpp" />
+    <ClCompile Include="Input\Input.cpp" />
+    <ClCompile Include="Core\Logging.cpp" />
+    <ClCompile Include="Math\Matrix3f.cpp" />
+    <ClCompile Include="Object\Component\ObjectComponent.cpp" />
+    <ClCompile Include="Core\Platform.cpp" />
+    <ClCompile Include="Physics\Collision\QuadTree.cpp" />
+    <ClCompile Include="Resource\RawImage.cpp" />
+    <ClCompile Include="Math\Geometry\Rectangle.cpp" />
+    <ClCompile Include="Object\Component\RenderableComponent.cpp" />
+    <ClCompile Include="Graphics\Renderer\Renderer.cpp" />
+    <ClCompile Include="Graphics\RenderSystem.cpp" />
+    <ClCompile Include="Resource\Resources.cpp" />
+    <ClCompile Include="Object\Component\RigidBodyComponent.cpp" />
+    <ClCompile Include="Scene\Scene.cpp" />
+    <ClCompile Include="Scene\SceneManager.cpp" />
+    <ClCompile Include="Graphics\Renderer\SceneRenderer.cpp" />
+    <ClCompile Include="Graphics\Shader\ShaderProgram.cpp" />
+    <ClCompile Include="Math\Geometry\Shape.cpp" />
+    <ClCompile Include="Graphics\Animation\SpriteAnimState.cpp" />
+    <ClCompile Include="Object\Component\SpriteComponent.cpp" />
+    <ClCompile Include="Graphics\Renderer\SpriteRenderer.cpp" />
+    <ClCompile Include="Graphics\Animation\SpriteSequenceAnimState.cpp" />
+    <ClCompile Include="Graphics\Text\Text.cpp" />
+    <ClCompile Include="Graphics\Text\TextManager.cpp" />
+    <ClCompile Include="Graphics\Renderer\TextRenderer.cpp" />
+    <ClCompile Include="Graphics\Texture.cpp" />
+    <ClCompile Include="Graphics\TextureManager.cpp" />
+    <ClCompile Include="Scene\Tile.cpp" />
+    <ClCompile Include="Scene\TileScene.cpp" />
+    <ClCompile Include="Object\Transform.cpp" />
+    <ClCompile Include="Graphics\Shader\Uniform.cpp" />
+    <ClCompile Include="Math\Vector2f.cpp" />
+    <ClCompile Include="Graphics\Memory\VertexArrayObject.cpp" />
+    <ClCompile Include="Graphics\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="AnimatorComponent.h" />
-    <ClInclude Include="AnimState.h" />
-    <ClInclude Include="Debug.h" />
-    <ClInclude Include="Delegate.h" />
-    <ClInclude Include="EngineAssert.h" />
-    <ClInclude Include="Buffer.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Color.h" />
-    <ClInclude Include="Core.h" />
-    <ClInclude Include="Font.h" />
-    <ClInclude Include="FontManager.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="Glyph.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="Logging.h" />
-    <ClInclude Include="Matrix3f.h" />
-    <ClInclude Include="ObjectComponent.h" />
-    <ClInclude Include="Platform.h" />
-    <ClInclude Include="Point.h" />
-    <ClInclude Include="QuadTree.h" />
-    <ClInclude Include="RawImage.h" />
-    <ClInclude Include="Rectangle.h" />
-    <ClInclude Include="RenderableComponent.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="RenderSystem.h" />
-    <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="Resources.h" />
-    <ClInclude Include="RigidBodyComponent.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="SceneRenderer.h" />
-    <ClInclude Include="ShaderProgram.h" />
-    <ClInclude Include="Shape.h" />
-    <ClInclude Include="SpriteAnimState.h" />
-    <ClInclude Include="SpriteComponent.h" />
-    <ClInclude Include="SpriteRenderer.h" />
-    <ClInclude Include="SpriteSequenceAnimState.h" />
-    <ClInclude Include="Text.h" />
-    <ClInclude Include="TextManager.h" />
-    <ClInclude Include="TextRenderer.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="Tile.h" />
-    <ClInclude Include="TileScene.h" />
-    <ClInclude Include="Transform.h" />
-    <ClInclude Include="Types.h" />
-    <ClInclude Include="Uniform.h" />
-    <ClInclude Include="Vector2f.h" />
-    <ClInclude Include="VertexArrayObject.h" />
-    <ClInclude Include="Window.h" />
+    <ClInclude Include="Graphics\Animation\Animation.h" />
+    <ClInclude Include="Object\Component\AnimatorComponent.h" />
+    <ClInclude Include="Graphics\Animation\AnimState.h" />
+    <ClInclude Include="Core\Debug.h" />
+    <ClInclude Include="Core\Delegate.h" />
+    <ClInclude Include="Core\EngineAssert.h" />
+    <ClInclude Include="Graphics\Memory\Buffer.h" />
+    <ClInclude Include="Graphics\Camera.h" />
+    <ClInclude Include="Graphics\Color.h" />
+    <ClInclude Include="Core\Core.h" />
+    <ClInclude Include="Graphics\Text\Font.h" />
+    <ClInclude Include="Graphics\Text\FontManager.h" />
+    <ClInclude Include="Core\Game.h" />
+    <ClInclude Include="Object\GameObject.h" />
+    <ClInclude Include="Graphics\Text\Glyph.h" />
+    <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="Core\Logging.h" />
+    <ClInclude Include="Math\Matrix3f.h" />
+    <ClInclude Include="Object\Component\ObjectComponent.h" />
+    <ClInclude Include="Core\Platform.h" />
+    <ClInclude Include="Math\Geometry\Point.h" />
+    <ClInclude Include="Physics\Collision\QuadTree.h" />
+    <ClInclude Include="Resource\RawImage.h" />
+    <ClInclude Include="Math\Geometry\Rectangle.h" />
+    <ClInclude Include="Object\Component\RenderableComponent.h" />
+    <ClInclude Include="Graphics\Renderer\Renderer.h" />
+    <ClInclude Include="Graphics\RenderSystem.h" />
+    <ClInclude Include="Resource\ResourceManager.h" />
+    <ClInclude Include="Resource\Resources.h" />
+    <ClInclude Include="Object\Component\RigidBodyComponent.h" />
+    <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Scene\SceneManager.h" />
+    <ClInclude Include="Graphics\Renderer\SceneRenderer.h" />
+    <ClInclude Include="Graphics\Shader\ShaderProgram.h" />
+    <ClInclude Include="Math\Geometry\Shape.h" />
+    <ClInclude Include="Graphics\Animation\SpriteAnimState.h" />
+    <ClInclude Include="Object\Component\SpriteComponent.h" />
+    <ClInclude Include="Graphics\Renderer\SpriteRenderer.h" />
+    <ClInclude Include="Graphics\Animation\SpriteSequenceAnimState.h" />
+    <ClInclude Include="Graphics\Text\Text.h" />
+    <ClInclude Include="Graphics\Text\TextManager.h" />
+    <ClInclude Include="Graphics\Renderer\TextRenderer.h" />
+    <ClInclude Include="Graphics\Texture.h" />
+    <ClInclude Include="Graphics\TextureManager.h" />
+    <ClInclude Include="Scene\Tile.h" />
+    <ClInclude Include="Scene\TileScene.h" />
+    <ClInclude Include="Object\Transform.h" />
+    <ClInclude Include="Core\Types.h" />
+    <ClInclude Include="Graphics\Shader\Uniform.h" />
+    <ClInclude Include="Math\Vector2f.h" />
+    <ClInclude Include="Graphics\Memory\VertexArrayObject.h" />
+    <ClInclude Include="Graphics\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

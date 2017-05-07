@@ -51,304 +51,304 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Window.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Shape.cpp">
-      <Filter>Math\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="Rectangle.cpp">
-      <Filter>Math\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
+    <ClCompile Include="Core\Debug.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="RawImage.cpp">
-      <Filter>Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="Resources.cpp">
-      <Filter>Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderSystem.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix3f.cpp">
-      <Filter>Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Uniform.cpp">
-      <Filter>Graphics\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="Logging.cpp">
+    <ClCompile Include="Core\EngineAssert.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
+    <ClCompile Include="Core\Game.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Logging.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Platform.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Camera.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderProgram.cpp">
+    <ClCompile Include="Graphics\Color.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\RenderSystem.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Texture.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\TextureManager.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Window.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Animation\Animation.cpp">
+      <Filter>Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Animation\AnimState.cpp">
+      <Filter>Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Memory\Buffer.cpp">
+      <Filter>Graphics\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Text\Font.cpp">
+      <Filter>Graphics\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Text\FontManager.cpp">
+      <Filter>Graphics\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Text\Glyph.cpp">
+      <Filter>Graphics\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Renderer\Renderer.cpp">
+      <Filter>Graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Renderer\SceneRenderer.cpp">
+      <Filter>Graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Renderer\SpriteRenderer.cpp">
+      <Filter>Graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Shader\ShaderProgram.cpp">
       <Filter>Graphics\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="Buffer.cpp">
-      <Filter>Graphics\Memory</Filter>
+    <ClCompile Include="Graphics\Animation\SpriteAnimState.cpp">
+      <Filter>Graphics\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="VertexArrayObject.cpp">
-      <Filter>Graphics\Memory</Filter>
+    <ClCompile Include="Graphics\Animation\SpriteSequenceAnimState.cpp">
+      <Filter>Graphics\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteRenderer.cpp">
+    <ClCompile Include="Graphics\Text\Text.cpp">
+      <Filter>Graphics\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Text\TextManager.cpp">
+      <Filter>Graphics\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Renderer\TextRenderer.cpp">
       <Filter>Graphics\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Graphics\Renderer</Filter>
+    <ClCompile Include="Graphics\Shader\Uniform.cpp">
+      <Filter>Graphics\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="TextureManager.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Graphics\Memory\VertexArrayObject.cpp">
+      <Filter>Graphics\Memory</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
+    <ClCompile Include="Input\Input.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="Vector2f.cpp">
+    <ClCompile Include="Math\Vector2f.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="Color.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Math\Matrix3f.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="SceneRenderer.cpp">
-      <Filter>Graphics\Renderer</Filter>
+    <ClCompile Include="Math\Geometry\Rectangle.cpp">
+      <Filter>Math\Geometry</Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Scene</Filter>
+    <ClCompile Include="Math\Geometry\Shape.cpp">
+      <Filter>Math\Geometry</Filter>
     </ClCompile>
-    <ClCompile Include="TileScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Platform.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
+    <ClCompile Include="Object\Transform.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectComponent.cpp">
-      <Filter>Object\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderableComponent.cpp">
-      <Filter>Object\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Transform.cpp">
+    <ClCompile Include="Object\GameObject.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteComponent.cpp">
+    <ClCompile Include="Object\Component\AnimatorComponent.cpp">
       <Filter>Object\Component</Filter>
     </ClCompile>
-    <ClCompile Include="RigidBodyComponent.cpp">
+    <ClCompile Include="Object\Component\ObjectComponent.cpp">
       <Filter>Object\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Debug.cpp">
-      <Filter>Core</Filter>
+    <ClCompile Include="Object\Component\RenderableComponent.cpp">
+      <Filter>Object\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Font.cpp">
-      <Filter>Graphics\Text</Filter>
+    <ClCompile Include="Object\Component\RigidBodyComponent.cpp">
+      <Filter>Object\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Glyph.cpp">
-      <Filter>Graphics\Text</Filter>
+    <ClCompile Include="Object\Component\SpriteComponent.cpp">
+      <Filter>Object\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Text.cpp">
-      <Filter>Graphics\Text</Filter>
-    </ClCompile>
-    <ClCompile Include="TextRenderer.cpp">
-      <Filter>Graphics\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineAssert.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="FontManager.cpp">
-      <Filter>Graphics\Text</Filter>
-    </ClCompile>
-    <ClCompile Include="TextManager.cpp">
-      <Filter>Graphics\Text</Filter>
-    </ClCompile>
-    <ClCompile Include="QuadTree.cpp">
+    <ClCompile Include="Physics\Collision\QuadTree.cpp">
       <Filter>Physics\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Graphics\Animation</Filter>
+    <ClCompile Include="Resource\RawImage.cpp">
+      <Filter>Resource</Filter>
     </ClCompile>
-    <ClCompile Include="AnimState.cpp">
-      <Filter>Graphics\Animation</Filter>
+    <ClCompile Include="Resource\Resources.cpp">
+      <Filter>Resource</Filter>
     </ClCompile>
-    <ClCompile Include="AnimatorComponent.cpp">
-      <Filter>Object\Component</Filter>
+    <ClCompile Include="Scene\Scene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteAnimState.cpp">
-      <Filter>Graphics\Animation</Filter>
+    <ClCompile Include="Scene\SceneManager.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteSequenceAnimState.cpp">
-      <Filter>Graphics\Animation</Filter>
+    <ClCompile Include="Scene\Tile.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\TileScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Window.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Shape.h">
-      <Filter>Math\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Rectangle.h">
-      <Filter>Math\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Point.h">
-      <Filter>Math\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Core.h">
+    <ClInclude Include="Core\Debug.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Types.h">
+    <ClInclude Include="Core\Core.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
+    <ClInclude Include="Core\EngineAssert.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="RawImage.h">
-      <Filter>Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderSystem.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix3f.h">
-      <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Resources.h">
-      <Filter>Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="Uniform.h">
-      <Filter>Graphics\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="Logging.h">
+    <ClInclude Include="Core\Delegate.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
+    <ClInclude Include="Core\Game.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Logging.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Types.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Platform.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Camera.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderProgram.h">
-      <Filter>Graphics\Shader</Filter>
+    <ClInclude Include="Graphics\Color.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Buffer.h">
+    <ClInclude Include="Graphics\RenderSystem.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Texture.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\TextureManager.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Window.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Animation\Animation.h">
+      <Filter>Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Animation\AnimState.h">
+      <Filter>Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Memory\Buffer.h">
       <Filter>Graphics\Memory</Filter>
     </ClInclude>
-    <ClInclude Include="VertexArrayObject.h">
+    <ClInclude Include="Graphics\Text\Font.h">
+      <Filter>Graphics\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Text\FontManager.h">
+      <Filter>Graphics\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Text\Glyph.h">
+      <Filter>Graphics\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Renderer\Renderer.h">
+      <Filter>Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Renderer\SceneRenderer.h">
+      <Filter>Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Renderer\SpriteRenderer.h">
+      <Filter>Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Shader\ShaderProgram.h">
+      <Filter>Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Animation\SpriteAnimState.h">
+      <Filter>Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Animation\SpriteSequenceAnimState.h">
+      <Filter>Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Text\Text.h">
+      <Filter>Graphics\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Text\TextManager.h">
+      <Filter>Graphics\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Renderer\TextRenderer.h">
+      <Filter>Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Shader\Uniform.h">
+      <Filter>Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Memory\VertexArrayObject.h">
       <Filter>Graphics\Memory</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteRenderer.h">
-      <Filter>Graphics\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Graphics\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
+    <ClInclude Include="Input\Input.h">
       <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="Vector2f.h">
+    <ClInclude Include="Math\Vector2f.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="Color.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Math\Matrix3f.h">
+      <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="SceneRenderer.h">
-      <Filter>Graphics\Renderer</Filter>
+    <ClInclude Include="Math\Geometry\Point.h">
+      <Filter>Math\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Scene</Filter>
+    <ClInclude Include="Math\Geometry\Rectangle.h">
+      <Filter>Math\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="TileScene.h">
-      <Filter>Scene</Filter>
+    <ClInclude Include="Math\Geometry\Shape.h">
+      <Filter>Math\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Platform.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
+    <ClInclude Include="Object\Transform.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectComponent.h">
-      <Filter>Object\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderableComponent.h">
-      <Filter>Object\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
+    <ClInclude Include="Object\GameObject.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteComponent.h">
+    <ClInclude Include="Object\Component\AnimatorComponent.h">
       <Filter>Object\Component</Filter>
     </ClInclude>
-    <ClInclude Include="RigidBodyComponent.h">
+    <ClInclude Include="Object\Component\ObjectComponent.h">
       <Filter>Object\Component</Filter>
     </ClInclude>
-    <ClInclude Include="EngineAssert.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="Object\Component\RenderableComponent.h">
+      <Filter>Object\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Debug.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="Object\Component\RigidBodyComponent.h">
+      <Filter>Object\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Font.h">
-      <Filter>Graphics\Text</Filter>
+    <ClInclude Include="Object\Component\SpriteComponent.h">
+      <Filter>Object\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Glyph.h">
-      <Filter>Graphics\Text</Filter>
-    </ClInclude>
-    <ClInclude Include="Text.h">
-      <Filter>Graphics\Text</Filter>
-    </ClInclude>
-    <ClInclude Include="TextRenderer.h">
-      <Filter>Graphics\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="FontManager.h">
-      <Filter>Graphics\Text</Filter>
-    </ClInclude>
-    <ClInclude Include="TextManager.h">
-      <Filter>Graphics\Text</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="QuadTree.h">
+    <ClInclude Include="Physics\Collision\QuadTree.h">
       <Filter>Physics\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="Delegate.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="Resource\RawImage.h">
+      <Filter>Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Graphics\Animation</Filter>
+    <ClInclude Include="Resource\ResourceManager.h">
+      <Filter>Resource</Filter>
     </ClInclude>
-    <ClInclude Include="AnimState.h">
-      <Filter>Graphics\Animation</Filter>
+    <ClInclude Include="Resource\Resources.h">
+      <Filter>Resource</Filter>
     </ClInclude>
-    <ClInclude Include="AnimatorComponent.h">
-      <Filter>Object\Component</Filter>
+    <ClInclude Include="Scene\Scene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteAnimState.h">
-      <Filter>Graphics\Animation</Filter>
+    <ClInclude Include="Scene\SceneManager.h">
+      <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteSequenceAnimState.h">
-      <Filter>Graphics\Animation</Filter>
+    <ClInclude Include="Scene\Tile.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\TileScene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

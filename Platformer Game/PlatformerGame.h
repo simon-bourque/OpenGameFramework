@@ -1,7 +1,8 @@
+#pragma once
 #ifndef PLATFORMERGAME_H
 #define PLATFORMERGAME_H
 
-#include "Game.h"
+#include "Core/Game.h"
 
 class Texture;
 class TileScene;

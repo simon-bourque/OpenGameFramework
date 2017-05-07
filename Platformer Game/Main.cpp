@@ -1,16 +1,7 @@
 #include "PlatformerGame.h"
 
-#include "Core.h"
-#include <iostream>
-
-#include "Resources.h"
-
-#include "Vector2f.h"
-#include "Matrix3f.h"
-
-#include "EngineAssert.h"
-
-#include "Platform.h"
+#include "Core/Core.h"
+#include "Core/Platform.h"
 
 int main() {
 	//ASSERT(false, "Test message");

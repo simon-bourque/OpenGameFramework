@@ -195,6 +195,12 @@
     <ClCompile Include="Graphics\Renderer\ShapeRenderer.cpp">
       <Filter>Graphics\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="Physics\Collision\Manifold.cpp">
+      <Filter>Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Component\AABBColliderComponent.cpp">
+      <Filter>Object\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Debug.h">
@@ -358,6 +364,15 @@
     </ClInclude>
     <ClInclude Include="Math\Constants.h">
       <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Collision\Manifold.h">
+      <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Component\AABBColliderComponent.h">
+      <Filter>Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Component\ComponentType.h">
+      <Filter>Object\Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

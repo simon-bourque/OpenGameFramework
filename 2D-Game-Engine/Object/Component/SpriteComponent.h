@@ -6,6 +6,8 @@
 
 #include "Object/Component/RenderableComponent.h"
 
+#include "Object/Component/ComponentType.h"
+
 class GameObject;
 class Game;
 class Texture;
@@ -28,6 +30,8 @@ public:
 
 	virtual void tick(float32 delta, Game* game) override;
 	virtual void render(RenderSystem* rs) override;
+
+	virtual ComponentType getType() override { return SPRITE_COMPONENT; };
 };
 
 #endif

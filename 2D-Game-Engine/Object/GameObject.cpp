@@ -44,3 +44,18 @@ void GameObject::addComponent(ObjectComponent* component) {
 void GameObject::addComponent(RenderableComponent* component) {
 	m_renderableComponents.push_back(component);
 }
+
+ObjectComponent* GameObject::findComponent(ComponentType type) {
+	for (ObjectComponent* component : m_components) {
+		if (component->getType() == type) {
+			return component;
+		}
+	}
+	for (RenderableComponent* component : m_renderableComponents) {
+		if (component->getType() == type) {
+			return component;
+		}
+	}
+
+	return nullptr;
+}

@@ -143,7 +143,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Object\Component\AABBColliderComponent.cpp" />
     <ClCompile Include="Graphics\Animation\Animation.cpp" />
+    <ClCompile Include="Physics\Collision\Manifold.cpp" />
     <ClCompile Include="Object\Component\AnimatorComponent.cpp" />
     <ClCompile Include="Graphics\Animation\AnimState.cpp" />
     <ClCompile Include="Graphics\Memory\Buffer.cpp" />
@@ -193,6 +195,9 @@
     <ClCompile Include="Graphics\Renderer\ShapeRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Object\Component\AABBColliderComponent.h" />
+    <ClInclude Include="Object\Component\ComponentType.h" />
+    <ClInclude Include="Physics\Collision\Manifold.h" />
     <ClInclude Include="Math\Constants.h" />
     <ClInclude Include="Graphics\Animation\Animation.h" />
     <ClInclude Include="Object\Component\AnimatorComponent.h" />

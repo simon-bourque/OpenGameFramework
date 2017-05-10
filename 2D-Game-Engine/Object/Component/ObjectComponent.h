@@ -4,6 +4,8 @@
 
 #include "Core/Core.h"
 
+#include "Object/Component/ComponentType.h"
+
 class GameObject;
 class Game;
 
@@ -24,6 +26,7 @@ public:
 	void setActive(bool active) { m_active = active; };
 
 	virtual void tick(float32 delta, Game* game) = 0;
+	virtual ComponentType getType() = 0;
 };
 
 #endif

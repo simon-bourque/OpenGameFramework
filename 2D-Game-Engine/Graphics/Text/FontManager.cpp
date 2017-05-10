@@ -12,7 +12,7 @@ FontManager::~FontManager() {}
 Font* FontManager::createFont(const string& name) {
 	string img = name;
 	string desc = name;
-	img.append(".png");
+	img.append(".tx");
 	desc.append(".fnt");
 
 	Texture* tex = m_rs->getTextureManager()->createTexture2D(img, Texture::Filter::LINEAR);

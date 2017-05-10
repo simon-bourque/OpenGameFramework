@@ -31,7 +31,7 @@ void PlatformerGame::init() {
 	getRenderSystem().getCamera().getTransform().translate(11.0f,-5.5f);
 	getSceneManager().loadTileLevel("level_0.lvl", this);
 
-	Texture* gemTexture = getRenderSystem().getTextureManager()->createTexture2D("gemRed.png", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* gemTexture = getRenderSystem().getTextureManager()->createTexture2D("gemRed.tx", Texture::Filter::NEAREST_NEIGHBOR);
 
 	GameObject* gem1 = new GameObject(Transform(11.0f, -5.5f));
 	GameObject* gem2 = new GameObject(Transform(12.0f, -5.5f));
@@ -67,12 +67,12 @@ void PlatformerGame::init() {
 	GameObject* animTestObj = new GameObject(Transform(3.5f, -7.5f));
 	
 	uint32* frames = new uint32[11]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-	uint32* frames2 = new uint32[11]{5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
 	float32* delays = new float32[11]{0.05f, 0.05f, 0.05f, 0.05f, 0.05f, 0.05f, 0.05f, 0.05f, 0.05f, 0.05f, 0.05f};
 	
 	Animation animation(frames, delays, 11);
 
-	Texture* animTex = getRenderSystem().getTextureManager()->createTexture2DArray("p1_spritesheet.png", "p1_spritesheet.txt", frames2, 11, Texture::Filter::NEAREST_NEIGHBOR);
+	//Texture* animTex = getRenderSystem().getTextureManager()->createTexture2DArray("p1_spritesheet.png", "p1_spritesheet.txt", frames2, 11, Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* animTex = getRenderSystem().getTextureManager()->createTexture2DArray("player_walk.tx", Texture::Filter::NEAREST_NEIGHBOR);
 	
 	AnimState* animState = new SpriteSequenceAnimState(animTex, animation);
 	AnimatorComponent* animComp = new AnimatorComponent(animTestObj, "WALK", animState);
@@ -81,7 +81,6 @@ void PlatformerGame::init() {
 	getSceneManager().getCurrentScene().addGameObject(animTestObj);
 
 	delete[] frames;
-	delete[] frames2;
 	delete[] delays;
 }
 

@@ -2,9 +2,11 @@
 
 #include "Core/Core.h"
 
+#include "Graphics/Renderer/ShapeRenderer.h"
 #include "Graphics/TextureManager.h"
 #include "Graphics/RenderSystem.h"
 #include "Graphics/Window.h"
+#include "Graphics/Color.h"
 
 #include "Math/Geometry/Rectangle.h"
 #include "Math/Vector2f.h"
@@ -17,11 +19,6 @@
 #include "Object/Component/SpriteComponent.h"
 #include "Object/Component/RigidBodyComponent.h"
 #include "Object/Component/AnimatorComponent.h"
-
-#include "Graphics/Animation/AnimState.h"
-#include "Graphics/Animation/SpriteSequenceAnimState.h"
-#include "Graphics/Animation/SpriteAnimState.h"
-#include "Graphics/Animation/Animation.h"
 
 #include "Player.h"
 
@@ -92,6 +89,9 @@ void PlatformerGame::tick(float32 delta) {
 
 void PlatformerGame::render() {
 	Game::render();
+	//getRenderSystem()->getShapeRenderer()->drawVector(11.0f, -5.5f, Vector2f(1.0f,1.0f), Color::MAGENTA);
+	//getRenderSystem()->getShapeRenderer()->drawRectangle(Rectangle(11,-5.5, 1,1), Color::RED, true);
+	//getRenderSystem()->getShapeRenderer()->drawCircle(5.0f, -9.0f, 0.5f, Color::YELLOW, true);
 }
 
 void PlatformerGame::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {

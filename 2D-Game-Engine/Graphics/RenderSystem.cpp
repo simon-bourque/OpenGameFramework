@@ -3,6 +3,7 @@
 #include "Graphics/Renderer/SpriteRenderer.h"
 #include "Graphics/Renderer/SceneRenderer.h"
 #include "Graphics/Renderer/TextRenderer.h"
+#include "Graphics/Renderer/ShapeRenderer.h"
 #include "Graphics/Text/FontManager.h"
 #include "Graphics/Text/TextManager.h"
 #include "Graphics/TextureManager.h"
@@ -63,10 +64,13 @@ RenderSystem::RenderSystem(const Camera& camera) : m_camera(camera) {
 	m_spriteRenderer.reset(new SpriteRenderer(this));
 	m_sceneRenderer.reset(new SceneRenderer(this));
 	m_textRenderer.reset(new TextRenderer(this));
+	m_shapeRenderer.reset(new ShapeRenderer(this));
 
 	m_textureManager.reset(new TextureManager(this));
 	m_fontManager.reset(new FontManager(this));
 	m_textManager.reset(new TextManager(this));
+
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
 
 

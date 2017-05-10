@@ -21,8 +21,16 @@ void Buffer::unbind() const {
 	glBindBuffer(static_cast<GLenum>(m_target), 0);
 }
 
+void Buffer::bufferData(GLsizeiptr size, Usage usage) {
+	glBufferData(static_cast<GLenum>(m_target), size, nullptr, static_cast<GLenum>(usage));
+}
+
 void Buffer::bufferData(const GLvoid* data, GLsizeiptr size, Usage usage) {
 	glBufferData(static_cast<GLenum>(m_target), size, data, static_cast<GLenum>(usage));
+}
+
+void Buffer::bufferSubData(GLintptr offset, GLsizeiptr size, const GLvoid * data) {
+	glBufferSubData(static_cast<GLenum>(m_target), offset, size, data);
 }
 
 void Buffer::vertexAttributePointer(GLuint index, GLint vertexSize, GLenum type, GLboolean normalized, GLsizei stride, GLvoid* pointer) {

@@ -19,6 +19,7 @@
 
 #include "Graphics/Animation/AnimState.h"
 #include "Graphics/Animation/SpriteSequenceAnimState.h"
+#include "Graphics/Animation/SpriteAnimState.h"
 #include "Graphics/Animation/Animation.h"
 
 PlatformerGame::PlatformerGame() : Game("Platformer", 720, 576, Rectangle(20, 16)), up(false), down(false), left(false), right(false) {}
@@ -71,11 +72,13 @@ void PlatformerGame::init() {
 	
 	Animation animation(frames, delays, 11);
 
-	//Texture* animTex = getRenderSystem().getTextureManager()->createTexture2DArray("p1_spritesheet.png", "p1_spritesheet.txt", frames2, 11, Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* animTex = getRenderSystem().getTextureManager()->createTexture2DArray("player_walk.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* standTex = getRenderSystem().getTextureManager()->createTexture2D("player_stand.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* walkTex = getRenderSystem().getTextureManager()->createTexture2DArray("player_walk.tx", Texture::Filter::NEAREST_NEIGHBOR);
 	
-	AnimState* animState = new SpriteSequenceAnimState(animTex, animation);
-	AnimatorComponent* animComp = new AnimatorComponent(animTestObj, "WALK", animState);
+	AnimState* walkState = new SpriteSequenceAnimState(walkTex, animation);
+	AnimState* standState = new SpriteAnimState(standTex);
+	animComp = new AnimatorComponent(animTestObj, "STAND", standState);
+	animComp->addState("WALK", walkState);
 	animTestObj->addComponent(animComp);
 
 	getSceneManager().getCurrentScene().addGameObject(animTestObj);
@@ -139,6 +142,14 @@ void PlatformerGame::onKeyPress(int32 key, int32 scancode, int32 action, int32 m
 		if (action == Input::RELEASE) {
 			right = false;
 		}
+	}
+
+	if (key == Input::KEY_1 && action == Input::PRESS) {
+		animComp->changeState("STAND");
+	}
+
+	if (key == Input::KEY_2 && action == Input::PRESS) {
+		animComp->changeState("WALK");
 	}
 }
 

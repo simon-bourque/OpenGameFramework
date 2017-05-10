@@ -28,11 +28,11 @@ PlatformerGame::PlatformerGame() : Game("Platformer", 720, 576, Rectangle(20, 16
 PlatformerGame::~PlatformerGame() {}
 
 void PlatformerGame::init() {
-	getWindow().getInput()->addKeyListener(this, &PlatformerGame::onKeyPress);
-	getRenderSystem().getCamera().getTransform().translate(11.0f,-5.5f);
-	getSceneManager().loadTileLevel("level_0.lvl", this);
+	getWindow()->getInput()->addKeyListener(this, &PlatformerGame::onKeyPress);
+	getRenderSystem()->getCamera().getTransform().translate(11.0f,-5.5f);
+	getSceneManager()->loadTileLevel("level_0.lvl", this);
 
-	Texture* gemTexture = getRenderSystem().getTextureManager()->createTexture2D("gemRed.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* gemTexture = getRenderSystem()->getTextureManager()->createTexture2D("gemRed.tx", Texture::Filter::NEAREST_NEIGHBOR);
 
 	GameObject* gem1 = new GameObject(Transform(11.0f, -5.5f));
 	GameObject* gem2 = new GameObject(Transform(12.0f, -5.5f));
@@ -59,10 +59,10 @@ void PlatformerGame::init() {
 	gem3->addComponent(rb3);
 	gem4->addComponent(rb4);
 
-	getSceneManager().getCurrentScene().addGameObject(gem1);
-	getSceneManager().getCurrentScene().addGameObject(gem2);
-	getSceneManager().getCurrentScene().addGameObject(gem3);
-	getSceneManager().getCurrentScene().addGameObject(gem4);
+	getSceneManager()->getCurrentScene().addGameObject(gem1);
+	getSceneManager()->getCurrentScene().addGameObject(gem2);
+	getSceneManager()->getCurrentScene().addGameObject(gem3);
+	getSceneManager()->getCurrentScene().addGameObject(gem4);
 
 	// ##################### ANIM TEST #############################################################
 	GameObject* animTestObj = new GameObject(Transform(3.5f, -7.5f));
@@ -72,8 +72,8 @@ void PlatformerGame::init() {
 	
 	Animation animation(frames, delays, 11);
 
-	Texture* standTex = getRenderSystem().getTextureManager()->createTexture2D("player_stand.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* walkTex = getRenderSystem().getTextureManager()->createTexture2DArray("player_walk.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* standTex = getRenderSystem()->getTextureManager()->createTexture2D("player_stand.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* walkTex = getRenderSystem()->getTextureManager()->createTexture2DArray("player_walk.tx", Texture::Filter::NEAREST_NEIGHBOR);
 	
 	AnimState* walkState = new SpriteSequenceAnimState(walkTex, animation);
 	AnimState* standState = new SpriteAnimState(standTex);
@@ -81,7 +81,7 @@ void PlatformerGame::init() {
 	animComp->addState("WALK", walkState);
 	animTestObj->addComponent(animComp);
 
-	getSceneManager().getCurrentScene().addGameObject(animTestObj);
+	getSceneManager()->getCurrentScene().addGameObject(animTestObj);
 
 	delete[] frames;
 	delete[] delays;
@@ -93,16 +93,16 @@ void PlatformerGame::tick(float32 delta) {
 	const static float32 SPEED = 25.0f;
 
 	if (up) {
-		getRenderSystem().getCamera().getTransform().translate(0.0f, SPEED * delta);
+		getRenderSystem()->getCamera().getTransform().translate(0.0f, SPEED * delta);
 	}
 	if (down) {
-		getRenderSystem().getCamera().getTransform().translate(0.0f, -SPEED * delta);
+		getRenderSystem()->getCamera().getTransform().translate(0.0f, -SPEED * delta);
 	}
 	if (left) {
-		getRenderSystem().getCamera().getTransform().translate(-SPEED * delta, 0.0f);
+		getRenderSystem()->getCamera().getTransform().translate(-SPEED * delta, 0.0f);
 	}
 	if (right) {
-		getRenderSystem().getCamera().getTransform().translate(SPEED * delta, 0.0f);
+		getRenderSystem()->getCamera().getTransform().translate(SPEED * delta, 0.0f);
 	}
 }
 

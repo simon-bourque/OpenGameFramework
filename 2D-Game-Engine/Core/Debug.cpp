@@ -23,11 +23,11 @@
 
 Debug::Debug(Game* game) : m_game(game), m_debugMode(false), m_renderPerf(false), m_zoomIn(false), m_zoomOut(false) {
 	ASSERT(game, "Game should not be null");
-	game->getWindow().getInput()->addKeyListener(this, &Debug::onKeyPress);
+	game->getWindow()->getInput()->addKeyListener(this, &Debug::onKeyPress);
 
-	Font* font = game->getRenderSystem().getFontManager()->createFont("font3");
-	m_fpsText = game->getRenderSystem().getTextManager()->createText("debug_fps_text_0", "fps: 00", font, Text::Usage::STREAM);
-	m_debugOnText = game->getRenderSystem().getTextManager()->createText("debug_debug_on_text_0", "Debug Mode ON", font, Text::Usage::STATIC);
+	Font* font = game->getRenderSystem()->getFontManager()->createFont("font3");
+	m_fpsText = game->getRenderSystem()->getTextManager()->createText("debug_fps_text_0", "fps: 00", font, Text::Usage::STREAM);
+	m_debugOnText = game->getRenderSystem()->getTextManager()->createText("debug_debug_on_text_0", "Debug Mode ON", font, Text::Usage::STATIC);
 }
 
 
@@ -47,8 +47,8 @@ void Debug::tick() {
 		const static float32 MAX_ZOOM_IN = 0.01f;
 
 		float32 ds = (m_zoomIn) ? -SCALE_INCR : SCALE_INCR;
-		float32 scaleX = m_game->getRenderSystem().getCamera().getTransform().xScale + ds;
-		float32 scaleY = m_game->getRenderSystem().getCamera().getTransform().yScale + ds;
+		float32 scaleX = m_game->getRenderSystem()->getCamera().getTransform().xScale + ds;
+		float32 scaleY = m_game->getRenderSystem()->getCamera().getTransform().yScale + ds;
 
 		if (scaleX < MAX_ZOOM_IN) {
 			scaleX = MAX_ZOOM_IN;
@@ -58,8 +58,8 @@ void Debug::tick() {
 			scaleY = MAX_ZOOM_IN;
 		}
 
-		m_game->getRenderSystem().getCamera().getTransform().xScale = scaleX;
-		m_game->getRenderSystem().getCamera().getTransform().yScale = scaleY;
+		m_game->getRenderSystem()->getCamera().getTransform().xScale = scaleX;
+		m_game->getRenderSystem()->getCamera().getTransform().yScale = scaleY;
 	}
 }
 
@@ -67,7 +67,7 @@ void Debug::render() {
 	if (!m_debugMode) {
 		return;
 	}
-	m_game->getRenderSystem().getTextRenderer()->renderText(m_debugOnText, -0.98f, -0.93f, Color::RED);
+	m_game->getRenderSystem()->getTextRenderer()->renderText(m_debugOnText, -0.98f, -0.93f, Color::RED);
 
 	if (m_renderPerf) {
 		renderPerf();
@@ -75,7 +75,7 @@ void Debug::render() {
 }
 
 void Debug::renderPerf() const {
-	m_game->getRenderSystem().getTextRenderer()->renderText(m_fpsText, -0.98f, 0.98f, Color::BLACK);
+	m_game->getRenderSystem()->getTextRenderer()->renderText(m_fpsText, -0.98f, 0.98f, Color::BLACK);
 }
 
 void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
@@ -122,8 +122,8 @@ void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
 	}
 	if (key == Input::KEY_KP_ENTER && action == Input::PRESS && m_debugMode) {
 		// Reset zoom
-		m_game->getRenderSystem().getCamera().getTransform().xScale = 1.0f;
-		m_game->getRenderSystem().getCamera().getTransform().yScale = 1.0f;
+		m_game->getRenderSystem()->getCamera().getTransform().xScale = 1.0f;
+		m_game->getRenderSystem()->getCamera().getTransform().yScale = 1.0f;
 	}
 }
 

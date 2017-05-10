@@ -40,9 +40,9 @@ public:
 
 	void shutdown() { m_shutdown = true; };
 
-	Window& getWindow() { return *m_window; };
-	RenderSystem& getRenderSystem() { return *m_renderSystem; };
-	SceneManager& getSceneManager() { return *m_sceneManager; };
+	Window* getWindow() { return m_window.get(); };
+	RenderSystem* getRenderSystem() { return m_renderSystem.get(); };
+	SceneManager* getSceneManager() { return m_sceneManager.get(); };
 	int32 getFps() const { return m_fps; };
 };
 

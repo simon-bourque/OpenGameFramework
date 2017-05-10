@@ -332,12 +332,12 @@ TileScene* loadTileLevel(string file, Game* game) {
 	// Load level bounds
 	float32 boundsX = 0;
 	float32 boundsY = 0;
-	int32 boundsWidth = 0;
-	int32 boundsHeight = 0;
+	float32 boundsWidth = 0;
+	float32 boundsHeight = 0;
 	readFloat(input, boundsX);
 	readFloat(input, boundsY);
-	readInt(input, boundsWidth);
-	readInt(input, boundsHeight);
+	readFloat(input, boundsWidth);
+	readFloat(input, boundsHeight);
 
 	int32 numTiles = 0;
 	readInt(input, numTiles);

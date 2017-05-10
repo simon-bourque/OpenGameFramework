@@ -5,7 +5,7 @@
 #include "Object\GameObject.h"
 
 class Game;
-class Vector2f;
+struct Vector2f;
 
 class Player : public GameObject {
 public:

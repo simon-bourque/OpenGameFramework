@@ -6,6 +6,8 @@
 
 #include "Object/Component/RenderableComponent.h"
 
+#include "Object/Component/ComponentType.h"
+
 #include <map>
 
 class AnimState;
@@ -35,6 +37,8 @@ public:
 
 	void setHorizontalFlip(bool horizontalFlip) { m_horizontalFlip = horizontalFlip; };
 	void setVerticalFlip(bool verticalFlip) { m_verticalFlip = verticalFlip; };
+
+	virtual ComponentType getType() override { return ANIMATOR_COMPONENT; };
 };
 
 #endif

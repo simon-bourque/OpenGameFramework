@@ -19,6 +19,9 @@
 #include "Object/Component/SpriteComponent.h"
 #include "Object/Component/RigidBodyComponent.h"
 #include "Object/Component/AnimatorComponent.h"
+#include "Object/Component/AABBColliderComponent.h"
+
+#include "Object/Component/ComponentType.h"
 
 #include "Player.h"
 
@@ -66,6 +69,7 @@ void PlatformerGame::init() {
 
 	Player* player = new Player(this, Vector2f(0.5f, -10.8f));
 	getSceneManager()->getCurrentScene().addGameObject(player);
+	m_player = player;
 }
 
 void PlatformerGame::tick(float32 delta) {
@@ -89,6 +93,12 @@ void PlatformerGame::tick(float32 delta) {
 
 void PlatformerGame::render() {
 	Game::render();
+
+	ObjectComponent* ptr = m_player->findComponent(ComponentType::AABB_COLLIDER_COMPONENT);
+	if (ptr) {
+		AABBColliderComponent* collider = static_cast<AABBColliderComponent*>(ptr);
+		getRenderSystem()->getShapeRenderer()->drawRectangle(collider->getRectangle(), Color::MAGENTA, false);
+	}
 	//getRenderSystem()->getShapeRenderer()->drawVector(11.0f, -5.5f, Vector2f(1.0f,1.0f), Color::MAGENTA);
 	//getRenderSystem()->getShapeRenderer()->drawRectangle(Rectangle(11,-5.5, 1,1), Color::RED, true);
 	//getRenderSystem()->getShapeRenderer()->drawCircle(5.0f, -9.0f, 0.5f, Color::YELLOW, true);
@@ -126,14 +136,6 @@ void PlatformerGame::onKeyPress(int32 key, int32 scancode, int32 action, int32 m
 		if (action == Input::RELEASE) {
 			right = false;
 		}
-	}
-
-	if (key == Input::KEY_1 && action == Input::PRESS) {
-		animComp->changeState("STAND");
-	}
-
-	if (key == Input::KEY_2 && action == Input::PRESS) {
-		animComp->changeState("WALK");
 	}
 }
 

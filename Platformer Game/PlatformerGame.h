@@ -7,6 +7,7 @@
 class Texture;
 class TileScene;
 class AnimatorComponent;
+class Player;
 
 class PlatformerGame : public Game
 {
@@ -16,7 +17,7 @@ private:
 	bool left;
 	bool right;
 
-	AnimatorComponent* animComp;
+	Player* m_player;
 public:
 	PlatformerGame();
 	virtual ~PlatformerGame();

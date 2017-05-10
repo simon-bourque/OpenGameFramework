@@ -6,6 +6,8 @@
 
 #include "Object/Transform.h"
 
+#include "Object/Component/ComponentType.h"
+
 #include <vector>
 
 class ObjectComponent;
@@ -30,6 +32,8 @@ public:
 
 	void addComponent(ObjectComponent* component);
 	void addComponent(RenderableComponent* component);
+
+	ObjectComponent* findComponent(ComponentType type);
 
 	const Transform& getTransform() const { return m_transform; };
 	Transform& getTransform() { return m_transform; };

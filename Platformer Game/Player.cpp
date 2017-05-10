@@ -5,6 +5,7 @@
 
 #include "Object/Component/AnimatorComponent.h"
 #include "Object/Component/RigidBodyComponent.h"
+#include "Object/Component/AABBColliderComponent.h"
 
 #include "Graphics/Animation/Animation.h"
 #include "Graphics/Animation/AnimState.h"
@@ -45,7 +46,8 @@ Player::Player(Game* game, const Vector2f& spawnLocation) {
 	addComponent(animator);
 
 	// ######################## Physics #####################################
-	addComponent(new RigidBodyComponent(this, 65.0f));
+	//addComponent(new RigidBodyComponent(this, 65.0f));
+	addComponent(new AABBColliderComponent(this, Rectangle(PLAYER_WIDTH, PLAYER_HEIGHT)));
 }
 
 Player::~Player() {}

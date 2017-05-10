@@ -8,6 +8,8 @@
 
 #include "Math/Vector2f.h"
 
+#include "Object/Component/ComponentType.h"
+
 class GameObject;
 
 class RigidBodyComponent : public ObjectComponent {
@@ -25,6 +27,8 @@ public:
 	void stop();
 
 	virtual void tick(float32 delta, Game* game) override;
+
+	virtual ComponentType getType() override { return RIGIDBODY_COMPONENT; };
 };
 
 #endif

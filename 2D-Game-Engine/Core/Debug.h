@@ -21,11 +21,13 @@ private:
 
 	bool m_debugMode;
 	bool m_renderPerf;
+	bool m_renderBounds;
 
 	bool m_zoomIn;
 	bool m_zoomOut;
 
 	void renderPerf() const;
+	void renderBounds() const;
 	void onKeyPress(int32 key, int32 scancode, int32 action, int32 mods);
 public:
 	Debug(Game* game);

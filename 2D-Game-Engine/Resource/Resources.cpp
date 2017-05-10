@@ -26,6 +26,7 @@
 
 void readFloat(std::ifstream& input, float32& value);
 void readInt(std::ifstream& input, int32& value);
+void readUInt(std::ifstream& input, uint32& value);
 
 const static string SHADER_PATH = "res/shader/";
 const static string TEXTURE_PATH = "res/texture/";
@@ -57,6 +58,77 @@ string loadSrc(string file) {
 	return ss.str();
 }
 
+uint8* loadTexture(const string& file, uint8 type, uint32& width, uint32& height, uint8& channels) {
+	std::ifstream input(TEXTURE_PATH + file);
+
+	if (!input) {
+		input.close();
+		throw std::runtime_error("Failed to load texture " + file);
+	}
+
+	if (input.get() != type) {
+		input.close();
+		throw std::runtime_error("Failed to load texture " + file + ": Texture targets do not match.");
+	}
+
+	uint32 _width = 0;
+	uint32 _height = 0;
+	uint8 _channels = 0;
+	readUInt(input, _width);
+	readUInt(input, _height);
+	_channels = input.get();
+
+	uint32 numBytes = _width * _height * _channels;
+	uint8* data = new uint8[numBytes];
+
+	for (uint32 i = 0; i < numBytes; i++) {
+		data[i] = input.get();
+	}
+
+	width = _width;
+	height = _height;
+	channels = _channels;
+
+	return data;
+}
+
+uint8* loadTexture(const string& file, uint8 type, uint32& width, uint32& height, uint8& channels, uint32& depth) {
+	std::ifstream input(TEXTURE_PATH + file);
+
+	if (!input) {
+		input.close();
+		throw std::runtime_error("Failed to load texture " + file);
+	}
+
+	if (input.get() != type) {
+		input.close();
+		throw std::runtime_error("Failed to load texture " + file + ": Texture targets do not match.");
+	}
+
+	uint32 _width = 0;
+	uint32 _height = 0;
+	uint8 _channels = 0;
+	uint32 _depth = 0;
+	readUInt(input, _width);
+	readUInt(input, _height);
+	_channels = input.get();
+	readUInt(input, _depth);
+
+	uint32 numBytes = _width * _height * _channels * _depth;
+	uint8* data = new uint8[numBytes];
+
+	for (uint32 i = 0; i < numBytes; i++) {
+		data[i] = input.get();
+	}
+
+	width = _width;
+	height = _height;
+	channels = _channels;
+	depth = _depth;
+
+	return data;
+}
+
 RawImage* loadImage(string file) {
 	int32 width = 0;
 	int32 height = 0;
@@ -65,7 +137,7 @@ RawImage* loadImage(string file) {
 
 	if (!data) {
 		const char* reason = stbi_failure_reason();
-		throw std::runtime_error("Failed to load texture " + file + ": " + reason);
+		throw std::runtime_error("Failed to load image " + file + ": " + reason);
 	}
 
 	RawImage* img = new RawImage(data, width, height, channels);
@@ -345,6 +417,14 @@ void readFloat(std::ifstream& input, float32& value) {
 void readInt(std::ifstream& input, int32& value) {
 	char b[4] = { 0, 0, 0, 0 };
 	
+	input.get(b[0]).get(b[1]).get(b[2]).get(b[3]);
+
+	memcpy(&value, b, 4);
+}
+
+void readUInt(std::ifstream& input, uint32& value) {
+	char b[4] = { 0, 0, 0, 0 };
+
 	input.get(b[0]).get(b[1]).get(b[2]).get(b[3]);
 
 	memcpy(&value, b, 4);

@@ -38,9 +38,14 @@ TextureManager::~TextureManager() {}
 
 Texture* TextureManager::createTexture2D(const string& name, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT) {	
 
-	RawImage* img = nullptr;
+	//RawImage* img = nullptr;
+	uint8* data = nullptr;
+	uint32 width = 0;
+	uint32 height = 0;
+	uint8 channels = 0;
 	try {
-		img = loadImage(name);
+		//img = loadImage(name);
+		data = loadTexture(name, 0x1, width, height, channels);
 	}
 	catch (std::runtime_error& ex) {
 		DEBUG_LOG(ex.what());
@@ -52,7 +57,8 @@ Texture* TextureManager::createTexture2D(const string& name, Texture::Filter fil
 	tex->bind();
 	//glBindTexture(Texture::TEXTURE_2D, name);
 	
-	glTexImage2D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, img->getWidth(), img->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, img->getData());
+	//glTexImage2D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, img->getWidth(), img->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, img->getData());
+	glTexImage2D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filtering));
 	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filtering));
 	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(textureWrapS));
@@ -65,7 +71,42 @@ Texture* TextureManager::createTexture2D(const string& name, Texture::Filter fil
 	//m_textures.push_back(tex);
 	m_loadedResources[name] = tex;
 
-	delete img;
+	//delete img;
+	delete[] data;
+	return tex;
+}
+
+Texture* TextureManager::createTexture2DArray(const string& name, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT) {
+	uint8* data = nullptr;
+	uint32 width = 0;
+	uint32 height = 0;
+	uint8 channels = 0;
+	uint32 depth = 0;
+	try {
+		//img = loadImage(name);
+		data = loadTexture(name, 0x2, width, height, channels, depth);
+	}
+	catch (std::runtime_error& ex) {
+		DEBUG_LOG(ex.what());
+		return m_defaultTexture.get();
+	}
+
+	Texture* tex = new Texture(Texture::Target::TEXTURE_2D_ARRAY, Texture::Unit::UNIT_0);
+	//Texture tex(name, Texture::Target::TEXTURE_2D_ARRAY, Texture::UNIT_0);
+
+	tex->bind();
+	glTexImage3D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, width, height, depth, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filtering));
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filtering));
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(textureWrapS));
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(textureWrapT));
+	tex->unbind();
+
+	delete[] data;
+	//m_textures.push_back(tex);
+	m_loadedResources[name] = tex;
+
 	return tex;
 }
 

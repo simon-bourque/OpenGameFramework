@@ -26,6 +26,8 @@ public:
 
 	void bind() const;
 	void unbind() const;
+
+	Buffer* getBuffer(uint32 index) const { return m_buffers[index]; }; // TODO add bounds checking
 };
 
 #endif

@@ -192,6 +192,9 @@
     <ClCompile Include="Scene\TileScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Renderer\ShapeRenderer.cpp">
+      <Filter>Graphics\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Debug.h">
@@ -349,6 +352,12 @@
     </ClInclude>
     <ClInclude Include="Scene\TileScene.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Renderer\ShapeRenderer.h">
+      <Filter>Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Constants.h">
+      <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

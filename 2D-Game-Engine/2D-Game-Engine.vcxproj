@@ -190,8 +190,10 @@
     <ClCompile Include="Math\Vector2f.cpp" />
     <ClCompile Include="Graphics\Memory\VertexArrayObject.cpp" />
     <ClCompile Include="Graphics\Window.cpp" />
+    <ClCompile Include="Graphics\Renderer\ShapeRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Math\Constants.h" />
     <ClInclude Include="Graphics\Animation\Animation.h" />
     <ClInclude Include="Object\Component\AnimatorComponent.h" />
     <ClInclude Include="Graphics\Animation\AnimState.h" />
@@ -244,6 +246,7 @@
     <ClInclude Include="Math\Vector2f.h" />
     <ClInclude Include="Graphics\Memory\VertexArrayObject.h" />
     <ClInclude Include="Graphics\Window.h" />
+    <ClInclude Include="Graphics\Renderer\ShapeRenderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

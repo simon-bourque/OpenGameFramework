@@ -393,7 +393,7 @@ TileScene* loadTileLevel(string file, Game* game) {
 	readInt(input, tileWidth);
 	readInt(input, tileHeight);
 
-	Texture* texture = game->getRenderSystem().getTextureManager()->createTexture2DArray(texPath, margin, spacing, tileWidth, tileHeight, Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* texture = game->getRenderSystem()->getTextureManager()->createTexture2DArray(texPath, margin, spacing, tileWidth, tileHeight, Texture::Filter::NEAREST_NEIGHBOR);
 
 	input.close();
 

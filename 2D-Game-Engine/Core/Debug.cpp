@@ -21,7 +21,7 @@
 
 #include "Resource/Resources.h"
 
-Debug::Debug(Game* game) : m_game(game), m_debugMode(false), m_renderPerf(false), m_zoomIn(false), m_zoomOut(false) {
+Debug::Debug(Game* game) : m_game(game), m_debugMode(false), m_renderPerf(false), m_renderBounds(false), m_zoomIn(false), m_zoomOut(false) {
 	ASSERT(game, "Game should not be null");
 	game->getWindow()->getInput()->addKeyListener(this, &Debug::onKeyPress);
 
@@ -72,10 +72,18 @@ void Debug::render() {
 	if (m_renderPerf) {
 		renderPerf();
 	}
+
+	if (m_renderBounds) {
+		renderBounds();
+	}
 }
 
 void Debug::renderPerf() const {
 	m_game->getRenderSystem()->getTextRenderer()->renderText(m_fpsText, -0.98f, 0.98f, Color::BLACK);
+}
+
+void Debug::renderBounds() const {
+	//m_game->getRenderSystem()
 }
 
 void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
@@ -93,6 +101,7 @@ void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
 	if (key == Input::KEY_KP_DECIMAL && action == Input::PRESS && m_debugMode) {
 		DEBUG_LOG("---------- SHORTCUTS ----------");
 		DEBUG_LOG("KP 0:\t\tToggle performance stats");
+		DEBUG_LOG("KP 1:\t\tShow scene bounds");
 		DEBUG_LOG("KP ADD:\t\tZoom in");
 		DEBUG_LOG("KP SUBTRACT:\t\tZoom out");
 		DEBUG_LOG("KP ENTER:\t\tReset zoom");
@@ -101,6 +110,12 @@ void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
 	if (key == Input::KEY_KP_0 && m_debugMode) {
 		if (action == Input::PRESS) {
 			m_renderPerf = !m_renderPerf;
+		}
+	}
+
+	if (key == Input::KEY_KP_1 && m_debugMode) {
+		if (action == Input::PRESS) {
+			m_renderBounds = !m_renderBounds;
 		}
 	}
 

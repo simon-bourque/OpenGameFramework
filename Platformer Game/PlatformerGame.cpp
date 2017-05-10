@@ -7,6 +7,7 @@
 #include "Graphics/Window.h"
 
 #include "Math/Geometry/Rectangle.h"
+#include "Math/Vector2f.h"
 
 #include "Input/Input.h"
 
@@ -21,6 +22,8 @@
 #include "Graphics/Animation/SpriteSequenceAnimState.h"
 #include "Graphics/Animation/SpriteAnimState.h"
 #include "Graphics/Animation/Animation.h"
+
+#include "Player.h"
 
 PlatformerGame::PlatformerGame() : Game("Platformer", 720, 576, Rectangle(20, 16)), up(false), down(false), left(false), right(false) {}
 
@@ -64,27 +67,8 @@ void PlatformerGame::init() {
 	getSceneManager()->getCurrentScene().addGameObject(gem3);
 	getSceneManager()->getCurrentScene().addGameObject(gem4);
 
-	// ##################### ANIM TEST #############################################################
-	GameObject* animTestObj = new GameObject(Transform(3.5f, -7.5f));
-	
-	uint32* frames = new uint32[11]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-	float32* delays = new float32[11]{0.05f, 0.05f, 0.05f, 0.05f, 0.05f, 0.05f, 0.05f, 0.05f, 0.05f, 0.05f, 0.05f};
-	
-	Animation animation(frames, delays, 11);
-
-	Texture* standTex = getRenderSystem()->getTextureManager()->createTexture2D("player_stand.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* walkTex = getRenderSystem()->getTextureManager()->createTexture2DArray("player_walk.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	
-	AnimState* walkState = new SpriteSequenceAnimState(walkTex, animation);
-	AnimState* standState = new SpriteAnimState(standTex);
-	animComp = new AnimatorComponent(animTestObj, "STAND", standState);
-	animComp->addState("WALK", walkState);
-	animTestObj->addComponent(animComp);
-
-	getSceneManager()->getCurrentScene().addGameObject(animTestObj);
-
-	delete[] frames;
-	delete[] delays;
+	Player* player = new Player(this, Vector2f(0.5f, -10.8f));
+	getSceneManager()->getCurrentScene().addGameObject(player);
 }
 
 void PlatformerGame::tick(float32 delta) {

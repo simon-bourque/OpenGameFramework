@@ -23,7 +23,7 @@ private:
 public:
 	GameObject();
 	explicit GameObject(const Transform& transform);
-	~GameObject();
+	virtual ~GameObject();
 
 	void tick(float32 delta, Game* game);
 	void render(RenderSystem* rs);

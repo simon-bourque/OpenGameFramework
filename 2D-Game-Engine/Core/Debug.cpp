@@ -16,6 +16,9 @@
 #include "Graphics/RenderSystem.h"
 #include "Graphics/Camera.h"
 
+#include "Physics/Collision/CollisionSystem.h"
+#include "Physics/Collision/QuadTree.h"
+
 #include "Scene/SceneManager.h"
 #include "Scene/Scene.h"
 
@@ -25,7 +28,15 @@
 
 #include "Resource/Resources.h"
 
-Debug::Debug(Game* game) : m_game(game), m_debugMode(false), m_renderPerf(false), m_renderBounds(false), m_zoomIn(false), m_zoomOut(false) {
+Debug::Debug(Game* game) : 
+	m_game(game),
+	m_debugMode(false),
+	m_renderPerf(false),
+	m_renderBounds(false),
+	m_renderQuadTree(false),
+	m_zoomIn(false),
+	m_zoomOut(false)
+{
 	ASSERT(game, "Game should not be null");
 	game->getWindow()->getInput()->addKeyListener(this, &Debug::onKeyPress);
 
@@ -80,6 +91,10 @@ void Debug::render() {
 	if (m_renderBounds) {
 		renderBounds();
 	}
+
+	if (m_renderQuadTree) {
+		renderQuadTree();
+	}
 }
 
 void Debug::renderPerf() const {
@@ -88,6 +103,10 @@ void Debug::renderPerf() const {
 
 void Debug::renderBounds() const {
 	m_game->getRenderSystem()->getShapeRenderer()->drawRectangle(m_game->getSceneManager()->getCurrentScene().getBounds(), Color::WHITE, false);
+}
+
+void Debug::renderQuadTree() const {
+	m_game->getSceneManager()->getCurrentScene().getCollisionSystem()->getQuadTree()->render(m_game->getRenderSystem());
 }
 
 void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
@@ -106,6 +125,7 @@ void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
 		DEBUG_LOG("---------- SHORTCUTS ----------");
 		DEBUG_LOG("KP 0:\t\tToggle performance stats");
 		DEBUG_LOG("KP 1:\t\tShow scene bounds");
+		DEBUG_LOG("KP 2:\t\tShow quad tree");
 		DEBUG_LOG("KP ADD:\t\tZoom in");
 		DEBUG_LOG("KP SUBTRACT:\t\tZoom out");
 		DEBUG_LOG("KP ENTER:\t\tReset zoom");
@@ -120,6 +140,12 @@ void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
 	if (key == Input::KEY_KP_1 && m_debugMode) {
 		if (action == Input::PRESS) {
 			m_renderBounds = !m_renderBounds;
+		}
+	}
+
+	if (key == Input::KEY_KP_2 && m_debugMode) {
+		if (action == Input::PRESS) {
+			m_renderQuadTree = !m_renderQuadTree;
 		}
 	}
 

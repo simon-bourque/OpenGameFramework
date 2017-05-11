@@ -25,6 +25,8 @@ public:
 	void addStaticCollider(const Rectangle& collider);
 
 	void narrowScan();
+
+	const QuadTree* getQuadTree() const { return m_tree; };
 };
 
 #endif

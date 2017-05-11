@@ -8,6 +8,10 @@
 
 #include <vector>
 
+#ifdef DEBUG_BUILD
+	class RenderSystem;
+#endif
+
 class QuadTree {
 private:
 	Rectangle m_bounds;
@@ -37,6 +41,10 @@ public:
 
 	QuadTree& operator=(const QuadTree& qt);
 	QuadTree& operator=(QuadTree&& qt);
+
+#ifdef DEBUG_BUILD
+	void render(RenderSystem* rs) const;
+#endif
 };
 
 #endif

@@ -2,7 +2,11 @@
 
 #include "Object/GameObject.h"
 
-Scene::Scene(const Rectangle& bounds) : m_bounds(bounds) {}
+#include "Physics/Collision/CollisionSystem.h"
+
+Scene::Scene(const Rectangle& bounds) : m_bounds(bounds) {
+	m_collisionSystem.reset(new CollisionSystem(bounds));
+}
 
 Scene::~Scene() {
 	for (GameObject* object : m_objects) {

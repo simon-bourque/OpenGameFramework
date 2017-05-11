@@ -93,7 +93,7 @@ void QuadTree::retrieve(const Rectangle& rect, std::vector<Rectangle>& list) con
 }
 
 void QuadTree::split() {
-	ASSERT(m_northWest, "Quadtree should never split more than once.");
+	ASSERT(!m_northWest, "Quadtree should never split more than once.");
 
 	float32 quarterWidth = m_bounds.getHalfWidth() / 2.0f;
 	float32 quarterHeight = m_bounds.getHalfHeight() / 2.0f;

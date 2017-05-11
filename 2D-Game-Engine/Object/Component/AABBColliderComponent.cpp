@@ -2,6 +2,11 @@
 
 #include "Object/GameObject.h"
 
+#include "Core/Game.h"
+#include "Scene/Scene.h"
+#include "Scene/SceneManager.h"
+#include "Physics/Collision/CollisionSystem.h"
+
 void AABBColliderComponent::emptyIntersectResponse(const Manifold& manifold, GameObject* other) {}
 
 AABBColliderComponent::AABBColliderComponent(GameObject* parentObject, const Rectangle& rectangle, float32 xOffset, float32 yOffset) : ObjectComponent(parentObject),
@@ -19,11 +24,11 @@ AABBColliderComponent::~AABBColliderComponent() {
 
 void AABBColliderComponent::tick(float32 delta, Game* game) {
 	resetPosition();
-	//game->...
+	game->getSceneManager()->getCurrentScene().getCollisionSystem()->addCollider(this);
 }
 
 void AABBColliderComponent::resetPosition() {
-	const Transform& t = getParentObject().getTransform();
+	const Transform& t = getParentObject()->getTransform();
 
 	m_rectangle.setX(t.xPos + m_xOffset);
 	m_rectangle.setY(t.yPos + m_yOffset);
@@ -32,7 +37,7 @@ void AABBColliderComponent::resetPosition() {
 void AABBColliderComponent::onIntersectLevel(const Manifold& manifold) {
 	
 	Vector2f delta = manifold.direction * manifold.depth;
-	getParentObject().getTransform().translate(delta.x, delta.y);
+	getParentObject()->getTransform().translate(delta.x, delta.y);
 	//getParentObject().broadcastMessage("COLLISION_LEVEL", manifold);
 }
 

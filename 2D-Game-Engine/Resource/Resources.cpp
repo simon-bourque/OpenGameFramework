@@ -13,7 +13,10 @@
 #include "Graphics/TextureManager.h"
 #include "Graphics/Texture.h"
 
+#include "Math/Geometry/Rectangle.h"
 #include "Math/Vector2f.h"
+
+#include "Physics/Collision/CollisionSystem.h"
 
 #define STBI_FAILURE_USERMSG
 #define STB_IMAGE_IMPLEMENTATION
@@ -358,6 +361,7 @@ TileScene* loadTileLevel(string file, Game* game) {
 	int32 numColliders = 0;
 	readInt(input, numColliders);
 
+	Rectangle* colliders = new Rectangle[numColliders];
 	for (int32 i = 0; i < numColliders; i++) {
 		float32 x = 0;
 		float32 y = 0;
@@ -367,6 +371,10 @@ TileScene* loadTileLevel(string file, Game* game) {
 		readFloat(input, y);
 		readFloat(input, width);
 		readFloat(input, height);
+		colliders[i].setX(x);
+		colliders[i].setY(y);
+		colliders[i].setWidth(width);
+		colliders[i].setHeight(height);
 	}
 
 	int32 stringLen = 0;
@@ -398,7 +406,13 @@ TileScene* loadTileLevel(string file, Game* game) {
 	input.close();
 
 	TileScene* scene = new TileScene(tiles, numTiles, texture, Rectangle(boundsX, boundsY, boundsWidth, boundsHeight));
+	
+	for (uint32 i = 0; i < numColliders; i++) {
+		scene->getCollisionSystem()->addStaticCollider(colliders[i]);
+	}
 
+
+	delete[] colliders;
 	delete[] tiles;
 	delete[] texPath;
 

@@ -16,8 +16,8 @@
 #include "Graphics/Texture.h"
 
 Player::Player(Game* game, const Vector2f& spawnLocation) {
-	const static float32 PLAYER_WIDTH = 1;
-	const static float32 PLAYER_HEIGHT = 1.4;
+	const static float32 PLAYER_WIDTH = 1.0f;
+	const static float32 PLAYER_HEIGHT = 1.4f;
 	const static float32 ANIM_DELAY = 0.05f;
 
 	getTransform().yScale = PLAYER_HEIGHT;

@@ -10,10 +10,14 @@
 #include "Graphics/Text/TextManager.h"
 #include "Graphics/Text/Text.h"
 #include "Graphics/Renderer/TextRenderer.h"
+#include "Graphics/Renderer/ShapeRenderer.h"
 #include "Graphics/Color.h"
 #include "Graphics/Window.h"
 #include "Graphics/RenderSystem.h"
 #include "Graphics/Camera.h"
+
+#include "Scene/SceneManager.h"
+#include "Scene/Scene.h"
 
 #include "Input/Input.h"
 
@@ -83,7 +87,7 @@ void Debug::renderPerf() const {
 }
 
 void Debug::renderBounds() const {
-	//m_game->getRenderSystem()
+	m_game->getRenderSystem()->getShapeRenderer()->drawRectangle(m_game->getSceneManager()->getCurrentScene().getBounds(), Color::WHITE, false);
 }
 
 void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {

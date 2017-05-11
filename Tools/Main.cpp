@@ -394,7 +394,7 @@ void convertLevel(const string& path) {
 	index--;
 
 	if (index > -1) {
-		Tile tile(x, y, index);
+		Tile tile(x, -y, index);
 		tiles.push_back(tile);
 	}
 

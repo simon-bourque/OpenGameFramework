@@ -18,6 +18,7 @@
 
 #include "Physics/Collision/CollisionSystem.h"
 
+#define STB_IMAGE_STATIC
 #define STBI_FAILURE_USERMSG
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>

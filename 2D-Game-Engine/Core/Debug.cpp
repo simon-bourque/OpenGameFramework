@@ -28,12 +28,15 @@
 
 #include "Resource/Resources.h"
 
+#include "Math/Vector2f.h"
+
 Debug::Debug(Game* game) : 
 	m_game(game),
 	m_debugMode(false),
 	m_renderPerf(false),
 	m_renderBounds(false),
 	m_renderQuadTree(false),
+	m_renderGrid(false),
 	m_zoomIn(false),
 	m_zoomOut(false)
 {
@@ -88,6 +91,10 @@ void Debug::render() {
 		renderPerf();
 	}
 
+	if (m_renderGrid) {
+		renderGrid();
+	}
+
 	if (m_renderBounds) {
 		renderBounds();
 	}
@@ -107,6 +114,20 @@ void Debug::renderBounds() const {
 
 void Debug::renderQuadTree() const {
 	m_game->getSceneManager()->getCurrentScene().getCollisionSystem()->getQuadTree()->render(m_game->getRenderSystem());
+}
+
+void Debug::renderGrid() const {
+	Rectangle& bounds = m_game->getSceneManager()->getCurrentScene().getBounds();
+	Vector2f vertLine(0,-bounds.getHeight());
+	Vector2f horizLine(bounds.getWidth(), 0);
+	
+	for (int32 i = 0; i < bounds.getWidth() - 1; i++) {
+		m_game->getRenderSystem()->getShapeRenderer()->drawVector(0.5f + i, 0.5f,vertLine, Color::WHITE);
+	}
+
+	for (int32 i = 0; i < bounds.getHeight() - 1; i++) {
+		m_game->getRenderSystem()->getShapeRenderer()->drawVector(-0.5f, -i - 0.5f, horizLine, Color::WHITE);
+	}
 }
 
 void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
@@ -146,6 +167,12 @@ void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
 	if (key == Input::KEY_KP_2 && m_debugMode) {
 		if (action == Input::PRESS) {
 			m_renderQuadTree = !m_renderQuadTree;
+		}
+	}
+
+	if (key == Input::KEY_KP_3 && m_debugMode) {
+		if (action == Input::PRESS) {
+			m_renderGrid = !m_renderGrid;
 		}
 	}
 

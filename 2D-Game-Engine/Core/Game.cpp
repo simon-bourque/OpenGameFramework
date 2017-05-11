@@ -9,6 +9,8 @@
 #include "Input/Input.h"
 
 #include "Scene/SceneManager.h"
+#include "Scene/Scene.h"
+#include "Physics/Collision/CollisionSystem.h"
 
 #include <GLFW/glfw3.h>
 
@@ -79,7 +81,7 @@ void Game::run() {
 
 void Game::tick(float32 delta) {
 	m_sceneManager->tickCurrentScene(delta, this);
-
+	m_sceneManager->getCurrentScene().getCollisionSystem()->narrowScan();
 #ifdef DEBUG_BUILD
 	m_debug->tick();
 #endif

@@ -211,3 +211,25 @@ QuadTree& QuadTree::operator=(QuadTree&& qt) {
 
 	return *this;
 }
+
+#ifdef DEBUG_BUILD
+#include "Graphics/RenderSystem.h"
+#include "Graphics/Renderer/ShapeRenderer.h"
+#include "Graphics/Color.h"
+
+void QuadTree::render(RenderSystem* rs) const {
+
+	rs->getShapeRenderer()->drawRectangle(m_bounds, Color::BLUE, false);
+	
+	for (const Rectangle& rect : m_bucket) {
+		rs->getShapeRenderer()->drawRectangle(rect, Color::YELLOW, false);
+	}
+
+	if (m_northWest) {
+		m_northWest->render(rs);
+		m_northEast->render(rs);
+		m_southWest->render(rs);
+		m_southEast->render(rs);
+	}
+}
+#endif

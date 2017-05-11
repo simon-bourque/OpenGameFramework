@@ -425,8 +425,8 @@ void convertLevel(const string& path) {
 			float32 collHeight = it->attribute("height").as_int() / ((float32)mapNode.attribute("tileheight").as_int());
 
 			// Shift origin to center
-			x += (collWidth / 2.0f) - 0.5f;
-			y += (collHeight / 2.0f) - 0.5f;
+			collX += (collWidth / 2.0f) - 0.5f;
+			collY += (collHeight / 2.0f) - 0.5f;
 
 			Rectangle collider(collX, collY, collWidth, collHeight);
 			colliders.push_back(collider);
@@ -439,7 +439,7 @@ void convertLevel(const string& path) {
 	for (const Rectangle& collider : colliders) {
 		floatUnion.value = collider.getX();
 		output.write(floatUnion.bytes, sizeof(float));
-		floatUnion.value = collider.getY();
+		floatUnion.value = -collider.getY();
 		output.write(floatUnion.bytes, sizeof(float));
 		floatUnion.value = collider.getWidth();
 		output.write(floatUnion.bytes, sizeof(float));

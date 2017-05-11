@@ -59,7 +59,8 @@ RenderSystem::RenderSystem(const Camera& camera) : m_camera(camera) {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	//GL11.glEnable(GL13.GL_MULTISAMPLE);
-	glClearColor(0.0f, 0.0f,1.0f, 1.0f);
+	//glClearColor(0.0f, 0.0f,1.0f, 1.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	m_spriteRenderer.reset(new SpriteRenderer(this));
 	m_sceneRenderer.reset(new SceneRenderer(this));

@@ -23,6 +23,7 @@ private:
 	bool m_renderPerf;
 	bool m_renderBounds;
 	bool m_renderQuadTree;
+	bool m_renderGrid;
 
 	bool m_zoomIn;
 	bool m_zoomOut;
@@ -30,6 +31,7 @@ private:
 	void renderPerf() const;
 	void renderBounds() const;
 	void renderQuadTree() const;
+	void renderGrid() const;
 	void onKeyPress(int32 key, int32 scancode, int32 action, int32 mods);
 public:
 	Debug(Game* game);

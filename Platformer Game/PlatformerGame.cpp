@@ -81,16 +81,16 @@ void PlatformerGame::tick(float32 delta) {
 	const static float32 SPEED = 25.0f;
 
 	if (up) {
-		getRenderSystem()->getCamera().getTransform().translate(0.0f, SPEED * delta);
+		//getRenderSystem()->getCamera().getTransform().translate(0.0f, SPEED * delta);
 	}
 	if (down) {
-		getRenderSystem()->getCamera().getTransform().translate(0.0f, -SPEED * delta);
+		//getRenderSystem()->getCamera().getTransform().translate(0.0f, -SPEED * delta);
 	}
 	if (left) {
-		getRenderSystem()->getCamera().getTransform().translate(-SPEED * delta, 0.0f);
+		//getRenderSystem()->getCamera().getTransform().translate(-SPEED * delta, 0.0f);
 	}
 	if (right) {
-		getRenderSystem()->getCamera().getTransform().translate(SPEED * delta, 0.0f);
+		//getRenderSystem()->getCamera().getTransform().translate(SPEED * delta, 0.0f);
 	}
 }
 

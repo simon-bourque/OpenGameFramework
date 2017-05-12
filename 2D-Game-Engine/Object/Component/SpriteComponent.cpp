@@ -5,6 +5,8 @@
 
 #include "Object/GameObject.h"
 
+#include "Core/Event.h"
+
 SpriteComponent::SpriteComponent(GameObject* parentObject, Texture* texture) : RenderableComponent(parentObject),
 	m_texture(texture),
 	m_horizontalFlip(false),
@@ -21,5 +23,12 @@ void SpriteComponent::render(RenderSystem* rs) {
 }
 
 void SpriteComponent::receiveEvent(const Event& event) {
-
+	switch (event.type) {
+	case Event::Type::FLIP_SPRITE: {
+		m_horizontalFlip = event.param.asBool;
+		break;
+	}
+	default:
+		break;
+	}
 }

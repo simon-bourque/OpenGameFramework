@@ -43,6 +43,11 @@ void RigidBodyComponent::tick(float32 delta, Game* game) {
 
 void RigidBodyComponent::receiveEvent(const Event& event) {
 	switch (event.type) {
+	case Event::Type::APPLY_IMPULSE: {
+		const Vector2f* impulse = static_cast<const Vector2f*>(event.param.asPointer);
+		applyImpulse(*impulse);
+		break;
+	}
 	case Event::Type::COLLISION_LEVEL: {
 		const Vector2f& direction = (static_cast<const Manifold*>(event.param.asPointer))->direction;
 

@@ -29,6 +29,19 @@ void GameObject::tick(float32 delta, Game* game) {
 	}
 }
 
+void GameObject::broadcastEvent(const Event& event) {
+	for (ObjectComponent* component : m_components) {
+		if (component->isActive()) {
+			component->receiveEvent(event);
+		}
+	}
+	for (RenderableComponent* component : m_renderableComponents) {
+		if (component->isActive()) {
+			component->receiveEvent(event);
+		}
+	}
+}
+
 void GameObject::render(RenderSystem* rs) {
 	for (RenderableComponent* component : m_renderableComponents) {
 		if (component->isVisible()) {

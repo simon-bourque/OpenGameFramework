@@ -3,6 +3,8 @@
 #include "Object/GameObject.h"
 
 #include "Core/Game.h"
+#include "Core/Event.h"
+
 #include "Scene/Scene.h"
 #include "Scene/SceneManager.h"
 #include "Physics/Collision/CollisionSystem.h"
@@ -38,9 +40,11 @@ void AABBColliderComponent::onIntersectLevel(const Manifold& manifold) {
 	
 	Vector2f delta = manifold.direction * manifold.depth;
 	getParentObject()->getTransform().translate(delta.x, delta.y);
-	//getParentObject().broadcastMessage("COLLISION_LEVEL", manifold);
+	getParentObject()->broadcastEvent(Event(Event::Type::COLLISION_LEVEL, static_cast<const void*>(&manifold)));
 }
 
 void AABBColliderComponent::onIntersectObject(const Manifold& manifold, GameObject* other) {
 	(*m_response)(manifold, other);
 }
+
+void AABBColliderComponent::receiveEvent(const Event& event) {}

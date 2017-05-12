@@ -8,6 +8,7 @@
 
 class GameObject;
 class Game;
+struct Event;
 
 class ObjectComponent
 {
@@ -27,6 +28,7 @@ public:
 
 	virtual void tick(float32 delta, Game* game) = 0;
 	virtual ComponentType getType() = 0;
+	virtual void receiveEvent(const Event& event) = 0;
 };
 
 #endif

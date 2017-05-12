@@ -195,8 +195,12 @@
     <ClCompile Include="Graphics\Memory\VertexArrayObject.cpp" />
     <ClCompile Include="Graphics\Window.cpp" />
     <ClCompile Include="Graphics\Renderer\ShapeRenderer.cpp" />
+    <ClCompile Include="Object\State\State.cpp" />
+    <ClCompile Include="Object\State\StateTransition.cpp" />
+    <ClCompile Include="Object\State\StateMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Object\State\Condition.h" />
     <ClInclude Include="Core\Event.h" />
     <ClInclude Include="Physics\Collision\CollisionSystem.h" />
     <ClInclude Include="Object\Component\AABBColliderComponent.h" />
@@ -256,6 +260,9 @@
     <ClInclude Include="Graphics\Memory\VertexArrayObject.h" />
     <ClInclude Include="Graphics\Window.h" />
     <ClInclude Include="Graphics\Renderer\ShapeRenderer.h" />
+    <ClInclude Include="Object\State\State.h" />
+    <ClInclude Include="Object\State\StateTransition.h" />
+    <ClInclude Include="Object\State\StateMachine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

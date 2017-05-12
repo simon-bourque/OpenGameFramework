@@ -14,6 +14,11 @@
 #include "Graphics/RenderSystem.h"
 #include "Graphics/TextureManager.h"
 #include "Graphics/Texture.h"
+#include "Graphics/Window.h"
+
+#include "Input/Input.h"
+
+#include "PlayerController.h"
 
 Player::Player(Game* game, const Vector2f& spawnLocation) {
 	const static float32 PLAYER_WIDTH = 1.0f;
@@ -48,6 +53,10 @@ Player::Player(Game* game, const Vector2f& spawnLocation) {
 	// ######################## Physics #####################################
 	addComponent(new RigidBodyComponent(this, 65.0f));
 	addComponent(new AABBColliderComponent(this, Rectangle(PLAYER_WIDTH, PLAYER_HEIGHT)));
+
+	PlayerController* controller = new PlayerController(this);
+	game->getWindow()->getInput()->addKeyListener(controller, &PlayerController::onKey);
+	addComponent(controller);
 }
 
 Player::~Player() {}

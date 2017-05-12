@@ -3,6 +3,7 @@
 #include "Graphics/Animation/AnimState.h"
 
 #include "Core/EngineAssert.h"
+#include "Core/Event.h"
 
 AnimatorComponent::AnimatorComponent(GameObject* parentObject, const string& currentStateName, AnimState* currentState) :
 	RenderableComponent(parentObject),
@@ -53,5 +54,17 @@ void AnimatorComponent::render(RenderSystem* rs) {
 }
 
 void AnimatorComponent::receiveEvent(const Event& event) {
-
+	switch (event.type) {
+	case Event::Type::ANIM_STATE_CHANGE: {
+		const string* name = static_cast<const string*>(event.param.asPointer);
+		changeState(*name);
+		break;
+	}
+	case Event::Type::FLIP_SPRITE: {
+		m_horizontalFlip = event.param.asBool;
+		break;
+	}
+	default:
+		break;
+	}
 }

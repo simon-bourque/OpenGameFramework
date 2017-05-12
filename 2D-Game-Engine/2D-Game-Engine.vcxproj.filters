@@ -49,6 +49,9 @@
     <Filter Include="Graphics\Animation">
       <UniqueIdentifier>{9a7b9efe-6788-4e27-a257-50a31905339b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\State">
+      <UniqueIdentifier>{e59efa09-4e47-41eb-b5a4-887c78e849ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Debug.cpp">
@@ -206,6 +209,15 @@
     </ClCompile>
     <ClCompile Include="Core\Event.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\State\State.cpp">
+      <Filter>Object\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\State\StateTransition.cpp">
+      <Filter>Object\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\State\StateMachine.cpp">
+      <Filter>Object\State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -385,6 +397,18 @@
     </ClInclude>
     <ClInclude Include="Core\Event.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\State\Condition.h">
+      <Filter>Object\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\State\State.h">
+      <Filter>Object\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\State\StateTransition.h">
+      <Filter>Object\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\State\StateMachine.h">
+      <Filter>Object\State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

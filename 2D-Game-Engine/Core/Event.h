@@ -9,7 +9,10 @@ struct Event
 	enum class Type {
 		DEFAULT,
 		COLLISION_LEVEL,
-		HIT_GROUND
+		HIT_GROUND,
+		APPLY_IMPULSE,
+		FLIP_SPRITE,
+		ANIM_STATE_CHANGE
 	};
 
 	Type type;

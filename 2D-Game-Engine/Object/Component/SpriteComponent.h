@@ -32,6 +32,7 @@ public:
 	virtual void render(RenderSystem* rs) override;
 
 	virtual ComponentType getType() override { return SPRITE_COMPONENT; };
+	virtual void receiveEvent(const Event& event) override;
 };
 
 #endif

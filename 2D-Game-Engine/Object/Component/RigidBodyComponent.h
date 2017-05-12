@@ -29,6 +29,7 @@ public:
 	virtual void tick(float32 delta, Game* game) override;
 
 	virtual ComponentType getType() override { return RIGIDBODY_COMPONENT; };
+	virtual void receiveEvent(const Event& event) override;
 };
 
 #endif

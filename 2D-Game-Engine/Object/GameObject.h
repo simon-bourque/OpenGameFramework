@@ -14,6 +14,7 @@ class ObjectComponent;
 class RenderableComponent;
 class Game;
 class RenderSystem;
+struct Event;
 
 class GameObject
 {
@@ -32,6 +33,8 @@ public:
 
 	void addComponent(ObjectComponent* component);
 	void addComponent(RenderableComponent* component);
+
+	void broadcastEvent(const Event& event);
 
 	ObjectComponent* findComponent(ComponentType type);
 

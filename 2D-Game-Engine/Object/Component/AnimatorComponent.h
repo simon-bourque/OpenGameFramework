@@ -39,6 +39,7 @@ public:
 	void setVerticalFlip(bool verticalFlip) { m_verticalFlip = verticalFlip; };
 
 	virtual ComponentType getType() override { return ANIMATOR_COMPONENT; };
+	virtual void receiveEvent(const Event& event) override;
 };
 
 #endif

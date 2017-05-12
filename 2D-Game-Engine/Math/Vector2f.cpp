@@ -55,3 +55,8 @@ Vector2f Vector2f::operator*(float32 s) const {
 Vector2f Vector2f::operator/(float32 s) const {
 	return{ x / s, y / s };
 }
+
+bool Vector2f::operator==(const Vector2f& v) const {
+	// TODO actually implement a proper way to compare floating point numbers
+	return abs(x - v.x) < 0.000005 && abs(y - v.y) < 0.000005;
+}

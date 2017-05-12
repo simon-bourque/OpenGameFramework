@@ -35,6 +35,7 @@ struct Vector2f
 	Vector2f operator-(float32 s) const;
 	Vector2f operator*(float32 s) const;
 	Vector2f operator/(float32 s) const;
+	bool operator==(const Vector2f& v) const;
 };
 
 #endif

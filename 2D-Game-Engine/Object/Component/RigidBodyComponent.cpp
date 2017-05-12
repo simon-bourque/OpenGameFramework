@@ -1,7 +1,11 @@
 #include "RigidBodyComponent.h"
 
+#include "Core/Event.h"
+
 #include "Object/GameObject.h"
 #include "Object/Transform.h"
+
+#include "Physics/Collision/Manifold.h"
 
 RigidBodyComponent::RigidBodyComponent(GameObject* parentObject, float32 mass) : ObjectComponent(parentObject), m_mass(mass) {}
 
@@ -35,4 +39,29 @@ void RigidBodyComponent::tick(float32 delta, Game* game) {
 
 	m_parentObject->getTransform().translate(displacement);
 	m_velocity = vF;
+}
+
+void RigidBodyComponent::receiveEvent(const Event& event) {
+	switch (event.type) {
+	case Event::Type::COLLISION_LEVEL: {
+		const Vector2f& direction = (static_cast<const Manifold*>(event.param.asPointer))->direction;
+
+		if (direction == Vector2f::Y_AXIS) {
+			if (m_velocity.y < 0) {
+				m_velocity.y = 0;
+			}
+
+			getParentObject()->broadcastEvent(Event(Event::Type::HIT_GROUND, true));
+		}
+		else if (direction == Vector2f::Y_AXIS.reverse()) {
+			if (m_velocity.y > 0) {
+				m_velocity.y = 0;
+			}
+		}
+
+		break;
+	}
+	default:
+		break;
+	}
 }

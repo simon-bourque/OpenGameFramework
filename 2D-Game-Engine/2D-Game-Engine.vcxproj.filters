@@ -204,6 +204,9 @@
     <ClCompile Include="Physics\Collision\CollisionSystem.cpp">
       <Filter>Physics\Collision</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Event.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Debug.h">
@@ -379,6 +382,9 @@
     </ClInclude>
     <ClInclude Include="Physics\Collision\CollisionSystem.h">
       <Filter>Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Event.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

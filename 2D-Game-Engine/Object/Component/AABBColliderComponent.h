@@ -44,6 +44,7 @@ public:
 	Rectangle getRectangle() const { return m_rectangle; };
 
 	virtual ComponentType getType() override { return AABB_COLLIDER_COMPONENT; };
+	virtual void receiveEvent(const Event& event) override;
 };
 
 template<typename T>

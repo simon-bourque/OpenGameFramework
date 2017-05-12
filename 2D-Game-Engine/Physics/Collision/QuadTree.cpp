@@ -56,17 +56,28 @@ QuadTree::~QuadTree() {
 }
 
 void QuadTree::insert(const Rectangle& rect) {
+	//if (isSplit()) {
+	//	// If has already split
+	//	addToQuadrant(rect, m_bucket);
+	//}
+	//else if (m_bucket.size() < m_bucketSize) {
+	//	// If bucket is not already full
+	//	m_bucket.push_back(rect);
+	//}
+	//else {
+	//	split();
+	//	addToQuadrant(rect, m_bucket);
+	//}
+
 	if (isSplit()) {
-		// If has already split
 		addToQuadrant(rect, m_bucket);
-	}
-	else if (m_bucket.size() < m_bucketSize) {
-		// If bucket is not already full
-		m_bucket.push_back(rect);
 	}
 	else {
-		split();
-		addToQuadrant(rect, m_bucket);
+		m_bucket.push_back(rect);
+
+		if (m_bucket.size() > m_bucketSize) {
+			split();
+		}
 	}
 }
 

@@ -23,11 +23,19 @@ Rectangle::~Rectangle() {}
 void Rectangle::setWidth(float32 width) {
 	m_width = width;
 	m_halfWidth = width / 2.0f;
+	m_topLeft.x = getX() - m_halfWidth;
+	m_topRight.x = getX() + m_halfWidth;
+	m_bottomLeft.x = getX() - m_halfWidth;
+	m_bottomRight.x = getX() + m_halfWidth;
 }
 
 void Rectangle::setHeight(float32 height) {
 	m_height = height;
 	m_halfHeight = height / 2.0f;
+	m_topLeft.y = getY() + m_halfHeight;
+	m_topRight.y = getY() + m_halfHeight;
+	m_bottomLeft.y = getY() - m_halfHeight;
+	m_bottomRight.y = getY() - m_halfHeight;
 }
 
 void Rectangle::setX(float32 x) {

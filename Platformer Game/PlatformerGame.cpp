@@ -23,6 +23,9 @@
 
 #include "Object/Component/ComponentType.h"
 
+#include "Physics/Collision/CollisionSystem.h"
+#include "Physics/Collision/QuadTree.h"
+
 #include "Player.h"
 
 PlatformerGame::PlatformerGame() : Game("Platformer", 720, 576, Rectangle(20, 16)), up(false), down(false), left(false), right(false) {}
@@ -98,6 +101,12 @@ void PlatformerGame::render() {
 	if (ptr) {
 		AABBColliderComponent* collider = static_cast<AABBColliderComponent*>(ptr);
 		getRenderSystem()->getShapeRenderer()->drawRectangle(collider->getRectangle(), Color::MAGENTA, false);
+
+		std::vector<Rectangle> rects;
+		getSceneManager()->getCurrentScene().getCollisionSystem()->getQuadTree()->retrieve(collider->getRectangle(), rects);
+		for (const Rectangle& rect : rects) {
+			getRenderSystem()->getShapeRenderer()->drawRectangle(rect, Color::YELLOW, true);
+		}
 	}
 	//getRenderSystem()->getShapeRenderer()->drawVector(11.0f, -5.5f, Vector2f(1.0f,1.0f), Color::MAGENTA);
 	//getRenderSystem()->getShapeRenderer()->drawRectangle(Rectangle(11,-5.5, 1,1), Color::RED, true);

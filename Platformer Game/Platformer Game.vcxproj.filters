@@ -1,60 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Player">
+      <UniqueIdentifier>{93004141-8756-4524-b333-342a0df4358b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Player\State">
+      <UniqueIdentifier>{ab32dbd6-70ba-4a95-98d6-ff6771233e13}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlatformerGame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="PlayerController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="IdleState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Player\State</Filter>
     </ClCompile>
     <ClCompile Include="WalkState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatformerGame.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="InAirState.cpp">
+      <Filter>Player\State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PlatformerGame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
+      <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IdleState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="WalkState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="IdleState.h">
+      <Filter>Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatformerGame.h" />
+    <ClInclude Include="InAirState.h">
+      <Filter>Player\State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -29,6 +29,9 @@ private:
 	bool m_grounded;
 
 	int32 m_lastDirection;
+
+	bool isOnGround() { return m_grounded; };
+	bool isInAir() { return !m_grounded; };
 public:
 	PlayerController(GameObject* parentObject);
 	virtual ~PlayerController();

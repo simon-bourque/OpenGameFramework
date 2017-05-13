@@ -141,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IdleState.cpp" />
+    <ClCompile Include="InAirState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PlatformerGame.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -150,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IdleState.h" />
+    <ClInclude Include="InAirState.h" />
     <ClInclude Include="PlatformerGame.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerController.h" />

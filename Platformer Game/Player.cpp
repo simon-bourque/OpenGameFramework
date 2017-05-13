@@ -6,6 +6,7 @@
 #include "Object/Component/AnimatorComponent.h"
 #include "Object/Component/RigidBodyComponent.h"
 #include "Object/Component/AABBColliderComponent.h"
+#include "Object/Component/CameraComponent.h"
 
 #include "Graphics/Animation/Animation.h"
 #include "Graphics/Animation/AnimState.h"
@@ -55,8 +56,13 @@ Player::Player(Game* game, const Vector2f& spawnLocation) {
 	addComponent(new AABBColliderComponent(this, Rectangle(PLAYER_WIDTH, PLAYER_HEIGHT)));
 
 	PlayerController* controller = new PlayerController(this);
-	Input::get()->addKeyListener(controller, &PlayerController::onKey);
 	addComponent(controller);
+
+	CameraComponent* camera = new CameraComponent(this, &RenderSystem::get()->getCamera());
+	camera->setSceneBounded(true);
+	camera->setSceneBounds(CameraComponent::BOUNDED_BOTTOM_BIT | CameraComponent::BOUNDED_LEFT_BIT | CameraComponent::BOUNDED_RIGHT_BIT);
+	//camera.setYOffset(2f);
+	addComponent(camera);
 }
 
 Player::~Player() {}

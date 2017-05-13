@@ -3,7 +3,6 @@
 #include "Debug.h"
 
 #include "Core/Game.h"
-#include "Core/EngineAssert.h"
 
 #include "Graphics/Text/Font.h"
 #include "Graphics/Text/FontManager.h"
@@ -30,9 +29,11 @@
 
 #include "Math/Vector2f.h"
 
-Debug::Debug(Game* game) : 
-	m_game(game),
+Debug* Debug::s_instance = nullptr;
+
+Debug::Debug() : 
 	m_debugMode(false),
+	m_renderColliders(false),
 	m_renderPerf(false),
 	m_renderBounds(false),
 	m_renderQuadTree(false),
@@ -40,7 +41,6 @@ Debug::Debug(Game* game) :
 	m_zoomIn(false),
 	m_zoomOut(false)
 {
-	ASSERT(game, "Game should not be null");
 	Input::get()->addKeyListener(this, &Debug::onKeyPress);
 
 	Font* font = RenderSystem::get()->getFontManager()->createFont("font3");
@@ -51,13 +51,13 @@ Debug::Debug(Game* game) :
 
 Debug::~Debug() {}
 
-void Debug::tick() {
+void Debug::tick(int32 fps) {
 	if (!m_debugMode) {
 		return;
 	}
 
 	if (m_renderPerf) {
-		m_fpsText->setText("fps: " + std::to_string(m_game->getFps()));
+		m_fpsText->setText("fps: " + std::to_string(fps));
 	}
 	
 	if (m_zoomIn != m_zoomOut) {
@@ -173,6 +173,12 @@ void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
 	if (key == Input::KEY_KP_3 && m_debugMode) {
 		if (action == Input::PRESS) {
 			m_renderGrid = !m_renderGrid;
+		}
+	}
+
+	if (key == Input::KEY_KP_4 && m_debugMode) {
+		if (action == Input::PRESS) {
+			m_renderColliders = !m_renderColliders;
 		}
 	}
 

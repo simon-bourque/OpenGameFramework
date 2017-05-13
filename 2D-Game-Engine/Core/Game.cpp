@@ -32,13 +32,16 @@ Game::Game(const string& title, int32 width, int32 height, const Rectangle& view
 	SceneManager::init();
 
 #ifdef DEBUG_BUILD
-	m_debug.reset(new Debug(this));
+	Debug::init();
 #endif
 }
 
 
 Game::~Game() {
 	DEBUG_LOG("Destroying game");
+#ifdef DEBUG_BUILD
+	Debug::destroy();
+#endif
 	SceneManager::destroy();
 	RenderSystem::destroy();
 	Input::destroy();
@@ -88,7 +91,7 @@ void Game::tick(float32 delta) {
 	SceneManager::get()->tickCurrentScene(delta);
 	SceneManager::get()->getCurrentScene().getCollisionSystem()->narrowScan();
 #ifdef DEBUG_BUILD
-	m_debug->tick();
+	Debug::get()->tick(m_fps);
 #endif
 }
 
@@ -98,6 +101,6 @@ void Game::render() {
 	SceneManager::get()->renderCurrentScene();
 
 #ifdef DEBUG_BUILD
-	m_debug->render();
+	Debug::get()->render();
 #endif
 }

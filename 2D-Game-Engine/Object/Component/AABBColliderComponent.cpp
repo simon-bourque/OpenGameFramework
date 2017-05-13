@@ -9,6 +9,13 @@
 #include "Scene/SceneManager.h"
 #include "Physics/Collision/CollisionSystem.h"
 
+#ifdef DEBUG_BUILD
+#include "Core/Debug.h"
+#include "Graphics/RenderSystem.h"
+#include "Graphics/Color.h"
+#include "Graphics/Renderer/ShapeRenderer.h"
+#endif
+
 void AABBColliderComponent::emptyIntersectResponse(const Manifold& manifold, GameObject* other) {}
 
 AABBColliderComponent::AABBColliderComponent(GameObject* parentObject, const Rectangle& rectangle, float32 xOffset, float32 yOffset) : ObjectComponent(parentObject),
@@ -48,3 +55,11 @@ void AABBColliderComponent::onIntersectObject(const Manifold& manifold, GameObje
 }
 
 void AABBColliderComponent::receiveEvent(const Event& event) {}
+
+#ifdef DEBUG_BUILD
+void AABBColliderComponent::debugRender() {
+	if (Debug::get()->shouldRenderColliders()) {
+		RenderSystem::get()->getShapeRenderer()->drawRectangle(m_rectangle, Color::MAGENTA, false);
+	}
+}
+#endif

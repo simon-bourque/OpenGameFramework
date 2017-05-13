@@ -73,3 +73,7 @@ void RigidBodyComponent::receiveEvent(const Event& event) {
 		break;
 	}
 }
+
+#ifdef DEBUG_BUILD
+void RigidBodyComponent::debugRender() {}
+#endif

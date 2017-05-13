@@ -41,6 +41,9 @@ void Scene::addBackground(Background* background) {
 void Scene::renderObjects() {
 	for (GameObject* object : m_objects) {
 		object->render();
+#ifdef DEBUG_BUILD
+		object->debugRender();
+#endif
 	}
 }
 

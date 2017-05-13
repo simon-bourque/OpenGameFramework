@@ -138,3 +138,7 @@ void PlayerController::onKey(int32 key, int32 scancode, int32 action, int32 mods
 			m_toggleFly = false;
 	}
 }
+
+#ifdef DEBUG_BUILD
+void PlayerController::debugRender() {}
+#endif

@@ -68,3 +68,7 @@ void CameraComponent::tick(float32 delta) {
 }
 
 void CameraComponent::receiveEvent(const Event& event) {}
+
+#ifdef DEBUG_BUILD
+void CameraComponent::debugRender() {}
+#endif

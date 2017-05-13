@@ -68,3 +68,7 @@ void AnimatorComponent::receiveEvent(const Event& event) {
 		break;
 	}
 }
+
+#ifdef DEBUG_BUILD
+void AnimatorComponent::debugRender() {}
+#endif

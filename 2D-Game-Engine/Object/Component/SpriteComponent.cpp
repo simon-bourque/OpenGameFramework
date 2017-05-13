@@ -32,3 +32,7 @@ void SpriteComponent::receiveEvent(const Event& event) {
 		break;
 	}
 }
+
+#ifdef DEBUG_BUILD
+void SpriteComponent::debugRender() {}
+#endif

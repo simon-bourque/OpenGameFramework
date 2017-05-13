@@ -18,6 +18,7 @@
 
 #include "Object/Component/AABBColliderComponent.h"
 #include "Object/Component/ComponentType.h"
+#include "Object/Component/RigidBodyComponent.h"
 
 #include "Physics/Collision/CollisionSystem.h"
 #include "Physics/Collision/QuadTree.h"
@@ -31,7 +32,6 @@ PlatformerGame::~PlatformerGame() {}
 
 void PlatformerGame::init() {
 	Input::get()->addKeyListener(this, &PlatformerGame::onKeyPress);
-	//RenderSystem::get()->getCamera().getTransform().translate(11.0f,-5.5f);
 	SceneManager::get()->loadTileLevel("level_0.lvl");
 	SceneManager::get()->getCurrentScene().setGravity(9.8f * 4.0f);
 
@@ -47,71 +47,25 @@ void PlatformerGame::init() {
 
 void PlatformerGame::tick(float32 delta) {
 	Game::tick(delta);
-
-	const static float32 SPEED = 25.0f;
-
-	if (up) {
-		//getRenderSystem()->getCamera().getTransform().translate(0.0f, SPEED * delta);
-	}
-	if (down) {
-		//getRenderSystem()->getCamera().getTransform().translate(0.0f, -SPEED * delta);
-	}
-	if (left) {
-		//getRenderSystem()->getCamera().getTransform().translate(-SPEED * delta, 0.0f);
-	}
-	if (right) {
-		//getRenderSystem()->getCamera().getTransform().translate(SPEED * delta, 0.0f);
-	}
 }
 
 void PlatformerGame::render() {
 	Game::render();
-
-	ObjectComponent* ptr = m_player->findComponent(ComponentType::AABB_COLLIDER_COMPONENT);
-	if (ptr) {
-		AABBColliderComponent* collider = static_cast<AABBColliderComponent*>(ptr);
-		RenderSystem::get()->getShapeRenderer()->drawRectangle(collider->getRectangle(), Color::MAGENTA, false);
-
-		std::vector<Rectangle> rects;
-		SceneManager::get()->getCurrentScene().getCollisionSystem()->getQuadTree()->retrieve(collider->getRectangle(), rects);
-		for (const Rectangle& rect : rects) {
-			RenderSystem::get()->getShapeRenderer()->drawRectangle(rect, Color::YELLOW, true);
-		}
-	}
 }
 
 void PlatformerGame::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
-	if ((key == Input::KEY_UP || key == Input::KEY_W)) {
-		if (action == Input::PRESS) {
-			up = true;
-		}
-		if (action == Input::RELEASE) {
-			up = false;
-		}
+	if (key == Input::KEY_ESCAPE && action == Input::PRESS) {
+		shutdown();
 	}
-	if ((key == Input::KEY_DOWN || key == Input::KEY_S)) {
-		if (action == Input::PRESS) {
-			down = true;
+	if (key == Input::KEY_R && action == Input::PRESS) {
+		ObjectComponent* component = m_player->findComponent(RIGIDBODY_COMPONENT);
+		if (component) {
+			RigidBodyComponent* rb = static_cast<RigidBodyComponent*>(component);
+			rb->stop();
 		}
-		if (action == Input::RELEASE) {
-			down = false;
-		}
-	}
-	if ((key == Input::KEY_LEFT || key == Input::KEY_A)) {
-		if (action == Input::PRESS) {
-			left = true;
-		}
-		if (action == Input::RELEASE) {
-			left = false;
-		}
-	}
-	if ((key == Input::KEY_RIGHT || key == Input::KEY_D)) {
-		if (action == Input::PRESS) {
-			right = true;
-		}
-		if (action == Input::RELEASE) {
-			right = false;
-		}
+
+		m_player->getTransform().xPos = 0.5f;
+		m_player->getTransform().yPos = -10.8f;
 	}
 }
 

@@ -49,6 +49,10 @@ public:
 	void setTrackY(bool trackY) { m_trackY = trackY; };
 	void setSceneBounded(bool sceneBounded) { m_sceneBounded = sceneBounded; };
 	void setSceneBounds(uint8 mask) { m_sceneBoundsMask = mask; };
+
+#ifdef DEBUG_BUILD
+	virtual void debugRender() override;
+#endif
 };
 
 #endif

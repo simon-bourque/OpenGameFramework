@@ -3,14 +3,14 @@
 #include "Object/State/State.h"
 #include "Object/State/StateTransition.h"
 
-StateMachine::StateMachine(State* initialState) : m_currentState(initialState) {}
+StateMachine::StateMachine() : m_currentState(nullptr) {}
 
-StateMachine::~StateMachine() { 
-	for (State* state : m_states) {
-		delete state;
+StateMachine::~StateMachine() {
+	for (const std::pair<string, State*>& pair : m_states) {
+		delete pair.second;
 	}
-	for (StateTransition* transition : m_transtions) {
-		delete transition;
+	for (const std::pair<string, StateTransition*>& pair : m_transitions) {
+		delete pair.second;
 	}
 }
 
@@ -30,10 +30,23 @@ void StateMachine::transitionState() {
 	}
 }
 
-void StateMachine::addState(State* state) {
-	m_states.push_back(state);
+void StateMachine::createTransition(const string& transitionName, const string& stateName, const string& nextStateName, BaseCondition* condition) {
+	// TODO add assert or something similar for when trying to access states that don't exist
+	auto stateIter = m_states.find(stateName);
+	auto nextStateIter = m_states.find(nextStateName);
+
+	if (stateIter != m_states.end() && nextStateIter != m_states.end()) {
+		StateTransition* transition = new StateTransition((*nextStateIter).second, condition);
+		m_transitions[transitionName] = transition;
+		(*stateIter).second->addTransition(transition);
+	}
 }
 
-void StateMachine::addTransition(StateTransition* transition) {
-	m_transtions.push_back(transition);
+void StateMachine::setCurrentState(const string& stateName) {
+	// TODO add assert or something similar for when trying to access states that don't exist
+	auto stateIter = m_states.find(stateName);
+
+	if (stateIter != m_states.end()) {
+		m_currentState = (*stateIter).second;
+	}
 }

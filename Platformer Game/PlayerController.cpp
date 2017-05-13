@@ -28,21 +28,15 @@ PlayerController::PlayerController(GameObject* parentObject) : ObjectComponent(p
 	m_grounded(false),
 	m_lastDirection(0)
 {
-	PlayerState* idleState = new IdleState(this);
-	PlayerState* walkState = new WalkState(this);
 
-	StateTransition* idleToWalk = new StateTransition(walkState, StateTransition::createCondition(this, &PlayerController::isMovingLeftOrRight));
-	StateTransition* walkToIdle = new StateTransition(idleState, StateTransition::createCondition(this, &PlayerController::isStandingStill));
+	m_sm = new StateMachine();
 
-	idleState->addTransition(idleToWalk);
-	walkState->addTransition(walkToIdle);
+	m_sm->createState<IdleState>("player_idle", this);
+	m_sm->createState<WalkState>("player_walk", this);
+	m_sm->createTransition("idle_to_walk", "player_idle", "player_walk", StateTransition::createCondition(this, &PlayerController::isMovingLeftOrRight));
+	m_sm->createTransition("walk_to_idle", "player_walk", "player_idle", StateTransition::createCondition(this, &PlayerController::isStandingStill));
 
-	m_sm = new StateMachine(idleState);
-
-	m_sm->addState(idleState);
-	m_sm->addState(walkState);
-	m_sm->addTransition(idleToWalk);
-	m_sm->addTransition(walkToIdle);
+	m_sm->setCurrentState("player_idle");
 }
 
 

@@ -18,10 +18,6 @@ class Debug;
 class Game
 {
 private:
-	std::unique_ptr<Window> m_window;
-	std::unique_ptr<RenderSystem> m_renderSystem;
-	std::unique_ptr<SceneManager> m_sceneManager;
-
 #ifdef DEBUG_BUILD
 	std::unique_ptr<Debug> m_debug;
 #endif
@@ -29,7 +25,7 @@ private:
 	bool m_shutdown;
 	int32 m_fps;
 public:
-	Game(string title, int32 width, int32 height, const Rectangle& viewPort);
+	Game(const string& title, int32 width, int32 height, const Rectangle& viewPort);
 	virtual ~Game();
 
 	void run();
@@ -40,9 +36,6 @@ public:
 
 	void shutdown() { m_shutdown = true; };
 
-	Window* getWindow() { return m_window.get(); };
-	RenderSystem* getRenderSystem() { return m_renderSystem.get(); };
-	SceneManager* getSceneManager() { return m_sceneManager.get(); };
 	int32 getFps() const { return m_fps; };
 };
 

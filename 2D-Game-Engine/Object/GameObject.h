@@ -29,7 +29,7 @@ public:
 	virtual ~GameObject();
 
 	void tick(float32 delta, Game* game);
-	void render(RenderSystem* rs);
+	void render();
 
 	void addComponent(ObjectComponent* component);
 	void addComponent(RenderableComponent* component);

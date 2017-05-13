@@ -4,6 +4,7 @@
 
 #include "Core/Core.h"
 #include "Core/Delegate.h"
+#include "Core/EngineAssert.h"
 
 #include <GLFW/glfw3.h>
 
@@ -218,6 +219,8 @@ public:
 	};
 
 private:
+	static Input* s_instance;
+
 	typedef BaseDelegate<int32, int32, int32, int32> KeyListener;
 	typedef BaseDelegate<float64, float64> CursorPositionListener, ScrollListener;
 	typedef BaseDelegate<int32, int32, int32> MouseButtonListener;
@@ -226,8 +229,9 @@ private:
 	std::vector<CursorPositionListener*> m_cursorPositionListeners;
 	std::vector<MouseButtonListener*> m_mouseButtonListeners;
 	std::vector<ScrollListener*> m_scrollListeners;
+
+	Input();
 public:
-	explicit Input(Window* window);
 	virtual ~Input();
 
 	template <typename T>
@@ -241,6 +245,20 @@ public:
 
 	template <typename T>
 	void addScrollListener(T* object, void(T::*method)(float64 xOffset, float64 yOffset));
+
+	static Input* get() {
+		ASSERT(s_instance, "Input must be initialized before use.");
+		return s_instance;
+	};
+
+	static void init() {
+		ASSERT(!s_instance, "Input is already initialized.");
+		s_instance = new Input();
+	}
+
+	static void destroy() {
+		delete s_instance;
+	}
 };
 
 template <typename T>

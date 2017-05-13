@@ -30,7 +30,7 @@ public:
 	void removeState(const string& name);
 
 	virtual void tick(float32 delta, Game* game) override;
-	virtual void render(RenderSystem* rs) override;
+	virtual void render() override;
 
 	bool isHorizontallyFlipped() const { return m_horizontalFlip; };
 	bool isVerticallyFlipped() const { return m_verticalFlip; };

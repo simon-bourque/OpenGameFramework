@@ -29,10 +29,10 @@ Player::Player(Game* game, const Vector2f& spawnLocation) {
 	getTransform().translate(spawnLocation);
 
 	// ###################### Animations #####################################
-	Texture* walkTexture = game->getRenderSystem()->getTextureManager()->createTexture2DArray("player_walk.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* standTexture = game->getRenderSystem()->getTextureManager()->createTexture2D("player_stand.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* jumpTexture = game->getRenderSystem()->getTextureManager()->createTexture2D("player_jump.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* duckTexture = game->getRenderSystem()->getTextureManager()->createTexture2D("player_duck.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* walkTexture = RenderSystem::get()->getTextureManager()->createTexture2DArray("player_walk.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* standTexture = RenderSystem::get()->getTextureManager()->createTexture2D("player_stand.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* jumpTexture = RenderSystem::get()->getTextureManager()->createTexture2D("player_jump.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* duckTexture = RenderSystem::get()->getTextureManager()->createTexture2D("player_duck.tx", Texture::Filter::NEAREST_NEIGHBOR);
 
 	uint32 frames[11] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 	float32 delays[11] = { ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY };
@@ -55,7 +55,7 @@ Player::Player(Game* game, const Vector2f& spawnLocation) {
 	addComponent(new AABBColliderComponent(this, Rectangle(PLAYER_WIDTH, PLAYER_HEIGHT)));
 
 	PlayerController* controller = new PlayerController(this);
-	game->getWindow()->getInput()->addKeyListener(controller, &PlayerController::onKey);
+	Input::get()->addKeyListener(controller, &PlayerController::onKey);
 	addComponent(controller);
 }
 

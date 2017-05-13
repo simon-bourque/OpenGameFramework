@@ -14,6 +14,8 @@
 
 #include <sstream>
 
+RenderSystem* RenderSystem::s_instance = nullptr;
+
 RenderSystem::RenderSystem(const Camera& camera) : m_camera(camera) {
 	
 	glewExperimental = GL_TRUE;

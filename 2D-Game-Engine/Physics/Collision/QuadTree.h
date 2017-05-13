@@ -43,7 +43,7 @@ public:
 	QuadTree& operator=(QuadTree&& qt);
 
 #ifdef DEBUG_BUILD
-	void render(RenderSystem* rs) const;
+	void render() const;
 #endif
 };
 

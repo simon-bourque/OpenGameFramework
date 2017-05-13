@@ -18,8 +18,8 @@ SpriteComponent::~SpriteComponent() {}
 
 void SpriteComponent::tick(float32 delta, Game* game) {}
 
-void SpriteComponent::render(RenderSystem* rs) {
-	rs->getSpriteRenderer()->renderSprite(&m_parentObject->getTransform(), m_texture, m_horizontalFlip, m_verticalFlip);
+void SpriteComponent::render() {
+	RenderSystem::get()->getSpriteRenderer()->renderSprite(&m_parentObject->getTransform(), m_texture, m_horizontalFlip, m_verticalFlip);
 }
 
 void SpriteComponent::receiveEvent(const Event& event) {

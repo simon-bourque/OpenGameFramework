@@ -3,6 +3,7 @@
 #define SCENEMANAGER_H
 
 #include "Core/Core.h"
+#include "Core/EngineAssert.h"
 
 #include "Scene/Scene.h"
 
@@ -13,6 +14,7 @@ class Game;
 class SceneManager
 {
 private:
+	static SceneManager* s_instance;
 
 	std::unique_ptr<Scene> m_currentScene;
 
@@ -22,10 +24,24 @@ public:
 
 	void loadTileLevel(const string& file, Game* game);
 	void tickCurrentScene(float32 delta, Game* game);
-	void renderCurrentScene(RenderSystem* rs);
+	void renderCurrentScene();
 
 	const Scene& getCurrentScene() const { return *m_currentScene; };
 	Scene& getCurrentScene() { return *m_currentScene; };
+
+	static SceneManager* get() {
+		ASSERT(s_instance, "SceneManager must be initialized before use.");
+		return s_instance;
+	};
+
+	static void init() {
+		ASSERT(!s_instance, "SceneManager is already initialized.");
+		s_instance = new SceneManager();
+	}
+
+	static void destroy() {
+		delete s_instance;
+	}
 };
 
 #endif

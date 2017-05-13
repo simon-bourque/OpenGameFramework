@@ -29,7 +29,7 @@ public:
 	void setVerticalFlip(bool verticalFlip) { m_verticalFlip = verticalFlip; }
 
 	virtual void tick(float32 delta, Game* game) override;
-	virtual void render(RenderSystem* rs) override;
+	virtual void render() override;
 
 	virtual ComponentType getType() override { return SPRITE_COMPONENT; };
 	virtual void receiveEvent(const Event& event) override;

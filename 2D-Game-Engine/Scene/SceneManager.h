@@ -22,8 +22,8 @@ public:
 	SceneManager();
 	virtual ~SceneManager();
 
-	void loadTileLevel(const string& file, Game* game);
-	void tickCurrentScene(float32 delta, Game* game);
+	void loadTileLevel(const string& file);
+	void tickCurrentScene(float32 delta);
 	void renderCurrentScene();
 
 	const Scene& getCurrentScene() const { return *m_currentScene; };

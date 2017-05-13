@@ -24,7 +24,7 @@ AABBColliderComponent::~AABBColliderComponent() {
 	delete m_response;
 }
 
-void AABBColliderComponent::tick(float32 delta, Game* game) {
+void AABBColliderComponent::tick(float32 delta) {
 	resetPosition();
 	SceneManager::get()->getCurrentScene().getCollisionSystem()->addCollider(this);
 }

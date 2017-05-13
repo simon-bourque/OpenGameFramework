@@ -6,12 +6,17 @@
 StateMachine::StateMachine(State* initialState) : m_currentState(initialState) {}
 
 StateMachine::~StateMachine() { 
-	delete m_currentState;
+	for (State* state : m_states) {
+		delete state;
+	}
+	for (StateTransition* transition : m_transtions) {
+		delete transition;
+	}
 }
 
-void StateMachine::tick(float32 delta, Game* game) {
+void StateMachine::tick(float32 delta) {
 	transitionState();
-	m_currentState->tick(delta, game);
+	m_currentState->tick(delta);
 }
 
 void StateMachine::transitionState() {
@@ -23,4 +28,12 @@ void StateMachine::transitionState() {
 			break;
 		}
 	}
+}
+
+void StateMachine::addState(State* state) {
+	m_states.push_back(state);
+}
+
+void StateMachine::addTransition(StateTransition* transition) {
+	m_transtions.push_back(transition);
 }

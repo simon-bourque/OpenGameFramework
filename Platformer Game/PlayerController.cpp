@@ -31,11 +31,18 @@ PlayerController::PlayerController(GameObject* parentObject) : ObjectComponent(p
 	PlayerState* idleState = new IdleState(this);
 	PlayerState* walkState = new WalkState(this);
 
-	idleState->addTransition(new StateTransition(walkState, StateTransition::createCondition(this, &PlayerController::isMovingLeftOrRight)));
+	StateTransition* idleToWalk = new StateTransition(walkState, StateTransition::createCondition(this, &PlayerController::isMovingLeftOrRight));
+	StateTransition* walkToIdle = new StateTransition(idleState, StateTransition::createCondition(this, &PlayerController::isStandingStill));
 
-	walkState->addTransition(new StateTransition(idleState, StateTransition::createCondition(this, &PlayerController::isStandingStill)));
+	idleState->addTransition(idleToWalk);
+	walkState->addTransition(walkToIdle);
 
 	m_sm = new StateMachine(idleState);
+
+	m_sm->addState(idleState);
+	m_sm->addState(walkState);
+	m_sm->addTransition(idleToWalk);
+	m_sm->addTransition(walkToIdle);
 }
 
 
@@ -43,8 +50,8 @@ PlayerController::~PlayerController() {
 	delete m_sm;
 }
 
-void PlayerController::tick(float32 delta, Game* game) {
-	m_sm->tick(delta, game);
+void PlayerController::tick(float32 delta) {
+	m_sm->tick(delta);
 
 	int32 direction = getDirection();
 

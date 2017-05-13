@@ -26,7 +26,7 @@ public:
 	void applyImpulse(const Vector2f& impulse);
 	void stop();
 
-	virtual void tick(float32 delta, Game* game) override;
+	virtual void tick(float32 delta) override;
 
 	virtual ComponentType getType() override { return RIGIDBODY_COMPONENT; };
 	virtual void receiveEvent(const Event& event) override;

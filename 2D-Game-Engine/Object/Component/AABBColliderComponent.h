@@ -31,7 +31,7 @@ public:
 	AABBColliderComponent(GameObject* parentObject, const Rectangle& rectangle, float32 xOffset = 0.0f, float32 yOffset = 0.0f);
 	virtual ~AABBColliderComponent();
 
-	virtual void tick(float32 delta, Game* game) override;
+	virtual void tick(float32 delta) override;
 
 	void resetPosition();
 

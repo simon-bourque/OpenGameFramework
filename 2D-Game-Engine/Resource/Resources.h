@@ -19,6 +19,6 @@ RawImage* loadImage(string file);
 RawImage* loadImages(string file, int32 margin, int32 spacing, int32 tileWidth, int32 tileHeight, uint32& imgCount);
 RawImage* loadImages(const string& imgFile, const string& infoFile, uint32& numberOfImages);
 std::pair<char, Glyph>* loadFont(const string& file, uint32& charMapSize, Glyph& invalidCharacter);
-TileScene* loadTileLevel(string file, Game* game);
+TileScene* loadTileLevel(string file);
 
 #endif

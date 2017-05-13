@@ -16,15 +16,15 @@ GameObject::~GameObject() {
 	}
 }
 
-void GameObject::tick(float32 delta, Game* game) {
+void GameObject::tick(float32 delta) {
 	for (ObjectComponent* component : m_components) {
 		if (component->isActive()) {
-			component->tick(delta, game);
+			component->tick(delta);
 		}
 	}
 	for (RenderableComponent* component : m_renderableComponents) {
 		if (component->isActive()) {
-			component->tick(delta, game);
+			component->tick(delta);
 		}
 	}
 }

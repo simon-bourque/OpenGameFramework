@@ -324,7 +324,7 @@ std::pair<char, Glyph>* loadFont(const string& file, uint32& charMapSize, Glyph&
 	return characterMap;
 }
 
-TileScene* loadTileLevel(string file, Game* game) {
+TileScene* loadTileLevel(string file) {
 	std::ifstream input(LEVEL_PATH + file);
 
 	if (!input) {

@@ -13,7 +13,7 @@ public:
 
 	virtual void onEnter() override;
 	virtual void onExit() override;
-	virtual void tick(float32 delta, Game* game) override;
+	virtual void tick(float32 delta) override;
 };
 
 #endif

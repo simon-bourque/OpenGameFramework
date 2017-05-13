@@ -18,6 +18,6 @@ void WalkState::onEnter() {
 
 void WalkState::onExit() {}
 
-void WalkState::tick(float32 delta, Game* game) {
+void WalkState::tick(float32 delta) {
 	m_pc->getParentObject()->getTransform().translate(PlayerController::SPEED * delta * m_pc->getDirection(), 0);
 }

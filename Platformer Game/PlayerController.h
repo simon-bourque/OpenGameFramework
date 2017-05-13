@@ -33,7 +33,7 @@ public:
 	PlayerController(GameObject* parentObject);
 	virtual ~PlayerController();
 
-	void tick(float32 delta, Game* game) override;
+	void tick(float32 delta) override;
 	void receiveEvent(const Event& event) override;
 
 	int32 getDirection() const;

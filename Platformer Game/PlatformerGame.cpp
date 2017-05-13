@@ -7,6 +7,7 @@
 #include "Graphics/RenderSystem.h"
 #include "Graphics/Window.h"
 #include "Graphics/Color.h"
+#include "Graphics/Background.h"
 
 #include "Math/Geometry/Rectangle.h"
 #include "Math/Vector2f.h"
@@ -36,7 +37,11 @@ PlatformerGame::~PlatformerGame() {}
 void PlatformerGame::init() {
 	Input::get()->addKeyListener(this, &PlatformerGame::onKeyPress);
 	RenderSystem::get()->getCamera().getTransform().translate(11.0f,-5.5f);
-	SceneManager::get()->loadTileLevel("level_0.lvl", this);
+	SceneManager::get()->loadTileLevel("level_0.lvl");
+
+	// Load background
+	Texture* bgTexture = RenderSystem::get()->getTextureManager()->createTexture2D("uncolored_forest.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	SceneManager::get()->getCurrentScene().addBackground(new Background(bgTexture));
 
 	Texture* gemTexture = RenderSystem::get()->getTextureManager()->createTexture2D("gemRed.tx", Texture::Filter::NEAREST_NEIGHBOR);
 

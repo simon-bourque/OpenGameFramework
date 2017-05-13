@@ -12,6 +12,7 @@ class RenderSystem;
 class ShaderProgram;
 class VertexArrayObject;
 class Texture;
+class Background;
 
 class SceneRenderer : public Renderer {
 private:
@@ -28,6 +29,7 @@ public:
 	SceneRenderer(RenderSystem* rs);
 	virtual ~SceneRenderer();
 
+	void renderBackground(const Background& bg) const;
 	void renderTiles(const VertexArrayObject* tileVAO, const Texture* tileSheet, int32 numberOfTiles) const;
 };
 

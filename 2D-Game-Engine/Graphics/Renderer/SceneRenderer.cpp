@@ -4,6 +4,7 @@
 #include "Graphics/Memory/VertexArrayObject.h"
 #include "Graphics/Texture.h"
 #include "Graphics/RenderSystem.h"
+#include "Graphics/Background.h"
 
 #include "Resource/Resources.h"
 
@@ -37,6 +38,18 @@ SceneRenderer::SceneRenderer(RenderSystem* rs) : Renderer(rs) {
 
 
 SceneRenderer::~SceneRenderer() {}
+
+void SceneRenderer::renderBackground(const Background& bg) const {
+	glUseProgram(m_backgroundShaderProgram->getProgramId());
+
+	m_backgroundVAO->bind();
+	bg.getTexture()->bind();
+
+	glUniform1i(m_backgroundShaderProgram->getUniform("diffuseTexture").getLocation(), 0);
+	glUniform1f(m_backgroundShaderProgram->getUniform("xOffset").getLocation(), bg.getXOffset());
+
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, BACKGROUND_NUM_VERTICES);
+}
 
 void SceneRenderer::renderTiles(const VertexArrayObject* tileVAO, const Texture* tileSheet, int32 numberOfTiles) const {
 	glUseProgram(m_tileShaderProgram->getProgramId());

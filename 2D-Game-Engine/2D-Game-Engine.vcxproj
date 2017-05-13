@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Graphics\Background.cpp" />
     <ClCompile Include="Core\Event.cpp" />
     <ClCompile Include="Physics\Collision\CollisionSystem.cpp" />
     <ClCompile Include="Object\Component\AABBColliderComponent.cpp" />
@@ -198,6 +199,7 @@
     <ClCompile Include="Object\State\StateMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Graphics\Background.h" />
     <ClInclude Include="Object\State\Condition.h" />
     <ClInclude Include="Core\Event.h" />
     <ClInclude Include="Physics\Collision\CollisionSystem.h" />

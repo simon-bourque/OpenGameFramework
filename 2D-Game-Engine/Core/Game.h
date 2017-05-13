@@ -18,10 +18,6 @@ class Debug;
 class Game
 {
 private:
-#ifdef DEBUG_BUILD
-	std::unique_ptr<Debug> m_debug;
-#endif
-
 	bool m_shutdown;
 	int32 m_fps;
 public:

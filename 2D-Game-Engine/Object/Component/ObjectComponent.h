@@ -29,6 +29,10 @@ public:
 	virtual void tick(float32 delta) = 0;
 	virtual ComponentType getType() = 0;
 	virtual void receiveEvent(const Event& event) = 0;
+
+#ifdef DEBUG_BUILD
+	virtual void debugRender() = 0;
+#endif
 };
 
 #endif

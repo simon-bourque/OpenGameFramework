@@ -33,6 +33,10 @@ public:
 
 	virtual ComponentType getType() override { return SPRITE_COMPONENT; };
 	virtual void receiveEvent(const Event& event) override;
+
+#ifdef DEBUG_BUILD
+	virtual void debugRender() override;
+#endif
 };
 
 #endif

@@ -40,6 +40,10 @@ public:
 
 	const Transform& getTransform() const { return m_transform; };
 	Transform& getTransform() { return m_transform; };
+
+#ifdef DEBUG_BUILD
+	void debugRender();
+#endif
 };
 
 #endif

@@ -72,3 +72,14 @@ ObjectComponent* GameObject::findComponent(ComponentType type) {
 
 	return nullptr;
 }
+
+#ifdef DEBUG_BUILD
+void GameObject::debugRender() {
+	for (ObjectComponent* component : m_components) {
+		component->debugRender();
+	}
+	for (RenderableComponent* component : m_renderableComponents) {
+		component->debugRender();
+	}
+}
+#endif

@@ -45,6 +45,10 @@ public:
 
 	virtual ComponentType getType() override { return AABB_COLLIDER_COMPONENT; };
 	virtual void receiveEvent(const Event& event) override;
+
+#ifdef DEBUG_BUILD
+	virtual void debugRender() override;
+#endif
 };
 
 template<typename T>

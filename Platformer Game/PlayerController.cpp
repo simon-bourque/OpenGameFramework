@@ -14,6 +14,7 @@
 #include "PlayerState.h"
 #include "IdleState.h"
 #include "WalkState.h"
+#include "InAirState.h"
 
 const float32 PlayerController::SPEED = 9.0f;
 const float32 PlayerController::JUMP_POWER = 1050.0f;
@@ -24,17 +25,28 @@ PlayerController::PlayerController(GameObject* parentObject) : ObjectComponent(p
 	m_upAction(false),
 	m_downAction(false),
 	m_toggleFly(false),
-	m_canJump(false),
+	m_canJump(true),
 	m_grounded(false),
 	m_lastDirection(0)
 {
+	Input::get()->addKeyListener(this, &PlayerController::onKey);
 
 	m_sm = new StateMachine();
 
 	m_sm->createState<IdleState>("player_idle", this);
 	m_sm->createState<WalkState>("player_walk", this);
+	m_sm->createState<InAirState>("player_in_air", this);
+
+	// Idle transitions
 	m_sm->createTransition("idle_to_walk", "player_idle", "player_walk", StateTransition::createCondition(this, &PlayerController::isMovingLeftOrRight));
+	m_sm->createTransition("idle_to_in_air", "player_idle", "player_in_air", StateTransition::createCondition(this, &PlayerController::isInAir));
+
+	// Walk transitions
 	m_sm->createTransition("walk_to_idle", "player_walk", "player_idle", StateTransition::createCondition(this, &PlayerController::isStandingStill));
+	m_sm->createTransition("walk_to_in_air", "player_walk", "player_in_air", StateTransition::createCondition(this, &PlayerController::isInAir));
+
+	// In Air transitions
+	m_sm->createTransition("in_air_to_idle", "player_in_air", "player_idle", StateTransition::createCondition(this, &PlayerController::isOnGround));
 
 	m_sm->setCurrentState("player_idle");
 }

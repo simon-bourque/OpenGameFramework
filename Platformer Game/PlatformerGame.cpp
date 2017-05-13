@@ -16,12 +16,7 @@
 
 #include "Scene/SceneManager.h"
 
-#include "Object/GameObject.h"
-#include "Object/Component/SpriteComponent.h"
-#include "Object/Component/RigidBodyComponent.h"
-#include "Object/Component/AnimatorComponent.h"
 #include "Object/Component/AABBColliderComponent.h"
-
 #include "Object/Component/ComponentType.h"
 
 #include "Physics/Collision/CollisionSystem.h"
@@ -36,45 +31,15 @@ PlatformerGame::~PlatformerGame() {}
 
 void PlatformerGame::init() {
 	Input::get()->addKeyListener(this, &PlatformerGame::onKeyPress);
-	RenderSystem::get()->getCamera().getTransform().translate(11.0f,-5.5f);
+	//RenderSystem::get()->getCamera().getTransform().translate(11.0f,-5.5f);
 	SceneManager::get()->loadTileLevel("level_0.lvl");
+	SceneManager::get()->getCurrentScene().setGravity(9.8f * 4.0f);
 
 	// Load background
 	Texture* bgTexture = RenderSystem::get()->getTextureManager()->createTexture2D("uncolored_forest.tx", Texture::Filter::NEAREST_NEIGHBOR);
 	SceneManager::get()->getCurrentScene().addBackground(new Background(bgTexture));
 
-	Texture* gemTexture = RenderSystem::get()->getTextureManager()->createTexture2D("gemRed.tx", Texture::Filter::NEAREST_NEIGHBOR);
-
-	GameObject* gem1 = new GameObject(Transform(11.0f, -5.5f));
-	GameObject* gem2 = new GameObject(Transform(12.0f, -5.5f));
-	GameObject* gem3 = new GameObject(Transform(13.0f, -5.5f));
-	GameObject* gem4 = new GameObject(Transform(14.0f, -5.5f));
-
-	gem1->addComponent(new SpriteComponent(gem1, gemTexture));
-	gem2->addComponent(new SpriteComponent(gem2, gemTexture));
-	gem3->addComponent(new SpriteComponent(gem3, gemTexture));
-	gem4->addComponent(new SpriteComponent(gem4, gemTexture));
-
-	RigidBodyComponent* rb1 = new RigidBodyComponent(gem1, 60.0f);
-	RigidBodyComponent* rb2 = new RigidBodyComponent(gem2, 60.0f);
-	RigidBodyComponent* rb3 = new RigidBodyComponent(gem3, 60.0f);
-	RigidBodyComponent* rb4 = new RigidBodyComponent(gem4, 60.0f);
-
-	rb1->applyImpulse({ (float32)(((rand() % 2) ? 1:-1) * (rand() % 101 + 100)), (float32)(rand() % 101 + 100)});
-	rb2->applyImpulse({ (float32)(((rand() % 2) ? 1 : -1) * (rand() % 101 + 100)), (float32)(rand() % 101 + 100) });
-	rb3->applyImpulse({ (float32)(((rand() % 2) ? 1 : -1) * (rand() % 101 + 100)), (float32)(rand() % 101 + 100) });
-	rb4->applyImpulse({ (float32)(((rand() % 2) ? 1 : -1) * (rand() % 101 + 100)), (float32)(rand() % 101 + 100) });
-
-	gem1->addComponent(rb1);
-	gem2->addComponent(rb2);
-	gem3->addComponent(rb3);
-	gem4->addComponent(rb4);
-
-	SceneManager::get()->getCurrentScene().addGameObject(gem1);
-	SceneManager::get()->getCurrentScene().addGameObject(gem2);
-	SceneManager::get()->getCurrentScene().addGameObject(gem3);
-	SceneManager::get()->getCurrentScene().addGameObject(gem4);
-
+	// load player
 	Player* player = new Player(this, Vector2f(0.5f, -10.8f));
 	SceneManager::get()->getCurrentScene().addGameObject(player);
 	m_player = player;
@@ -113,9 +78,6 @@ void PlatformerGame::render() {
 			RenderSystem::get()->getShapeRenderer()->drawRectangle(rect, Color::YELLOW, true);
 		}
 	}
-	//getRenderSystem()->getShapeRenderer()->drawVector(11.0f, -5.5f, Vector2f(1.0f,1.0f), Color::MAGENTA);
-	//getRenderSystem()->getShapeRenderer()->drawRectangle(Rectangle(11,-5.5, 1,1), Color::RED, true);
-	//getRenderSystem()->getShapeRenderer()->drawCircle(5.0f, -9.0f, 0.5f, Color::YELLOW, true);
 }
 
 void PlatformerGame::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {

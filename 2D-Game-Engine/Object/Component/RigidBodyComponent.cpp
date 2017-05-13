@@ -7,6 +7,9 @@
 
 #include "Physics/Collision/Manifold.h"
 
+#include "Scene/SceneManager.h"
+#include "Scene/Scene.h"
+
 RigidBodyComponent::RigidBodyComponent(GameObject* parentObject, float32 mass) : ObjectComponent(parentObject), m_mass(mass) {}
 
 
@@ -28,7 +31,7 @@ void RigidBodyComponent::stop() {
 void RigidBodyComponent::tick(float32 delta) {
 
 	// Apply Gravity
-	applyForce({0, -9.8f * m_mass});
+	applyForce({0, -SceneManager::get()->getCurrentScene().getGravity() * m_mass});
 
 	Vector2f acceleration(m_netForce / m_mass);
 

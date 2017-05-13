@@ -23,6 +23,8 @@ private:
 	std::vector<Background*> m_backgrounds;
 
 	std::unique_ptr<CollisionSystem> m_collisionSystem;
+
+	float32 m_gravity;
 protected:
 	void renderObjects();
 	void renderBackgrounds();
@@ -38,6 +40,9 @@ public:
 
 	const Rectangle& getBounds() const { return m_bounds; };
 	Rectangle& getBounds() { return m_bounds; };
+
+	float32 getGravity() const { return m_gravity; };
+	void setGravity(float32 gravity) { m_gravity = gravity; };
 
 	CollisionSystem* getCollisionSystem() { return m_collisionSystem.get(); };
 };

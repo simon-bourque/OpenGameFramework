@@ -176,7 +176,7 @@ Matrix3f Matrix3f::orthographic(float32 l, float32 r, float32 t, float32 b, floa
 	return{
 		2 / (r - l),
 		0.0f,
-		2 / (t - b),
+		-((r + l) / (r - l)),
 		0.0f,
 		2 / (t - b),
 		-((t + b) / (t - b)),

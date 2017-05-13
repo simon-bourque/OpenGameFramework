@@ -222,6 +222,9 @@
     <ClCompile Include="Graphics\Background.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Object\Component\CameraComponent.cpp">
+      <Filter>Object\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Debug.h">
@@ -415,6 +418,9 @@
     </ClInclude>
     <ClInclude Include="Graphics\Background.h">
       <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Component\CameraComponent.h">
+      <Filter>Object\Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

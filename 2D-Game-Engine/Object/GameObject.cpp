@@ -42,10 +42,10 @@ void GameObject::broadcastEvent(const Event& event) {
 	}
 }
 
-void GameObject::render(RenderSystem* rs) {
+void GameObject::render() {
 	for (RenderableComponent* component : m_renderableComponents) {
 		if (component->isVisible()) {
-			component->render(rs);
+			component->render();
 		}
 	}
 }

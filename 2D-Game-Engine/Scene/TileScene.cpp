@@ -87,8 +87,8 @@ TileScene::~TileScene() {
 	delete m_tileVAO;
 }
 
-void TileScene::render(RenderSystem* rs) {
-	renderBackgrounds(rs);
-	rs->getSceneRenderer()->renderTiles(m_tileVAO, m_tileSheet, m_numberOfTiles);
-	renderObjects(rs);
+void TileScene::render() {
+	renderBackgrounds();
+	RenderSystem::get()->getSceneRenderer()->renderTiles(m_tileVAO, m_tileSheet, m_numberOfTiles);
+	renderObjects();
 }

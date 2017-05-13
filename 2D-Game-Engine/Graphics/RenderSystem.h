@@ -3,6 +3,7 @@
 #define RENDERSYSTEM_H
 
 #include "Core/Core.h"
+#include "Core/EngineAssert.h"
 
 #include "Graphics/Camera.h"
 
@@ -22,6 +23,8 @@ class TextManager;
 class RenderSystem
 {
 private:
+	static RenderSystem* s_instance;
+
 	Camera m_camera;
 	
 	std::unique_ptr<SpriteRenderer> m_spriteRenderer;
@@ -32,8 +35,9 @@ private:
 	std::unique_ptr<TextureManager> m_textureManager;
 	std::unique_ptr<FontManager> m_fontManager;
 	std::unique_ptr<TextManager> m_textManager;
-public:
+
 	explicit RenderSystem(const Camera& camera);
+public:
 	~RenderSystem();
 
 	Camera& getCamera() { return m_camera; };
@@ -46,6 +50,20 @@ public:
 	TextureManager* getTextureManager() const { return m_textureManager.get(); };
 	FontManager* getFontManager() const { return m_fontManager.get(); };
 	TextManager* getTextManager() const { return m_textManager.get(); };
+
+	static RenderSystem* get() {
+		ASSERT(s_instance, "RenderSystem must be initialized before use.");
+		return s_instance;
+	};
+
+	static void init(const Camera& camera) {
+		ASSERT(!s_instance, "RenderSystem is already initialized.");
+		s_instance = new RenderSystem(camera);
+	}
+
+	static void destroy() {
+		delete s_instance;
+	}
 };
 
 #endif

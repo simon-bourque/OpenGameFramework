@@ -4,6 +4,8 @@
 
 #include "Scene/TileScene.h"
 
+SceneManager* SceneManager::s_instance = nullptr;
+
 SceneManager::SceneManager() {
 	m_currentScene.reset(new Scene(Rectangle(100,100)));
 }
@@ -20,6 +22,6 @@ void SceneManager::tickCurrentScene(float32 delta, Game* game) {
 	m_currentScene->tick(delta, game);
 }
 
-void SceneManager::renderCurrentScene(RenderSystem* rs) {
-	m_currentScene->render(rs);
+void SceneManager::renderCurrentScene() {
+	m_currentScene->render();
 }

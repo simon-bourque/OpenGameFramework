@@ -7,7 +7,9 @@
 
 #include <exception>
 
-Window::Window(string title, int32 width, int32 height) : m_title(title), m_width(width), m_height(height) {
+Window* Window::s_instance = nullptr;
+
+Window::Window(const string& title, int32 width, int32 height) : m_title(title), m_width(width), m_height(height) {
 
 	glfwSetErrorCallback([](int32 error, const char* desc) -> void { DEBUG_LOG(desc); });
 
@@ -39,20 +41,16 @@ Window::Window(string title, int32 width, int32 height) : m_title(title), m_widt
 
 	glfwShowWindow(m_handle);
 
-	glfwSetWindowUserPointer(m_handle, this);
 	glfwSetWindowSizeCallback(m_handle, windowSizeCallback);
-
-	m_input = new Input(this);
 }
 
 
 Window::~Window() {
-	delete m_input;
 	glfwTerminate();
 }
 
 static void windowSizeCallback(GLFWwindow* window, int32 width, int32 height) {
-	Window* windowPtr = (Window*)glfwGetWindowUserPointer(window);
+	Window* windowPtr = Window::get();
 	windowPtr->m_width = width;
 	windowPtr->m_height = height;
 	glViewport(0, 0, width, height);

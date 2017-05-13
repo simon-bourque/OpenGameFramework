@@ -18,17 +18,18 @@
 #include "Core/Debug.h"
 #endif
 
-Game::Game(string title, int32 width, int32 height, const Rectangle& viewPort) : m_shutdown(false), m_fps(0) {
+Game::Game(const string& title, int32 width, int32 height, const Rectangle& viewPort) : m_shutdown(false), m_fps(0) {
 	DEBUG_LOG("Initializing game...");
 
 	DEBUG_LOG("Initializing window...");
-	m_window.reset(new Window(title, width, height));
+	Window::init(title, width, height);
+	Input::init();
 
 	DEBUG_LOG("Initializing render system...");
-	m_renderSystem.reset(new RenderSystem(Camera(viewPort)));
+	RenderSystem::init(Camera(viewPort));
 
 	DEBUG_LOG("Initializing scene manager...");
-	m_sceneManager.reset(new SceneManager());
+	SceneManager::init();
 
 #ifdef DEBUG_BUILD
 	m_debug.reset(new Debug(this));
@@ -38,6 +39,10 @@ Game::Game(string title, int32 width, int32 height, const Rectangle& viewPort) :
 
 Game::~Game() {
 	DEBUG_LOG("Destroying game");
+	SceneManager::destroy();
+	RenderSystem::destroy();
+	Input::destroy();
+	Window::destroy();
 }
 
 void Game::run() {
@@ -51,7 +56,7 @@ void Game::run() {
 
 	DEBUG_LOG("Entering loop");
 
-	while (!m_window->shouldClose() && !m_shutdown) {
+	while (!Window::get()->shouldClose() && !m_shutdown) {
 
 
 		Window::pollEvents();
@@ -63,7 +68,7 @@ void Game::run() {
 		render();
 
 
-		m_window->swapBuffers();
+		Window::get()->swapBuffers();
 		delta = glfwGetTime() - currentTime;
 
 		counter += delta;
@@ -80,8 +85,8 @@ void Game::run() {
 }
 
 void Game::tick(float32 delta) {
-	m_sceneManager->tickCurrentScene(delta, this);
-	m_sceneManager->getCurrentScene().getCollisionSystem()->narrowScan();
+	SceneManager::get()->tickCurrentScene(delta, this);
+	SceneManager::get()->getCurrentScene().getCollisionSystem()->narrowScan();
 #ifdef DEBUG_BUILD
 	m_debug->tick();
 #endif
@@ -89,8 +94,8 @@ void Game::tick(float32 delta) {
 
 void Game::render() {
 	glClear(GL_COLOR_BUFFER_BIT);
-	m_renderSystem->getCamera().updateViewProjectionMatrix();
-	m_sceneManager->renderCurrentScene(m_renderSystem.get());
+	RenderSystem::get()->getCamera().updateViewProjectionMatrix();
+	SceneManager::get()->renderCurrentScene();
 
 #ifdef DEBUG_BUILD
 	m_debug->render();

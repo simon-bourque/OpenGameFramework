@@ -17,7 +17,7 @@ public:
 
 	virtual void onEnter() = 0;
 	virtual void tick(float32 delta) = 0;
-	virtual void render(RenderSystem* rs, const AnimatorComponent& component) = 0;
+	virtual void render(const AnimatorComponent& component) = 0;
 };
 
 #endif

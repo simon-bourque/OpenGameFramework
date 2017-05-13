@@ -49,8 +49,8 @@ void AnimatorComponent::tick(float32 delta, Game* game) {
 	m_currentState->tick(delta);
 }
 
-void AnimatorComponent::render(RenderSystem* rs) {
-	m_currentState->render(rs, *this);
+void AnimatorComponent::render() {
+	m_currentState->render(*this);
 }
 
 void AnimatorComponent::receiveEvent(const Event& event) {

@@ -20,21 +20,21 @@ void Scene::tick(float32 delta, Game* game) {
 	}
 }
 
-void Scene::render(RenderSystem* rs) {
-	renderBackgrounds(rs);
-	renderObjects(rs);
+void Scene::render() {
+	renderBackgrounds();
+	renderObjects();
 }
 
 void Scene::addGameObject(GameObject* object) {
 	m_objects.push_back(object);
 }
 
-void Scene::renderObjects(RenderSystem* rs) {
+void Scene::renderObjects() {
 	for (GameObject* object : m_objects) {
-		object->render(rs);
+		object->render();
 	}
 }
 
-void Scene::renderBackgrounds(RenderSystem* rs) {
+void Scene::renderBackgrounds() {
 	// TODO render backgrounds
 }

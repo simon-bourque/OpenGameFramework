@@ -22,14 +22,14 @@ private:
 
 	std::unique_ptr<CollisionSystem> m_collisionSystem;
 protected:
-	void renderObjects(RenderSystem* rs);
-	void renderBackgrounds(RenderSystem* rs);
+	void renderObjects();
+	void renderBackgrounds();
 public:
 	Scene(const Rectangle& bounds);
 	virtual ~Scene();
 
 	virtual void tick(float32 delta, Game* game);
-	virtual void render(RenderSystem* rs);
+	virtual void render();
 
 	void addGameObject(GameObject* object);
 

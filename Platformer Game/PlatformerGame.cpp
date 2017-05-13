@@ -34,11 +34,11 @@ PlatformerGame::PlatformerGame() : Game("Platformer", 720, 576, Rectangle(20, 16
 PlatformerGame::~PlatformerGame() {}
 
 void PlatformerGame::init() {
-	getWindow()->getInput()->addKeyListener(this, &PlatformerGame::onKeyPress);
-	getRenderSystem()->getCamera().getTransform().translate(11.0f,-5.5f);
-	getSceneManager()->loadTileLevel("level_0.lvl", this);
+	Input::get()->addKeyListener(this, &PlatformerGame::onKeyPress);
+	RenderSystem::get()->getCamera().getTransform().translate(11.0f,-5.5f);
+	SceneManager::get()->loadTileLevel("level_0.lvl", this);
 
-	Texture* gemTexture = getRenderSystem()->getTextureManager()->createTexture2D("gemRed.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* gemTexture = RenderSystem::get()->getTextureManager()->createTexture2D("gemRed.tx", Texture::Filter::NEAREST_NEIGHBOR);
 
 	GameObject* gem1 = new GameObject(Transform(11.0f, -5.5f));
 	GameObject* gem2 = new GameObject(Transform(12.0f, -5.5f));
@@ -65,13 +65,13 @@ void PlatformerGame::init() {
 	gem3->addComponent(rb3);
 	gem4->addComponent(rb4);
 
-	getSceneManager()->getCurrentScene().addGameObject(gem1);
-	getSceneManager()->getCurrentScene().addGameObject(gem2);
-	getSceneManager()->getCurrentScene().addGameObject(gem3);
-	getSceneManager()->getCurrentScene().addGameObject(gem4);
+	SceneManager::get()->getCurrentScene().addGameObject(gem1);
+	SceneManager::get()->getCurrentScene().addGameObject(gem2);
+	SceneManager::get()->getCurrentScene().addGameObject(gem3);
+	SceneManager::get()->getCurrentScene().addGameObject(gem4);
 
 	Player* player = new Player(this, Vector2f(0.5f, -10.8f));
-	getSceneManager()->getCurrentScene().addGameObject(player);
+	SceneManager::get()->getCurrentScene().addGameObject(player);
 	m_player = player;
 }
 
@@ -100,12 +100,12 @@ void PlatformerGame::render() {
 	ObjectComponent* ptr = m_player->findComponent(ComponentType::AABB_COLLIDER_COMPONENT);
 	if (ptr) {
 		AABBColliderComponent* collider = static_cast<AABBColliderComponent*>(ptr);
-		getRenderSystem()->getShapeRenderer()->drawRectangle(collider->getRectangle(), Color::MAGENTA, false);
+		RenderSystem::get()->getShapeRenderer()->drawRectangle(collider->getRectangle(), Color::MAGENTA, false);
 
 		std::vector<Rectangle> rects;
-		getSceneManager()->getCurrentScene().getCollisionSystem()->getQuadTree()->retrieve(collider->getRectangle(), rects);
+		SceneManager::get()->getCurrentScene().getCollisionSystem()->getQuadTree()->retrieve(collider->getRectangle(), rects);
 		for (const Rectangle& rect : rects) {
-			getRenderSystem()->getShapeRenderer()->drawRectangle(rect, Color::YELLOW, true);
+			RenderSystem::get()->getShapeRenderer()->drawRectangle(rect, Color::YELLOW, true);
 		}
 	}
 	//getRenderSystem()->getShapeRenderer()->drawVector(11.0f, -5.5f, Vector2f(1.0f,1.0f), Color::MAGENTA);

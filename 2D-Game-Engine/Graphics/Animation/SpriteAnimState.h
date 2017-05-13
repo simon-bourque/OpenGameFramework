@@ -16,7 +16,7 @@ public:
 
 	virtual void onEnter() override;
 	virtual void tick(float32 delta) override;
-	virtual void render(RenderSystem* rs, const AnimatorComponent& component) override;
+	virtual void render(const AnimatorComponent& component) override;
 };
 
 #endif

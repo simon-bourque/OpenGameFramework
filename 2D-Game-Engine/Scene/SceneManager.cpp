@@ -13,13 +13,13 @@ SceneManager::SceneManager() {
 
 SceneManager::~SceneManager() {}
 
-void SceneManager::loadTileLevel(const string& file, Game* game) {
-	TileScene* scene = ::loadTileLevel(file, game);
+void SceneManager::loadTileLevel(const string& file) {
+	TileScene* scene = ::loadTileLevel(file);
 	m_currentScene.reset(static_cast<Scene*>(scene));
 }
 
-void SceneManager::tickCurrentScene(float32 delta, Game* game) {
-	m_currentScene->tick(delta, game);
+void SceneManager::tickCurrentScene(float32 delta) {
+	m_currentScene->tick(delta);
 }
 
 void SceneManager::renderCurrentScene() {

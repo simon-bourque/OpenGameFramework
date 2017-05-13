@@ -45,7 +45,7 @@ void AnimatorComponent::removeState(const string& name) {
 	}
 }
 
-void AnimatorComponent::tick(float32 delta, Game* game) {
+void AnimatorComponent::tick(float32 delta) {
 	m_currentState->tick(delta);
 }
 

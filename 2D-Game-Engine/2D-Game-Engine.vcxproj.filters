@@ -219,6 +219,9 @@
     <ClCompile Include="Object\State\StateMachine.cpp">
       <Filter>Object\State</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Background.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Debug.h">
@@ -409,6 +412,9 @@
     </ClInclude>
     <ClInclude Include="Object\State\StateMachine.h">
       <Filter>Object\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Background.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

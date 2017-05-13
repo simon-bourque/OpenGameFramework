@@ -4,6 +4,8 @@
 
 #include "Physics/Collision/CollisionSystem.h"
 
+#include "Graphics/Background.h"
+
 Scene::Scene(const Rectangle& bounds) : m_bounds(bounds) {
 	m_collisionSystem.reset(new CollisionSystem(bounds));
 }
@@ -12,11 +14,14 @@ Scene::~Scene() {
 	for (GameObject* object : m_objects) {
 		delete object;
 	}
+	for (Background* bg : m_backgrounds) {
+		delete bg;
+	}
 }
 
-void Scene::tick(float32 delta, Game* game) {
+void Scene::tick(float32 delta) {
 	for (GameObject* object : m_objects) {
-		object->tick(delta, game);
+		object->tick(delta);
 	}
 }
 
@@ -29,6 +34,10 @@ void Scene::addGameObject(GameObject* object) {
 	m_objects.push_back(object);
 }
 
+void Scene::addBackground(Background* background) {
+	m_backgrounds.push_back(background);
+}
+
 void Scene::renderObjects() {
 	for (GameObject* object : m_objects) {
 		object->render();
@@ -36,5 +45,7 @@ void Scene::renderObjects() {
 }
 
 void Scene::renderBackgrounds() {
-	// TODO render backgrounds
+	for (Background* bg : m_backgrounds) {
+		bg->render();
+	}
 }

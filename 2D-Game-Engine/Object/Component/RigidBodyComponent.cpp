@@ -25,7 +25,7 @@ void RigidBodyComponent::stop() {
 	m_velocity = { 0, 0 };
 }
 
-void RigidBodyComponent::tick(float32 delta, Game* game) {
+void RigidBodyComponent::tick(float32 delta) {
 
 	// Apply Gravity
 	applyForce({0, -9.8f * m_mass});

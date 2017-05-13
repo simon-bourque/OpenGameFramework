@@ -21,6 +21,6 @@ void IdleState::onExit() {
 
 }
 
-void IdleState::tick(float32 delta, Game* game) {
+void IdleState::tick(float32 delta) {
 
 }

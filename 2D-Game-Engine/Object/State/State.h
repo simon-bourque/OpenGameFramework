@@ -23,7 +23,7 @@ public:
 
 	virtual void onEnter() = 0;
 	virtual void onExit() = 0;
-	virtual void tick(float32 delta, Game* game) = 0;
+	virtual void tick(float32 delta) = 0;
 };
 
 #endif

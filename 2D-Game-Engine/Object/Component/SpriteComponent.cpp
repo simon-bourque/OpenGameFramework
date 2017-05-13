@@ -16,7 +16,7 @@ SpriteComponent::SpriteComponent(GameObject* parentObject, Texture* texture) : R
 
 SpriteComponent::~SpriteComponent() {}
 
-void SpriteComponent::tick(float32 delta, Game* game) {}
+void SpriteComponent::tick(float32 delta) {}
 
 void SpriteComponent::render() {
 	RenderSystem::get()->getSpriteRenderer()->renderSprite(&m_parentObject->getTransform(), m_texture, m_horizontalFlip, m_verticalFlip);

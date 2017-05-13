@@ -29,7 +29,7 @@ public:
 	void addState(const string& name, AnimState* state);
 	void removeState(const string& name);
 
-	virtual void tick(float32 delta, Game* game) override;
+	virtual void tick(float32 delta) override;
 	virtual void render() override;
 
 	bool isHorizontallyFlipped() const { return m_horizontalFlip; };

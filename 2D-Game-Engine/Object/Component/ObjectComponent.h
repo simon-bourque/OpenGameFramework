@@ -26,7 +26,7 @@ public:
 	bool isActive() const { return m_active; };
 	void setActive(bool active) { m_active = active; };
 
-	virtual void tick(float32 delta, Game* game) = 0;
+	virtual void tick(float32 delta) = 0;
 	virtual ComponentType getType() = 0;
 	virtual void receiveEvent(const Event& event) = 0;
 };

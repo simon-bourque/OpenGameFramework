@@ -28,7 +28,7 @@ public:
 	void setHorizontalFlip(bool horizontalFlip) { m_horizontalFlip = horizontalFlip; }
 	void setVerticalFlip(bool verticalFlip) { m_verticalFlip = verticalFlip; }
 
-	virtual void tick(float32 delta, Game* game) override;
+	virtual void tick(float32 delta) override;
 	virtual void render() override;
 
 	virtual ComponentType getType() override { return SPRITE_COMPONENT; };

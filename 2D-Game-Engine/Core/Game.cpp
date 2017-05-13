@@ -85,7 +85,7 @@ void Game::run() {
 }
 
 void Game::tick(float32 delta) {
-	SceneManager::get()->tickCurrentScene(delta, this);
+	SceneManager::get()->tickCurrentScene(delta);
 	SceneManager::get()->getCurrentScene().getCollisionSystem()->narrowScan();
 #ifdef DEBUG_BUILD
 	m_debug->tick();

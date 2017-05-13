@@ -28,7 +28,7 @@ public:
 	explicit GameObject(const Transform& transform);
 	virtual ~GameObject();
 
-	void tick(float32 delta, Game* game);
+	void tick(float32 delta);
 	void render();
 
 	void addComponent(ObjectComponent* component);

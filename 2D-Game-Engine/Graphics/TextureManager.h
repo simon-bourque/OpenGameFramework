@@ -10,7 +10,6 @@
 
 #include <memory>
 
-class RenderSystem;
 class RawImage;
 class Buffer;
 
@@ -18,7 +17,7 @@ class TextureManager : public ResourceManager<Texture> {
 private:
 	std::unique_ptr<Texture> m_defaultTexture;
 public:
-	TextureManager(RenderSystem* rs);
+	TextureManager();
 	virtual ~TextureManager();
 
 	Texture* createTexture2D(const string& name, Texture::Filter filtering, Texture::Wrap textureWrapS = Texture::Wrap::CLAMP_TO_EDGE, Texture::Wrap textureWrapT = Texture::Wrap::CLAMP_TO_EDGE);

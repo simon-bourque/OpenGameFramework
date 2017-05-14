@@ -12,6 +12,7 @@
 #include "Graphics/RenderSystem.h"
 #include "Graphics/TextureManager.h"
 #include "Graphics/Texture.h"
+#include "Graphics/Window.h"
 
 #include "Math/Geometry/Rectangle.h"
 #include "Math/Vector2f.h"
@@ -260,19 +261,19 @@ std::pair<char, Glyph>* loadFont(const string& file, uint32& charMapSize, Glyph&
 		int32 asciiCode = stoi(read.substr(3));
 
 		input >> read;
-		float32 x = stof(read.substr(2)) / imgWidth;
+		float32 x = stof(read.substr(2));
 		input >> read;
-		float32 y = stof(read.substr(2)) / imgHeight;
+		float32 y = stof(read.substr(2));
 		input >> read;
-		float32 width = stof(read.substr(6)) / imgWidth;
+		float32 width = stof(read.substr(6));
 		input >> read;
-		float32 height = stof(read.substr(7)) / imgHeight;
+		float32 height = stof(read.substr(7));
 		input >> read;
-		float32 xOffset = stof(read.substr(8)) / imgWidth;
+		float32 xOffset = stof(read.substr(8)) / Window::get()->getWidth();
 		input >> read;
-		float32 yOffset = stof(read.substr(8)) / imgHeight;
+		float32 yOffset = stof(read.substr(8)) / Window::get()->getHeight();
 		input >> read;
-		float32 xAdvance = stof(read.substr(9)) / imgWidth;
+		float32 xAdvance = stof(read.substr(9)) / Window::get()->getWidth();
 
 		input >> read;
 		input >> read;
@@ -281,10 +282,15 @@ std::pair<char, Glyph>* loadFont(const string& file, uint32& charMapSize, Glyph&
 		float32 textCoords[12];
 		float32 vertices[12];
 
-		Vector2f bottomLeft(x, y + height);
-		Vector2f topLeft(x, y);
-		Vector2f bottomRight(x + width, y + height);
-		Vector2f topRight(x + width, y);
+		float32 scaledX = x / imgWidth;
+		float32 scaledY = y / imgHeight;
+		float32 scaledWidth = width / imgWidth;
+		float32 scaledHeight = height / imgHeight;
+
+		Vector2f bottomLeft(scaledX, scaledY + scaledHeight);
+		Vector2f topLeft(scaledX, scaledY);
+		Vector2f bottomRight(scaledX + scaledWidth, scaledY + scaledHeight);
+		Vector2f topRight(scaledX + scaledWidth, scaledY);
 
 		textCoords[0] = bottomLeft.x;
 		textCoords[1] = bottomLeft.y;
@@ -300,16 +306,16 @@ std::pair<char, Glyph>* loadFont(const string& file, uint32& charMapSize, Glyph&
 		textCoords[11] = topRight.y;
 
 		vertices[0] = 0; // bottom left x
-		vertices[1] = -height; // bottom left y
+		vertices[1] = -height / (float32)Window::get()->getHeight(); // bottom left y
 		vertices[2] = 0; // top left x
 		vertices[3] = 0; // top left y
-		vertices[4] = width; // bottom right x
-		vertices[5] = -height; // bottom right y
-		vertices[6] = width; // bottom right x
-		vertices[7] = -height; // bottom right y
+		vertices[4] = width / (float32)Window::get()->getWidth(); // bottom right x
+		vertices[5] = -height / (float32)Window::get()->getHeight(); // bottom right y
+		vertices[6] = width / (float32)Window::get()->getWidth(); // bottom right x
+		vertices[7] = -height / (float32)Window::get()->getHeight(); // bottom right y
 		vertices[8] = 0; // top left x
 		vertices[9] = 0; // top left y
-		vertices[10] = width; // top right x
+		vertices[10] = width / (float32)Window::get()->getWidth(); // top right x
 		vertices[11] = 0; // top right y
 
 		if (asciiCode == -1) {

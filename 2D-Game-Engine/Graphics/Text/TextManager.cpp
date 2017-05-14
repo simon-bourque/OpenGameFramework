@@ -1,7 +1,7 @@
 #include "TextManager.h"
 
 
-TextManager::TextManager(RenderSystem* rs) : ResourceManager(rs) {}
+TextManager::TextManager() {}
 
 TextManager::~TextManager() {}
 

@@ -6,15 +6,12 @@
 
 #include <unordered_map>
 
-class RenderSystem;
-
 template <typename T>
 class ResourceManager {
 protected:
-	RenderSystem* m_rs;
 	std::unordered_map<string, T*> m_loadedResources;
 public:
-	ResourceManager(RenderSystem* rs);
+	ResourceManager();
 	virtual ~ResourceManager();
 	
 	void deleteResource(const string& name);
@@ -26,7 +23,7 @@ public:
 };
 
 template <typename T>
-ResourceManager<T>::ResourceManager(RenderSystem* rs) : m_rs(rs) {}
+ResourceManager<T>::ResourceManager() {}
 
 template <typename T>
 ResourceManager<T>::~ResourceManager() {

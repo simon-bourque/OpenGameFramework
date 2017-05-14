@@ -5,7 +5,7 @@
 #include "Graphics/RenderSystem.h"
 #include "Graphics/TextureManager.h"
 
-FontManager::FontManager(RenderSystem* rs) : ResourceManager(rs) {}
+FontManager::FontManager() {}
 
 FontManager::~FontManager() {}
 
@@ -15,7 +15,7 @@ Font* FontManager::createFont(const string& name) {
 	img.append(".tx");
 	desc.append(".fnt");
 
-	Texture* tex = m_rs->getTextureManager()->createTexture2D(img, Texture::Filter::LINEAR);
+	Texture* tex = RenderSystem::get()->getTextureManager()->createTexture2D(img, Texture::Filter::LINEAR);
 
 	Glyph invalidCharacter;
 	uint32 size = 0;

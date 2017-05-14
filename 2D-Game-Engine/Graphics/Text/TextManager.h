@@ -8,11 +8,9 @@
 
 #include "Graphics/Text/Text.h"
 
-class RenderSystem;
-
 class TextManager : public ResourceManager<Text> {
 public:
-	TextManager(RenderSystem* rs);
+	TextManager();
 	virtual ~TextManager();
 
 	Text* createText(const string& name, const string& text, Font* font, Text::Usage usage);

@@ -69,9 +69,9 @@ RenderSystem::RenderSystem(const Camera& camera) : m_camera(camera) {
 	m_textRenderer.reset(new TextRenderer(this));
 	m_shapeRenderer.reset(new ShapeRenderer(this));
 
-	m_textureManager.reset(new TextureManager(this));
-	m_fontManager.reset(new FontManager(this));
-	m_textManager.reset(new TextManager(this));
+	m_textureManager.reset(new TextureManager());
+	m_fontManager.reset(new FontManager());
+	m_textManager.reset(new TextManager());
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }

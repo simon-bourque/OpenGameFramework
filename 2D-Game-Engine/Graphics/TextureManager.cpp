@@ -6,7 +6,7 @@
 #include "Graphics/Memory/Buffer.h"
 #include "Graphics/Color.h"
 
-TextureManager::TextureManager(RenderSystem* rs) : ResourceManager(rs) {
+TextureManager::TextureManager() {
 	const Color& red = Color::RED;
 	const Color& grey = Color::GREY;
 	float32 data[16] = {

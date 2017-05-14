@@ -8,11 +8,9 @@
 
 #include "Graphics/Text/Font.h"
 
-class RenderSystem;
-
 class FontManager : public ResourceManager<Font> {
 public:
-	FontManager(RenderSystem* rs);
+	FontManager();
 	virtual ~FontManager();
 
 	Font* createFont(const string& name);

@@ -5,7 +5,7 @@
 
 #include "Graphics/Text/Font.h"
 
-Text::Text(const string& text, Font* font, Usage usage) : m_font(font), m_usage(usage) {
+Text::Text(const string& text, Font* font, Usage usage) : m_font(font), m_usage(usage), m_scale(1.0f) {
 	m_numCharacters = text.length();
 
 	m_textVAO.reset(new VertexArrayObject());

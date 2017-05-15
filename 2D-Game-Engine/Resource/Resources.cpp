@@ -13,6 +13,7 @@
 #include "Graphics/TextureManager.h"
 #include "Graphics/Texture.h"
 #include "Graphics/Window.h"
+#include "Graphics/Coordinates.h"
 
 #include "Math/Geometry/Rectangle.h"
 #include "Math/Vector2f.h"
@@ -269,11 +270,15 @@ std::pair<char, Glyph>* loadFont(const string& file, uint32& charMapSize, Glyph&
 		input >> read;
 		float32 height = stof(read.substr(7));
 		input >> read;
-		float32 xOffset = stof(read.substr(8)) / Window::get()->getWidth();
+		float32 xOffset = stof(read.substr(8));
 		input >> read;
-		float32 yOffset = stof(read.substr(8)) / Window::get()->getHeight();
+		float32 yOffset = stof(read.substr(8));
 		input >> read;
-		float32 xAdvance = stof(read.substr(9)) / Window::get()->getWidth();
+		float32 xAdvance = stof(read.substr(9));
+
+		convertPixelToOpenGLLength(xOffset, Window::get()->getWidth(), xOffset);
+		convertPixelToOpenGLLength(yOffset, Window::get()->getHeight(), yOffset);
+		convertPixelToOpenGLLength(xAdvance, Window::get()->getWidth(), xAdvance);
 
 		input >> read;
 		input >> read;
@@ -305,17 +310,21 @@ std::pair<char, Glyph>* loadFont(const string& file, uint32& charMapSize, Glyph&
 		textCoords[10] = topRight.x;
 		textCoords[11] = topRight.y;
 
+		// Sorry its getting really messy here I should eventually re do all this code and clean it up
+		convertPixelToOpenGLLength(width, Window::get()->getWidth(), width);
+		convertPixelToOpenGLLength(height, Window::get()->getHeight(), height);
+
 		vertices[0] = 0; // bottom left x
-		vertices[1] = -height / (float32)Window::get()->getHeight(); // bottom left y
+		vertices[1] = -height; // bottom left y
 		vertices[2] = 0; // top left x
 		vertices[3] = 0; // top left y
-		vertices[4] = width / (float32)Window::get()->getWidth(); // bottom right x
-		vertices[5] = -height / (float32)Window::get()->getHeight(); // bottom right y
-		vertices[6] = width / (float32)Window::get()->getWidth(); // bottom right x
-		vertices[7] = -height / (float32)Window::get()->getHeight(); // bottom right y
+		vertices[4] = width; // bottom right x
+		vertices[5] = -height; // bottom right y
+		vertices[6] = width; // bottom right x
+		vertices[7] = -height; // bottom right y
 		vertices[8] = 0; // top left x
 		vertices[9] = 0; // top left y
-		vertices[10] = width / (float32)Window::get()->getWidth(); // top right x
+		vertices[10] = width; // top right x
 		vertices[11] = 0; // top right y
 
 		if (asciiCode == -1) {

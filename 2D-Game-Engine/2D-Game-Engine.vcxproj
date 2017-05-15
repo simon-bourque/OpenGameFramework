@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Graphics\Coordinates.cpp" />
     <ClCompile Include="Object\Component\CameraComponent.cpp" />
     <ClCompile Include="Graphics\Background.cpp" />
     <ClCompile Include="Core\Event.cpp" />
@@ -200,6 +201,7 @@
     <ClCompile Include="Object\State\StateMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Graphics\Coordinates.h" />
     <ClInclude Include="Object\Component\CameraComponent.h" />
     <ClInclude Include="Graphics\Background.h" />
     <ClInclude Include="Object\State\Condition.h" />

@@ -24,7 +24,7 @@ void TextRenderer::renderText(const Text* text, float32 x, float32 y, const Colo
 
 	text->getTextVAO().bind();
 
-	Matrix3f modelMatrix = Matrix3f::translation(x, y) * Matrix3f::scale(1, 1);
+	Matrix3f modelMatrix = Matrix3f::translation(x, y) * Matrix3f::scale(text->getScale(), text->getScale());
 
 	text->getFont().getBitmap()->bind();
 

@@ -16,6 +16,10 @@
 #include "WalkState.h"
 #include "InAirState.h"
 
+#ifdef DEBUG_BUILD
+#include "NoClipState.h"
+#endif
+
 const float32 PlayerController::SPEED = 9.0f;
 const float32 PlayerController::JUMP_POWER = 1050.0f;
 
@@ -36,6 +40,14 @@ PlayerController::PlayerController(GameObject* parentObject) : ObjectComponent(p
 	m_sm->createState<IdleState>("player_idle", this);
 	m_sm->createState<WalkState>("player_walk", this);
 	m_sm->createState<InAirState>("player_in_air", this);
+
+#ifdef DEBUG_BUILD
+	m_sm->createState<NoClipState>("player_no_clip", this);
+	m_sm->createTransition("idle_to_no_clip", "player_idle", "player_no_clip", StateTransition::createCondition(this, &PlayerController::shouldToggleFly));
+	m_sm->createTransition("walk_to_no_clip", "player_walk", "player_no_clip", StateTransition::createCondition(this, &PlayerController::shouldToggleFly));
+	m_sm->createTransition("in_air_to_no_clip", "player_in_air", "player_no_clip", StateTransition::createCondition(this, &PlayerController::shouldToggleFly));
+	m_sm->createTransition("no_clip_to_idle", "player_no_clip", "player_idle", StateTransition::createCondition(this, &PlayerController::shouldToggleFly));
+#endif
 
 	// Idle transitions
 	m_sm->createTransition("idle_to_walk", "player_idle", "player_walk", StateTransition::createCondition(this, &PlayerController::isMovingLeftOrRight));

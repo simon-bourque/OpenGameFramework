@@ -143,6 +143,7 @@
     <ClCompile Include="IdleState.cpp" />
     <ClCompile Include="InAirState.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="NoClipState.cpp" />
     <ClCompile Include="PlatformerGame.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerController.cpp" />
@@ -152,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="InAirState.h" />
+    <ClInclude Include="NoClipState.h" />
     <ClInclude Include="PlatformerGame.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerController.h" />

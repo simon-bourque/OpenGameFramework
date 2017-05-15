@@ -32,6 +32,7 @@ private:
 
 	bool isOnGround() { return m_grounded; };
 	bool isInAir() { return !m_grounded; };
+	bool shouldToggleFly() { return m_toggleFly; };
 public:
 	PlayerController(GameObject* parentObject);
 	virtual ~PlayerController();

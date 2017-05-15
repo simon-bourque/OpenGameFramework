@@ -29,6 +29,9 @@
     <ClCompile Include="InAirState.cpp">
       <Filter>Player\State</Filter>
     </ClCompile>
+    <ClCompile Include="NoClipState.cpp">
+      <Filter>Player\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -48,6 +51,9 @@
     </ClInclude>
     <ClInclude Include="PlatformerGame.h" />
     <ClInclude Include="InAirState.h">
+      <Filter>Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="NoClipState.h">
       <Filter>Player\State</Filter>
     </ClInclude>
   </ItemGroup>

@@ -30,6 +30,8 @@ private:
 
 	Usage m_usage;
 
+	float32 m_scale;
+
 	void buildBuffers(const string& text);
 public:
 	Text(const string& text, Font* font, Usage usage);
@@ -43,6 +45,9 @@ public:
 	const Font& getFont() const { return *m_font; };
 	const VertexArrayObject& getTextVAO() const { return *m_textVAO; };
 	uint32 getNumCharacters() const { return m_numCharacters; };
+	
+	float32 getScale() const { return m_scale; };
+	void setScale(float32 scale) { m_scale = scale; };
 };
 
 #endif

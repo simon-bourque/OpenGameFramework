@@ -225,6 +225,9 @@
     <ClCompile Include="Object\Component\CameraComponent.cpp">
       <Filter>Object\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Coordinates.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Debug.h">
@@ -421,6 +424,9 @@
     </ClInclude>
     <ClInclude Include="Object\Component\CameraComponent.h">
       <Filter>Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Coordinates.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

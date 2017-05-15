@@ -46,6 +46,9 @@ Debug::Debug() :
 	Font* font = RenderSystem::get()->getFontManager()->createFont("font3");
 	m_fpsText = RenderSystem::get()->getTextManager()->createText("debug_fps_text_0", "fps: 00", font, Text::Usage::STREAM);
 	m_debugOnText = RenderSystem::get()->getTextManager()->createText("debug_debug_on_text_0", "Debug Mode ON", font, Text::Usage::STATIC);
+
+	m_fpsText->setScale(0.5f);
+	m_debugOnText->setScale(0.5f);
 }
 
 

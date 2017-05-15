@@ -43,7 +43,7 @@ void SceneRenderer::renderBackground(const Background& bg) const {
 	glUseProgram(m_backgroundShaderProgram->getProgramId());
 
 	m_backgroundVAO->bind();
-	bg.getTexture()->bind();
+	bg.getTexture()->bind(Texture::Unit::UNIT_0);
 
 	glUniform1i(m_backgroundShaderProgram->getUniform("diffuseTexture").getLocation(), 0);
 	glUniform1f(m_backgroundShaderProgram->getUniform("xOffset").getLocation(), bg.getXOffset());
@@ -55,7 +55,7 @@ void SceneRenderer::renderTiles(const VertexArrayObject* tileVAO, const Texture*
 	glUseProgram(m_tileShaderProgram->getProgramId());
 
 	tileVAO->bind();
-	tileSheet->bind();
+	tileSheet->bind(Texture::Unit::UNIT_0);
 
 	glUniform1i(m_tileShaderProgram->getUniform("tilesheet").getLocation(), 0);
 	glUniformMatrix3fv(m_tileShaderProgram->getUniform("vpMatrix").getLocation(), 1, true, m_rs->getCamera().getViewProjectionMatrix().values);

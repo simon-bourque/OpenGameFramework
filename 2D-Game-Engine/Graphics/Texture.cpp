@@ -1,6 +1,6 @@
 #include "Texture.h"
 
-Texture::Texture(Target target, Unit unit) : m_target(target), m_unit(unit) {
+Texture::Texture(Target target) : m_target(target) {
 	GLuint name = 0;
 	glGenTextures(1, &name);
 	m_name = name;
@@ -11,8 +11,8 @@ Texture::~Texture() {
 	m_name = 0;
 }
 
-void Texture::bind() const {
-	glActiveTexture(static_cast<GLenum>(m_unit));
+void Texture::bind(Unit unit) const {
+	glActiveTexture(static_cast<GLenum>(unit));
 	glBindTexture(static_cast<GLenum>(m_target), m_name);
 }
 

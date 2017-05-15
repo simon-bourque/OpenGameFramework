@@ -39,20 +39,17 @@ public:
 	};
 
 private:
-
 	GLuint m_name;
 	Target m_target;
-	Unit m_unit;
-	Texture(Target target, Unit unit);
+	Texture(Target target);
 public:
 	virtual ~Texture();
 
-	void bind() const;
+	void bind(Unit unit) const;
 	void unbind() const;
 
 	GLuint getName() const { return m_name; };
 	Target getTarget() const { return m_target; };
-	Unit getUnit() const { return m_unit; };
 
 	// Prevent copying of texture
 	Texture(const Texture&) = delete;

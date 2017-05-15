@@ -19,8 +19,8 @@ TextureManager::TextureManager() {
 	Texture::Wrap textureWrapS = Texture::Wrap::CLAMP_TO_EDGE;
 	Texture::Wrap textureWrapT = Texture::Wrap::CLAMP_TO_EDGE;
 
-	Texture* tex = new Texture(Texture::Target::TEXTURE_2D, Texture::Unit::UNIT_0);
-	tex->bind();
+	Texture* tex = new Texture(Texture::Target::TEXTURE_2D);
+	tex->bind(Texture::Unit::UNIT_0);
 
 	glTexImage2D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, 2, 2, 0, GL_RGBA, GL_FLOAT, data);
 	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filtering));
@@ -52,9 +52,9 @@ Texture* TextureManager::createTexture2D(const string& name, Texture::Filter fil
 		return m_defaultTexture.get();
 	}
 
-	Texture* tex = new Texture(Texture::Target::TEXTURE_2D, Texture::Unit::UNIT_0);
+	Texture* tex = new Texture(Texture::Target::TEXTURE_2D);
 	//Texture tex(name, Texture::TEXTURE_2D, Texture::UNIT_0);
-	tex->bind();
+	tex->bind(Texture::Unit::UNIT_0);
 	//glBindTexture(Texture::TEXTURE_2D, name);
 	
 	//glTexImage2D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, img->getWidth(), img->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, img->getData());
@@ -91,10 +91,10 @@ Texture* TextureManager::createTexture2DArray(const string& name, Texture::Filte
 		return m_defaultTexture.get();
 	}
 
-	Texture* tex = new Texture(Texture::Target::TEXTURE_2D_ARRAY, Texture::Unit::UNIT_0);
+	Texture* tex = new Texture(Texture::Target::TEXTURE_2D_ARRAY);
 	//Texture tex(name, Texture::Target::TEXTURE_2D_ARRAY, Texture::UNIT_0);
 
-	tex->bind();
+	tex->bind(Texture::Unit::UNIT_0);
 	glTexImage3D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, width, height, depth, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
 	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filtering));
@@ -129,10 +129,10 @@ Texture* TextureManager::createTexture2DArray(const string& name, const string& 
 		}
 	}
 
-	Texture* tex = new Texture(Texture::Target::TEXTURE_2D_ARRAY, Texture::Unit::UNIT_0);
+	Texture* tex = new Texture(Texture::Target::TEXTURE_2D_ARRAY);
 	//Texture tex(name, Texture::Target::TEXTURE_2D_ARRAY, Texture::UNIT_0);
 
-	tex->bind();
+	tex->bind(Texture::Unit::UNIT_0);
 	glTexImage3D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, width, height, framesSize, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
 	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filtering));
@@ -167,10 +167,10 @@ Texture* TextureManager::createTexture2DArray(const string& name, int32 margin, 
 		}
 	}
 	
-	Texture* tex = new Texture(Texture::Target::TEXTURE_2D_ARRAY, Texture::Unit::UNIT_0);
+	Texture* tex = new Texture(Texture::Target::TEXTURE_2D_ARRAY);
 	//Texture tex(name, Texture::Target::TEXTURE_2D_ARRAY, Texture::UNIT_0);
 
-	tex->bind();
+	tex->bind(Texture::Unit::UNIT_0);
 	glTexImage3D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, width, height, layers, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
 	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filtering));
@@ -188,8 +188,8 @@ Texture* TextureManager::createTexture2DArray(const string& name, int32 margin, 
 }
 
 Texture* TextureManager::createTextureBuffer(const string& name, Buffer* buffer) {
-	Texture* tex = new Texture(Texture::Target::TEXTURE_BUFFER, Texture::Unit::UNIT_1);
-	tex->bind();
+	Texture* tex = new Texture(Texture::Target::TEXTURE_BUFFER);
+	tex->bind(Texture::Unit::UNIT_0);
 	glTexBuffer(static_cast<GLenum>(tex->m_target), GL_R32F, buffer->getHandle());
 	tex->unbind();
 

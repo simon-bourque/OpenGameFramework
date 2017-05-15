@@ -48,7 +48,7 @@ void SpriteRenderer::renderSprite(const Transform* transform, const Texture* tex
 
 	m_spriteVAO->bind();
 
-	texture->bind();
+	texture->bind(Texture::Unit::UNIT_0);
 
 	Matrix3f finalMatrix = m_rs->getCamera().getViewProjectionMatrix() * transform->toMatrix();
 
@@ -69,7 +69,7 @@ void SpriteRenderer::renderAnimationFrame(const Transform& transform, uint32 fra
 	Matrix3f finalMatrix = m_rs->getCamera().getViewProjectionMatrix() * transform.toMatrix();
 
 	// Diffuse Texture
-	texture.bind();
+	texture.bind(Texture::Unit::UNIT_0);
 
 	glUniformMatrix3fv(m_animSpriteShaderProgram->getUniform("mvpMatrix").getLocation(), 1, true, finalMatrix.values);
 	glUniform1i(m_animSpriteShaderProgram->getUniform("diffuseTextureAtlas").getLocation(), 0);

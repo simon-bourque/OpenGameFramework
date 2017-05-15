@@ -26,7 +26,7 @@ void TextRenderer::renderText(const Text* text, float32 x, float32 y, const Colo
 
 	Matrix3f modelMatrix = Matrix3f::translation(x, y) * Matrix3f::scale(text->getScale(), text->getScale());
 
-	text->getFont().getBitmap()->bind();
+	text->getFont().getBitmap()->bind(Texture::Unit::UNIT_0);
 
 	glUniformMatrix3fv(m_textShaderProgram->getUniform("modelMatrix").getLocation(), 1, true, modelMatrix.values);
 	glUniform1i(m_textShaderProgram->getUniform("diffuseTexture").getLocation(), 0);

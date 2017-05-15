@@ -105,6 +105,8 @@ void ShapeRenderer::initEllipseBuffers() {
 	m_ellipseVAO->getBuffer(0)->setDebugLabel("ELLIPSE_BUFFER");
 #endif
 
+	delete[] data;
+	delete[] buffer;
 	m_ellipseVAO->unbind();
 }
 

@@ -21,9 +21,15 @@
     <ClCompile Include="RoguelikeGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RoguePlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RoguelikeGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RoguePlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -335,7 +335,7 @@ void convertLevel(const string& path) {
 	string newFileName = originalFileName.substr(0, originalFileName.find_last_of(".")).append(".lvl");
 	string newPath = path.substr(0, path.find_last_of("/\\") + 1).append(newFileName);
 
-	ofstream output(newPath);
+	ofstream output(newPath, std::ios_base::out | std::ios_base::binary);
 
 	if (!output) {
 		cout << "Failed to write new lvl file." << endl;

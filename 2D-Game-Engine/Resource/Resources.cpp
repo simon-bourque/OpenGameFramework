@@ -27,6 +27,7 @@
 
 #include <sstream>
 #include <fstream>
+#include <ios>
 #include <cstdlib>
 #include <map>
 
@@ -340,7 +341,7 @@ std::pair<char, Glyph>* loadFont(const string& file, uint32& charMapSize, Glyph&
 }
 
 TileScene* loadTileLevel(string file) {
-	std::ifstream input(LEVEL_PATH + file);
+	std::ifstream input(LEVEL_PATH + file, std::ios_base::in | std::ios_base::binary);
 
 	if (!input) {
 		input.close();

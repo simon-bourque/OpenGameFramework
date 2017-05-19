@@ -1,12 +1,12 @@
-#include "PlatformerGame.h"
-
 #include "Core/Core.h"
 #include "Core/Platform.h"
+
+#include "RoguelikeGame.h"
 
 int main() {
 	//ASSERT(false, "Test message");
 	try {
-		PlatformerGame game;
+		RoguelikeGame game;
 		game.run();
 	}
 	catch (std::runtime_error& ex) {

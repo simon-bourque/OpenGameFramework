@@ -13,7 +13,7 @@ RoguelikeGame::~RoguelikeGame() {}
 
 void RoguelikeGame::init() {
 	SceneManager::get()->loadTileLevel("level_test.lvl");
-	RenderSystem::get()->getCamera().getTransform().translate(47,-53);
+	RenderSystem::get()->getCamera().getTransform().translate(54,-53);
 }
 
 void RoguelikeGame::render() {

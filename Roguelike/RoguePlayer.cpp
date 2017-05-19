@@ -2,8 +2,10 @@
 
 #include "PlayerController.h"
 
+#include "Object/Component/CameraComponent.h"
 #include "Object/Component/AABBColliderComponent.h"
 #include "Object/Component/AnimatorComponent.h"
+
 #include "Graphics/TextureManager.h"
 #include "Graphics/Texture.h"
 #include "Graphics/RenderSystem.h"
@@ -50,8 +52,14 @@ RoguePlayer::RoguePlayer() {
 	animator->addState("WALK_N", state_walk_n);
 
 	addComponent(animator);
+	
 	addComponent(new AABBColliderComponent(this,Rectangle(1,1)));
 	addComponent(new PlayerController(this));
+
+	CameraComponent* camera = new CameraComponent(this, &RenderSystem::get()->getCamera());
+	camera->setSceneBounded(true);
+	camera->setSceneBounds(CameraComponent::BOUNDED_ALL);
+	addComponent(camera);
 }
 
 RoguePlayer::~RoguePlayer() {

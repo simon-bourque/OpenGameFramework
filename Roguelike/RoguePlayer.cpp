@@ -1,4 +1,8 @@
 #include "RoguePlayer.h"
+
+#include "PlayerController.h"
+
+#include "Object/Component/AABBColliderComponent.h"
 #include "Object/Component/AnimatorComponent.h"
 #include "Graphics/TextureManager.h"
 #include "Graphics/Texture.h"
@@ -9,17 +13,17 @@
 
 RoguePlayer::RoguePlayer() {
 
-	const static float32 ANIM_DELAY = 0.05f;
+	const static float32 ANIM_DELAY = 0.07f;
 
-	Texture* tex_walk_s = RenderSystem::get()->getTextureManager()->createTexture2DArray("Rogue_walk_s.tex", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* tex_walk_w = RenderSystem::get()->getTextureManager()->createTexture2DArray("Rogue_walk_w.tex", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* tex_walk_e = RenderSystem::get()->getTextureManager()->createTexture2DArray("Rogue_walk_e.tex", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* tex_walk_n = RenderSystem::get()->getTextureManager()->createTexture2DArray("Rogue_walk_n.tex", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* tex_walk_s = RenderSystem::get()->getTextureManager()->createTexture2DArray("Rogue_walk_s.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* tex_walk_w = RenderSystem::get()->getTextureManager()->createTexture2DArray("Rogue_walk_w.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* tex_walk_e = RenderSystem::get()->getTextureManager()->createTexture2DArray("Rogue_walk_e.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* tex_walk_n = RenderSystem::get()->getTextureManager()->createTexture2DArray("Rogue_walk_n.tx", Texture::Filter::NEAREST_NEIGHBOR);
 
-	Texture* tex_idle_s = RenderSystem::get()->getTextureManager()->createTexture2D("Rogue_idle_s.tex", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* tex_idle_w = RenderSystem::get()->getTextureManager()->createTexture2D("Rogue_idle_w.tex", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* tex_idle_e = RenderSystem::get()->getTextureManager()->createTexture2D("Rogue_idle_e.tex", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* tex_idle_n = RenderSystem::get()->getTextureManager()->createTexture2D("Rogue_idle_n.tex", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* tex_idle_s = RenderSystem::get()->getTextureManager()->createTexture2D("Rogue_idle_s.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* tex_idle_w = RenderSystem::get()->getTextureManager()->createTexture2D("Rogue_idle_w.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* tex_idle_e = RenderSystem::get()->getTextureManager()->createTexture2D("Rogue_idle_e.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* tex_idle_n = RenderSystem::get()->getTextureManager()->createTexture2D("Rogue_idle_n.tx", Texture::Filter::NEAREST_NEIGHBOR);
 
 	uint32 frames[4] = { 0,1,2,3 };
 	float32 delays[4] = { ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY };
@@ -46,6 +50,8 @@ RoguePlayer::RoguePlayer() {
 	animator->addState("WALK_N", state_walk_n);
 
 	addComponent(animator);
+	addComponent(new AABBColliderComponent(this,Rectangle(1,1)));
+	addComponent(new PlayerController(this));
 }
 
 RoguePlayer::~RoguePlayer() {

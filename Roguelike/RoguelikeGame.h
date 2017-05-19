@@ -2,7 +2,13 @@
 
 #include "Core/Game.h"
 
+class Font;
+class Text;
+
 class RoguelikeGame : public Game {
+private:
+	Font* m_mainFont;
+	Text* m_testText;
 public:
 	RoguelikeGame();
 	virtual ~RoguelikeGame();

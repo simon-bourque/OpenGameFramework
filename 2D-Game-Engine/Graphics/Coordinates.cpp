@@ -5,6 +5,6 @@ void convertPixelToOpenGLCoordinate(uint32 xIn, uint32 yIn, uint32 windowWidth, 
 	yOut = -(((yIn * 2) / (float32)windowHeight) - 1);
 }
 
-void convertPixelToOpenGLLength(uint32 lengthIn, uint32 windowLength, float32& lengthOut) {
+void convertPixelToOpenGLLength(int32 lengthIn, uint32 windowLength, float32& lengthOut) {
 	lengthOut = (lengthIn * 2) / (float32)windowLength;
 }

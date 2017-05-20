@@ -116,6 +116,7 @@
   <ItemGroup>
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="HealthBar.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="RoguelikeGame.cpp" />
@@ -124,6 +125,7 @@
   <ItemGroup>
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="HealthBar.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="RoguelikeGame.h" />
     <ClInclude Include="RoguePlayer.h" />

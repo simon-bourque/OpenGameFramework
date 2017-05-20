@@ -70,7 +70,7 @@ void SpriteRenderer::renderSpriteUI(const Rectangle& bounds, const Texture* text
 
 	texture->bind(Texture::Unit::UNIT_0);
 
-	Matrix3f finalMatrix = Matrix3f::scale(bounds.getWidth(), bounds.getHeight()) * Matrix3f::translation(bounds.getX(), bounds.getY());
+	Matrix3f finalMatrix = Matrix3f::translation(bounds.getX(), bounds.getY()) * Matrix3f::scale(bounds.getWidth(), bounds.getHeight());
 	//Matrix3f finalMatrix = m_rs->getCamera().getViewProjectionMatrix() * transform->toMatrix();
 
 	glUniformMatrix3fv(m_spriteShaderProgram->getUniform("mvpMatrix").getLocation(), 1, true, finalMatrix.values);

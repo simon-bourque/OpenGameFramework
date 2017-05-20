@@ -3,6 +3,7 @@
 #include "Resource/RawImage.h"
 
 #include "Scene/TileScene.h"
+#include "Scene/TileLayer.h"
 #include "Scene/Tile.h"
 
 #include "Core/Game.h"
@@ -359,21 +360,70 @@ TileScene* loadTileLevel(string file) {
 	readFloat(input, boundsWidth);
 	readFloat(input, boundsHeight);
 
-	int32 numTiles = 0;
-	readInt(input, numTiles);
+	// Load tilesets
+	uint32 numTilesets = 0;
+	readUInt(input, numTilesets);
 
-	
-	Tile* tiles = new Tile[numTiles];
-	for (int32 i = 0; i < numTiles; i++) {
-		float32 x = 0;
-		float32 y = 0;
-		int32 index = 0;
-		readFloat(input, x);
-		readFloat(input, y);
-		readInt(input, index);
-		
-		tiles[i] = { x, y, index };
+	Texture** textures = new Texture*[numTilesets];
+
+	for (uint32 i = 0; i < numTilesets; i++) {
+
+		int32 stringLen = 0;
+		readInt(input, stringLen);
+
+		char* texPath = new char[stringLen + 1];
+
+		for (int32 i = 0; i < stringLen; i++) {
+			char character = 0;
+			input.get(character);
+			texPath[i] = character;
+		}
+		texPath[stringLen] = '\0';
+
+		DEBUG_LOG("--- TILE SHEET PATH ---");
+		DEBUG_LOG(texPath);
+
+		int32 margin = 0;
+		int32 spacing = 0;
+		int32 tileWidth = 0;
+		int32 tileHeight = 0;
+		readInt(input, margin);
+		readInt(input, spacing);
+		readInt(input, tileWidth);
+		readInt(input, tileHeight);
+
+		Texture* texture = RenderSystem::get()->getTextureManager()->createTexture2DArray(texPath, margin, spacing, tileWidth, tileHeight, Texture::Filter::NEAREST_NEIGHBOR);
+		textures[i] = texture;
+		delete[] texPath;
 	}
+
+	// Load tileLayers
+	uint32 numLayers = 0;
+	readUInt(input, numLayers);
+
+	TileLayer** layers = new TileLayer*[numLayers];
+
+	for (uint32 i = 0; i < numLayers; i++) {
+		int32 numTiles = 0;
+		readInt(input, numTiles);
+
+
+		Tile* tiles = new Tile[numTiles];
+		for (int32 i = 0; i < numTiles; i++) {
+			float32 x = 0;
+			float32 y = 0;
+			int32 index = 0;
+			readFloat(input, x);
+			readFloat(input, y);
+			readInt(input, index);
+
+			tiles[i] = { x, y, index };
+		}
+
+		layers[i] = new TileLayer(tiles, numTiles, textures[i]);
+		delete[] tiles;
+	}
+
 
 	int32 numColliders = 0;
 	readInt(input, numColliders);
@@ -394,44 +444,23 @@ TileScene* loadTileLevel(string file) {
 		colliders[i].setHeight(height);
 	}
 
-	int32 stringLen = 0;
-	readInt(input, stringLen);
-
-	char* texPath = new char[stringLen + 1];
-
-	for (int32 i = 0; i < stringLen; i++) {
-		char character = 0;
-		input.get(character);
-		texPath[i] = character;
-	}
-	texPath[stringLen] = '\0';
-
-	DEBUG_LOG("--- TILE SHEET PATH ---");
-	DEBUG_LOG(texPath);
-
-	int32 margin = 0;
-	int32 spacing = 0;
-	int32 tileWidth = 0;
-	int32 tileHeight = 0;
-	readInt(input, margin);
-	readInt(input, spacing);
-	readInt(input, tileWidth);
-	readInt(input, tileHeight);
-
-	Texture* texture = RenderSystem::get()->getTextureManager()->createTexture2DArray(texPath, margin, spacing, tileWidth, tileHeight, Texture::Filter::NEAREST_NEIGHBOR);
-
+	
 	input.close();
 
-	TileScene* scene = new TileScene(tiles, numTiles, texture, Rectangle(boundsX, boundsY, boundsWidth, boundsHeight));
+	TileScene* scene = new TileScene(Rectangle(boundsX, boundsY, boundsWidth, boundsHeight));
 	
+	for (uint32 i = 0; i < numLayers; i++) {
+		scene->addTileLayer(layers[i]);
+	}
+
 	for (uint32 i = 0; i < numColliders; i++) {
 		scene->getCollisionSystem()->addStaticCollider(colliders[i]);
 	}
 
 
+	delete[] textures;
 	delete[] colliders;
-	delete[] tiles;
-	delete[] texPath;
+	delete[] layers;
 
 	return scene;
 }

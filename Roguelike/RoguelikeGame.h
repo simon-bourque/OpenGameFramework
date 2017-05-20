@@ -24,8 +24,6 @@ public:
 	virtual void render() override;
 	virtual void tick(float32 delta) override;
 
-	SoundEngine* soundEngine;
-
 	void onKey(int32 key, int32 scancode, int32 action, int32 mods);
 };
 

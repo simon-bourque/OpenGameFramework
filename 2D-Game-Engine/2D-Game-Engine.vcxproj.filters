@@ -228,6 +228,9 @@
     <ClCompile Include="Graphics\Coordinates.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="UserInterface.cpp" />
+    <ClCompile Include="UIComponent.cpp" />
+    <ClCompile Include="UIImage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Debug.h">
@@ -428,5 +431,8 @@
     <ClInclude Include="Graphics\Coordinates.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="UIComponent.h" />
+    <ClInclude Include="UIImage.h" />
   </ItemGroup>
 </Project>

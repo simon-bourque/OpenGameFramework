@@ -10,6 +10,7 @@
 
 #include "Scene/SceneManager.h"
 #include "Scene/Scene.h"
+#include "Sound/SoundEngine.h"
 #include "Physics/Collision/CollisionSystem.h"
 
 #include <GLFW/glfw3.h>
@@ -31,6 +32,9 @@ Game::Game(const string& title, int32 width, int32 height, const Rectangle& view
 	DEBUG_LOG("Initializing scene manager...");
 	SceneManager::init();
 
+	DEBUG_LOG("Initializing sound engine...");
+	SoundEngine::init();
+
 #ifdef DEBUG_BUILD
 	Debug::init();
 #endif
@@ -42,6 +46,7 @@ Game::~Game() {
 #ifdef DEBUG_BUILD
 	Debug::destroy();
 #endif
+	SoundEngine::destroy();
 	SceneManager::destroy();
 	RenderSystem::destroy();
 	Input::destroy();

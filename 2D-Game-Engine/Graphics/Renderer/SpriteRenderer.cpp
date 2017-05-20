@@ -6,6 +6,8 @@
 #include "Graphics/Memory/VertexArrayObject.h"
 #include "Graphics/Memory/Buffer.h"
 
+#include "Math/Geometry/Rectangle.h"
+
 #include "Object/Transform.h"
 
 #include "Resource/Resources.h"
@@ -51,6 +53,25 @@ void SpriteRenderer::renderSprite(const Transform* transform, const Texture* tex
 	texture->bind(Texture::Unit::UNIT_0);
 
 	Matrix3f finalMatrix = m_rs->getCamera().getViewProjectionMatrix() * transform->toMatrix();
+
+	glUniformMatrix3fv(m_spriteShaderProgram->getUniform("mvpMatrix").getLocation(), 1, true, finalMatrix.values);
+	glUniform1i(m_spriteShaderProgram->getUniform("horizontalFlip").getLocation(), (hFlip) ? GL_TRUE : GL_FALSE);
+	glUniform1i(m_spriteShaderProgram->getUniform("verticalFlip").getLocation(), (vFlip) ? GL_TRUE : GL_FALSE);
+	glUniform1i(m_spriteShaderProgram->getUniform("sprite").getLocation(), 0);
+
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, SPRITE_NUM_VERTICES);
+
+}
+
+void SpriteRenderer::renderSpriteUI(const Rectangle& bounds, const Texture* texture, bool hFlip, bool vFlip) const {
+	glUseProgram(m_spriteShaderProgram->getProgramId());
+
+	m_spriteVAO->bind();
+
+	texture->bind(Texture::Unit::UNIT_0);
+
+	Matrix3f finalMatrix = Matrix3f::translation(bounds.getX(), bounds.getY()) * Matrix3f::scale(bounds.getWidth(), bounds.getHeight());
+	//Matrix3f finalMatrix = m_rs->getCamera().getViewProjectionMatrix() * transform->toMatrix();
 
 	glUniformMatrix3fv(m_spriteShaderProgram->getUniform("mvpMatrix").getLocation(), 1, true, finalMatrix.values);
 	glUniform1i(m_spriteShaderProgram->getUniform("horizontalFlip").getLocation(), (hFlip) ? GL_TRUE : GL_FALSE);

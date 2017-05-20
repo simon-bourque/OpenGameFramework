@@ -18,7 +18,9 @@
 RoguelikeGame::RoguelikeGame() : Game("Roguelike", 720, 576, Rectangle(20,20)) {}
 
 
-RoguelikeGame::~RoguelikeGame() {}
+RoguelikeGame::~RoguelikeGame() {
+	delete soundEngine;
+}
 
 void RoguelikeGame::init() {
 	SceneManager::get()->loadTileLevel("level_test.lvl");
@@ -30,6 +32,10 @@ void RoguelikeGame::init() {
 
 	m_mainFont = RenderSystem::get()->getFontManager()->createFont("const");
 	m_testText = RenderSystem::get()->getTextManager()->createText("test_text_69", "abcdefghijklmnopqrstuvwxyz", m_mainFont, Text::Usage::STATIC);
+
+	soundEngine = new SoundEngine();
+
+	soundEngine->playMusic("res/sound/title.ogg", true, musicType::FOREGROUND);
 }
 
 void RoguelikeGame::render() {

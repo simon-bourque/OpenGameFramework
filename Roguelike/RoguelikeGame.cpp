@@ -17,9 +17,11 @@
 
 #include "RoguePlayer.h"
 
+#include "Input/Input.h"
+
 #include "UI/UserInterface.h"
 #include "UI/UIComponent.h"
-#include "UI/UIImage.h"
+#include "HealthBar.h"
 
 RoguelikeGame::RoguelikeGame() : Game("Roguelike", 720, 576, Rectangle(20,20)) {}
 
@@ -30,12 +32,14 @@ RoguelikeGame::~RoguelikeGame() {
 }
 
 void RoguelikeGame::init() {
+	Input::get()->addKeyListener(this, &RoguelikeGame::onKey);
+
 	SceneManager::get()->loadTileLevel("level_test2.lvl");
 	RenderSystem::get()->getCamera().getTransform().translate(54,-53);
 
-	RoguePlayer* player = new RoguePlayer();
-	player->getTransform().translate(54, -53);
-	SceneManager::get()->getCurrentScene().addGameObject(player);
+	m_player = new RoguePlayer();
+	m_player->getTransform().translate(54, -53);
+	SceneManager::get()->getCurrentScene().addGameObject(m_player);
 
 	m_mainFont = RenderSystem::get()->getFontManager()->createFont("const");
 	m_testText = RenderSystem::get()->getTextManager()->createText("test_text_69", "abcdefghijklmnopqrstuvwxyz", m_mainFont, Text::Usage::STATIC);
@@ -44,10 +48,8 @@ void RoguelikeGame::init() {
 
 	soundEngine->playMusic("res/sound/title.ogg", true, musicType::FOREGROUND);
 
-	Texture* heart_tex = RenderSystem::get()->getTextureManager()->createTexture2D("heart_full.tx", Texture::Filter::NEAREST_NEIGHBOR);
 	m_ui = new UserInterface();
-	UIImage* heart = new UIImage(Rectangle(-0.93f, 0.93f, 0.1f,0.1f),heart_tex);
-	m_ui->addUIComponent(heart);
+	m_ui->addUIComponent(new HealthBar(m_player));
 }
 
 void RoguelikeGame::render() {
@@ -58,4 +60,10 @@ void RoguelikeGame::render() {
 
 void RoguelikeGame::tick(float32 delta) {
 	Game::tick(delta);
+}
+
+void RoguelikeGame::onKey(int32 key, int32 scancode, int32 action, int32 mods) {
+	if (key == Input::KEY_MINUS && action == Input::PRESS) {
+		m_player->setCurrentHealth(m_player->getCurrentHealth() - 1);
+	}
 }

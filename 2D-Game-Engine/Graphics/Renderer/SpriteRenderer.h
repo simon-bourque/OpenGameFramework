@@ -12,6 +12,7 @@ class ShaderProgram;
 class VertexArrayObject;
 struct Transform;
 class Texture;
+class Rectangle;
 
 class SpriteRenderer : public Renderer {
 private:
@@ -29,6 +30,7 @@ public:
 	virtual ~SpriteRenderer();
 
 	void renderSprite(const Transform* transform, const Texture* texture, bool hFlip, bool vFlip) const;
+	void renderSpriteUI(const Rectangle& bounds, const Texture* texture, bool hFlip, bool vFlip) const;
 	void renderAnimationFrame(const Transform& transform, uint32 frame, const Texture& texture, bool hFlip, bool vFlip) const;
 };
 

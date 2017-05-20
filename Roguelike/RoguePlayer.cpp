@@ -4,9 +4,13 @@
 
 #include "PlayerController.h"
 
+#include "Scene/SceneManager.h"
+#include "Scene/Scene.h"
+
 #include "Object/Component/CameraComponent.h"
 #include "Object/Component/AABBColliderComponent.h"
 #include "Object/Component/AnimatorComponent.h"
+#include "Object/Component/SpriteComponent.h"
 
 #include "Graphics/TextureManager.h"
 #include "Graphics/Texture.h"
@@ -56,15 +60,25 @@ RoguePlayer::RoguePlayer() : m_currentHealth(3), m_maxHealth(3), m_bonusAgility(
 	addComponent(animator);
 	
 	addComponent(new AABBColliderComponent(this,Rectangle(1,1)));
-	addComponent(new PlayerController(this));
+	addComponent(new PlayerController(this, this));
 
 	CameraComponent* camera = new CameraComponent(this, &RenderSystem::get()->getCamera());
 	camera->setSceneBounded(true);
 	camera->setSceneBounds(CameraComponent::BOUNDED_ALL);
 	addComponent(camera);
+
+	// ################### SWORD #########################
+	Texture* swordTexture = RenderSystem::get()->getTextureManager()->createTexture2D("sword.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	m_sword = new GameObject();
+	m_sword->getTransform().scale(0.5f);
+	SpriteComponent* spComp = new SpriteComponent(m_sword, swordTexture);
+	spComp->setVisible(false);
+	m_sword->addComponent(spComp);
+	SceneManager::get()->getCurrentScene().addGameObject(m_sword);
 }
 
 void RoguePlayer::tick(float32 delta) {
+	GameObject::tick(delta);
 	if (m_bonusTimer < 0) {
 		m_currentEffect = effect::SOBER;
 	}

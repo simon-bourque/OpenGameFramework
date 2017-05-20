@@ -2,6 +2,8 @@
 
 #include "Object/Component/ObjectComponent.h"
 
+class RoguePlayer;
+
 class PlayerController : public ObjectComponent {
 private:
 	enum Direction {
@@ -20,8 +22,13 @@ private:
 	bool m_rightAction;
 
 	Direction getDirection() const;
+
+	RoguePlayer* m_player;
+	float32 m_swordOffset;
+	float32 m_swordCountdown;
+	bool m_swingingSword;
 public:
-	PlayerController(GameObject* parentObject);
+	PlayerController(GameObject* parentObject, RoguePlayer* player);
 	virtual ~PlayerController();
 
 	virtual void tick(float32 delta) override;

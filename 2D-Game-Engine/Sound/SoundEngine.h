@@ -32,6 +32,7 @@ public:
 	void playSound(std::string);
 	void stopSound();
 	void pauseSound();
+	bool soundPlaying();
 
 	//Music Manip
 	void playMusic(std::string, bool isLooped, musicType);

@@ -87,6 +87,10 @@ void PlayerController::tick(float32 delta) {
 		}
 	}
 
+	if (direction != NONE) {
+		//WALKING SOUND
+	}
+
 	m_lastDirection = direction;
 
 	// Move sword

@@ -52,6 +52,9 @@
     <Filter Include="Object\State">
       <UniqueIdentifier>{e59efa09-4e47-41eb-b5a4-887c78e849ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{eae99159-0362-4935-92bc-a697fb8c1a4c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Debug.cpp">
@@ -227,6 +230,9 @@
     </ClCompile>
     <ClCompile Include="Graphics\Coordinates.cpp">
       <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound\SoundEngine.cpp">
+      <Filter>Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -427,6 +433,9 @@
     </ClInclude>
     <ClInclude Include="Graphics\Coordinates.h">
       <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\SoundEngine.h">
+      <Filter>Sound</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

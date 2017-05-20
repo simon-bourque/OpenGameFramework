@@ -12,14 +12,21 @@
 #include "Graphics/Text/Text.h"
 #include "Graphics/Renderer/TextRenderer.h"
 #include "Graphics/Color.h"
+#include "Graphics/TextureManager.h"
+#include "Graphics/Texture.h"
 
 #include "RoguePlayer.h"
+
+#include "UserInterface.h"
+#include "UIComponent.h"
+#include "UIImage.h"
 
 RoguelikeGame::RoguelikeGame() : Game("Roguelike", 720, 576, Rectangle(20,20)) {}
 
 
 RoguelikeGame::~RoguelikeGame() {
 	delete soundEngine;
+	delete m_ui;
 }
 
 void RoguelikeGame::init() {
@@ -36,11 +43,17 @@ void RoguelikeGame::init() {
 	soundEngine = new SoundEngine();
 
 	soundEngine->playMusic("res/sound/title.ogg", true, musicType::FOREGROUND);
+
+	Texture* heart_tex = RenderSystem::get()->getTextureManager()->createTexture2D("heart_full.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	m_ui = new UserInterface();
+	UIImage* heart = new UIImage(Rectangle(0.1f,0.1f),heart_tex);
+	m_ui->addUIComponent(heart);
 }
 
 void RoguelikeGame::render() {
 	Game::render();
 	RenderSystem::get()->getTextRenderer()->renderText(m_testText, -0.9,0.9, Color::WHITE);
+	m_ui->render();
 }
 
 void RoguelikeGame::tick(float32 delta) {

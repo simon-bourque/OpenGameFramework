@@ -17,9 +17,9 @@
 
 #include "RoguePlayer.h"
 
-#include "UserInterface.h"
-#include "UIComponent.h"
-#include "UIImage.h"
+#include "UI/UserInterface.h"
+#include "UI/UIComponent.h"
+#include "UI/UIImage.h"
 
 RoguelikeGame::RoguelikeGame() : Game("Roguelike", 720, 576, Rectangle(20,20)) {}
 
@@ -30,7 +30,7 @@ RoguelikeGame::~RoguelikeGame() {
 }
 
 void RoguelikeGame::init() {
-	SceneManager::get()->loadTileLevel("level_test.lvl");
+	SceneManager::get()->loadTileLevel("level_test2.lvl");
 	RenderSystem::get()->getCamera().getTransform().translate(54,-53);
 
 	RoguePlayer* player = new RoguePlayer();

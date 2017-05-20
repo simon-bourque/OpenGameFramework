@@ -200,9 +200,10 @@
     <ClCompile Include="Object\State\StateTransition.cpp" />
     <ClCompile Include="Object\State\StateMachine.cpp" />
     <ClCompile Include="Sound\SoundEngine.cpp" />
-    <ClCompile Include="UIComponent.cpp" />
-    <ClCompile Include="UIImage.cpp" />
-    <ClCompile Include="UserInterface.cpp" />
+    <ClCompile Include="Scene\TileLayer.cpp" />
+    <ClCompile Include="UI\UIComponent.cpp" />
+    <ClCompile Include="UI\UIImage.cpp" />
+    <ClCompile Include="UI\UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\Coordinates.h" />
@@ -272,9 +273,10 @@
     <ClInclude Include="Object\State\StateTransition.h" />
     <ClInclude Include="Object\State\StateMachine.h" />
     <ClInclude Include="Sound\SoundEngine.h" />
-    <ClInclude Include="UIComponent.h" />
-    <ClInclude Include="UIImage.h" />
-    <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="Scene\TileLayer.h" />
+    <ClInclude Include="UI\UIComponent.h" />
+    <ClInclude Include="UI\UIImage.h" />
+    <ClInclude Include="UI\UserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

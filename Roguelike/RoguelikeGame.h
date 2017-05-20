@@ -20,7 +20,5 @@ public:
 	virtual void init() override;
 	virtual void render() override;
 	virtual void tick(float32 delta) override;
-
-	SoundEngine* soundEngine;
 };
 

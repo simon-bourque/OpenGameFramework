@@ -1,6 +1,6 @@
 #include "Inventory.h"
 
-
+std::vector<Item*> Inventory::inventoryArray;
 
 Inventory::Inventory(): m_selected(nullptr) {
 }

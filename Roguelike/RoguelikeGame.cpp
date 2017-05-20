@@ -25,6 +25,7 @@ RoguelikeGame::RoguelikeGame() : Game("Roguelike", 720, 576, Rectangle(20,20)) {
 
 
 RoguelikeGame::~RoguelikeGame() {
+	delete soundEngine;
 	delete m_ui;
 }
 
@@ -39,6 +40,9 @@ void RoguelikeGame::init() {
 	m_mainFont = RenderSystem::get()->getFontManager()->createFont("const");
 	m_testText = RenderSystem::get()->getTextManager()->createText("test_text_69", "abcdefghijklmnopqrstuvwxyz", m_mainFont, Text::Usage::STATIC);
 
+	soundEngine = new SoundEngine();
+
+	soundEngine->playMusic("res/sound/title.ogg", true, musicType::FOREGROUND);
 
 	Texture* heart_tex = RenderSystem::get()->getTextureManager()->createTexture2D("heart_full.tx", Texture::Filter::NEAREST_NEIGHBOR);
 	m_ui = new UserInterface();

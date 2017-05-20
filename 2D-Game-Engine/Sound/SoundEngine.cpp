@@ -5,6 +5,7 @@ SoundEngine* SoundEngine::s_instance = nullptr;
 SoundEngine::SoundEngine() {
 	m_fgMusic = new sf::Music();
 	m_bgMusic = new sf::Music();
+	sound = new sf::Sound();
 }
 
 void SoundEngine::playSound(std::string soundName) {

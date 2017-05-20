@@ -22,6 +22,7 @@
 #include "UI/UserInterface.h"
 #include "UI/UIComponent.h"
 #include "HealthBar.h"
+#include "InventoryUI.h"
 
 RoguelikeGame::RoguelikeGame() : Game("Roguelike", 720, 576, Rectangle(20,20)) {}
 
@@ -47,6 +48,7 @@ void RoguelikeGame::init() {
 
 	m_ui = new UserInterface();
 	m_ui->addUIComponent(new HealthBar(m_player));
+	m_ui->addUIComponent(new InventoryUI());
 }
 
 void RoguelikeGame::render() {

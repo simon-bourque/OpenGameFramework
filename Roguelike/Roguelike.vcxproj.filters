@@ -59,6 +59,9 @@
     <ClInclude Include="HealthBar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Effects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="InventoryUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>

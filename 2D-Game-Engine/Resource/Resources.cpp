@@ -3,6 +3,7 @@
 #include "Resource/RawImage.h"
 
 #include "Scene/TileScene.h"
+#include "Scene/TileLayer.h"
 #include "Scene/Tile.h"
 
 #include "Core/Game.h"
@@ -422,7 +423,8 @@ TileScene* loadTileLevel(string file) {
 
 	input.close();
 
-	TileScene* scene = new TileScene(tiles, numTiles, texture, Rectangle(boundsX, boundsY, boundsWidth, boundsHeight));
+	TileLayer* layer = new TileLayer(tiles, numTiles, texture);
+	TileScene* scene = new TileScene(layer, Rectangle(boundsX, boundsY, boundsWidth, boundsHeight));
 	
 	for (uint32 i = 0; i < numColliders; i++) {
 		scene->getCollisionSystem()->addStaticCollider(colliders[i]);

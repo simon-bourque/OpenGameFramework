@@ -6,11 +6,13 @@
 
 class Font;
 class Text;
+class UserInterface;
 
 class RoguelikeGame : public Game {
 private:
 	Font* m_mainFont;
 	Text* m_testText;
+	UserInterface* m_ui;
 public:
 	RoguelikeGame();
 	virtual ~RoguelikeGame();

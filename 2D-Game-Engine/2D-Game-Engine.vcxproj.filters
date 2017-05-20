@@ -234,6 +234,9 @@
     <ClCompile Include="Sound\SoundEngine.cpp">
       <Filter>Sound</Filter>
     </ClCompile>
+    <ClCompile Include="UserInterface.cpp" />
+    <ClCompile Include="UIComponent.cpp" />
+    <ClCompile Include="UIImage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Debug.h">
@@ -437,5 +440,8 @@
     <ClInclude Include="Sound\SoundEngine.h">
       <Filter>Sound</Filter>
     </ClInclude>
+    <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="UIComponent.h" />
+    <ClInclude Include="UIImage.h" />
   </ItemGroup>
 </Project>

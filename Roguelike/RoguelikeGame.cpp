@@ -17,9 +17,9 @@
 
 #include "RoguePlayer.h"
 
-#include "UserInterface.h"
-#include "UIComponent.h"
-#include "UIImage.h"
+#include "UI/UserInterface.h"
+#include "UI/UIComponent.h"
+#include "UI/UIImage.h"
 
 RoguelikeGame::RoguelikeGame() : Game("Roguelike", 720, 576, Rectangle(20,20)) {}
 

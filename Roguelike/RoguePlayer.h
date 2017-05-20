@@ -25,6 +25,8 @@ private:
 	bool m_isGhost;
 
 	effect m_currentEffect;
+
+	GameObject* m_sword;
 	
 public:
 	RoguePlayer();
@@ -35,6 +37,8 @@ public:
 	uint32 getDamage() const { return m_baseDamage + m_bonusDamage; };
 	uint32 getAgility() const { return m_baseAgility + m_bonusAgility; };
 	uint32 getDefense() const { return m_baseDefense + m_bonusDefense; };
+
+	GameObject* getSword() { return m_sword; };
 
 	void tick(float32 delta) override;
 

@@ -35,16 +35,15 @@ void RoguelikeGame::init() {
 	Input::get()->addKeyListener(this, &RoguelikeGame::onKey);
 
 	SceneManager::get()->loadTileLevel("level_test2.lvl");
-	RenderSystem::get()->getCamera().getTransform().translate(54,-53);
 
 	m_player = new RoguePlayer();
-	m_player->getTransform().translate(54, -53);
+	m_player->getTransform().translate(6.5f, -89);
 	SceneManager::get()->getCurrentScene().addGameObject(m_player);
 
 	m_mainFont = RenderSystem::get()->getFontManager()->createFont("const");
 	m_testText = RenderSystem::get()->getTextManager()->createText("test_text_69", "abcdefghijklmnopqrstuvwxyz", m_mainFont, Text::Usage::STATIC);
 
-	SoundEngine::get()->playMusic("res/sound/wily.ogg", true, musicType::FOREGROUND);
+	//SoundEngine::get()->playMusic("res/sound/wily.ogg", true, musicType::FOREGROUND);
 
 	m_ui = new UserInterface();
 	m_invUI = new InventoryUI();

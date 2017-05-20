@@ -13,7 +13,7 @@
 #include "Graphics/Animation/SpriteSequenceAnimState.h"
 #include "Graphics/Animation/SpriteAnimState.h"
 
-RoguePlayer::RoguePlayer() {
+RoguePlayer::RoguePlayer() : m_currentHealth(3), m_maxHealth(3) {
 
 	const static float32 ANIM_DELAY = 0.07f;
 

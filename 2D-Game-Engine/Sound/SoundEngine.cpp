@@ -1,5 +1,7 @@
 #include "SoundEngine.h"
 
+SoundEngine* SoundEngine::s_instance = nullptr;
+
 SoundEngine::SoundEngine() {
 	m_fgMusic = new sf::Music();
 	m_bgMusic = new sf::Music();
@@ -10,22 +12,19 @@ void SoundEngine::playSound(std::string soundName) {
 		throw std::runtime_error("Failed to load sound from file " + soundName);
 	}
 
-	sf::Sound sound;
-	sound.setBuffer(m_soundBuffer);
-	sound.play();
+	sound->setBuffer(m_soundBuffer);
+	sound->play();
 
 }
 
 void SoundEngine::stopSound() {
-	sf::Sound sound;
-	sound.setBuffer(m_soundBuffer);
-	sound.stop();
+	sound->setBuffer(m_soundBuffer);
+	sound->stop();
 }
 
 void SoundEngine::pauseSound() {
-	sf::Sound sound;
-	sound.setBuffer(m_soundBuffer);
-	sound.pause();
+	sound->setBuffer(m_soundBuffer);
+	sound->pause();
 }
 
 void SoundEngine::playMusic(std::string musicName, bool isLooped, musicType type) {
@@ -63,6 +62,15 @@ void SoundEngine::stopMusic(musicType type) {
 	}
 	else if (type == musicType::BACKGROUND) {
 		m_bgMusic->stop();
+	}
+}
+
+void SoundEngine::setMusicVolume(int volume, musicType type) {
+	if (type == musicType::FOREGROUND) {
+		m_fgMusic->setVolume(volume);
+	}
+	else if (type == musicType::BACKGROUND) {
+		m_bgMusic->setVolume(volume);
 	}
 }
 

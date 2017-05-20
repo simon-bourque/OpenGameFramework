@@ -4,15 +4,24 @@
 
 #include "Object/GameObject.h"
 #include "Object/Component/ComponentType.h"
+#include "Object/Component/SpriteComponent.h"
 #include "Input/Input.h"
 
-PlayerController::PlayerController(GameObject* parentObject) : 
+#include "Sound/SoundEngine.h"
+
+#include "RoguePlayer.h"
+
+PlayerController::PlayerController(GameObject* parentObject, RoguePlayer* player) : 
 	ObjectComponent(parentObject),
 	m_lastDirection(NONE),
 	m_upAction(false),
 	m_downAction(false),
 	m_leftAction(false),
-	m_rightAction(false)
+	m_rightAction(false),
+	m_player(player),
+	m_swordOffset(0.4f),
+	m_swordCountdown(1.0f),
+	m_swingingSword(false)
 {
 	Input::get()->addKeyListener(this, &PlayerController::onKey);
 }
@@ -44,6 +53,9 @@ void PlayerController::tick(float32 delta) {
 		if (direction != m_lastDirection) {
 			str = "WALK_W";
 			getParentObject()->broadcastEvent(Event(Event::Type::ANIM_STATE_CHANGE, &str));
+			SpriteComponent* cp = (SpriteComponent*)(m_player->getSword()->findComponent(ComponentType::SPRITE_COMPONENT));
+			cp->setHorizontalFlip(false);
+			m_swordOffset = -0.4f;
 		}
 		getParentObject()->getTransform().translate(-SPEED * delta, 0);
 		break;
@@ -51,6 +63,9 @@ void PlayerController::tick(float32 delta) {
 		if (direction != m_lastDirection) {
 			str = "WALK_E";
 			getParentObject()->broadcastEvent(Event(Event::Type::ANIM_STATE_CHANGE, &str));
+			SpriteComponent* cp = (SpriteComponent*)(m_player->getSword()->findComponent(ComponentType::SPRITE_COMPONENT));
+			cp->setHorizontalFlip(true);
+			m_swordOffset = 0.4f;
 		}
 		getParentObject()->getTransform().translate(SPEED * delta, 0);
 		break;
@@ -72,19 +87,21 @@ void PlayerController::tick(float32 delta) {
 		}
 	}
 
-	if (m_upAction) {
-		//getParentObject()->getTransform().translate(0, SPEED * delta);
-	}
-	if (m_downAction) {
-		//getParentObject()->getTransform().translate(0, -SPEED * delta);
-	}
-	if (m_leftAction) {
-		//getParentObject()->getTransform().translate(-SPEED * delta, 0);
-	}
-	if (m_rightAction) {
-		//getParentObject()->getTransform().translate(SPEED * delta, 0);
-	}
 	m_lastDirection = direction;
+
+	// Move sword
+	m_player->getSword()->getTransform().xPos = getParentObject()->getTransform().xPos + m_swordOffset;
+	m_player->getSword()->getTransform().yPos = getParentObject()->getTransform().yPos;
+
+	if (m_swingingSword) {
+		m_swordCountdown -= delta;
+
+		if (m_swordCountdown <= 0) {
+			SpriteComponent* cp = (SpriteComponent*)(m_player->getSword()->findComponent(ComponentType::SPRITE_COMPONENT));
+			cp->setVisible(false);
+			m_swingingSword = false;
+		}
+	}
 }
 
 PlayerController::Direction PlayerController::getDirection() const {
@@ -146,6 +163,16 @@ void PlayerController::onKey(int32 key, int32 scancode, int32 action, int32 mods
 		}
 		if (action == Input::RELEASE) {
 			m_rightAction = false;
+		}
+	}
+
+	if (key == Input::KEY_SPACE) {
+		if (action == Input::PRESS && !m_swingingSword) {
+			SpriteComponent* cp = (SpriteComponent*)(m_player->getSword()->findComponent(ComponentType::SPRITE_COMPONENT));
+			m_swordCountdown = 0.1f;
+			cp->setVisible(true);
+			m_swingingSword = true;
+			SoundEngine::get()->playSound("res/sound/swish.wav");
 		}
 	}
 }

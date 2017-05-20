@@ -47,8 +47,10 @@ void RoguelikeGame::init() {
 	SoundEngine::get()->playMusic("res/sound/wily.ogg", true, musicType::FOREGROUND);
 
 	m_ui = new UserInterface();
+	m_invUI = new InventoryUI();
+	m_invUI->setVisible(false);
 	m_ui->addUIComponent(new HealthBar(m_player));
-	m_ui->addUIComponent(new InventoryUI());
+	m_ui->addUIComponent(m_invUI);
 }
 
 void RoguelikeGame::render() {
@@ -64,5 +66,10 @@ void RoguelikeGame::tick(float32 delta) {
 void RoguelikeGame::onKey(int32 key, int32 scancode, int32 action, int32 mods) {
 	if (key == Input::KEY_MINUS && action == Input::PRESS) {
 		m_player->setCurrentHealth(m_player->getCurrentHealth() - 1);
+	}
+	if (key == Input::KEY_I && action == Input::PRESS) {
+		// Toggle inventory
+		m_invUI->setVisible(!m_invUI->isVisible());
+		SceneManager::get()->setPaused(!SceneManager::get()->isPaused());
 	}
 }

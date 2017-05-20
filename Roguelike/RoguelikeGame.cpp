@@ -46,7 +46,7 @@ void RoguelikeGame::init() {
 
 	Texture* heart_tex = RenderSystem::get()->getTextureManager()->createTexture2D("heart_full.tx", Texture::Filter::NEAREST_NEIGHBOR);
 	m_ui = new UserInterface();
-	UIImage* heart = new UIImage(Rectangle(0.1f,0.1f),heart_tex);
+	UIImage* heart = new UIImage(Rectangle(-0.93f, 0.93f, 0.1f,0.1f),heart_tex);
 	m_ui->addUIComponent(heart);
 }
 

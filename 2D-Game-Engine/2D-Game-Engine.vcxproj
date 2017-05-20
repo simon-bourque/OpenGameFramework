@@ -199,6 +199,9 @@
     <ClCompile Include="Object\State\State.cpp" />
     <ClCompile Include="Object\State\StateTransition.cpp" />
     <ClCompile Include="Object\State\StateMachine.cpp" />
+    <ClCompile Include="UIComponent.cpp" />
+    <ClCompile Include="UIImage.cpp" />
+    <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\Coordinates.h" />
@@ -267,6 +270,9 @@
     <ClInclude Include="Object\State\State.h" />
     <ClInclude Include="Object\State\StateTransition.h" />
     <ClInclude Include="Object\State\StateMachine.h" />
+    <ClInclude Include="UIComponent.h" />
+    <ClInclude Include="UIImage.h" />
+    <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

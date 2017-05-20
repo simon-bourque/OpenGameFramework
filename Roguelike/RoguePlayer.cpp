@@ -1,5 +1,7 @@
 #include "RoguePlayer.h"
 
+#include <iostream>
+
 #include "PlayerController.h"
 
 #include "Object/Component/CameraComponent.h"
@@ -13,7 +15,7 @@
 #include "Graphics/Animation/SpriteSequenceAnimState.h"
 #include "Graphics/Animation/SpriteAnimState.h"
 
-RoguePlayer::RoguePlayer() : m_currentHealth(3), m_maxHealth(3) {
+RoguePlayer::RoguePlayer() : m_currentHealth(3), m_maxHealth(3), m_bonusAgility(0), m_bonusDamage(0), m_bonusDefense(0), m_bonusSpeed(0), m_isGhost(false), m_bonusTimer(BONUS_DURATION) {
 
 	const static float32 ANIM_DELAY = 0.07f;
 
@@ -60,6 +62,44 @@ RoguePlayer::RoguePlayer() : m_currentHealth(3), m_maxHealth(3) {
 	camera->setSceneBounded(true);
 	camera->setSceneBounds(CameraComponent::BOUNDED_ALL);
 	addComponent(camera);
+}
+
+void RoguePlayer::tick(float32 delta) {
+	if (m_bonusTimer < 0) {
+		m_currentEffect = effect::SOBER;
+	}
+	else {
+		m_bonusTimer -= delta;
+	}
+
+	switch (m_currentEffect) {
+	case effect::AGI: m_bonusAgility = 2;
+		break;
+	case effect::CRIPPLE: m_bonusSpeed = -2;
+		break;
+	case effect::DEF: m_bonusDefense = 2;
+		break;
+	case effect::GHOST: //TODO implement ghost mode
+		break;
+	case effect::HEALTH: m_currentHealth += 1;
+		break;
+	case effect::POISON: m_currentHealth -= 1;
+		break;
+	case effect::SPEED: m_bonusSpeed = 2;
+		break;
+	case effect::STR: m_bonusDamage = 2;
+		break;
+	case effect::VULN: m_bonusDefense -= 2;
+		break;
+	case effect::WEAK: m_bonusDamage -= 2;
+		break;
+	case effect::SOBER:
+		m_bonusTimer = BONUS_DURATION;
+		m_bonusAgility = 0;
+		m_bonusDamage = 0;
+		m_bonusDefense = 0;
+		m_bonusSpeed = 0;
+	}
 }
 
 RoguePlayer::~RoguePlayer() {

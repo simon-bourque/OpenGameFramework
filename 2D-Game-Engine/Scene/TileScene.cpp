@@ -3,9 +3,7 @@
 #include "Scene/TileLayer.h"
 
 
-TileScene::TileScene(TileLayer* layer, const Rectangle& bounds) : Scene(bounds) {
-	m_layers.push_back(layer);
-}
+TileScene::TileScene(const Rectangle& bounds) : Scene(bounds) {}
 
 
 TileScene::~TileScene() {

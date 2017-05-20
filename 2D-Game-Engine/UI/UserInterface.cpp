@@ -18,6 +18,8 @@ void UserInterface::addUIComponent(UIComponent* component) {
 
 void UserInterface::render() {
 	for (UIComponent* component : m_components) {
-		component->render();
+		if (component->isVisible()) {
+			component->render();
+		}
 	}
 }

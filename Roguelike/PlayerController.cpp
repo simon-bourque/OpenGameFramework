@@ -11,7 +11,7 @@
 
 #include "RoguePlayer.h"
 
-PlayerController::PlayerController(GameObject* parentObject, RoguePlayer* player) : 
+PlayerController::PlayerController(GameObject* parentObject, RoguePlayer* player) :
 	ObjectComponent(parentObject),
 	m_lastDirection(NONE),
 	m_upAction(false),
@@ -21,6 +21,7 @@ PlayerController::PlayerController(GameObject* parentObject, RoguePlayer* player
 	m_player(player),
 	m_swordOffset(0.4f),
 	m_swordCountdown(1.0f),
+	m_walkDelay(0.0f),
 	m_swingingSword(false)
 {
 	Input::get()->addKeyListener(this, &PlayerController::onKey);
@@ -88,14 +89,18 @@ void PlayerController::tick(float32 delta) {
 	}
 
 	if (direction != NONE) {
-		//WALKING SOUND
+		m_walkDelay += delta;
+		if (m_walkDelay > 0.1f) {
+			m_walkDelay = 0.0f;
+			SoundEngine::get()->playSound("res/sound/walk.wav"); 
+		}
 	}
 
 	m_lastDirection = direction;
 
 	// Move sword
-	m_player->getSword()->getTransform().xPos = getParentObject()->getTransform().xPos + m_swordOffset;
-	m_player->getSword()->getTransform().yPos = getParentObject()->getTransform().yPos;
+		m_player->getSword()->getTransform().xPos = getParentObject()->getTransform().xPos + m_swordOffset;
+		m_player->getSword()->getTransform().yPos = getParentObject()->getTransform().yPos;
 
 	if (m_swingingSword) {
 		m_swordCountdown -= delta;

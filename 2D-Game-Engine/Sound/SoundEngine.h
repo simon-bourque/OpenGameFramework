@@ -35,6 +35,7 @@ public:
 	void playSound(string);
 	void stopSound();
 	void pauseSound();
+	void setSoundVolume(uint32);
 
 	//Music Manip
 	void playMusic(string, bool isLooped, musicType);

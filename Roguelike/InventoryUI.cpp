@@ -4,7 +4,6 @@
 #include "Graphics/TextureManager.h"
 #include "Graphics/Renderer/SpriteRenderer.h"
 #include "Graphics/Texture.h"
- x
 #include "Math/Geometry/Rectangle.h"
 
 InventoryUI::InventoryUI() : UIComponent(Rectangle(1,1)), m_width(4), m_height(3) {

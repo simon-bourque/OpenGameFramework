@@ -19,7 +19,7 @@
 #include "Graphics/Animation/SpriteSequenceAnimState.h"
 #include "Graphics/Animation/SpriteAnimState.h"
 
-RoguePlayer::RoguePlayer() : m_currentHealth(3), m_maxHealth(3), m_bonusAgility(0), m_bonusDamage(0), m_bonusDefense(0), m_bonusSpeed(0), m_isGhost(false), m_bonusTimer(BONUS_DURATION) {
+RoguePlayer::RoguePlayer() : m_currentHealth(3), m_maxHealth(3), m_bonusAgility(0), m_bonusDamage(0), m_bonusDefense(0), m_isGhost(false), m_bonusTimer(BONUS_DURATION) {
 
 	const static float32 ANIM_DELAY = 0.07f;
 
@@ -89,7 +89,7 @@ void RoguePlayer::tick(float32 delta) {
 	switch (m_currentEffect) {
 	case effect::AGI: m_bonusAgility = 2;
 		break;
-	case effect::CRIPPLE: m_bonusSpeed = -2;
+	case effect::CRIPPLE: m_bonusAgility = -2;
 		break;
 	case effect::DEF: m_bonusDefense = 2;
 		break;
@@ -98,8 +98,6 @@ void RoguePlayer::tick(float32 delta) {
 	case effect::HEALTH: m_currentHealth += 1;
 		break;
 	case effect::POISON: m_currentHealth -= 1;
-		break;
-	case effect::SPEED: m_bonusSpeed = 2;
 		break;
 	case effect::STR: m_bonusDamage = 2;
 		break;
@@ -112,7 +110,6 @@ void RoguePlayer::tick(float32 delta) {
 		m_bonusAgility = 0;
 		m_bonusDamage = 0;
 		m_bonusDefense = 0;
-		m_bonusSpeed = 0;
 	}
 }
 

@@ -77,8 +77,8 @@ void InventoryUI::render() {
 		}
 	}
 
-	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi - EQUIPSIZE, yi, EQUIPSIZE, EQUIPSIZE), m_ui_helm, false, false);
-	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi - EQUIPSIZE, yi - EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_chest, false, false);
-	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi - EQUIPSIZE, yi - 2*EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_glove, false, false);
-	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi - EQUIPSIZE, yi - 3*EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_boot, false, false);
+	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi - ((SIZE + EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f), EQUIPSIZE, EQUIPSIZE), m_ui_helm, false, false);
+	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi - ((SIZE + EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f) - EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_chest, false, false);
+	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi - ((SIZE + EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f) - 2*EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_glove, false, false);
+	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi - ((SIZE + EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f) - 3*EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_boot, false, false);
 }

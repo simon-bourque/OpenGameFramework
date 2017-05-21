@@ -6,9 +6,12 @@ SoundEngine::SoundEngine() {
 	m_bgMusic = new sf::Music();
 	m_sound = new sf::Sound();
 
-	//Initialize all your sounds here
+	m_sound->setVolume(50);
+
+	//Initialize all sounds here
 	soundMap["res/sound/walk.wav"] = new sf::SoundBuffer();
 	soundMap["res/sound/swish.wav"] = new sf::SoundBuffer();
+	soundMap["res/sound/inventory.wav"] = new sf::SoundBuffer();
 
 	//Loading sounds in memory
 	for (auto &sound : soundMap) {
@@ -33,6 +36,10 @@ void SoundEngine::stopSound() {
 
 void SoundEngine::pauseSound() {
 	m_sound->pause();
+}
+
+void SoundEngine::setSoundVolume(uint32 volume) {
+	m_sound->setVolume(volume);
 }
 
 void SoundEngine::playMusic(string musicName, bool isLooped, musicType type) {

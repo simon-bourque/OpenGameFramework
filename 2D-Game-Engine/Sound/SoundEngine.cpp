@@ -93,4 +93,8 @@ SoundEngine::~SoundEngine() {
 	delete m_sound;
 	delete m_bgMusic;
 	delete m_fgMusic;
+
+	for (const std::pair<string, sf::SoundBuffer*>& pair : soundMap) {
+		delete pair.second;
+	}
 }

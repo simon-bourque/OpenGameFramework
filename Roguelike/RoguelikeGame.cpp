@@ -50,6 +50,8 @@ void RoguelikeGame::init() {
 	m_invUI->setVisible(false);
 	m_ui->addUIComponent(new HealthBar(m_player));
 	m_ui->addUIComponent(m_invUI);
+
+	SoundEngine::get()->playMusic("res/sound/wily.ogg", true, musicType::FOREGROUND);
 }
 
 void RoguelikeGame::render() {

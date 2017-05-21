@@ -88,7 +88,7 @@ void PlayerController::tick(float32 delta) {
 	}
 
 	if (direction != NONE) {
-		//WALKING SOUND
+		SoundEngine::get()->playSound("res/sound/walk.wav");
 	}
 
 	m_lastDirection = direction;
@@ -176,7 +176,7 @@ void PlayerController::onKey(int32 key, int32 scancode, int32 action, int32 mods
 			m_swordCountdown = 0.1f;
 			cp->setVisible(true);
 			m_swingingSword = true;
-			SoundEngine::get()->playSound("res/sound/swish.wav");
+			//SoundEngine::get()->playSound("res/sound/swish.wav");
 		}
 	}
 }

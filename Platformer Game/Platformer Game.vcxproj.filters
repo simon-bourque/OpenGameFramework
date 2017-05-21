@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Player">
+      <UniqueIdentifier>{93004141-8756-4524-b333-342a0df4358b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player\State">
+      <UniqueIdentifier>{ab32dbd6-70ba-4a95-98d6-ff6771233e13}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="IdleState.cpp">
+      <Filter>Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="WalkState.cpp">
+      <Filter>Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatformerGame.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="InAirState.cpp">
+      <Filter>Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="NoClipState.cpp">
+      <Filter>Player\State</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="WalkState.h">
+      <Filter>Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="IdleState.h">
+      <Filter>Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatformerGame.h" />
+    <ClInclude Include="InAirState.h">
+      <Filter>Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="NoClipState.h">
+      <Filter>Player\State</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

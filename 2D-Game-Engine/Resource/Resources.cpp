@@ -67,7 +67,7 @@ string loadSrc(string file) {
 }
 
 uint8* loadTexture(const string& file, uint8 type, uint32& width, uint32& height, uint8& channels) {
-	std::ifstream input(TEXTURE_PATH + file);
+	std::ifstream input(TEXTURE_PATH + file, std::ios_base::in | std::ios_base::binary);
 
 	if (!input) {
 		input.close();
@@ -101,7 +101,7 @@ uint8* loadTexture(const string& file, uint8 type, uint32& width, uint32& height
 }
 
 uint8* loadTexture(const string& file, uint8 type, uint32& width, uint32& height, uint8& channels, uint32& depth) {
-	std::ifstream input(TEXTURE_PATH + file);
+	std::ifstream input(TEXTURE_PATH + file, std::ios_base::in | std::ios_base::binary);
 
 	if (!input) {
 		input.close();

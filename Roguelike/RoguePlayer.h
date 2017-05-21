@@ -14,11 +14,9 @@ private:
 	int32 m_baseDamage;
 	int32 m_baseDefense;
 	int32 m_baseAgility;
-	int32 m_baseSpeed;
 	int32 m_bonusDamage;
 	int32 m_bonusDefense;
 	int32 m_bonusAgility;
-	int32 m_bonusSpeed;
 
 	float32 m_bonusTimer;
 
@@ -34,9 +32,14 @@ public:
 
 	int32 getCurrentHealth() const { return m_currentHealth; };
 	int32 getMaxHealth() const { return m_maxHealth; };
-	uint32 getDamage() const { return m_baseDamage + m_bonusDamage; };
-	uint32 getAgility() const { return m_baseAgility + m_bonusAgility; };
-	uint32 getDefense() const { return m_baseDefense + m_bonusDefense; };
+	int32 getDamage() const { return m_baseDamage + m_bonusDamage; };
+	int32 getAgility() const { return m_baseAgility + m_bonusAgility; };
+	int32 getDefense() const { return m_baseDefense + m_bonusDefense; };
+
+	void setBonusDefense(int32 defense) { m_bonusDefense = defense; };
+	void setBonusDamage(int32 damage) { m_bonusDamage = damage; };
+	void setBonusAgility(int32 agility) { m_bonusAgility = agility; };
+
 
 	GameObject* getSword() { return m_sword; };
 

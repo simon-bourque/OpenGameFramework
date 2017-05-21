@@ -81,4 +81,7 @@ void InventoryUI::render() {
 	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi - ((SIZE + EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f) - EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_chest, false, false);
 	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi - ((SIZE + EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f) - 2*EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_glove, false, false);
 	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi - ((SIZE + EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f) - 3*EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_boot, false, false);
+	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi + 4*SIZE - ((SIZE - EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f) - EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_amulet, false, false);
+	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi + 4*SIZE - ((SIZE - EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f) - 2*EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_bag, false, false);
+
 }

@@ -26,6 +26,7 @@ private:
 	RoguePlayer* m_player;
 	float32 m_swordOffset;
 	float32 m_swordCountdown;
+	float32 m_walkDelay;
 	bool m_swingingSword;
 public:
 	PlayerController(GameObject* parentObject, RoguePlayer* player);

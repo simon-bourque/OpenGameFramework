@@ -43,15 +43,13 @@ void RoguelikeGame::init() {
 	m_mainFont = RenderSystem::get()->getFontManager()->createFont("const");
 	m_testText = RenderSystem::get()->getTextManager()->createText("test_text_69", "abcdefghijklmnopqrstuvwxyz", m_mainFont, Text::Usage::STATIC);
 
-	//SoundEngine::get()->playMusic("res/sound/wily.ogg", true, musicType::FOREGROUND);
-
 	m_ui = new UserInterface();
 	m_invUI = new InventoryUI();
 	m_invUI->setVisible(false);
 	m_ui->addUIComponent(new HealthBar(m_player));
 	m_ui->addUIComponent(m_invUI);
 
-	SoundEngine::get()->playMusic("res/sound/wily.ogg", true, musicType::FOREGROUND);
+	//SoundEngine::get()->playMusic("res/sound/wily.ogg", true, musicType::FOREGROUND);
 }
 
 void RoguelikeGame::render() {
@@ -71,6 +69,7 @@ void RoguelikeGame::onKey(int32 key, int32 scancode, int32 action, int32 mods) {
 	if (key == Input::KEY_I && action == Input::PRESS) {
 		// Toggle inventory
 		m_invUI->setVisible(!m_invUI->isVisible());
+		SoundEngine::get()->playSound("res/sound/inventory.wav");
 		SceneManager::get()->setPaused(!SceneManager::get()->isPaused());
 	}
 }

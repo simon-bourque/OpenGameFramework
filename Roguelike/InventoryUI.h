@@ -6,7 +6,13 @@ class Texture;
 
 class InventoryUI : public UIComponent {
 private:
-	Texture* m_ui_full;
+	Texture* m_ui_helm;
+	Texture* m_ui_chest;
+	Texture* m_ui_glove;
+	Texture* m_ui_empty;
+	Texture* m_ui_boot;
+	Texture* m_ui_amulet;
+	Texture* m_ui_bag;
 	
 	Texture* m_ui_tl;
 	Texture* m_ui_t;

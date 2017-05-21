@@ -8,7 +8,16 @@
 #include "Math/Geometry/Rectangle.h"
 
 InventoryUI::InventoryUI() : UIComponent(Rectangle(1,1)), m_width(4), m_height(3) {
-	m_ui_full = RenderSystem::get()->getTextureManager()->createTexture2D("ui_full.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	//Equipment
+	m_ui_helm = RenderSystem::get()->getTextureManager()->createTexture2D("ui_helm.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	m_ui_chest = RenderSystem::get()->getTextureManager()->createTexture2D("ui_chest.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	m_ui_glove = RenderSystem::get()->getTextureManager()->createTexture2D("ui_glove.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	m_ui_empty = RenderSystem::get()->getTextureManager()->createTexture2D("ui_empty.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	m_ui_boot = RenderSystem::get()->getTextureManager()->createTexture2D("ui_boot.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	m_ui_amulet = RenderSystem::get()->getTextureManager()->createTexture2D("ui_amulet.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	m_ui_bag = RenderSystem::get()->getTextureManager()->createTexture2D("ui_bag.tx", Texture::Filter::NEAREST_NEIGHBOR);
+
+	//Inventory
 	m_ui_tl = RenderSystem::get()->getTextureManager()->createTexture2D("ui_tl.tx", Texture::Filter::NEAREST_NEIGHBOR);
 	m_ui_t = RenderSystem::get()->getTextureManager()->createTexture2D("ui_t.tx", Texture::Filter::NEAREST_NEIGHBOR);
 	m_ui_tr = RenderSystem::get()->getTextureManager()->createTexture2D("ui_tr.tx", Texture::Filter::NEAREST_NEIGHBOR);
@@ -24,6 +33,7 @@ InventoryUI::InventoryUI() : UIComponent(Rectangle(1,1)), m_width(4), m_height(3
 InventoryUI::~InventoryUI() {}
 
 void InventoryUI::render() {
+	const static float32 EQUIPSIZE = 0.1875f;
 	const static float32 SIZE = 0.25f;
 
 	float32 xi = ((SIZE * m_width) / -2.0f) + (SIZE / 2.0f);
@@ -66,4 +76,9 @@ void InventoryUI::render() {
 			}
 		}
 	}
+
+	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi - EQUIPSIZE, yi, EQUIPSIZE, EQUIPSIZE), m_ui_helm, false, false);
+	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi - EQUIPSIZE, yi - EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_chest, false, false);
+	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi - EQUIPSIZE, yi - 2*EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_glove, false, false);
+	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi - EQUIPSIZE, yi - 3*EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_boot, false, false);
 }

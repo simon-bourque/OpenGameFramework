@@ -1,7 +1,9 @@
 #pragma once
 
-#include <string>
+#include "Core\Core.h"
 #include "SFML/Audio.hpp"
+
+#include <unordered_map>
 
 #include "Core/EngineAssert.h"
 
@@ -19,8 +21,9 @@ class SoundEngine
 private:
 	static SoundEngine* s_instance;
 
-	sf::SoundBuffer m_soundBuffer;
-	sf::Sound* sound;
+	std::unordered_map<string, sf::SoundBuffer*> soundMap;
+
+	sf::Sound* m_sound;
 	sf::Music* m_fgMusic;	//Foreground Music
 	sf::Music* m_bgMusic;	//Ambient Music
 
@@ -29,24 +32,24 @@ public:
 	virtual ~SoundEngine();
 
 	//Sound Manip
-	void playSound(std::string);
+	void playSound(string);
 	void stopSound();
 	void pauseSound();
-	bool soundPlaying();
+	void setSoundVolume(uint32);
 
 	//Music Manip
-	void playMusic(std::string, bool isLooped, musicType);
+	void playMusic(string, bool isLooped, musicType);
 	void stopMusic(musicType);
 	void pauseMusic(musicType);
-	void setMusicVolume(int, musicType);
+	void setMusicVolume(uint32, musicType);
 
 	static SoundEngine* get() {
-		ASSERT(s_instance, "Window must be initialized before use.");
+		ASSERT(s_instance, "SoundEngine must be initialized before use.");
 		return s_instance;
 	};
 
 	static void init() {
-		ASSERT(!s_instance, "Window is already initialized.");
+		ASSERT(!s_instance, "SoundEngine is already initialized.");
 		s_instance = new SoundEngine();
 	}
 

@@ -1,5 +1,4 @@
 #include "SoundEngine.h"
-#include <iostream>
 SoundEngine* SoundEngine::s_instance = nullptr;
 
 SoundEngine::SoundEngine() {

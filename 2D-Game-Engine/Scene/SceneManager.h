@@ -18,6 +18,7 @@ private:
 
 	std::unique_ptr<Scene> m_currentScene;
 
+	bool m_paused;
 public:
 	SceneManager();
 	virtual ~SceneManager();
@@ -28,6 +29,9 @@ public:
 
 	const Scene& getCurrentScene() const { return *m_currentScene; };
 	Scene& getCurrentScene() { return *m_currentScene; };
+
+	bool isPaused() const { return m_paused; };
+	void setPaused(bool paused) { m_paused = paused; };
 
 	static SceneManager* get() {
 		ASSERT(s_instance, "SceneManager must be initialized before use.");

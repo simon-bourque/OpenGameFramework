@@ -6,7 +6,7 @@
 
 SceneManager* SceneManager::s_instance = nullptr;
 
-SceneManager::SceneManager() {
+SceneManager::SceneManager() : m_paused(false) {
 	m_currentScene.reset(new Scene(Rectangle(100,100)));
 }
 
@@ -19,7 +19,9 @@ void SceneManager::loadTileLevel(const string& file) {
 }
 
 void SceneManager::tickCurrentScene(float32 delta) {
-	m_currentScene->tick(delta);
+	if (!m_paused) {
+		m_currentScene->tick(delta);
+	}
 }
 
 void SceneManager::renderCurrentScene() {

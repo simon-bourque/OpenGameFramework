@@ -335,7 +335,7 @@ void convertLevel(const string& path) {
 	string newFileName = originalFileName.substr(0, originalFileName.find_last_of(".")).append(".lvl");
 	string newPath = path.substr(0, path.find_last_of("/\\") + 1).append(newFileName);
 
-	ofstream output(newPath);
+	ofstream output(newPath, std::ios_base::out | std::ios_base::binary);
 
 	if (!output) {
 		cout << "Failed to write new lvl file." << endl;
@@ -350,6 +350,9 @@ void convertLevel(const string& path) {
 	float32 rectY = (height / -2.0f) + 0.5f;
 
 	Float floatUnion;
+	UnsignedInteger uinteger;
+	Integer integer;
+
 
 	floatUnion.value = rectX;
 	output.write(floatUnion.bytes, sizeof(float));
@@ -360,13 +363,51 @@ void convertLevel(const string& path) {
 	floatUnion.value = height;
 	output.write(floatUnion.bytes, sizeof(float));
 
+	// ######################### TILESETS ###########################
+	auto tilesetNodes = mapNode.children("tileset");
+	uint32 numTilesets = 0;
+	for (const pugi::xml_node& tilesetNode : tilesetNodes) {
+		numTilesets++;
+	}
+
+	uinteger.value = numTilesets;
+	output.write(uinteger.bytes, sizeof(unsigned int));
+
+	vector<pair<uint32, uint32>> firstgids;
+
+	for (const pugi::xml_node& tilesetNode : tilesetNodes) {
+		pugi::xml_node imgNode = tilesetNode.child("image");
+		string texturePath = imgNode.attribute("source").value();
+		string textureName = texturePath.substr(texturePath.find_last_of("/\\") + 1);
+
+		uinteger.value = textureName.size();
+		output.write(uinteger.bytes, sizeof(unsigned int));
+		for (uint32 i = 0; i < textureName.size(); i++) {
+			output.put(textureName[i]);
+		}
+
+		uinteger.value = tilesetNode.attribute("margin").as_uint();
+		output.write(uinteger.bytes, sizeof(unsigned int));
+		uinteger.value = tilesetNode.attribute("spacing").as_uint();
+		output.write(uinteger.bytes, sizeof(unsigned int));
+		uinteger.value = tilesetNode.attribute("tilewidth").as_uint();
+		output.write(uinteger.bytes, sizeof(unsigned int));
+		uinteger.value = tilesetNode.attribute("tileheight").as_uint();
+		output.write(uinteger.bytes, sizeof(unsigned int));
+
+		firstgids.push_back({ tilesetNode.attribute("firstgid").as_uint(), tilesetNode.attribute("tilecount").as_uint() });
+	}
+
+	// ################################# TILES #########################################
+	vector<Tile>* tileLayers = new vector<Tile>[numTilesets];
+
 	pugi::xml_node dataNode = mapNode.child("layer").child("data");
 	if (string(dataNode.attribute("encoding").value()) != "csv") {
 		cout << "Failed to write new lvl file.  Encoding not supported." << endl;
 		output.close();
 		return;
 	}
-	vector<Tile> tiles;
+
 	string data = dataNode.child_value();
 	stringstream ss;
 	float32 x = 0;
@@ -377,11 +418,19 @@ void convertLevel(const string& path) {
 		}
 		else if (data[i] == ',') {
 			int32 index = stoi(ss.str());
-			index--;
+			uint32 layer = 0;
+			for (uint32 i = 0; i < firstgids.size(); i++) {
+				if (index >= firstgids[i].first && index < firstgids[i].second + firstgids[i].first) {
+					layer = i;
+					index -= firstgids[i].first;
+					break;
+				}
+			}
+			//index--;
 
-			if (index > -1) {
+			if (index > 0) {
 				Tile tile(x, -y, index);
-				tiles.push_back(tile);
+				tileLayers[layer].push_back(tile);
 			}
 			x++;
 			if (x >= width) {
@@ -392,28 +441,40 @@ void convertLevel(const string& path) {
 		}
 	}
 	int32 index = stoi(ss.str());
-	index--;
+	uint32 layer = 0;
+	for (uint32 i = 0; i < firstgids.size(); i++) {
+		if (index >= firstgids[i].first && index < firstgids[i].second + firstgids[i].first) {
+			layer = i;
+			index -= firstgids[i].first;
+			break;
+		}
+	}
+	//index--;
 
 	if (index > -1) {
 		Tile tile(x, -y, index);
-		tiles.push_back(tile);
+		tileLayers[layer].push_back(tile);
 	}
 
-	UnsignedInteger uinteger;
-	Integer integer;
-
-	uinteger.value = tiles.size();
+	uinteger.value = numTilesets;
 	output.write(uinteger.bytes, sizeof(unsigned int));
 
-	for (const Tile& tile : tiles) {
-		floatUnion.value = tile.x;
-		output.write(floatUnion.bytes, sizeof(float));
-		floatUnion.value = tile.y;
-		output.write(floatUnion.bytes, sizeof(float));
-		integer.value = tile.index;
-		output.write(integer.bytes, sizeof(int));
+	for (uint32 i = 0; i < numTilesets; i++) {
+		const vector<Tile>& tiles = tileLayers[i];
+		uinteger.value = tiles.size();
+		output.write(uinteger.bytes, sizeof(unsigned int));
+
+		for (const Tile& tile : tiles) {
+			floatUnion.value = tile.x;
+			output.write(floatUnion.bytes, sizeof(float));
+			floatUnion.value = tile.y;
+			output.write(floatUnion.bytes, sizeof(float));
+			integer.value = tile.index;
+			output.write(integer.bytes, sizeof(int));
+		}
 	}
 
+	// ########################## COLLIDERS #############################
 	vector<Rectangle> colliders;
 	pugi::xml_node groupNode = mapNode.child("objectgroup");
 
@@ -447,26 +508,7 @@ void convertLevel(const string& path) {
 		output.write(floatUnion.bytes, sizeof(float));
 	}
 
-	pugi::xml_node tilesetNode = mapNode.child("tileset");
-	pugi::xml_node imgNode = tilesetNode.child("image");
-	string texturePath = imgNode.attribute("source").value();
-	string textureName = texturePath.substr(texturePath.find_last_of("/\\") + 1);
-	
-	uinteger.value = textureName.size();
-	output.write(uinteger.bytes, sizeof(unsigned int));
-	for (uint32 i = 0; i < textureName.size(); i++) {
-		output.put(textureName[i]);
-	}
-
-	uinteger.value = tilesetNode.attribute("margin").as_uint();
-	output.write(uinteger.bytes, sizeof(unsigned int));
-	uinteger.value = tilesetNode.attribute("spacing").as_uint();
-	output.write(uinteger.bytes, sizeof(unsigned int));
-	uinteger.value = tilesetNode.attribute("tilewidth").as_uint();
-	output.write(uinteger.bytes, sizeof(unsigned int));
-	uinteger.value = tilesetNode.attribute("tileheight").as_uint();
-	output.write(uinteger.bytes, sizeof(unsigned int));
-
+	delete[] tileLayers;
 	cout << "Done." << endl;
 
 	output.close();

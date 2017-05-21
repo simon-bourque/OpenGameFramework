@@ -75,7 +75,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)$(ProjectName);$(SolutionDir)dependencies/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GLEW_STATIC;DEBUG_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;SFML_STATIC;DEBUG_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -83,7 +83,7 @@
       <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;sfml-system-s-d.lib;ogg.lib;flac.lib;vorbis.lib;vorbisfile.lib;winmm.lib;vorbisenc.lib;openal32.lib;sfml-audio-s-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)dependencies;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -108,7 +108,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)$(ProjectName);$(SolutionDir)dependencies/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -117,7 +117,7 @@
       <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;sfml-system-s-d.lib;ogg.lib;flac.lib;vorbis.lib;vorbisfile.lib;winmm.lib;vorbisenc.lib;openal32.lib;sfml-audio-s-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)dependencies;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -199,6 +199,11 @@
     <ClCompile Include="Object\State\State.cpp" />
     <ClCompile Include="Object\State\StateTransition.cpp" />
     <ClCompile Include="Object\State\StateMachine.cpp" />
+    <ClCompile Include="Sound\SoundEngine.cpp" />
+    <ClCompile Include="Scene\TileLayer.cpp" />
+    <ClCompile Include="UI\UIComponent.cpp" />
+    <ClCompile Include="UI\UIImage.cpp" />
+    <ClCompile Include="UI\UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\Coordinates.h" />
@@ -267,6 +272,11 @@
     <ClInclude Include="Object\State\State.h" />
     <ClInclude Include="Object\State\StateTransition.h" />
     <ClInclude Include="Object\State\StateMachine.h" />
+    <ClInclude Include="Sound\SoundEngine.h" />
+    <ClInclude Include="Scene\TileLayer.h" />
+    <ClInclude Include="UI\UIComponent.h" />
+    <ClInclude Include="UI\UIImage.h" />
+    <ClInclude Include="UI\UserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

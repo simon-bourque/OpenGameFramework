@@ -6,20 +6,18 @@
 
 #include "Scene/Scene.h"
 
-struct Tile;
-class Texture;
-class VertexArrayObject;
-class RenderSystem;
+#include <vector>
+
+class TileLayer;
 
 class TileScene : public Scene {
 private:
-	Texture* m_tileSheet;
-	VertexArrayObject* m_tileVAO;
-
-	int32 m_numberOfTiles;
+	std::vector<TileLayer*> m_layers;
 public:
-	TileScene(Tile* tiles, int32 numberOfTiles, Texture* tileSheet, const Rectangle& bounds);
+	TileScene(const Rectangle& bounds);
 	virtual ~TileScene();
+
+	void addTileLayer(TileLayer* layer);
 
 	virtual void render() override;
 };

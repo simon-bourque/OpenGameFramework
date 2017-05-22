@@ -241,5 +241,5 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 
-!dependencies/Debug
-!dependencies/Release
+!dependencies/lib/Debug/x86
+!dependencies/lib/Release/x86

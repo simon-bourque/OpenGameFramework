@@ -56,7 +56,7 @@ void AnimatorComponent::render() {
 void AnimatorComponent::receiveEvent(const Event& event) {
 	switch (event.type) {
 	case Event::Type::ANIM_STATE_CHANGE: {
-		const string* name = static_cast<const string*>(event.param.asPointer);
+		const string* name = event.paramAsClass<string>();
 		changeState(*name);
 		break;
 	}

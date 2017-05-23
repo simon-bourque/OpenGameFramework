@@ -4,6 +4,8 @@
 
 #include "Core/Core.h"
 
+#include <type_traits>
+
 struct Event
 {
 	enum class Type {
@@ -41,6 +43,15 @@ struct Event
 	Event(Type type, bool param);
 	Event(Type type, const void* param);
 	virtual ~Event();
+
+	template<typename T>
+	const T* paramAsClass() const;
 };
+
+template<typename T>
+const T* Event::paramAsClass() const {
+	static_assert(std::is_class<T>::value, "Type must be a class.");
+	return static_cast<const T*>(param.asPointer);
+}
 
 #endif

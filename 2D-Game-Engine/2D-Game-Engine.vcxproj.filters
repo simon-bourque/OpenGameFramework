@@ -90,9 +90,6 @@
     <ClCompile Include="Graphics\TextureManager.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Window.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics\Animation\Animation.cpp">
       <Filter>Graphics\Animation</Filter>
     </ClCompile>
@@ -248,6 +245,9 @@
     </ClCompile>
     <ClCompile Include="Scene\TileLayer.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Window1.cpp">
+      <Filter>Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

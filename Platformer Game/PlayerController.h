@@ -11,7 +11,7 @@ class GameObject;
 struct Event;
 class StateMachine;
 
-class PlayerController : public ObjectComponent {\
+class PlayerController : public ObjectComponent {
 public:
 	static const float32 SPEED;
 	static const float32 JUMP_POWER;

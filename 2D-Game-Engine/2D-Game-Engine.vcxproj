@@ -194,7 +194,7 @@
     <ClCompile Include="Graphics\Shader\Uniform.cpp" />
     <ClCompile Include="Math\Vector2f.cpp" />
     <ClCompile Include="Graphics\Memory\VertexArrayObject.cpp" />
-    <ClCompile Include="Graphics\Window.cpp" />
+    <ClCompile Include="Graphics\Window1.cpp" />
     <ClCompile Include="Graphics\Renderer\ShapeRenderer.cpp" />
     <ClCompile Include="Object\State\State.cpp" />
     <ClCompile Include="Object\State\StateTransition.cpp" />

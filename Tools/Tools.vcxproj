@@ -123,12 +123,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ConvertLevel.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\2D-Game-Engine\2D-Game-Engine.vcxproj">
       <Project>{65f11ed5-654d-45fb-9a33-ab13e6e201b1}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ConvertLevel.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

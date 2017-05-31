@@ -14,6 +14,11 @@
 
 using namespace std;
 
+static void writeLevelBoundsChunk(ofstream& output, const pugi::xml_node& mapNode, float32& width);
+static void writeTilesetsChunk(ofstream& output, const pugi::xml_node& mapNode, vector<pair<uint32, uint32>>& firstgids, uint32& numTilesets);
+static void writeTilesChunk(ofstream& output, const pugi::xml_node& mapNode, vector<pair<uint32, uint32>>& firstgids, uint32 numTilesets, uint32 width);
+static void writeCollidersChunk(ofstream& output, const pugi::xml_node& mapNode);
+
 void convertLevel(const string& path) {
 	pugi::xml_document doc;
 
@@ -37,7 +42,34 @@ void convertLevel(const string& path) {
 	}
 
 	pugi::xml_node mapNode = doc.child("map");
-	float32 width = mapNode.attribute("width").as_float();
+	float32 width = 0;
+	writeLevelBoundsChunk(output, mapNode, width);
+
+
+	vector<pair<uint32, uint32>> firstgids;
+	uint32 numTilesets = 0;
+	writeTilesetsChunk(output, mapNode, firstgids, numTilesets);
+
+
+	writeTilesChunk(output, mapNode, firstgids, numTilesets, width);
+
+	writeCollidersChunk(output, mapNode);
+
+	cout << "Done." << endl;
+
+	output.close();
+}
+
+static void writeHeaderChunk() {
+
+}
+
+static void writeDependenciesChunk() {
+
+}
+
+static void writeLevelBoundsChunk(ofstream& output, const pugi::xml_node& mapNode, float32& width) {
+	width = mapNode.attribute("width").as_float();
 	float32 height = mapNode.attribute("height").as_float();
 	float32 rectX = (width / 2.0f) - 0.5f;
 	float32 rectY = (height / -2.0f) + 0.5f;
@@ -46,18 +78,16 @@ void convertLevel(const string& path) {
 	writeFloat(output, rectY);
 	writeFloat(output, width);
 	writeFloat(output, height);
+}
 
-
-	// ######################### TILESETS ###########################
+static void writeTilesetsChunk(ofstream& output, const pugi::xml_node& mapNode, vector<pair<uint32, uint32>>& firstgids, uint32& numTilesets) {
 	auto tilesetNodes = mapNode.children("tileset");
-	uint32 numTilesets = 0;
+	numTilesets = 0;
 	for (const pugi::xml_node& tilesetNode : tilesetNodes) {
 		numTilesets++;
 	}
 
 	writeUnsignedInt(output, numTilesets);
-
-	vector<pair<uint32, uint32>> firstgids;
 
 	for (const pugi::xml_node& tilesetNode : tilesetNodes) {
 		pugi::xml_node imgNode = tilesetNode.child("image");
@@ -76,16 +106,19 @@ void convertLevel(const string& path) {
 
 		firstgids.push_back({ tilesetNode.attribute("firstgid").as_uint(), tilesetNode.attribute("tilecount").as_uint() });
 	}
+}
 
-	// ################################# TILES #########################################
-	vector<Tile>* tileLayers = new vector<Tile>[numTilesets];
+static void writeTilesChunk(ofstream& output, const pugi::xml_node& mapNode, vector<pair<uint32, uint32>>& firstgids, uint32 numTilesets, uint32 width) {
 
 	pugi::xml_node dataNode = mapNode.child("layer").child("data");
 	if (string(dataNode.attribute("encoding").value()) != "csv") {
-		cout << "Failed to write new lvl file.  Encoding not supported." << endl;
+		//cout << "Failed to write new lvl file.  Encoding not supported." << endl;
 		output.close();
-		return;
+		throw runtime_error("Failed to write new lvl file.  Encoding not supported.");
+		//return;
 	}
+
+	vector<Tile>* tileLayers = new vector<Tile>[numTilesets];
 
 	string data = dataNode.child_value();
 	stringstream ss;
@@ -148,7 +181,10 @@ void convertLevel(const string& path) {
 		}
 	}
 
-	// ########################## COLLIDERS #############################
+	delete[] tileLayers;
+}
+
+static void writeCollidersChunk(ofstream& output, const pugi::xml_node& mapNode) {
 	vector<Rectangle> colliders;
 	pugi::xml_node groupNode = mapNode.child("objectgroup");
 
@@ -176,9 +212,4 @@ void convertLevel(const string& path) {
 		writeFloat(output, collider.getWidth());
 		writeFloat(output, collider.getHeight());
 	}
-
-	delete[] tileLayers;
-	cout << "Done." << endl;
-
-	output.close();
 }

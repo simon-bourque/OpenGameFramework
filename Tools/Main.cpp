@@ -3,8 +3,6 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
 
-#include <pugixml.hpp>
-
 #include <Resource/RawImage.h>
 #include <Core/Core.h>
 #include <Scene/Tile.h>

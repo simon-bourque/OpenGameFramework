@@ -1,6 +1,4 @@
 #pragma once
-#ifndef COLLISIONSYSTEM_H
-#define COLLISIONSYSTEM_H
 
 #include "Physics/Collision/Manifold.h"
 
@@ -28,5 +26,3 @@ public:
 
 	const QuadTree* getQuadTree() const { return m_tree; };
 };
-
-#endif

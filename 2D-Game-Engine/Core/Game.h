@@ -1,6 +1,4 @@
 #pragma once
-#ifndef GAME_H
-#define GAME_H
 
 #include "Core/Core.h"
 
@@ -34,6 +32,3 @@ public:
 
 	int32 getFps() const { return m_fps; };
 };
-
-#endif
-

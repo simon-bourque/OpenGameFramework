@@ -1,6 +1,4 @@
 #pragma once
-#ifndef TEXTURE_H
-#define TEXTURE_H
 
 #include "Core/Core.h"
 
@@ -55,6 +53,3 @@ public:
 	Texture(const Texture&) = delete;
 	Texture& operator=(const Texture&) = delete;
 };
-
-#endif
-

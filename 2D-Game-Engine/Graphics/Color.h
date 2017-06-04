@@ -1,6 +1,4 @@
 #pragma once
-#ifndef COLOR_H
-#define COLOR_H
 
 #include "Core/Core.h"
 
@@ -33,5 +31,3 @@ struct Color
 
 	static Color createColorHexRGB(uint32 rgb);
 };
-
-#endif

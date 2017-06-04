@@ -1,6 +1,4 @@
 #pragma once
-#ifndef SPRITERENDERER_H
-#define SPRITERENDERER_H
 
 #include "Graphics/Renderer/Renderer.h"
 #include "Core/Core.h"
@@ -33,6 +31,3 @@ public:
 	void renderSpriteUI(const Rectangle& bounds, const Texture* texture, bool hFlip, bool vFlip) const;
 	void renderAnimationFrame(const Transform& transform, uint32 frame, const Texture& texture, bool hFlip, bool vFlip) const;
 };
-
-#endif;
-

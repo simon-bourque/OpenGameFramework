@@ -1,6 +1,4 @@
 #pragma once
-#ifndef TEXT_H
-#define TEXT_H
 
 #include "Core/Core.h"
 
@@ -49,5 +47,3 @@ public:
 	float32 getScale() const { return m_scale; };
 	void setScale(float32 scale) { m_scale = scale; };
 };
-
-#endif

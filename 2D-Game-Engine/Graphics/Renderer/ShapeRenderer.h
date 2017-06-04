@@ -1,6 +1,4 @@
 #pragma once
-#ifndef SHAPERENDERER_H
-#define SHAPERENDERER_H
 
 #include "Core/Core.h"
 
@@ -50,5 +48,3 @@ public:
 	void drawCircle(float32 x, float32 y, float32 radius, const Color& color, bool filled);
 	void drawEllipse(float32 x, float32 y, float32 width, float32 height, const Color& color, bool filled);
 };
-
-#endif

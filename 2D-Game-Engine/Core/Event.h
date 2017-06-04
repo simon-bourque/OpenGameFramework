@@ -1,6 +1,4 @@
 #pragma once
-#ifndef EVENT_H
-#define EVENT_H
 
 #include "Core/Core.h"
 
@@ -53,5 +51,3 @@ const T* Event::paramAsClass() const {
 	static_assert(std::is_class<T>::value, "Type must be a class.");
 	return static_cast<const T*>(param.asPointer);
 }
-
-#endif

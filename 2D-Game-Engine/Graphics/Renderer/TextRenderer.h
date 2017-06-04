@@ -1,6 +1,4 @@
 #pragma once
-#ifndef TEXTRENDERER_H
-#define TEXTRENDERER_H
 
 #include "Graphics/Renderer/Renderer.h"
 
@@ -22,5 +20,3 @@ public:
 
 	void renderText(const Text* text, float32 x, float32 y, const Color& color) const;
 };
-
-#endif

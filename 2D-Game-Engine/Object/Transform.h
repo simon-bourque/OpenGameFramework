@@ -1,6 +1,4 @@
 #pragma once
-#ifndef TRANSFORM_H
-#define TRANSFORM_H
 
 #include "Core/Core.h"
 
@@ -23,6 +21,4 @@ struct Transform
 	void scale(float32 scale);
 	Matrix3f toMatrix() const;
 };
-
-#endif
 

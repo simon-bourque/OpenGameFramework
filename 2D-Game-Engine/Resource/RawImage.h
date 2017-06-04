@@ -1,6 +1,4 @@
 #pragma once
-#ifndef RAWIMAGE_H
-#define RAWIMAGE_H
 
 #include "Core/Core.h"
 
@@ -31,6 +29,3 @@ public:
 	RawImage& operator=(const RawImage& img);
 	RawImage& operator=(RawImage&& img);
 };
-
-#endif
-

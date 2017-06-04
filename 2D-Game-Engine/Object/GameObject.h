@@ -1,6 +1,4 @@
 #pragma once
-#ifndef GAMEOBJECT_H
-#define GAMEOBJECT_H
 
 #include "Core/Core.h"
 
@@ -45,5 +43,3 @@ public:
 	void debugRender();
 #endif
 };
-
-#endif

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef FONT_H
-#define FONT_H
 
 #include "Core/Core.h"
 
@@ -28,5 +26,3 @@ public:
 	Font(const Font&) = delete;
 	Font& operator=(const Font&) = delete;
 };
-
-#endif

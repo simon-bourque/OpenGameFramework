@@ -1,6 +1,4 @@
 #pragma once
-#ifndef SHAPE_H
-#define SHAPE_H
 
 #include "Core/Core.h"
 
@@ -18,5 +16,3 @@ public:
 	virtual void setX(float32 x) { m_x = x; };
 	virtual void setY(float32 y) { m_y = y; };
 };
-#endif
-

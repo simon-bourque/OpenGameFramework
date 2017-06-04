@@ -1,6 +1,4 @@
 #pragma once
-#ifndef VECTOR2F_H
-#define VECTOR2F_H
 
 #include "Core/Core.h"
 
@@ -37,6 +35,3 @@ struct Vector2f
 	Vector2f operator/(float32 s) const;
 	bool operator==(const Vector2f& v) const;
 };
-
-#endif
-

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef RENDERABLECOMPONENT_H
-#define RENDERABLECOMPONENT_H
 
 #include "Object/Component/ObjectComponent.h"
 
@@ -18,5 +16,3 @@ public:
 
 	virtual void render() = 0;
 };
-
-#endif

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef WINDOW_H
-#define WINDOW_H
 
 #include "Core/Core.h"
 
@@ -54,6 +52,3 @@ public:
 		delete s_instance;
 	}
 };
-
-#endif
-

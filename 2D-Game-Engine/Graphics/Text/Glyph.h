@@ -1,6 +1,4 @@
 #pragma once
-#ifndef GLYPH_H
-#define GLYPH_H
 
 #include "Core/Core.h"
 
@@ -18,5 +16,3 @@ public:
 	Glyph();
 	Glyph(uint32 index, float32 width, float32 height, float32 xOffset, float32 yOffset, float32 xAdvance, const float32 (&textCoords)[12], const float32 (&vertices)[12]);
 };
-
-#endif

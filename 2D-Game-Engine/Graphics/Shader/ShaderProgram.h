@@ -1,6 +1,4 @@
 #pragma once
-#ifndef SHADERPROGRAM_H
-#define SHADERPROGRAM_H
 
 #include "Core/Core.h"
 
@@ -28,6 +26,3 @@ public:
 	ShaderProgram(const ShaderProgram&) = delete;
 	ShaderProgram& operator=(const ShaderProgram&) = delete;
 };
-
-#endif
-

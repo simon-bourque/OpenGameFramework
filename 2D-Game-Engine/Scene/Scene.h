@@ -1,6 +1,4 @@
 #pragma once
-#ifndef SCENE_H
-#define SCENE_H
 
 #include "Core/Core.h"
 
@@ -46,5 +44,3 @@ public:
 
 	CollisionSystem* getCollisionSystem() { return m_collisionSystem.get(); };
 };
-
-#endif

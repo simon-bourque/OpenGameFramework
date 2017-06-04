@@ -1,6 +1,4 @@
 #pragma once
-#ifndef DELEGATE_H
-#define DELEGATE_H
 
 template <typename... Params>
 class BaseDelegate {
@@ -26,5 +24,3 @@ template <typename T, typename... Params>
 void Delegate<T, Params...>::operator()(Params... args) {
 	(m_object->*m_method)(args...);
 }
-
-#endif

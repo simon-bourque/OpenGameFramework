@@ -1,6 +1,4 @@
 #pragma once
-#ifndef INAIRSTATE_H
-#define INAIRSTATE_H
 
 #include "PlayerState.h"
 
@@ -16,5 +14,3 @@ public:
 	void onExit() override;
 	void tick(float32 delta) override;
 };
-
-#endif

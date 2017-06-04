@@ -1,6 +1,4 @@
 #pragma once
-#ifndef VERTEXARRAYOBJECT_H
-#define VERTEXARRAYOBJECT_H
 
 #include "Core/Core.h"
 
@@ -29,6 +27,3 @@ public:
 
 	Buffer* getBuffer(uint32 index) const { return m_buffers[index]; }; // TODO add bounds checking
 };
-
-#endif
-

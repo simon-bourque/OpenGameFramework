@@ -1,6 +1,4 @@
 #pragma once
-#ifndef RESOURCES_H
-#define RESOURCES_H
 
 #include "Core/Core.h"
 
@@ -20,5 +18,3 @@ RawImage* loadImages(string file, int32 margin, int32 spacing, int32 tileWidth, 
 RawImage* loadImages(const string& imgFile, const string& infoFile, uint32& numberOfImages);
 std::pair<char, Glyph>* loadFont(const string& file, uint32& charMapSize, Glyph& invalidCharacter);
 TileScene* loadTileLevel(string file);
-
-#endif

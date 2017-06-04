@@ -1,6 +1,4 @@
 #pragma once
-#ifndef BUFFER_H
-#define BUFFER_H
 
 #include "Core/Core.h"
 
@@ -64,5 +62,3 @@ public:
 	Buffer(const Buffer&) = delete;
 	Buffer& operator=(const Buffer&) = delete;
 };
-
-#endif

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef COMPONENTTYPE_H
-#define COMPONENTTYPE_H
 
 enum ComponentType {
 	DEFAULT,
@@ -10,5 +8,3 @@ enum ComponentType {
 	SPRITE_COMPONENT,
 	CAMERA_COMPONENT
 };
-
-#endif

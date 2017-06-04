@@ -1,6 +1,4 @@
 #pragma once
-#ifndef SCENEMANAGER_H
-#define SCENEMANAGER_H
 
 #include "Core/Core.h"
 #include "Core/EngineAssert.h"
@@ -47,5 +45,3 @@ public:
 		delete s_instance;
 	}
 };
-
-#endif

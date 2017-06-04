@@ -1,6 +1,4 @@
 #pragma once
-#ifndef ANIMATORCOMPONENT_H
-#define ANIMATORCOMPONENT_H
 
 #include "Core/Core.h"
 
@@ -45,5 +43,3 @@ public:
 	virtual void debugRender() override;
 #endif
 };
-
-#endif

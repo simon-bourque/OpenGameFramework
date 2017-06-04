@@ -1,6 +1,4 @@
 #pragma once
-#ifndef TEXTUREMANAGER_H
-#define TEXTUREMANAGER_H
 
 #include "Core/Core.h"
 
@@ -26,6 +24,3 @@ public:
 	Texture* createTexture2DArray(const string& name, Texture::Filter filtering, Texture::Wrap textureWrapS = Texture::Wrap::CLAMP_TO_EDGE, Texture::Wrap textureWrapT = Texture::Wrap::CLAMP_TO_EDGE);
 	Texture* createTextureBuffer(const string& name, Buffer* buffer);
 };
-
-#endif
-

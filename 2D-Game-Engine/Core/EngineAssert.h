@@ -1,6 +1,4 @@
 #pragma once
-#ifndef ENGINEASSERT_H
-#define ENGINEASSERT_H
 
 #ifdef DEBUG_BUILD
 
@@ -23,6 +21,4 @@ bool showAssertDialogWindows(const string& msg, const string& fileName, uint32 l
 
 #else
 	#define ASSERT(expr, msg) ((void)0)
-#endif
-
 #endif

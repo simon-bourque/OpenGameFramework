@@ -1,6 +1,4 @@
 #pragma once
-#ifndef MANIFOLD_H
-#define MANIFOLD_H
 
 #include "Math/Vector2f.h"
 
@@ -16,5 +14,3 @@ public:
 	Manifold(Shape* colA, Shape* colB, float32 depth, const Vector2f& direction);
 	virtual ~Manifold();
 };
-
-#endif

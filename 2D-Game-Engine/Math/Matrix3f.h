@@ -1,6 +1,4 @@
 #pragma once
-#ifndef MATRIX3F_H
-#define MATRIX3F_H
 
 #include "Core/Core.h"
 
@@ -39,5 +37,3 @@ struct Matrix3f
 	static Matrix3f rotation(float32 angle);
 	static Matrix3f orthographic(float32 l, float32 r, float32 t, float32 b, float32 n, float32 f);
 };
-
-#endif

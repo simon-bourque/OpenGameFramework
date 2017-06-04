@@ -1,6 +1,4 @@
 #pragma once
-#ifndef STATE_H
-#define STATE_H
 
 #include "Core/Core.h"
 
@@ -25,5 +23,3 @@ public:
 	virtual void onExit() = 0;
 	virtual void tick(float32 delta) = 0;
 };
-
-#endif

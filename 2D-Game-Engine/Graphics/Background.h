@@ -1,6 +1,4 @@
 #pragma once
-#ifndef BACKGROUND_H
-#define BACKGROUND_H
 
 #include "Core/Core.h"
 
@@ -22,5 +20,3 @@ public:
 
 	void render();
 };
-
-#endif

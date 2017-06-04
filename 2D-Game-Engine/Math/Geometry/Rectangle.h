@@ -1,6 +1,4 @@
 #pragma once
-#ifndef RECTANGLE_H
-#define RECTANGLE_H
 
 #include "Core/Core.h"
 
@@ -42,6 +40,3 @@ public:
 
 	bool intersects(const Rectangle& rect) const;
 };
-
-#endif
-

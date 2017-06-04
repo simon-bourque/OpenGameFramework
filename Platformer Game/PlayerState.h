@@ -1,6 +1,4 @@
 #pragma once
-#ifndef PLAYERSTATE_H
-#define PLAYERSTATE_H
 
 #include "Object/State/State.h"
 
@@ -13,5 +11,3 @@ public:
 	PlayerState(PlayerController* pc);
 	virtual ~PlayerState();
 };
-
-#endif

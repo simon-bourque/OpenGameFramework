@@ -1,6 +1,4 @@
 #pragma once
-#ifndef ANIMSTATE_H
-#define ANIMSTATE_H
 
 #include "Core/Core.h"
 
@@ -19,5 +17,3 @@ public:
 	virtual void tick(float32 delta) = 0;
 	virtual void render(const AnimatorComponent& component) = 0;
 };
-
-#endif

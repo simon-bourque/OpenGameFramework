@@ -1,6 +1,4 @@
 #pragma once
-#ifndef RIGIDBODYCOMPONENT_H
-#define RIGIDBODYCOMPONENT_H
 
 #include "Core/Core.h"
 
@@ -35,5 +33,3 @@ public:
 	virtual void debugRender() override;
 #endif
 };
-
-#endif

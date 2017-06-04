@@ -1,6 +1,4 @@
 #pragma once
-#ifndef QUADTREE_H
-#define QUADTREE_H
 
 #include "Core/Core.h"
 
@@ -46,5 +44,3 @@ public:
 	void render() const;
 #endif
 };
-
-#endif

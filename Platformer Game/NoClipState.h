@@ -1,5 +1,5 @@
-#pragma once
 #ifdef DEBUG_BUILD
+#pragma once
 
 #include "Core/Core.h"
 

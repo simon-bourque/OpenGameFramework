@@ -1,6 +1,4 @@
 #pragma once
-#ifndef PLAYER_H
-#define PLAYER_H
 
 #include "Object\GameObject.h"
 
@@ -12,5 +10,3 @@ public:
 	Player(Game* game, const Vector2f& spawnLocation);
 	virtual ~Player();
 };
-
-#endif

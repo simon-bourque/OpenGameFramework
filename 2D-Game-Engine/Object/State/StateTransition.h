@@ -1,6 +1,4 @@
 #pragma once
-#ifndef STATETRANSITION_H
-#define STATETRANSITION_H
 
 #include "Object/State/Condition.h"
 
@@ -29,5 +27,3 @@ template<typename T>
 static BaseCondition* StateTransition::createCondition(T* object, bool(T::*method)()) {
 	return new Condition<T>(object, method);
 }
-
-#endif

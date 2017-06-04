@@ -1,6 +1,4 @@
 #pragma once
-#ifndef TYPES_H
-#define TYPES_H
 
 #include <cstdint>
 
@@ -18,5 +16,3 @@ typedef uint64_t uint64;
 
 typedef float float32;
 typedef double float64;
-
-#endif

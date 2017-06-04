@@ -1,6 +1,4 @@
 #pragma once
-#ifndef OBJECTCOMPONENT_H
-#define OBJECTCOMPONENT_H
 
 #include "Core/Core.h"
 
@@ -34,5 +32,3 @@ public:
 	virtual void debugRender() = 0;
 #endif
 };
-
-#endif

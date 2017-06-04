@@ -1,6 +1,4 @@
 #pragma once
-#ifndef SCENERENDERER_H
-#define SCENERENDERER_H
 
 #include "Graphics/Renderer/Renderer.h"
 
@@ -32,5 +30,3 @@ public:
 	void renderBackground(const Background& bg) const;
 	void renderTiles(const VertexArrayObject* tileVAO, const Texture* tileSheet, int32 numberOfTiles) const;
 };
-
-#endif

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef TILESCENE_H
-#define TILESCENE_H
 
 #include "Core/Core.h"
 
@@ -21,5 +19,3 @@ public:
 
 	virtual void render() override;
 };
-
-#endif

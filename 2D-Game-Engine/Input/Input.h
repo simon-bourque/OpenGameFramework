@@ -1,6 +1,4 @@
 #pragma once
-#ifndef INPUT_H
-#define INPUT_H
 
 #include "Core/Core.h"
 #include "Core/Delegate.h"
@@ -284,6 +282,3 @@ void Input::addScrollListener(T* object, void(T::*method)(float64 xOffset, float
 	Delegate<T, float64, float64>* listener = new Delegate<T, float64, float64>(object, method);
 	m_scrollListeners.push_back(listener);
 }
-
-#endif
-

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef RESOURCEMANAGER_H
-#define RESOURCEMANAGER_H
 
 #include "Core/Core.h"
 
@@ -57,6 +55,3 @@ T* ResourceManager<T>::getResource(const string& name) const {
 	}
 	return nullptr;
 }
-
-
-#endif

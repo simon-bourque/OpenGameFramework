@@ -1,8 +1,6 @@
 #ifdef DEBUG_BUILD
 
 #pragma once
-#ifndef DEBUG_H
-#define DEBUG_H
 
 #include "Core/Core.h"
 #include "Core/EngineAssert.h"
@@ -64,5 +62,4 @@ public:
 	}
 };
 
-#endif
 #endif

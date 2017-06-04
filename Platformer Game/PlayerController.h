@@ -1,6 +1,4 @@
 #pragma once
-#ifndef PLAYERCONTROLLER_H
-#define PLAYERCONTROLLER_H
 
 #include "Core/Core.h"
 
@@ -56,5 +54,3 @@ public:
 	virtual void debugRender() override;
 #endif
 };
-
-#endif

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef ANIMATION_H
-#define ANIMATION_H
 
 #include "Core/Core.h"
 
@@ -26,5 +24,3 @@ public:
 	Animation& operator=(const Animation& anim);
 	Animation& operator=(Animation&& anim);
 };
-
-#endif

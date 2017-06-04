@@ -1,6 +1,4 @@
 #pragma once
-#ifndef CAMERACOMPONENT_H
-#define CAMERACOMPONENT_H
 
 #include "Object/Component/ObjectComponent.h"
 
@@ -54,5 +52,3 @@ public:
 	virtual void debugRender() override;
 #endif
 };
-
-#endif

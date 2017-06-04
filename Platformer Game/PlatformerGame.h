@@ -1,6 +1,4 @@
 #pragma once
-#ifndef PLATFORMERGAME_H
-#define PLATFORMERGAME_H
 
 #include "Core/Game.h"
 
@@ -28,6 +26,4 @@ public:
 
 	void onKeyPress(int32 key, int32 scancode, int32 action, int32 mods);
 };
-
-#endif
 

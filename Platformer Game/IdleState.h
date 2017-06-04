@@ -1,6 +1,4 @@
 #pragma once
-#ifndef IDLESTATE_H
-#define IDLESTATE_H
 
 #include "PlayerState.h"
 
@@ -15,5 +13,3 @@ public:
 	virtual void onExit() override;
 	virtual void tick(float32 delta) override;
 };
-
-#endif

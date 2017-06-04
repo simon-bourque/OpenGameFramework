@@ -1,6 +1,4 @@
 #pragma once
-#ifndef STATEMACHINE_H
-#define STATEMACHINE_H
 
 #include "Core/Core.h"
 
@@ -42,5 +40,3 @@ void StateMachine::createState(const string& stateName, Params... args) {
 
 	m_states[stateName] = state;
 };
-
-#endif

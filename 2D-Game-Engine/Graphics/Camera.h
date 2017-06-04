@@ -1,6 +1,4 @@
 #pragma once
-#ifndef CAMERA_H
-#define CAMERA_H
 
 #include "Object/Transform.h"
 
@@ -31,5 +29,3 @@ public:
 	const Matrix3f& getViewProjectionMatrix() const { return m_viewProjectionMatrix; }
 	const Rectangle& getViewPort() const { return m_viewPort; };
 };
-
-#endif

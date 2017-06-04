@@ -1,6 +1,4 @@
 #pragma once
-#ifndef COLLIDERCOMPONENT_H
-#define COLLIDERCOMPONENT_H
 
 #include "Core/Core.h"
 
@@ -56,5 +54,3 @@ void AABBColliderComponent::setCollisionResponse(T* object, void(T::*method)(con
 	delete m_response;
 	m_response = new Delegate<AABBColliderComponent, const Manifold&, GameObject*>(object, method);
 }
-
-#endif

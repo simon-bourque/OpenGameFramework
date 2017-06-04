@@ -1,6 +1,4 @@
 #pragma once
-#ifndef SPRITESEQUENCEANIMSTATE_H
-#define SPRITESEQUENCEANIMSTATE_H
 
 #include "Core/Core.h"
 
@@ -18,5 +16,3 @@ public:
 	virtual void tick(float32 delta) override;
 	virtual void render(const AnimatorComponent& component) override;
 };
-
-#endif

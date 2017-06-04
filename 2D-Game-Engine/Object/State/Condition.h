@@ -1,6 +1,4 @@
 #pragma once
-#ifndef CONDITION_H
-#define CONDITION_H
 
 class BaseCondition {
 public:
@@ -24,5 +22,3 @@ template<typename T>
 bool Condition<T>::eval() const {
 	return (m_object->*m_method)();
 }
-
-#endif

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef FONTMANAGER_H
-#define FONTMANAGER_H
 
 #include "Core/Core.h"
 
@@ -15,5 +13,3 @@ public:
 
 	Font* createFont(const string& name);
 };
-
-#endif

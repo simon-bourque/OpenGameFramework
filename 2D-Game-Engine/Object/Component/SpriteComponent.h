@@ -1,6 +1,4 @@
 #pragma once
-#ifndef SPRITECOMPONENT_H
-#define SPRITECOMPONENT_H
 
 #include "Core/Core.h"
 
@@ -38,5 +36,3 @@ public:
 	virtual void debugRender() override;
 #endif
 };
-
-#endif

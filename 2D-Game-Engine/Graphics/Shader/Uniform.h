@@ -1,6 +1,4 @@
 #pragma once
-#ifndef UNIFORM_H
-#define UNIFORM_H
 
 #include "Core/Core.h"
 
@@ -23,6 +21,3 @@ public:
 	GLint getSize() const { return m_size; };
 	GLenum getType() const { return m_type; };
 };
-
-#endif
-

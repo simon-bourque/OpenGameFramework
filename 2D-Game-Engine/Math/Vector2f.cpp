@@ -60,3 +60,7 @@ bool Vector2f::operator==(const Vector2f& v) const {
 	// TODO actually implement a proper way to compare floating point numbers
 	return abs(x - v.x) < 0.000005 && abs(y - v.y) < 0.000005;
 }
+
+Vector2f Vector2f::createVectorFromPolar(float32 magnitude, float32 direction) {
+	return{magnitude * cos(direction), magnitude * sin(direction)};
+}

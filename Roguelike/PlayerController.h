@@ -2,13 +2,19 @@
 
 #include "Object/Component/ObjectComponent.h"
 
+#include "Core/Core.h"
+
 class RoguePlayer;
 
 class PlayerController : public ObjectComponent {
 private:
 	enum Direction {
 		NORTH,
+		NORTH_WEST,
+		NORTH_EAST,
 		SOUTH,
+		SOUTH_WEST,
+		SOUTH_EAST,
 		EAST,
 		WEST,
 		NONE
@@ -28,6 +34,10 @@ private:
 	float32 m_swordCountdown;
 	float32 m_walkDelay;
 	bool m_swingingSword;
+
+	void flipSwordSprite(Direction direction);
+	void selectAnimation(Direction direction);
+	void movePlayer(Direction direction, float32 delta);
 public:
 	PlayerController(GameObject* parentObject, RoguePlayer* player);
 	virtual ~PlayerController();

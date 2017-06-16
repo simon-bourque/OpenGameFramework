@@ -7,6 +7,9 @@
 #include "Object/Component/SpriteComponent.h"
 #include "Input/Input.h"
 
+#include "Math/Vector2f.h"
+#include "Math/Constants.h"
+
 #include "Sound/SoundEngine.h"
 
 #include "RoguePlayer.h"
@@ -34,59 +37,9 @@ void PlayerController::tick(float32 delta) {
 
 	Direction direction = getDirection();
 
-	string str("IDLE_S");
-	switch (direction) {
-	case NORTH:
-		if (direction != m_lastDirection) {
-			str = "WALK_N";
-			getParentObject()->broadcastEvent(Event(Event::Type::ANIM_STATE_CHANGE, &str));
-		}
-		getParentObject()->getTransform().translate(0, SPEED * delta);
-		break;
-	case SOUTH:
-		if (direction != m_lastDirection) {
-			str = "WALK_S";
-			getParentObject()->broadcastEvent(Event(Event::Type::ANIM_STATE_CHANGE, &str));
-		}
-		getParentObject()->getTransform().translate(0, -SPEED * delta);
-		break;
-	case WEST:
-		if (direction != m_lastDirection) {
-			str = "WALK_W";
-			getParentObject()->broadcastEvent(Event(Event::Type::ANIM_STATE_CHANGE, &str));
-			SpriteComponent* cp = (SpriteComponent*)(m_player->getSword()->findComponent(ComponentType::SPRITE_COMPONENT));
-			cp->setHorizontalFlip(false);
-			m_swordOffset = -0.4f;
-		}
-		getParentObject()->getTransform().translate(-SPEED * delta, 0);
-		break;
-	case EAST:
-		if (direction != m_lastDirection) {
-			str = "WALK_E";
-			getParentObject()->broadcastEvent(Event(Event::Type::ANIM_STATE_CHANGE, &str));
-			SpriteComponent* cp = (SpriteComponent*)(m_player->getSword()->findComponent(ComponentType::SPRITE_COMPONENT));
-			cp->setHorizontalFlip(true);
-			m_swordOffset = 0.4f;
-		}
-		getParentObject()->getTransform().translate(SPEED * delta, 0);
-		break;
-	case NONE:
-		if (direction != m_lastDirection) {
-			if (m_lastDirection == NORTH) {
-				str = "IDLE_N";
-			}
-			else if (m_lastDirection == SOUTH) {
-				str = "IDLE_S";
-			}
-			else if (m_lastDirection == EAST) {
-				str = "IDLE_E";
-			}
-			else if (m_lastDirection == WEST) {
-				str = "IDLE_W";
-			}
-			getParentObject()->broadcastEvent(Event(Event::Type::ANIM_STATE_CHANGE, &str));
-		}
-	}
+	movePlayer(direction, delta);
+	selectAnimation(direction);
+	flipSwordSprite(direction);
 
 	if (direction != NONE) {
 		m_walkDelay += delta;
@@ -99,8 +52,8 @@ void PlayerController::tick(float32 delta) {
 	m_lastDirection = direction;
 
 	// Move sword
-		m_player->getSword()->getTransform().xPos = getParentObject()->getTransform().xPos + m_swordOffset;
-		m_player->getSword()->getTransform().yPos = getParentObject()->getTransform().yPos;
+	m_player->getSword()->getTransform().xPos = getParentObject()->getTransform().xPos + m_swordOffset;
+	m_player->getSword()->getTransform().yPos = getParentObject()->getTransform().yPos;
 
 	if (m_swingingSword) {
 		m_swordCountdown -= delta;
@@ -114,20 +67,116 @@ void PlayerController::tick(float32 delta) {
 }
 
 PlayerController::Direction PlayerController::getDirection() const {
-	if (m_upAction && !m_downAction && !m_rightAction && !m_leftAction) {
+	if ((m_upAction && !m_downAction && !m_rightAction && !m_leftAction) || (m_upAction && !m_downAction && m_rightAction && m_leftAction)) {
 		return NORTH;
 	}
-	if (!m_upAction && m_downAction && !m_rightAction && !m_leftAction) {
+	if (m_upAction && !m_downAction && !m_rightAction && m_leftAction) {
+		return NORTH_WEST;
+	}
+	if (m_upAction && !m_downAction && m_rightAction && !m_leftAction) {
+		return NORTH_EAST;
+	}
+	if ((!m_upAction && m_downAction && !m_rightAction && !m_leftAction) || (!m_upAction && m_downAction && m_rightAction && m_leftAction)) {
 		return SOUTH;
 	}
-	if (!m_upAction && !m_downAction && m_rightAction && !m_leftAction) {
+	if (!m_upAction && m_downAction && !m_rightAction && m_leftAction) {
+		return SOUTH_WEST;
+	}
+	if (!m_upAction && m_downAction && m_rightAction && !m_leftAction) {
+		return SOUTH_EAST;
+	}
+	if ((!m_upAction && !m_downAction && m_rightAction && !m_leftAction) || (m_upAction && m_downAction && m_rightAction && !m_leftAction)) {
 		return EAST;
 	}
-	if (!m_upAction && !m_downAction && !m_rightAction && m_leftAction) {
+	if ((!m_upAction && !m_downAction && !m_rightAction && m_leftAction) || (m_upAction && m_downAction && !m_rightAction && m_leftAction)) {
 		return WEST;
 	}
 
 	return NONE;
+}
+
+void PlayerController::flipSwordSprite(Direction direction) {
+	if (direction == m_lastDirection) {
+		return;
+	}
+
+	if (direction == EAST || direction == NORTH_EAST || direction == SOUTH_EAST) {
+		SpriteComponent* cp = (SpriteComponent*)(m_player->getSword()->findComponent(ComponentType::SPRITE_COMPONENT));
+		cp->setHorizontalFlip(true);
+		m_swordOffset = 0.4f;
+	}
+	else if (direction == WEST || direction == NORTH_WEST || direction == SOUTH_WEST) {
+		SpriteComponent* cp = (SpriteComponent*)(m_player->getSword()->findComponent(ComponentType::SPRITE_COMPONENT));
+		cp->setHorizontalFlip(false);
+		m_swordOffset = -0.4f;
+	}
+}
+
+void PlayerController::selectAnimation(Direction direction) {
+	if (direction == m_lastDirection) {
+		return;
+	}
+
+	string str("IDLE_S");
+	if (direction == NORTH) {
+		str = "WALK_N";
+	}
+	else if (direction == SOUTH) {
+		str = "WALK_S";
+	}
+	else if (direction == NORTH_WEST || direction == SOUTH_WEST || direction == WEST) {
+		str = "WALK_W";
+	}
+	else if (direction == NORTH_EAST || direction == SOUTH_EAST || direction == EAST) {
+		str = "WALK_E";
+	}
+	else {
+		if (m_lastDirection == NORTH) {
+			str = "IDLE_N";
+		}
+		else if (m_lastDirection == SOUTH) {
+			str = "IDLE_S";
+		}
+		else if (m_lastDirection == EAST || m_lastDirection == NORTH_EAST || m_lastDirection == SOUTH_EAST) {
+			str = "IDLE_E";
+		}
+		else if (m_lastDirection == WEST || m_lastDirection == NORTH_WEST || m_lastDirection == SOUTH_WEST) {
+			str = "IDLE_W";
+		}
+	}
+
+	getParentObject()->broadcastEvent(Event(Event::Type::ANIM_STATE_CHANGE, &str));
+}
+
+void PlayerController::movePlayer(Direction direction, float32 delta) {
+	const static float32 SPEED = 5.0f;
+
+	switch (direction) {
+	case NORTH:
+		getParentObject()->getTransform().translate(0, SPEED * delta);
+		break;
+	case NORTH_WEST:
+		getParentObject()->getTransform().translate(Vector2f::createVectorFromPolar(SPEED * delta, 3 * PI_4));
+		break;
+	case NORTH_EAST:
+		getParentObject()->getTransform().translate(Vector2f::createVectorFromPolar(SPEED * delta, PI_4));
+		break;
+	case SOUTH:
+		getParentObject()->getTransform().translate(0, -SPEED * delta);
+		break;
+	case SOUTH_WEST:
+		getParentObject()->getTransform().translate(Vector2f::createVectorFromPolar(SPEED * delta, 5 * PI_4));
+		break;
+	case SOUTH_EAST:
+		getParentObject()->getTransform().translate(Vector2f::createVectorFromPolar(SPEED * delta, 7 * PI_4));
+		break;
+	case WEST:
+		getParentObject()->getTransform().translate(-SPEED * delta, 0);
+		break;
+	case EAST:
+		getParentObject()->getTransform().translate(SPEED * delta, 0);
+		break;
+	}
 }
 
 ComponentType PlayerController::getType() {

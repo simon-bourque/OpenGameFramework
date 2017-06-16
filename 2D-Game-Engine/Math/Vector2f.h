@@ -34,4 +34,6 @@ struct Vector2f
 	Vector2f operator*(float32 s) const;
 	Vector2f operator/(float32 s) const;
 	bool operator==(const Vector2f& v) const;
+
+	static Vector2f createVectorFromPolar(float32 magnitude, float32 direction);
 };

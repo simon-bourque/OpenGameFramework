@@ -64,8 +64,8 @@ void PlatformerGame::onKeyPress(int32 key, int32 scancode, int32 action, int32 m
 			rb->stop();
 		}
 
-		m_player->getTransform().xPos = 0.5f;
-		m_player->getTransform().yPos = -10.8f;
+		m_player->transform.xPos = 0.5f;
+		m_player->transform.yPos = -10.8f;
 	}
 }
 

@@ -26,8 +26,8 @@ Player::Player(Game* game, const Vector2f& spawnLocation) {
 	const static float32 PLAYER_HEIGHT = 1.4f;
 	const static float32 ANIM_DELAY = 0.05f;
 
-	getTransform().yScale = PLAYER_HEIGHT;
-	getTransform().translate(spawnLocation);
+	transform.yScale = PLAYER_HEIGHT;
+	transform.translate(spawnLocation);
 
 	// ###################### Animations #####################################
 	Texture* walkTexture = RenderSystem::get()->getTextureManager()->createTexture2DArray("player_walk.tx", Texture::Filter::NEAREST_NEIGHBOR);

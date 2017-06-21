@@ -7,9 +7,9 @@
 
 class Camera
 {
-private:
-	Transform m_transform;
-	
+public:
+	Transform transform;
+private:	
 	Rectangle m_viewPort;
 
 	Matrix3f m_projectionMatrix;
@@ -21,9 +21,6 @@ public:
 
 	void updateViewProjectionMatrix();
 	Matrix3f getViewMatrix() const;
-
-	const Transform& getTransform() const { return m_transform; }
-	Transform& getTransform() { return m_transform; }
 
 	const Matrix3f& getProjectionMatrix() const { return m_projectionMatrix; }
 	const Matrix3f& getViewProjectionMatrix() const { return m_viewProjectionMatrix; }

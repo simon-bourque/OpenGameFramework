@@ -40,7 +40,7 @@ void RigidBodyComponent::tick(float32 delta) {
 	Vector2f vF(m_velocity + (acceleration * delta));
 	Vector2f displacement(((m_velocity + vF) / 2) * delta);
 
-	m_parentObject->getTransform().translate(displacement);
+	m_parentObject->transform.translate(displacement);
 	m_velocity = vF;
 }
 

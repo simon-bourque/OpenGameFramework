@@ -58,16 +58,16 @@ void NoClipState::tick(float32 delta) {
 	static const float32 SPEED = 20;
 
 	if (m_pc->isLeftAction()) {
-		m_pc->getParentObject()->getTransform().translate(-SPEED * delta, 0);
+		m_pc->getParentObject()->transform.translate(-SPEED * delta, 0);
 	}
 	if (m_pc->isRightAction()) {
-		m_pc->getParentObject()->getTransform().translate(SPEED * delta, 0);
+		m_pc->getParentObject()->transform.translate(SPEED * delta, 0);
 	}
 	if (m_pc->isUpAction()) {
-		m_pc->getParentObject()->getTransform().translate(0, SPEED * delta);
+		m_pc->getParentObject()->transform.translate(0, SPEED * delta);
 	}
 	if (m_pc->isDownAction()) {
-		m_pc->getParentObject()->getTransform().translate(0, -SPEED * delta);
+		m_pc->getParentObject()->transform.translate(0, -SPEED * delta);
 	}
 }
 

@@ -52,8 +52,8 @@ void PlayerController::tick(float32 delta) {
 	m_lastDirection = direction;
 
 	// Move sword
-	m_player->getSword()->getTransform().xPos = getParentObject()->getTransform().xPos + m_swordOffset;
-	m_player->getSword()->getTransform().yPos = getParentObject()->getTransform().yPos;
+	m_player->getSword()->transform.xPos = getParentObject()->transform.xPos + m_swordOffset;
+	m_player->getSword()->transform.yPos = getParentObject()->transform.yPos;
 
 	if (m_swingingSword) {
 		m_swordCountdown -= delta;
@@ -153,28 +153,28 @@ void PlayerController::movePlayer(Direction direction, float32 delta) {
 
 	switch (direction) {
 	case NORTH:
-		getParentObject()->getTransform().translate(0, SPEED * delta);
+		getParentObject()->transform.translate(0, SPEED * delta);
 		break;
 	case NORTH_WEST:
-		getParentObject()->getTransform().translate(Vector2f::createVectorFromPolar(SPEED * delta, 3 * PI_4));
+		getParentObject()->transform.translate(Vector2f::createVectorFromPolar(SPEED * delta, 3 * PI_4));
 		break;
 	case NORTH_EAST:
-		getParentObject()->getTransform().translate(Vector2f::createVectorFromPolar(SPEED * delta, PI_4));
+		getParentObject()->transform.translate(Vector2f::createVectorFromPolar(SPEED * delta, PI_4));
 		break;
 	case SOUTH:
-		getParentObject()->getTransform().translate(0, -SPEED * delta);
+		getParentObject()->transform.translate(0, -SPEED * delta);
 		break;
 	case SOUTH_WEST:
-		getParentObject()->getTransform().translate(Vector2f::createVectorFromPolar(SPEED * delta, 5 * PI_4));
+		getParentObject()->transform.translate(Vector2f::createVectorFromPolar(SPEED * delta, 5 * PI_4));
 		break;
 	case SOUTH_EAST:
-		getParentObject()->getTransform().translate(Vector2f::createVectorFromPolar(SPEED * delta, 7 * PI_4));
+		getParentObject()->transform.translate(Vector2f::createVectorFromPolar(SPEED * delta, 7 * PI_4));
 		break;
 	case WEST:
-		getParentObject()->getTransform().translate(-SPEED * delta, 0);
+		getParentObject()->transform.translate(-SPEED * delta, 0);
 		break;
 	case EAST:
-		getParentObject()->getTransform().translate(SPEED * delta, 0);
+		getParentObject()->transform.translate(SPEED * delta, 0);
 		break;
 	}
 }

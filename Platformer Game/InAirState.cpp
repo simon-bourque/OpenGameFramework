@@ -23,5 +23,5 @@ void InAirState::onExit() {
 }
 
 void InAirState::tick(float32 delta) {
-	m_pc->getParentObject()->getTransform().translate(PlayerController::SPEED * delta * m_pc->getDirection(), 0);
+	m_pc->getParentObject()->transform.translate(PlayerController::SPEED * delta * m_pc->getDirection(), 0);
 }

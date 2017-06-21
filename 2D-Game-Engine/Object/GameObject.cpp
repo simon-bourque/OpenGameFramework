@@ -5,7 +5,7 @@
 
 GameObject::GameObject() {}
 
-GameObject::GameObject(const Transform& transform) : m_transform(transform) {}
+GameObject::GameObject(const Transform& transform) : transform(transform) {}
 
 GameObject::~GameObject() {
 	for (ObjectComponent* component : m_components) {

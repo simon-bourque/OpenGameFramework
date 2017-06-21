@@ -70,7 +70,7 @@ RoguePlayer::RoguePlayer() : m_currentHealth(3), m_maxHealth(3), m_bonusAgility(
 	// ################### SWORD #########################
 	Texture* swordTexture = RenderSystem::get()->getTextureManager()->createTexture2D("sword.tx", Texture::Filter::NEAREST_NEIGHBOR);
 	m_sword = new GameObject();
-	m_sword->getTransform().scale(0.5f);
+	m_sword->transform.scale(0.5f);
 	SpriteComponent* spComp = new SpriteComponent(m_sword, swordTexture);
 	spComp->setVisible(false);
 	m_sword->addComponent(spComp);

@@ -37,7 +37,7 @@ void AABBColliderComponent::tick(float32 delta) {
 }
 
 void AABBColliderComponent::resetPosition() {
-	const Transform& t = getParentObject()->getTransform();
+	const Transform& t = getParentObject()->transform;
 
 	m_rectangle.setX(t.xPos + m_xOffset);
 	m_rectangle.setY(t.yPos + m_yOffset);
@@ -46,7 +46,7 @@ void AABBColliderComponent::resetPosition() {
 void AABBColliderComponent::onIntersectLevel(const Manifold& manifold) {
 	
 	Vector2f delta = manifold.direction * manifold.depth;
-	getParentObject()->getTransform().translate(delta.x, delta.y);
+	getParentObject()->transform.translate(delta.x, delta.y);
 	getParentObject()->broadcastEvent(Event(Event::Type::COLLISION_LEVEL, static_cast<const void*>(&manifold)));
 }
 

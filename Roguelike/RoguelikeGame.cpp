@@ -37,7 +37,7 @@ void RoguelikeGame::init() {
 	SceneManager::get()->loadTileLevel("level_test2.lvl");
 
 	m_player = new RoguePlayer();
-	m_player->getTransform().translate(6.5f, -89);
+	m_player->transform.translate(6.5f, -89);
 	SceneManager::get()->getCurrentScene().addGameObject(m_player);
 
 	m_mainFont = RenderSystem::get()->getFontManager()->createFont("const");

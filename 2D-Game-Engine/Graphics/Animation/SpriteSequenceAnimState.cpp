@@ -20,5 +20,5 @@ void SpriteSequenceAnimState::tick(float32 delta) {
 }
 
 void SpriteSequenceAnimState::render(const AnimatorComponent& component) {
-	RenderSystem::get()->getSpriteRenderer()->renderAnimationFrame(component.getParentObject()->getTransform(), m_animation.getCurrentFrame(), *m_texture, component.isHorizontallyFlipped(), component.isVerticallyFlipped());
+	RenderSystem::get()->getSpriteRenderer()->renderAnimationFrame(component.getParentObject()->transform, m_animation.getCurrentFrame(), *m_texture, component.isHorizontallyFlipped(), component.isVerticallyFlipped());
 }

@@ -2,7 +2,7 @@
 
 Camera::Camera(const Rectangle& viewPort) : Camera(Transform(), viewPort) {}
 
-Camera::Camera(const Transform& transform, const Rectangle& viewPort) : m_transform(transform), m_viewPort(viewPort) {
+Camera::Camera(const Transform& transform, const Rectangle& viewPort) : transform(transform), m_viewPort(viewPort) {
 	m_projectionMatrix = Matrix3f::orthographic(-viewPort.getHalfWidth(), viewPort.getHalfWidth(), viewPort.getHalfHeight(), -viewPort.getHalfHeight(), 1, 1000);
 }
 
@@ -13,5 +13,5 @@ void Camera::updateViewProjectionMatrix() {
 }
 
 Matrix3f Camera::getViewMatrix() const {
-	return m_transform.toMatrix().inverse();
+	return transform.toMatrix().inverse();
 }

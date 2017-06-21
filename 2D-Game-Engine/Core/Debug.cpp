@@ -68,8 +68,8 @@ void Debug::tick(int32 fps) {
 		const static float32 MAX_ZOOM_IN = 0.01f;
 
 		float32 ds = (m_zoomIn) ? -SCALE_INCR : SCALE_INCR;
-		float32 scaleX = RenderSystem::get()->getCamera().getTransform().xScale + ds;
-		float32 scaleY = RenderSystem::get()->getCamera().getTransform().yScale + ds;
+		float32 scaleX = RenderSystem::get()->getCamera().transform.xScale + ds;
+		float32 scaleY = RenderSystem::get()->getCamera().transform.yScale + ds;
 
 		if (scaleX < MAX_ZOOM_IN) {
 			scaleX = MAX_ZOOM_IN;
@@ -79,8 +79,8 @@ void Debug::tick(int32 fps) {
 			scaleY = MAX_ZOOM_IN;
 		}
 
-		RenderSystem::get()->getCamera().getTransform().xScale = scaleX;
-		RenderSystem::get()->getCamera().getTransform().yScale = scaleY;
+		RenderSystem::get()->getCamera().transform.xScale = scaleX;
+		RenderSystem::get()->getCamera().transform.yScale = scaleY;
 	}
 }
 
@@ -203,8 +203,8 @@ void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
 	}
 	if (key == Input::KEY_KP_ENTER && action == Input::PRESS && m_debugMode) {
 		// Reset zoom
-		RenderSystem::get()->getCamera().getTransform().xScale = 1.0f;
-		RenderSystem::get()->getCamera().getTransform().yScale = 1.0f;
+		RenderSystem::get()->getCamera().transform.xScale = 1.0f;
+		RenderSystem::get()->getCamera().transform.yScale = 1.0f;
 	}
 }
 

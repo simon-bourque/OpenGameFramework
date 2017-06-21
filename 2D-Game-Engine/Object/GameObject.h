@@ -16,9 +16,9 @@ struct Event;
 
 class GameObject
 {
+public:
+	Transform transform;
 private:
-	Transform m_transform;
-
 	std::vector<ObjectComponent*> m_components;
 	std::vector<RenderableComponent*> m_renderableComponents;
 public:
@@ -35,9 +35,6 @@ public:
 	void broadcastEvent(const Event& event);
 
 	ObjectComponent* findComponent(ComponentType type);
-
-	const Transform& getTransform() const { return m_transform; };
-	Transform& getTransform() { return m_transform; };
 
 #ifdef DEBUG_BUILD
 	void debugRender();

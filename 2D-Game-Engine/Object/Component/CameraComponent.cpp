@@ -25,11 +25,11 @@ CameraComponent::~CameraComponent() {}
 
 void CameraComponent::tick(float32 delta) {
 	if (m_trackX) {
-		m_camera->getTransform().xPos = m_xOffset + getParentObject()->getTransform().xPos;
+		m_camera->transform.xPos = m_xOffset + getParentObject()->transform.xPos;
 	}
 
 	if (m_trackY) {
-		m_camera->getTransform().yPos = m_yOffset + getParentObject()->getTransform().yPos;
+		m_camera->transform.yPos = m_yOffset + getParentObject()->transform.yPos;
 	}
 
 	if (m_sceneBounded) {
@@ -37,8 +37,8 @@ void CameraComponent::tick(float32 delta) {
 		const Rectangle& bounds = SceneManager::get()->getCurrentScene().getBounds();
 		const Rectangle& viewPort = m_camera->getViewPort();
 
-		float32 cameraX = m_camera->getTransform().xPos;
-		float32 cameraY = m_camera->getTransform().yPos;
+		float32 cameraX = m_camera->transform.xPos;
+		float32 cameraY = m_camera->transform.yPos;
 
 		float32 leftBound = bounds.getX() - bounds.getHalfWidth();
 		float32 rightBound = bounds.getX() + bounds.getHalfWidth();
@@ -47,22 +47,22 @@ void CameraComponent::tick(float32 delta) {
 
 		// Left bound
 		if (cameraX - viewPort.getHalfWidth() < leftBound && (m_sceneBoundsMask & BOUNDED_LEFT_BIT)) {
-			m_camera->getTransform().xPos = leftBound + viewPort.getHalfWidth();
+			m_camera->transform.xPos = leftBound + viewPort.getHalfWidth();
 		}
 
 		// Right bound
 		if (cameraX + viewPort.getHalfWidth() > rightBound && (m_sceneBoundsMask & BOUNDED_RIGHT_BIT)) {
-			m_camera->getTransform().xPos = rightBound - viewPort.getHalfWidth();
+			m_camera->transform.xPos = rightBound - viewPort.getHalfWidth();
 		}
 
 		// Top bound
 		if (cameraY + viewPort.getHalfHeight() > topBound && (m_sceneBoundsMask & BOUNDED_TOP_BIT)) {
-			m_camera->getTransform().yPos = topBound - viewPort.getHalfHeight();
+			m_camera->transform.yPos = topBound - viewPort.getHalfHeight();
 		}
 
 		// Bottom bound
 		if (cameraY - viewPort.getHalfHeight() < bottomBound && (m_sceneBoundsMask & BOUNDED_BOTTOM_BIT)) {
-			m_camera->getTransform().yPos = bottomBound + viewPort.getHalfHeight();
+			m_camera->transform.yPos = bottomBound + viewPort.getHalfHeight();
 		}
 	}
 }

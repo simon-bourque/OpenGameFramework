@@ -13,6 +13,8 @@
 #include "Sound/SoundEngine.h"
 #include "Physics/Collision/CollisionSystem.h"
 
+#include "Core/Platform.h"
+
 #include <GLFW/glfw3.h>
 
 #ifdef DEBUG_BUILD
@@ -21,6 +23,7 @@
 
 Game::Game(const string& title, int32 width, int32 height, const Rectangle& viewPort) : m_shutdown(false), m_fps(0) {
 	DEBUG_LOG("Initializing game...");
+	printSystemInfo();
 
 	DEBUG_LOG("Initializing window...");
 	Window::init(title, width, height);

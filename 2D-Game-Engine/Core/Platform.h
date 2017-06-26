@@ -10,3 +10,4 @@
 #include <string>
 
 void displayErrorBox(const std::string& msg);
+void printSystemInfo();

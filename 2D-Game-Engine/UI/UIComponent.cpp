@@ -2,6 +2,6 @@
 
 
 
-UIComponent::UIComponent(const Rectangle& bounds) : m_bounds(bounds), m_visible(true) {}
+UIComponent::UIComponent(const geo::Rectangle& bounds) : m_bounds(bounds), m_visible(true) {}
 
 UIComponent::~UIComponent() {}

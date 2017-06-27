@@ -10,7 +10,7 @@ class Game;
 struct Glyph;
 class Font;
 
-string loadSrc(string file);
+string loadSrc(const string& file);
 uint8* loadTexture(const string& file, uint8 type, uint32& width, uint32& height, uint8& channels);
 uint8* loadTexture(const string& file, uint8 type, uint32& width, uint32& height, uint8& channels, uint32& depth);
 RawImage* loadImage(string file);

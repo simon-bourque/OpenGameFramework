@@ -58,6 +58,9 @@
     <Filter Include="UI">
       <UniqueIdentifier>{40184a36-45f4-4c4f-b359-fd14e86f019b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource\File">
+      <UniqueIdentifier>{51ef6aba-1070-4f0e-ab4f-5bfa3b797ed7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Debug.cpp">
@@ -248,6 +251,9 @@
     </ClCompile>
     <ClCompile Include="Graphics\Window1.cpp">
       <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\File\WinFileReader.cpp">
+      <Filter>Resource\File</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -463,6 +469,9 @@
     </ClInclude>
     <ClInclude Include="Scene\TileLayer.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\File\FileReader.h">
+      <Filter>Resource\File</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

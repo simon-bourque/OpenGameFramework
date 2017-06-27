@@ -34,8 +34,8 @@ void CameraComponent::tick(float32 delta) {
 
 	if (m_sceneBounded) {
 		//Rectangle bounds = game.getScene().getBounds();
-		const Rectangle& bounds = SceneManager::get()->getCurrentScene().getBounds();
-		const Rectangle& viewPort = m_camera->getViewPort();
+		const geo::Rectangle& bounds = SceneManager::get()->getCurrentScene().getBounds();
+		const geo::Rectangle& viewPort = m_camera->getViewPort();
 
 		float32 cameraX = m_camera->transform.xPos;
 		float32 cameraY = m_camera->transform.yPos;

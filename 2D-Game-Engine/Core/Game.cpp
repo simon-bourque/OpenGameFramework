@@ -21,7 +21,7 @@
 #include "Core/Debug.h"
 #endif
 
-Game::Game(const string& title, int32 width, int32 height, const Rectangle& viewPort) : m_shutdown(false), m_fps(0) {
+Game::Game(const string& title, int32 width, int32 height, const geo::Rectangle& viewPort) : m_shutdown(false), m_fps(0) {
 	DEBUG_LOG("Initializing game...");
 	printSystemInfo();
 

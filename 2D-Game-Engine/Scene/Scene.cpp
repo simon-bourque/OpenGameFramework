@@ -6,7 +6,7 @@
 
 #include "Graphics/Background.h"
 
-Scene::Scene(const Rectangle& bounds) : m_bounds(bounds), m_gravity(0.0f) {
+Scene::Scene(const geo::Rectangle& bounds) : m_bounds(bounds), m_gravity(0.0f) {
 	m_collisionSystem.reset(new CollisionSystem(bounds));
 }
 

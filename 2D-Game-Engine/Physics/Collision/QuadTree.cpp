@@ -4,7 +4,7 @@
 
 #include <utility>
 
-QuadTree::QuadTree(const Rectangle& bounds, uint32 bucketSize) : 
+QuadTree::QuadTree(const geo::Rectangle& bounds, uint32 bucketSize) : 
 	m_bounds(bounds), 
 	m_bucketSize(bucketSize),
 	m_northWest(nullptr),
@@ -55,7 +55,7 @@ QuadTree::~QuadTree() {
 	delete m_southEast;
 }
 
-void QuadTree::insert(const Rectangle& rect) {
+void QuadTree::insert(const geo::Rectangle& rect) {
 	//if (isSplit()) {
 	//	// If has already split
 	//	addToQuadrant(rect, m_bucket);
@@ -81,9 +81,9 @@ void QuadTree::insert(const Rectangle& rect) {
 	}
 }
 
-void QuadTree::retrieve(const Rectangle& rect, std::vector<Rectangle>& list) const {
+void QuadTree::retrieve(const geo::Rectangle& rect, std::vector<geo::Rectangle>& list) const {
 
-	for (const Rectangle& rect : m_bucket) {
+	for (const geo::Rectangle& rect : m_bucket) {
 		list.push_back(rect);
 	}
 
@@ -109,21 +109,21 @@ void QuadTree::split() {
 	float32 quarterWidth = m_bounds.getHalfWidth() / 2.0f;
 	float32 quarterHeight = m_bounds.getHalfHeight() / 2.0f;
 
-	m_northWest = new QuadTree(Rectangle(m_bounds.getX() - quarterWidth, m_bounds.getY() + quarterHeight, m_bounds.getHalfWidth(), m_bounds.getHalfHeight()), m_bucketSize);
-	m_northEast = new QuadTree(Rectangle(m_bounds.getX() + quarterWidth, m_bounds.getY() + quarterHeight, m_bounds.getHalfWidth(), m_bounds.getHalfHeight()), m_bucketSize);
-	m_southWest = new QuadTree(Rectangle(m_bounds.getX() - quarterWidth, m_bounds.getY() - quarterHeight, m_bounds.getHalfWidth(), m_bounds.getHalfHeight()), m_bucketSize);
-	m_southEast = new QuadTree(Rectangle(m_bounds.getX() + quarterWidth, m_bounds.getY() - quarterHeight, m_bounds.getHalfWidth(), m_bounds.getHalfHeight()), m_bucketSize);
+	m_northWest = new QuadTree(geo::Rectangle(m_bounds.getX() - quarterWidth, m_bounds.getY() + quarterHeight, m_bounds.getHalfWidth(), m_bounds.getHalfHeight()), m_bucketSize);
+	m_northEast = new QuadTree(geo::Rectangle(m_bounds.getX() + quarterWidth, m_bounds.getY() + quarterHeight, m_bounds.getHalfWidth(), m_bounds.getHalfHeight()), m_bucketSize);
+	m_southWest = new QuadTree(geo::Rectangle(m_bounds.getX() - quarterWidth, m_bounds.getY() - quarterHeight, m_bounds.getHalfWidth(), m_bounds.getHalfHeight()), m_bucketSize);
+	m_southEast = new QuadTree(geo::Rectangle(m_bounds.getX() + quarterWidth, m_bounds.getY() - quarterHeight, m_bounds.getHalfWidth(), m_bounds.getHalfHeight()), m_bucketSize);
 
-	std::vector<Rectangle> newBucket;
+	std::vector<geo::Rectangle> newBucket;
 
-	for (const Rectangle& rect : m_bucket) {
+	for (const geo::Rectangle& rect : m_bucket) {
 		addToQuadrant(rect, newBucket);
 	}
 
 	m_bucket = std::move(newBucket);
 }
 
-void QuadTree::addToQuadrant(const Rectangle& rect, std::vector<Rectangle>& bucket) {
+void QuadTree::addToQuadrant(const geo::Rectangle& rect, std::vector<geo::Rectangle>& bucket) {
 	switch (getQuadrant(rect)) {
 	case 0:
 		m_northWest->insert(rect);
@@ -145,7 +145,7 @@ void QuadTree::addToQuadrant(const Rectangle& rect, std::vector<Rectangle>& buck
 	}
 }
 
-int8 QuadTree::getQuadrant(const Rectangle& rect) const {
+int8 QuadTree::getQuadrant(const geo::Rectangle& rect) const {
 	if (rect.intersects(m_northWest->getBounds()) && !rect.intersects(m_northEast->getBounds()) && !rect.intersects(m_southWest->getBounds()) && !rect.intersects(m_southEast->getBounds())) {
 		return 0;
 	}
@@ -232,7 +232,7 @@ void QuadTree::render() const {
 
 	RenderSystem::get()->getShapeRenderer()->drawRectangle(m_bounds, Color::BLUE, false);
 	
-	for (const Rectangle& rect : m_bucket) {
+	for (const geo::Rectangle& rect : m_bucket) {
 		RenderSystem::get()->getShapeRenderer()->drawRectangle(rect, Color::YELLOW, false);
 	}
 

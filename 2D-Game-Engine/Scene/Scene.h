@@ -15,7 +15,7 @@ class Background;
 
 class Scene {
 private:
-	Rectangle m_bounds;
+	geo::Rectangle m_bounds;
 
 	std::vector<GameObject*> m_objects;
 	std::vector<Background*> m_backgrounds;
@@ -27,7 +27,7 @@ protected:
 	void renderObjects();
 	void renderBackgrounds();
 public:
-	Scene(const Rectangle& bounds);
+	Scene(const geo::Rectangle& bounds);
 	virtual ~Scene();
 
 	virtual void tick(float32 delta);
@@ -36,8 +36,8 @@ public:
 	void addGameObject(GameObject* object);
 	void addBackground(Background* background);
 
-	const Rectangle& getBounds() const { return m_bounds; };
-	Rectangle& getBounds() { return m_bounds; };
+	const geo::Rectangle& getBounds() const { return m_bounds; };
+	geo::Rectangle& getBounds() { return m_bounds; };
 
 	float32 getGravity() const { return m_gravity; };
 	void setGravity(float32 gravity) { m_gravity = gravity; };

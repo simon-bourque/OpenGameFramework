@@ -3,7 +3,7 @@
 
 #ifdef _WIN32
 
-#define OS_WINDOWS
+#define PLATFORM_WINDOWS
 
 #endif
 

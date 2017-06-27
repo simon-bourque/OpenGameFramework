@@ -25,7 +25,7 @@
 
 #include "Player.h"
 
-PlatformerGame::PlatformerGame() : Game("Platformer", 720, 576, Rectangle(20, 16)), up(false), down(false), left(false), right(false) {}
+PlatformerGame::PlatformerGame() : Game("Platformer", 720, 576, geo::Rectangle(20, 16)), up(false), down(false), left(false), right(false) {}
 
 
 PlatformerGame::~PlatformerGame() {}

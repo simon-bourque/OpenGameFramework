@@ -7,7 +7,7 @@
 
 #include <cmath>
 
-CollisionSystem::CollisionSystem(const Rectangle& bounds) {
+CollisionSystem::CollisionSystem(const geo::Rectangle& bounds) {
 	m_tree = new QuadTree(bounds);
 }
 
@@ -20,7 +20,7 @@ void CollisionSystem::addCollider(AABBColliderComponent* collider) {
 	m_objects.push_back(collider);
 }
 
-void CollisionSystem::addStaticCollider(const Rectangle& collider) {
+void CollisionSystem::addStaticCollider(const geo::Rectangle& collider) {
 	m_tree->insert(collider);
 }
 
@@ -28,11 +28,11 @@ void CollisionSystem::narrowScan() {
 	for (uint32 i = 0; i < m_objects.size(); i++) {
 		
 		AABBColliderComponent* collider = m_objects[i];
-		Rectangle rA = collider->getRectangle();
+		geo::Rectangle rA = collider->getRectangle();
 
 		for (uint32 j = i + 1; j < m_objects.size(); j++) {
 			AABBColliderComponent* other = m_objects[j];
-			Rectangle rB = collider->getRectangle();
+			geo::Rectangle rB = collider->getRectangle();
 
 			if (rA.intersects(rB)) {
 				Manifold manifold = generateManifold(rA, rB);
@@ -41,10 +41,10 @@ void CollisionSystem::narrowScan() {
 			}
 		}
 
-		std::vector<Rectangle> rects;
+		std::vector<geo::Rectangle> rects;
 		m_tree->retrieve(rA, rects);
 
-		for (const Rectangle& rect : rects) {
+		for (const geo::Rectangle& rect : rects) {
 			if (rect.intersects(rA)) {
 				collider->onIntersectLevel(generateManifold(rA, rect));
 			}
@@ -54,7 +54,7 @@ void CollisionSystem::narrowScan() {
 	m_objects.clear();
 }
 
-Manifold CollisionSystem::generateManifold(const Rectangle& rA, const Rectangle& rB) {
+Manifold CollisionSystem::generateManifold(const geo::Rectangle& rA, const geo::Rectangle& rB) {
 	Vector2f direction;
 	float32 depth = 0;
 

@@ -53,7 +53,7 @@ Player::Player(Game* game, const Vector2f& spawnLocation) {
 
 	// ######################## Physics #####################################
 	addComponent(new RigidBodyComponent(this, 65.0f));
-	addComponent(new AABBColliderComponent(this, Rectangle(PLAYER_WIDTH, PLAYER_HEIGHT)));
+	addComponent(new AABBColliderComponent(this, geo::Rectangle(PLAYER_WIDTH, PLAYER_HEIGHT)));
 
 	PlayerController* controller = new PlayerController(this);
 	addComponent(controller);

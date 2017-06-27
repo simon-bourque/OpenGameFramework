@@ -21,6 +21,8 @@
 
 #include "Physics/Collision/CollisionSystem.h"
 
+#include "Resource/File/FileReader.h"
+
 #define STB_IMAGE_STATIC
 #define STBI_FAILURE_USERMSG
 #define STB_IMAGE_IMPLEMENTATION
@@ -41,24 +43,12 @@ const static string TEXTURE_PATH = "res/texture/";
 const static string LEVEL_PATH = "res/level/";
 const static string FONT_PATH = "res/font/";
 
-string loadSrc(string file) {
-	std::ifstream input(SHADER_PATH + file);
-
-	if (!input) {
-		input.close();
-		throw std::runtime_error("Failed to load source from file " + file);
-	}
-
+string loadSrc(const string& file) {
+	FileReader input(SHADER_PATH + file);
 	std::stringstream ss;
 
-	while (!input.eof()) {
-		int8 character = input.get();
-
-		if (input.eof()) {
-			break;
-		}
-
-		ss << character;
+	while (!input.isEndOfFile()) {
+		ss << input.readUInt8();
 	}
 
 	input.close();
@@ -428,7 +418,7 @@ TileScene* loadTileLevel(string file) {
 	int32 numColliders = 0;
 	readInt(input, numColliders);
 
-	Rectangle* colliders = new Rectangle[numColliders];
+	geo::Rectangle* colliders = new geo::Rectangle[numColliders];
 	for (int32 i = 0; i < numColliders; i++) {
 		float32 x = 0;
 		float32 y = 0;
@@ -447,7 +437,7 @@ TileScene* loadTileLevel(string file) {
 	
 	input.close();
 
-	TileScene* scene = new TileScene(Rectangle(boundsX, boundsY, boundsWidth, boundsHeight));
+	TileScene* scene = new TileScene(geo::Rectangle(boundsX, boundsY, boundsWidth, boundsHeight));
 	
 	for (uint32 i = 0; i < numLayers; i++) {
 		scene->addTileLayer(layers[i]);

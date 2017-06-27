@@ -120,7 +120,7 @@ void Debug::renderQuadTree() const {
 }
 
 void Debug::renderGrid() const {
-	Rectangle& bounds = SceneManager::get()->getCurrentScene().getBounds();
+	geo::Rectangle& bounds = SceneManager::get()->getCurrentScene().getBounds();
 	Vector2f vertLine(0,-bounds.getHeight());
 	Vector2f horizLine(bounds.getWidth(), 0);
 	

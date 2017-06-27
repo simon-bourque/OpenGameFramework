@@ -4,11 +4,11 @@
 
 class UIComponent {
 protected:
-	Rectangle m_bounds;
+	geo::Rectangle m_bounds;
 
 	bool m_visible;
 public:
-	UIComponent(const Rectangle& bounds);
+	UIComponent(const geo::Rectangle& bounds);
 	virtual ~UIComponent();
 
 	bool isVisible() const { return m_visible; };

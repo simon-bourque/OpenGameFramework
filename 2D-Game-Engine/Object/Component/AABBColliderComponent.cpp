@@ -18,7 +18,7 @@
 
 void AABBColliderComponent::emptyIntersectResponse(const Manifold& manifold, GameObject* other) {}
 
-AABBColliderComponent::AABBColliderComponent(GameObject* parentObject, const Rectangle& rectangle, float32 xOffset, float32 yOffset) : ObjectComponent(parentObject),
+AABBColliderComponent::AABBColliderComponent(GameObject* parentObject, const geo::Rectangle& rectangle, float32 xOffset, float32 yOffset) : ObjectComponent(parentObject),
 	m_rectangle(rectangle),
 	m_xOffset(xOffset),
 	m_yOffset(yOffset)

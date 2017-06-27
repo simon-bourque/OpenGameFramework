@@ -1,8 +1,8 @@
 #include "Camera.h"
 
-Camera::Camera(const Rectangle& viewPort) : Camera(Transform(), viewPort) {}
+Camera::Camera(const geo::Rectangle& viewPort) : Camera(Transform(), viewPort) {}
 
-Camera::Camera(const Transform& transform, const Rectangle& viewPort) : transform(transform), m_viewPort(viewPort) {
+Camera::Camera(const Transform& transform, const geo::Rectangle& viewPort) : transform(transform), m_viewPort(viewPort) {
 	m_projectionMatrix = Matrix3f::orthographic(-viewPort.getHalfWidth(), viewPort.getHalfWidth(), viewPort.getHalfHeight(), -viewPort.getHalfHeight(), 1, 1000);
 }
 

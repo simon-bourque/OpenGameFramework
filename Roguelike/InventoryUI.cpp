@@ -6,7 +6,7 @@
 #include "Graphics/Texture.h"
 #include "Math/Geometry/Rectangle.h"
 
-InventoryUI::InventoryUI() : UIComponent(Rectangle(1,1)), m_width(4), m_height(3) {
+InventoryUI::InventoryUI() : UIComponent(geo::Rectangle(1,1)), m_width(4), m_height(3) {
 	//Equipment
 	m_ui_helm = RenderSystem::get()->getTextureManager()->createTexture2D("ui_helm.tx", Texture::Filter::NEAREST_NEIGHBOR);
 	m_ui_chest = RenderSystem::get()->getTextureManager()->createTexture2D("ui_chest.tx", Texture::Filter::NEAREST_NEIGHBOR);
@@ -42,45 +42,45 @@ void InventoryUI::render() {
 		for (uint32 column = 0; column < m_width; column++) {
 			if (row == 0) {
 				if (column == 0) {
-					RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi + (column * SIZE), yi + (row * -SIZE), SIZE, SIZE), m_ui_tl, false, false);
+					RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(geo::Rectangle(xi + (column * SIZE), yi + (row * -SIZE), SIZE, SIZE), m_ui_tl, false, false);
 				}
 				else if (column == m_width - 1) {
-					RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi + (column * SIZE), yi + (row * -SIZE), SIZE, SIZE), m_ui_tr, false, false);
+					RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(geo::Rectangle(xi + (column * SIZE), yi + (row * -SIZE), SIZE, SIZE), m_ui_tr, false, false);
 				}
 				else {
-					RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi + (column * SIZE), yi + (row * -SIZE), SIZE, SIZE), m_ui_t, false, false);
+					RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(geo::Rectangle(xi + (column * SIZE), yi + (row * -SIZE), SIZE, SIZE), m_ui_t, false, false);
 				}
 			}
 			else if (row == m_height - 1) {
 				if (column == 0) {
-					RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi + (column * SIZE), yi + (row * -SIZE), SIZE, SIZE), m_ui_bl, false, false);
+					RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(geo::Rectangle(xi + (column * SIZE), yi + (row * -SIZE), SIZE, SIZE), m_ui_bl, false, false);
 				}
 				else if (column == m_width - 1) {
-					RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi + (column * SIZE), yi + (row * -SIZE), SIZE, SIZE), m_ui_br, false, false);
+					RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(geo::Rectangle(xi + (column * SIZE), yi + (row * -SIZE), SIZE, SIZE), m_ui_br, false, false);
 				}
 				else {
-					RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi + (column * SIZE), yi + (row * -SIZE), SIZE, SIZE), m_ui_b, false, false);
+					RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(geo::Rectangle(xi + (column * SIZE), yi + (row * -SIZE), SIZE, SIZE), m_ui_b, false, false);
 				}
 			}
 			else {
 				if (column == 0) {
-					RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi + (column * SIZE), yi + (row * -SIZE), SIZE, SIZE), m_ui_cl, false, false);
+					RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(geo::Rectangle(xi + (column * SIZE), yi + (row * -SIZE), SIZE, SIZE), m_ui_cl, false, false);
 				}
 				else if (column == m_width - 1) {
-					RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi + (column * SIZE), yi + (row * -SIZE), SIZE, SIZE), m_ui_cr, false, false);
+					RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(geo::Rectangle(xi + (column * SIZE), yi + (row * -SIZE), SIZE, SIZE), m_ui_cr, false, false);
 				}
 				else {
-					RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi + (column * SIZE), yi + (row * -SIZE), SIZE, SIZE), m_ui_c, false, false);
+					RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(geo::Rectangle(xi + (column * SIZE), yi + (row * -SIZE), SIZE, SIZE), m_ui_c, false, false);
 				}
 			}
 		}
 	}
 
-	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi - ((SIZE + EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f), EQUIPSIZE, EQUIPSIZE), m_ui_helm, false, false);
-	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi - ((SIZE + EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f) - EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_chest, false, false);
-	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi - ((SIZE + EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f) - 2*EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_glove, false, false);
-	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi - ((SIZE + EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f) - 3*EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_boot, false, false);
-	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi + 4*SIZE - ((SIZE - EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f) - EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_amulet, false, false);
-	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(Rectangle(xi + 4*SIZE - ((SIZE - EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f) - 2*EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_bag, false, false);
+	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(geo::Rectangle(xi - ((SIZE + EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f), EQUIPSIZE, EQUIPSIZE), m_ui_helm, false, false);
+	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(geo::Rectangle(xi - ((SIZE + EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f) - EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_chest, false, false);
+	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(geo::Rectangle(xi - ((SIZE + EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f) - 2*EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_glove, false, false);
+	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(geo::Rectangle(xi - ((SIZE + EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f) - 3*EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_boot, false, false);
+	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(geo::Rectangle(xi + 4*SIZE - ((SIZE - EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f) - EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_amulet, false, false);
+	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(geo::Rectangle(xi + 4*SIZE - ((SIZE - EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f) - 2*EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_bag, false, false);
 
 }

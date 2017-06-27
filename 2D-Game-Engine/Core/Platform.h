@@ -5,6 +5,10 @@
 
 #define PLATFORM_WINDOWS
 
+#else
+
+#error Unkown platform.
+
 #endif
 
 #include <string>

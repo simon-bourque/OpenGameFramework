@@ -157,7 +157,7 @@ void ShapeRenderer::drawLine(float32 xi, float32 yi, float32 xf, float32 yf, con
 	glDrawArrays(GL_LINES, 0, 2);
 }
 
-void ShapeRenderer::drawRectangle(const Rectangle& rect, const Color& color, bool filled) {
+void ShapeRenderer::drawRectangle(const geo::Rectangle& rect, const Color& color, bool filled) {
 	drawRectangle(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight(), color, filled);
 }
 

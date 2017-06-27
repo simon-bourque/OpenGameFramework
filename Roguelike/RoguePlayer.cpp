@@ -59,7 +59,7 @@ RoguePlayer::RoguePlayer() : m_currentHealth(3), m_maxHealth(3), m_bonusAgility(
 
 	addComponent(animator);
 	
-	addComponent(new AABBColliderComponent(this,Rectangle(1,1)));
+	addComponent(new AABBColliderComponent(this, geo::Rectangle(1,1)));
 	addComponent(new PlayerController(this, this));
 
 	CameraComponent* camera = new CameraComponent(this, &RenderSystem::get()->getCamera());

@@ -185,7 +185,7 @@ static void writeTilesChunk(ofstream& output, const pugi::xml_node& mapNode, vec
 }
 
 static void writeCollidersChunk(ofstream& output, const pugi::xml_node& mapNode) {
-	vector<Rectangle> colliders;
+	vector<geo::Rectangle> colliders;
 	pugi::xml_node groupNode = mapNode.child("objectgroup");
 
 	if (string(groupNode.attribute("name").value()) == "collision") {
@@ -199,14 +199,14 @@ static void writeCollidersChunk(ofstream& output, const pugi::xml_node& mapNode)
 			collX += (collWidth / 2.0f) - 0.5f;
 			collY += (collHeight / 2.0f) - 0.5f;
 
-			Rectangle collider(collX, collY, collWidth, collHeight);
+			geo::Rectangle collider(collX, collY, collWidth, collHeight);
 			colliders.push_back(collider);
 		}
 	}
 
 	writeUnsignedInt(output, colliders.size());
 
-	for (const Rectangle& collider : colliders) {
+	for (const geo::Rectangle& collider : colliders) {
 		writeFloat(output, collider.getX());
 		writeFloat(output, -collider.getY());
 		writeFloat(output, collider.getWidth());

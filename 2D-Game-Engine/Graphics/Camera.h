@@ -10,13 +10,13 @@ class Camera
 public:
 	Transform transform;
 private:	
-	Rectangle m_viewPort;
+	geo::Rectangle m_viewPort;
 
 	Matrix3f m_projectionMatrix;
 	Matrix3f m_viewProjectionMatrix;
 public:
-	explicit Camera(const Rectangle& viewPort);
-	Camera(const Transform& transform, const Rectangle& viewPort);
+	explicit Camera(const geo::Rectangle& viewPort);
+	Camera(const Transform& transform, const geo::Rectangle& viewPort);
 	~Camera();
 
 	void updateViewProjectionMatrix();
@@ -24,5 +24,5 @@ public:
 
 	const Matrix3f& getProjectionMatrix() const { return m_projectionMatrix; }
 	const Matrix3f& getViewProjectionMatrix() const { return m_viewProjectionMatrix; }
-	const Rectangle& getViewPort() const { return m_viewPort; };
+	const geo::Rectangle& getViewPort() const { return m_viewPort; };
 };

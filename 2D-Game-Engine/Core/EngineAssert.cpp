@@ -1,7 +1,7 @@
 
 #include "EngineAssert.h"
 
-#ifdef OS_WINDOWS
+#ifdef PLATFORM_WINDOWS
 
 #include "Windows.h"
 #include <cstdlib>

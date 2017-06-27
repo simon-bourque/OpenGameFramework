@@ -4,7 +4,7 @@
 #include "Graphics/Renderer/SpriteRenderer.h"
 
 
-UIImage::UIImage(const Rectangle& bounds, Texture* texture) : UIComponent(bounds), m_texture(texture) {}
+UIImage::UIImage(const geo::Rectangle& bounds, Texture* texture) : UIComponent(bounds), m_texture(texture) {}
  
 UIImage::~UIImage() {}
 

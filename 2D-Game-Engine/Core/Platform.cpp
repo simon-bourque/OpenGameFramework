@@ -1,19 +1,19 @@
 #include "Platform.h"
 
-#ifdef OS_WINDOWS
+#ifdef PLATFORM_WINDOWS
 	#include "Windows.h"
 #endif
 
 #include "Core/Core.h"
 
 void displayErrorBox(const std::string& msg) {
-#ifdef OS_WINDOWS
+#ifdef PLATFORM_WINDOWS
 	MessageBox(NULL, msg.c_str(), "Exception", MB_OK | MB_ICONERROR);
 #endif
 }
 
 void printSystemInfo() {
-#ifdef OS_WINDOWS
+#ifdef PLATFORM_WINDOWS
 	// Documentation for gathering system info on Windows https://msdn.microsoft.com/en-us/library/windows/desktop/ms724951.aspx
 
 	SYSTEM_INFO sysInfo;

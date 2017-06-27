@@ -12,9 +12,9 @@
 
 class QuadTree {
 private:
-	Rectangle m_bounds;
+	geo::Rectangle m_bounds;
 
-	std::vector<Rectangle> m_bucket;
+	std::vector<geo::Rectangle> m_bucket;
 	uint32 m_bucketSize;
 
 	QuadTree* m_northWest;
@@ -23,19 +23,19 @@ private:
 	QuadTree* m_southEast;
 
 	void split();
-	int8 getQuadrant(const Rectangle& rect) const;
-	void addToQuadrant(const Rectangle& rect, std::vector<Rectangle>& bucket);
+	int8 getQuadrant(const geo::Rectangle& rect) const;
+	void addToQuadrant(const geo::Rectangle& rect, std::vector<geo::Rectangle>& bucket);
 public:
-	QuadTree(const Rectangle& bounds, uint32 bucketSize = 1);
+	QuadTree(const geo::Rectangle& bounds, uint32 bucketSize = 1);
 	QuadTree(const QuadTree& qt);
 	QuadTree(QuadTree&& qt);
 	virtual ~QuadTree();
 
-	const Rectangle& getBounds() const { return m_bounds; };
+	const geo::Rectangle& getBounds() const { return m_bounds; };
 	bool isSplit() const { return m_northWest != nullptr; };
 
-	void insert(const Rectangle& rect);
-	void retrieve(const Rectangle& rect, std::vector<Rectangle>& list) const;
+	void insert(const geo::Rectangle& rect);
+	void retrieve(const geo::Rectangle& rect, std::vector<geo::Rectangle>& list) const;
 
 	QuadTree& operator=(const QuadTree& qt);
 	QuadTree& operator=(QuadTree&& qt);

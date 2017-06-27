@@ -3,7 +3,7 @@
 #include "Scene/TileLayer.h"
 
 
-TileScene::TileScene(const Rectangle& bounds) : Scene(bounds) {}
+TileScene::TileScene(const geo::Rectangle& bounds) : Scene(bounds) {}
 
 
 TileScene::~TileScene() {

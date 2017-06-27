@@ -6,8 +6,11 @@
 
 class Window;
 class RenderSystem;
-class Rectangle;
 class SceneManager;
+
+namespace geo {
+	class Rectangle;
+}
 
 #ifdef DEBUG_BUILD
 class Debug;
@@ -19,7 +22,7 @@ private:
 	bool m_shutdown;
 	int32 m_fps;
 public:
-	Game(const string& title, int32 width, int32 height, const Rectangle& viewPort);
+	Game(const string& title, int32 width, int32 height, const geo::Rectangle& viewPort);
 	virtual ~Game();
 
 	void run();

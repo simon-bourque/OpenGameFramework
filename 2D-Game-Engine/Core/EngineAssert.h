@@ -5,7 +5,7 @@
 #include "Core/Platform.h"
 #include "Core/Core.h"
 
-#ifdef OS_WINDOWS
+#ifdef PLATFORM_WINDOWS
 
 void debugBreakWindows();
 bool showAssertDialogWindows(const string& msg, const string& fileName, uint32 lineNumber);

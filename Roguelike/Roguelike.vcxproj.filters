@@ -1,69 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Player">
+      <UniqueIdentifier>{ad6b1bcc-0d8e-4aae-b3c0-205fc4395d83}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="UI">
+      <UniqueIdentifier>{25135c73-4640-40a3-957e-c4c6a25c6277}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RoguelikeGame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="RoguePlayer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="PlayerController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Inventory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HealthBar.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="InventoryUI.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="HealthBar.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="RoguelikeGame.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RoguelikeGame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RoguePlayer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Inventory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Header Files</Filter>
+      <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="HealthBar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Effects.h">
-      <Filter>Header Files</Filter>
+      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="InventoryUI.h">
-      <Filter>Header Files</Filter>
+      <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="Effects.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="RoguelikeGame.h" />
   </ItemGroup>
 </Project>

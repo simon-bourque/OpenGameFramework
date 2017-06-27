@@ -24,7 +24,7 @@
 #include "HealthBar.h"
 #include "InventoryUI.h"
 
-RoguelikeGame::RoguelikeGame() : Game("Roguelike", 720, 576, Rectangle(20,20)) {}
+RoguelikeGame::RoguelikeGame() : Game("Roguelike", 720, 576, geo::Rectangle(20,20)) {}
 
 
 RoguelikeGame::~RoguelikeGame() {

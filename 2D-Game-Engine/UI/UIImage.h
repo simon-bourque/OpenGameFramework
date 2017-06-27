@@ -9,7 +9,7 @@ class UIImage : public UIComponent {
 private:
 	Texture* m_texture;
 public:
-	UIImage(const Rectangle& bounds, Texture* texture);
+	UIImage(const geo::Rectangle& bounds, Texture* texture);
 	virtual ~UIImage();
 
 	void render() override;

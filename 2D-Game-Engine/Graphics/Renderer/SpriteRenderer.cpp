@@ -63,7 +63,7 @@ void SpriteRenderer::renderSprite(const Transform* transform, const Texture* tex
 
 }
 
-void SpriteRenderer::renderSpriteUI(const Rectangle& bounds, const Texture* texture, bool hFlip, bool vFlip) const {
+void SpriteRenderer::renderSpriteUI(const geo::Rectangle& bounds, const Texture* texture, bool hFlip, bool vFlip) const {
 	glUseProgram(m_spriteShaderProgram->getProgramId());
 
 	m_spriteVAO->bind();

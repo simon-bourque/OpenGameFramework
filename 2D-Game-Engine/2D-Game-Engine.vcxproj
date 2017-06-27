@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Resource\File\WinFileReader.cpp" />
     <ClCompile Include="Graphics\Coordinates.cpp" />
     <ClCompile Include="Object\Component\CameraComponent.cpp" />
     <ClCompile Include="Graphics\Background.cpp" />
@@ -206,6 +207,7 @@
     <ClCompile Include="UI\UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Resource\File\FileReader.h" />
     <ClInclude Include="Graphics\Coordinates.h" />
     <ClInclude Include="Object\Component\CameraComponent.h" />
     <ClInclude Include="Graphics\Background.h" />

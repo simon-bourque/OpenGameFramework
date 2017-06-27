@@ -1,5 +1,7 @@
 #include "Rectangle.h"
 
+using namespace geo;
+
 Rectangle::Rectangle() : Rectangle(0.0f, 0.0f){}
 
 Rectangle::Rectangle(float32 width, float32 height) : Rectangle(0.0f , 0.0f, width, height) {}

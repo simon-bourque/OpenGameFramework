@@ -10,9 +10,12 @@ class RenderSystem;
 class ShaderProgram;
 class VertexArrayObject;
 class Buffer;
-class Rectangle;
 struct Vector2f;
 struct Color;
+
+namespace geo {
+	class Rectangle;
+}
 
 class ShapeRenderer : Renderer {
 public:
@@ -42,7 +45,7 @@ public:
 	void drawVector(float32 x, float32 y, const Vector2f& vector, const Color& color);
 	void drawLine(float32 xi, float32 yi, float32 xf, float32 yf, const Color& color);
 
-	void drawRectangle(const Rectangle& rect, const Color& color, bool filled);
+	void drawRectangle(const geo::Rectangle& rect, const Color& color, bool filled);
 	void drawRectangle(float32 x, float32 y, float32 width, float32 height, const Color& color, bool filled);
 
 	void drawCircle(float32 x, float32 y, float32 radius, const Color& color, bool filled);

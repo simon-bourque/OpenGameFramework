@@ -52,24 +52,4 @@ void FileReader::readNextBuffer() {
 	}
 }
 
-uint8 FileReader::readUInt8() {
-	if (isEndOfFile() || isClosed()) {
-		return 0;
-	}
-
-	readNextBuffer();
-
-	uint8 v = m_buffer[m_bufferOffset];
-
-	m_bufferOffset += sizeof(uint8);
-	m_bytesRead += sizeof(uint8);
-
-	return v;
-}
-
-FileReader& FileReader::operator>>(uint8& v) {
-	v = readUInt8();
-	return (*this);
-}
-
 #endif

@@ -34,6 +34,10 @@
 #include <cstdlib>
 #include <map>
 
+// Only for testing, remove later
+#include <chrono>
+#include <iostream>
+
 void readFloat(std::ifstream& input, float32& value);
 void readInt(std::ifstream& input, int32& value);
 void readUInt(std::ifstream& input, uint32& value);
@@ -48,7 +52,7 @@ string loadSrc(const string& file) {
 	std::stringstream ss;
 
 	while (!input.isEndOfFile()) {
-		ss << input.readUInt8();
+		ss << input.read<uint8>();
 	}
 
 	input.close();
@@ -57,35 +61,64 @@ string loadSrc(const string& file) {
 }
 
 uint8* loadTexture(const string& file, uint8 type, uint32& width, uint32& height, uint8& channels) {
-	std::ifstream input(TEXTURE_PATH + file, std::ios_base::in | std::ios_base::binary);
 
-	if (!input) {
-		input.close();
-		throw std::runtime_error("Failed to load texture " + file);
-	}
+	static uint64 accum = 0;
+	auto t = std::chrono::high_resolution_clock::now();
+	
+	//std::ifstream input(TEXTURE_PATH + file, std::ios_base::in | std::ios_base::binary);
+	//
+	//if (!input) {
+	//	input.close();
+	//	throw std::runtime_error("Failed to load texture " + file);
+	//}
+	//
+	//if (input.get() != type) {
+	//	input.close();
+	//	throw std::runtime_error("Failed to load texture " + file + ": Texture targets do not match.");
+	//}
+	//
+	//uint32 _width = 0;
+	//uint32 _height = 0;
+	//uint8 _channels = 0;
+	//readUInt(input, _width);
+	//readUInt(input, _height);
+	//_channels = input.get();
+	//
+	//uint32 numBytes = _width * _height * _channels;
+	//uint8* data = new uint8[numBytes];
+	//
+	//for (uint32 i = 0; i < numBytes; i++) {
+	//	data[i] = input.get();
+	//}
+	//
+	//width = _width;
+	//height = _height;
+	//channels = _channels;
 
-	if (input.get() != type) {
+	//return data;
+
+	FileReader input(TEXTURE_PATH + file);
+	
+	if (input.read<uint8>() != type) {
 		input.close();
 		throw std::runtime_error("Failed to load texture " + file + ": Texture targets do not match.");
 	}
-
-	uint32 _width = 0;
-	uint32 _height = 0;
-	uint8 _channels = 0;
-	readUInt(input, _width);
-	readUInt(input, _height);
-	_channels = input.get();
-
-	uint32 numBytes = _width * _height * _channels;
+	
+	width = input.read<uint32>();
+	height = input.read<uint32>();
+	channels = input.read<uint8>();
+	
+	uint32 numBytes = width * height * channels;
 	uint8* data = new uint8[numBytes];
-
+	
 	for (uint32 i = 0; i < numBytes; i++) {
-		data[i] = input.get();
+		data[i] = input.read<uint8>();
 	}
+	
+	input.close();
 
-	width = _width;
-	height = _height;
-	channels = _channels;
+	accum += std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - t).count();
+	std::cout << accum << " ns" << std::endl;
 
 	return data;
 }

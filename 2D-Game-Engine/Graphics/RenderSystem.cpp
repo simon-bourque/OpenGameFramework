@@ -64,6 +64,8 @@ RenderSystem::RenderSystem(const Camera& camera) : m_camera(camera) {
 	//glClearColor(0.0f, 0.0f,1.0f, 1.0f);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
+	//glPixelStorei(GL_PACK_ALIGNMENT, 1);
+
 	m_spriteRenderer.reset(new SpriteRenderer(this));
 	m_sceneRenderer.reset(new SceneRenderer(this));
 	m_textRenderer.reset(new TextRenderer(this));

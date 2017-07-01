@@ -51,11 +51,13 @@ string loadSrc(const string& file) {
 	FileReader input(SHADER_PATH + file);
 	std::stringstream ss;
 
-	while (!input.isEndOfFile()) {
-		ss << input.read<uint8>();
-	}
+	uint8* chars = new uint8[input.getFileSize()];
+	uint32 bytesRead = 0;
 
+	input.read(chars, input.getFileSize(), bytesRead);
 	input.close();
+	
+	ss.write((char*)chars, bytesRead);
 
 	return ss.str();
 }
@@ -65,37 +67,6 @@ uint8* loadTexture(const string& file, uint8 type, uint32& width, uint32& height
 	static uint64 accum = 0;
 	auto t = std::chrono::high_resolution_clock::now();
 	
-	//std::ifstream input(TEXTURE_PATH + file, std::ios_base::in | std::ios_base::binary);
-	//
-	//if (!input) {
-	//	input.close();
-	//	throw std::runtime_error("Failed to load texture " + file);
-	//}
-	//
-	//if (input.get() != type) {
-	//	input.close();
-	//	throw std::runtime_error("Failed to load texture " + file + ": Texture targets do not match.");
-	//}
-	//
-	//uint32 _width = 0;
-	//uint32 _height = 0;
-	//uint8 _channels = 0;
-	//readUInt(input, _width);
-	//readUInt(input, _height);
-	//_channels = input.get();
-	//
-	//uint32 numBytes = _width * _height * _channels;
-	//uint8* data = new uint8[numBytes];
-	//
-	//for (uint32 i = 0; i < numBytes; i++) {
-	//	data[i] = input.get();
-	//}
-	//
-	//width = _width;
-	//height = _height;
-	//channels = _channels;
-
-	//return data;
 
 	FileReader input(TEXTURE_PATH + file);
 	
@@ -123,38 +94,25 @@ uint8* loadTexture(const string& file, uint8 type, uint32& width, uint32& height
 }
 
 uint8* loadTexture(const string& file, uint8 type, uint32& width, uint32& height, uint8& channels, uint32& depth) {
-	std::ifstream input(TEXTURE_PATH + file, std::ios_base::in | std::ios_base::binary);
+	FileReader input(TEXTURE_PATH + file);
 
-	if (!input) {
-		input.close();
-		throw std::runtime_error("Failed to load texture " + file);
-	}
-
-	if (input.get() != type) {
+	if (input.read<uint8>() != type) {
 		input.close();
 		throw std::runtime_error("Failed to load texture " + file + ": Texture targets do not match.");
 	}
 
-	uint32 _width = 0;
-	uint32 _height = 0;
-	uint8 _channels = 0;
-	uint32 _depth = 0;
-	readUInt(input, _width);
-	readUInt(input, _height);
-	_channels = input.get();
-	readUInt(input, _depth);
+	width = input.read<uint32>();
+	height = input.read<uint32>();
+	channels = input.read<uint8>();
+	depth = input.read<uint32>();
 
-	uint32 numBytes = _width * _height * _channels * _depth;
+	uint32 numBytes = width * height * channels * depth;
 	uint8* data = new uint8[numBytes];
 
-	for (uint32 i = 0; i < numBytes; i++) {
-		data[i] = input.get();
-	}
+	uint32 bytesRead = 0;
+	input.read(data, numBytes, bytesRead);
 
-	width = _width;
-	height = _height;
-	channels = _channels;
-	depth = _depth;
+	input.close();
 
 	return data;
 }
@@ -364,109 +322,71 @@ std::pair<char, Glyph>* loadFont(const string& file, uint32& charMapSize, Glyph&
 }
 
 TileScene* loadTileLevel(string file) {
-	std::ifstream input(LEVEL_PATH + file, std::ios_base::in | std::ios_base::binary);
-
-	if (!input) {
-		input.close();
-		throw std::runtime_error("Failed to load level " + file);
-	}
-
+	FileReader input(LEVEL_PATH + file);
 
 	// Load level bounds
-	float32 boundsX = 0;
-	float32 boundsY = 0;
-	float32 boundsWidth = 0;
-	float32 boundsHeight = 0;
-	readFloat(input, boundsX);
-	readFloat(input, boundsY);
-	readFloat(input, boundsWidth);
-	readFloat(input, boundsHeight);
-
+	float32 boundsX = input.read<float32>();
+	float32 boundsY = input.read<float32>();
+	float32 boundsWidth = input.read<float32>();
+	float32 boundsHeight = input.read<float32>();
+	
 	// Load tilesets
-	uint32 numTilesets = 0;
-	readUInt(input, numTilesets);
-
+	uint32 numTilesets = input.read<uint32>();
 	Texture** textures = new Texture*[numTilesets];
 
 	for (uint32 i = 0; i < numTilesets; i++) {
-
-		int32 stringLen = 0;
-		readInt(input, stringLen);
-
+	
+		uint32 stringLen = input.read<uint32>();
+	
 		char* texPath = new char[stringLen + 1];
-
-		for (int32 i = 0; i < stringLen; i++) {
-			char character = 0;
-			input.get(character);
-			texPath[i] = character;
-		}
+		uint32 bytesRead = 0;
+		input.read((uint8*)texPath, stringLen, bytesRead);
 		texPath[stringLen] = '\0';
 
 		DEBUG_LOG("--- TILE SHEET PATH ---");
 		DEBUG_LOG(texPath);
-
-		int32 margin = 0;
-		int32 spacing = 0;
-		int32 tileWidth = 0;
-		int32 tileHeight = 0;
-		readInt(input, margin);
-		readInt(input, spacing);
-		readInt(input, tileWidth);
-		readInt(input, tileHeight);
-
+	
+		uint32 margin = input.read<uint32>();
+		uint32 spacing = input.read<uint32>();
+		uint32 tileWidth = input.read<uint32>();
+		uint32 tileHeight = input.read<uint32>();
+	
 		Texture* texture = RenderSystem::get()->getTextureManager()->createTexture2DArray(texPath, margin, spacing, tileWidth, tileHeight, Texture::Filter::NEAREST_NEIGHBOR);
 		textures[i] = texture;
 		delete[] texPath;
 	}
 
 	// Load tileLayers
-	uint32 numLayers = 0;
-	readUInt(input, numLayers);
-
+	uint32 numLayers = input.read<uint32>();
 	TileLayer** layers = new TileLayer*[numLayers];
-
+	
 	for (uint32 i = 0; i < numLayers; i++) {
-		int32 numTiles = 0;
-		readInt(input, numTiles);
-
+		uint32 numTiles = input.read<uint32>();
 
 		Tile* tiles = new Tile[numTiles];
 		for (int32 i = 0; i < numTiles; i++) {
-			float32 x = 0;
-			float32 y = 0;
-			int32 index = 0;
-			readFloat(input, x);
-			readFloat(input, y);
-			readInt(input, index);
-
+			float32 x = input.read<float32>();
+			float32 y = input.read<float32>();
+			int32 index = input.read<int32>();
+	
 			tiles[i] = { x, y, index };
 		}
-
+	
 		layers[i] = new TileLayer(tiles, numTiles, textures[i]);
 		delete[] tiles;
 	}
 
-
-	int32 numColliders = 0;
-	readInt(input, numColliders);
-
+	// Load colliders
+	uint32 numColliders = input.read<uint32>();
 	geo::Rectangle* colliders = new geo::Rectangle[numColliders];
+
 	for (int32 i = 0; i < numColliders; i++) {
-		float32 x = 0;
-		float32 y = 0;
-		float32 width = 0;
-		float32 height = 0;
-		readFloat(input, x);
-		readFloat(input, y);
-		readFloat(input, width);
-		readFloat(input, height);
-		colliders[i].setX(x);
-		colliders[i].setY(y);
-		colliders[i].setWidth(width);
-		colliders[i].setHeight(height);
+		colliders[i].setX(input.read<float32>());
+		colliders[i].setY(input.read<float32>());
+		colliders[i].setWidth(input.read<float32>());
+		colliders[i].setHeight(input.read<float32>());
 	}
 
-	
 	input.close();
 
 	TileScene* scene = new TileScene(geo::Rectangle(boundsX, boundsY, boundsWidth, boundsHeight));
@@ -474,16 +394,16 @@ TileScene* loadTileLevel(string file) {
 	for (uint32 i = 0; i < numLayers; i++) {
 		scene->addTileLayer(layers[i]);
 	}
-
+	
 	for (uint32 i = 0; i < numColliders; i++) {
 		scene->getCollisionSystem()->addStaticCollider(colliders[i]);
 	}
-
-
+	
+	
 	delete[] textures;
 	delete[] colliders;
 	delete[] layers;
-
+	
 	return scene;
 }
 

@@ -20,6 +20,7 @@ FileReader::FileReader(const string& path) : m_path(path), m_buffer(nullptr), m_
 
 	LARGE_INTEGER integer;
 	if (!GetFileSizeEx(m_nativeHandle, &integer)) {
+		close();
 		throw std::runtime_error("Failed to open file " + m_path);
 	}
 
@@ -76,14 +77,14 @@ void FileReader::read(uint8* buffer, uint32 bytesToRead, uint32& bytesRead) {
 		}
 		else {
 			readNextBuffer();
-			for (uint32 i = 0; i < bytesLeftToRead || i < m_bytesInBuffer; i++) {
+			for (uint32 i = 0; i < bytesLeftToRead && i < m_bytesInBuffer; i++) {
 				buffer[i] = m_buffer[m_bufferOffset++];
 			}
 			bytesRead = (m_bytesInBuffer < bytesLeftToRead) ? m_bytesInBuffer : bytesLeftToRead;
 			bytesRead += bytesLeftInBuffer;
 		}
 	}
-
+	m_bytesRead += bytesRead;
 }
 
 void FileReader::readNextBuffer() {

@@ -44,6 +44,8 @@ public:
 
 	void close();
 
+	void FileReader::read(uint8* buffer, uint32 bytesToRead, uint32& bytesRead);
+
 	template<typename T>
 	typename std::enable_if<((sizeof(T) > 1) && std::is_arithmetic<T>::value), T>::type read() {
 		if (m_bytesRead + sizeof(T) > m_fileSize || isClosed()) {

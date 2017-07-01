@@ -111,9 +111,8 @@ uint8* loadTexture(const string& file, uint8 type, uint32& width, uint32& height
 	uint32 numBytes = width * height * channels;
 	uint8* data = new uint8[numBytes];
 	
-	for (uint32 i = 0; i < numBytes; i++) {
-		data[i] = input.read<uint8>();
-	}
+	uint32 bytesRead = 0;
+	input.read(data, numBytes, bytesRead);
 	
 	input.close();
 

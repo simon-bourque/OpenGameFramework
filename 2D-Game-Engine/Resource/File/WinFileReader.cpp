@@ -8,7 +8,7 @@ FileReader::FileReader(const string& path) : m_path(path), m_buffer(nullptr), m_
 		0, // Share mode
 		NULL, // Security attributes
 		OPEN_EXISTING, // Creation disposition
-		FILE_ATTRIBUTE_NORMAL, // Flags and attributes
+		FILE_FLAG_SEQUENTIAL_SCAN, // Flags and attributes
 		NULL // Template file
 	);
 
@@ -38,6 +38,52 @@ void FileReader::close() {
 		delete[] m_buffer;
 		m_closed = true;
 	}
+}
+
+void FileReader::read(uint8* buffer, uint32 bytesToRead, uint32& bytesRead) {
+	if (isEndOfFile() || isClosed()) {
+		bytesRead = 0;
+		return;
+	}
+
+	uint32 bytesLeftInBuffer = m_bytesInBuffer - m_bufferOffset;
+
+	// If all the bytes are contained in the buffer
+	if (bytesToRead <= bytesLeftInBuffer) {
+		for (uint32 i = 0; i < bytesToRead; i++) {
+			buffer[i] = m_buffer[m_bufferOffset++];
+		}
+		bytesRead = bytesToRead;
+	}
+	else {
+		// Read the remaining bytes in the buffer
+		for (uint32 i = 0; i < bytesLeftInBuffer; i++) {
+			buffer[i] = m_buffer[m_bufferOffset++];
+		}
+
+		uint32 bytesLeftToRead = bytesToRead - bytesLeftInBuffer;
+		
+		// If the remaining bytes to read would be greater than or equal to the size of the next buffer then don't bother using the buffer
+		if (bytesLeftToRead >= m_bufferCapacity) {
+
+			BOOL result = ReadFile(m_nativeHandle, (buffer + bytesLeftInBuffer), bytesLeftToRead, (LPDWORD)(&bytesRead), NULL);
+
+			if (result == FALSE) {
+				throw std::runtime_error("Error reading file " + m_path);
+			}
+
+			bytesRead += bytesLeftInBuffer;
+		}
+		else {
+			readNextBuffer();
+			for (uint32 i = 0; i < bytesLeftToRead || i < m_bytesInBuffer; i++) {
+				buffer[i] = m_buffer[m_bufferOffset++];
+			}
+			bytesRead = (m_bytesInBuffer < bytesLeftToRead) ? m_bytesInBuffer : bytesLeftToRead;
+			bytesRead += bytesLeftInBuffer;
+		}
+	}
+
 }
 
 void FileReader::readNextBuffer() {

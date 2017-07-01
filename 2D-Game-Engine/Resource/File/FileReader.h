@@ -37,6 +37,9 @@ public:
 	explicit FileReader(const string& path);
 	virtual ~FileReader();
 
+	FileReader(const FileReader&) = delete;
+	FileReader& operator=(const FileReader&) = delete;
+
 	bool isEndOfFile() const { return m_bytesRead >= m_fileSize; };
 	bool isClosed() const { return m_closed; };
 
@@ -53,26 +56,9 @@ public:
 		}
 
 		uint8 bytes[sizeof(T)];
+		uint32 bytesRead;
 
-		if (m_bufferOffset + sizeof(T) >= m_bytesInBuffer) {
-			uint32 bytesToRead = m_bytesInBuffer - m_bufferOffset;
-
-			for (uint32 i = 0; i < bytesToRead; i++) {
-				bytes[i] = m_buffer[m_bufferOffset++];
-			}
-
-			readNextBuffer();
-
-			for (uint32 i = bytesToRead; i < sizeof(T); i++) {
-				bytes[i] = m_buffer[m_bufferOffset++];
-			}
-		}
-		else {
-			for (uint32 i = 0; i < sizeof(T); i++) {
-				bytes[i] = m_buffer[m_bufferOffset++];
-			}
-		}
-		m_bytesRead += sizeof(T);
+		read(bytes, sizeof(T), bytesRead);
 
 		T v;
 		memcpy(&v, bytes, sizeof(T));
@@ -88,10 +74,8 @@ public:
 
 		readNextBuffer();
 
-		T v = m_buffer[m_bufferOffset];
-
-		m_bufferOffset += sizeof(T);
-		m_bytesRead += sizeof(T);
+		T v = m_buffer[m_bufferOffset++];
+		++m_bytesRead;
 
 		return v;
 	}

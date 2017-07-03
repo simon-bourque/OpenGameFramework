@@ -78,7 +78,7 @@ void FileReader::read(uint8* buffer, uint32 bytesToRead, uint32& bytesRead) {
 		else {
 			readNextBuffer();
 			for (uint32 i = 0; i < bytesLeftToRead && i < m_bytesInBuffer; i++) {
-				buffer[i] = m_buffer[m_bufferOffset++];
+				(buffer + bytesLeftInBuffer)[i] = m_buffer[m_bufferOffset++];
 			}
 			bytesRead = (m_bytesInBuffer < bytesLeftToRead) ? m_bytesInBuffer : bytesLeftToRead;
 			bytesRead += bytesLeftInBuffer;

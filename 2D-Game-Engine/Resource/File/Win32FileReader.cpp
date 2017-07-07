@@ -51,16 +51,14 @@ void FileReader::read(uint8* buffer, uint32 bytesToRead, uint32& bytesRead) {
 
 	// If all the bytes are contained in the buffer
 	if (bytesToRead <= bytesLeftInBuffer) {
-		for (uint32 i = 0; i < bytesToRead; i++) {
-			buffer[i] = m_buffer[m_bufferOffset++];
-		}
+		memcpy(buffer, (m_buffer+m_bufferOffset), bytesToRead);
+		m_bufferOffset += bytesToRead;
 		bytesRead = bytesToRead;
 	}
 	else {
 		// Read the remaining bytes in the buffer
-		for (uint32 i = 0; i < bytesLeftInBuffer; i++) {
-			buffer[i] = m_buffer[m_bufferOffset++];
-		}
+		memcpy(buffer, (m_buffer + m_bufferOffset), bytesLeftInBuffer);
+		m_bufferOffset += bytesLeftInBuffer;
 
 		uint32 bytesLeftToRead = bytesToRead - bytesLeftInBuffer;
 		
@@ -77,11 +75,11 @@ void FileReader::read(uint8* buffer, uint32 bytesToRead, uint32& bytesRead) {
 		}
 		else {
 			readNextBuffer();
-			for (uint32 i = 0; i < bytesLeftToRead && i < m_bytesInBuffer; i++) {
-				(buffer + bytesLeftInBuffer)[i] = m_buffer[m_bufferOffset++];
-			}
-			bytesRead = (m_bytesInBuffer < bytesLeftToRead) ? m_bytesInBuffer : bytesLeftToRead;
-			bytesRead += bytesLeftInBuffer;
+			uint32 bytesToReadInNextBuffer = (m_bytesInBuffer < bytesLeftToRead) ? m_bytesInBuffer : bytesLeftToRead;
+
+			memcpy((buffer + bytesLeftInBuffer), (m_buffer + m_bufferOffset), bytesToReadInNextBuffer);
+			m_bufferOffset += bytesToReadInNextBuffer;
+			bytesRead = bytesLeftInBuffer + bytesToReadInNextBuffer;
 		}
 	}
 	m_bytesRead += bytesRead;

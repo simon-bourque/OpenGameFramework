@@ -141,7 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Resource\File\WinFileReader.cpp" />
+    <ClCompile Include="Resource\File\Win32FileReader.cpp" />
     <ClCompile Include="Graphics\Coordinates.cpp" />
     <ClCompile Include="Object\Component\CameraComponent.cpp" />
     <ClCompile Include="Graphics\Background.cpp" />

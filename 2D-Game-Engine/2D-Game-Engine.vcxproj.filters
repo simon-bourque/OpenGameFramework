@@ -252,7 +252,7 @@
     <ClCompile Include="Graphics\Window1.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\File\WinFileReader.cpp">
+    <ClCompile Include="Resource\File\Win32FileReader.cpp">
       <Filter>Resource\File</Filter>
     </ClCompile>
   </ItemGroup>

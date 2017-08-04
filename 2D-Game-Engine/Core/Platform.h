@@ -3,11 +3,16 @@
 
 #ifdef _WIN32
 
+// Windows specific defines
 #define PLATFORM_WINDOWS
+
+#define USING_WIN32_FILES
+#define USING_WIN32_WINDOW
+//#define USING_GLFW_WINDOW
 
 #else
 
-#error Unkown platform.
+#error Undefined platform.
 
 #endif
 

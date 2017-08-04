@@ -61,6 +61,9 @@
     <Filter Include="Resource\File">
       <UniqueIdentifier>{51ef6aba-1070-4f0e-ab4f-5bfa3b797ed7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{b998abf0-e021-4f6b-8166-c3acc510756b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Debug.cpp">
@@ -143,9 +146,6 @@
     </ClCompile>
     <ClCompile Include="Graphics\Memory\VertexArrayObject.cpp">
       <Filter>Graphics\Memory</Filter>
-    </ClCompile>
-    <ClCompile Include="Input\Input.cpp">
-      <Filter>Input</Filter>
     </ClCompile>
     <ClCompile Include="Math\Vector2f.cpp">
       <Filter>Math</Filter>
@@ -249,11 +249,17 @@
     <ClCompile Include="Scene\TileLayer.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Window1.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Resource\File\Win32FileReader.cpp">
       <Filter>Resource\File</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Input.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\Win32Window.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\GLFWWindow.cpp">
+      <Filter>Window</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -294,9 +300,6 @@
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\TextureManager.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Window.h">
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Animation\Animation.h">
@@ -472,6 +475,15 @@
     </ClInclude>
     <ClInclude Include="Resource\File\FileReader.h">
       <Filter>Resource\File</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\InputConstants.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Time.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\Window.h">
+      <Filter>Window</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

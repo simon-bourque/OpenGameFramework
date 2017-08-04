@@ -2,7 +2,8 @@
 
 #include "Graphics/RenderSystem.h"
 #include "Graphics/Camera.h"
-#include "Graphics/Window.h"
+
+#include "Window/Window.h"
 
 #include "Math/Geometry/Rectangle.h"
 
@@ -14,6 +15,8 @@
 #include "Physics/Collision/CollisionSystem.h"
 
 #include "Core/Platform.h"
+
+#include "Core/Time.h"
 
 #include <GLFW/glfw3.h>
 
@@ -70,17 +73,17 @@ void Game::run() {
 	while (!Window::get()->shouldClose() && !m_shutdown) {
 
 
-		Window::pollEvents();
+		Window::get()->pollEvents();
 
-		currentTime = glfwGetTime();
+		currentTime = getCurrentTime();
 
-		tick((float)delta);
+		tick((float32)delta);
 
 		render();
 
 
 		Window::get()->swapBuffers();
-		delta = glfwGetTime() - currentTime;
+		delta = getCurrentTime() - currentTime;
 
 		counter += delta;
 		if (counter >= 1) {

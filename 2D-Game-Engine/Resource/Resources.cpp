@@ -13,8 +13,9 @@
 #include "Graphics/RenderSystem.h"
 #include "Graphics/TextureManager.h"
 #include "Graphics/Texture.h"
-#include "Graphics/Window.h"
 #include "Graphics/Coordinates.h"
+
+#include "Window/Window.h"
 
 #include "Math/Geometry/Rectangle.h"
 #include "Math/Vector2f.h"

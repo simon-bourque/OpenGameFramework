@@ -4,14 +4,18 @@
 
 #include "Core/EngineAssert.h"
 
+#include "Core/Platform.h"
+
+#ifdef USING_WIN32_WINDOW
+	#include "Windows.h"
+#endif
+
+#ifdef USING_GLFW_WINDOW
 struct GLFWwindow;
-class Input;
+#endif
 
-class Window
-{
-	friend Input;
-	friend void windowSizeCallback(GLFWwindow* window, int32 width, int32 height);
 
+class Window {
 private:
 	static Window* s_instance;
 
@@ -19,7 +23,20 @@ private:
 	int32 m_width;
 	int32 m_height;
 
+	bool m_shouldClose;
+
+#ifdef USING_GLFW_WINDOW
+	friend void windowSizeCallback(GLFWwindow* window, int32 width, int32 height);
+
 	GLFWwindow* m_handle;
+#endif
+#ifdef USING_WIN32_WINDOW
+	HWND m_handle;
+	HDC m_deviceContext;
+	HGLRC m_openglRenderContext;
+
+	friend LRESULT CALLBACK MainWndProc(HWND handle, UINT msg, WPARAM wParam, LPARAM lParam);
+#endif
 
 	Window(const string& title, int32 width, int32 height);
 public:
@@ -30,9 +47,9 @@ public:
 
 	void setTitle(const string& title);
 	void swapBuffers() const;
-	int32 shouldClose() const;
+	bool shouldClose() const;
 
-	static void pollEvents();
+	void pollEvents();
 
 	// Prevent copying of window
 	Window(const Window&) = delete;
@@ -46,6 +63,10 @@ public:
 	static void init(const string& title, int32 width, int32 height) {
 		ASSERT(!s_instance, "Window is already initialized.");
 		s_instance = new Window(title, width, height);
+	}
+
+	static bool isInitialized() {
+		return (s_instance);
 	}
 
 	static void destroy() {

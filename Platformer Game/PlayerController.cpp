@@ -114,39 +114,39 @@ void PlayerController::receiveEvent(const Event& event) {
 }
 
 void PlayerController::onKey(int32 key, int32 scancode, int32 action, int32 mods) {
-	if (key == Input::KEY_A) {
-		if (action == Input::PRESS)
+	if (key == Keys::KEY_A) {
+		if (action == Actions::PRESS)
 			m_leftAction = true;
-		if (action == Input::RELEASE)
+		if (action == Actions::RELEASE)
 			m_leftAction = false;
 	}
-	if (key == Input::KEY_D) {
-		if (action == Input::PRESS)
+	if (key == Keys::KEY_D) {
+		if (action == Actions::PRESS)
 			m_rightAction = true;
-		if (action == Input::RELEASE)
+		if (action == Actions::RELEASE)
 			m_rightAction = false;
 	}
-	if (key == Input::KEY_S) {
-		if (action == Input::PRESS)
+	if (key == Keys::KEY_S) {
+		if (action == Actions::PRESS)
 			m_downAction = true;
-		if (action == Input::RELEASE)
+		if (action == Actions::RELEASE)
 			m_downAction = false;
 	}
-	if (key == Input::KEY_W) {
-		if (action == Input::PRESS)
+	if (key == Keys::KEY_W) {
+		if (action == Actions::PRESS)
 			m_upAction = true;
-		if (action == Input::RELEASE)
+		if (action == Actions::RELEASE)
 			m_upAction = false;
 	}
-	if (key == Input::KEY_SPACE && action == Input::PRESS && m_canJump) {
+	if (key == Keys::KEY_SPACE && action == Actions::PRESS && m_canJump) {
 		static const Vector2f impulse(0, JUMP_POWER);
 		getParentObject()->broadcastEvent(Event(Event::Type::APPLY_IMPULSE, &impulse));
 		m_grounded = false;
 	}
-	if (key == Input::KEY_V) {
-		if (action == Input::PRESS)
+	if (key == Keys::KEY_V) {
+		if (action == Actions::PRESS)
 			m_toggleFly = true;
-		if (action == Input::RELEASE)
+		if (action == Actions::RELEASE)
 			m_toggleFly = false;
 	}
 }

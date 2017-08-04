@@ -5,7 +5,6 @@
 #include "Graphics/Renderer/ShapeRenderer.h"
 #include "Graphics/TextureManager.h"
 #include "Graphics/RenderSystem.h"
-#include "Graphics/Window.h"
 #include "Graphics/Color.h"
 #include "Graphics/Background.h"
 
@@ -54,10 +53,10 @@ void PlatformerGame::render() {
 }
 
 void PlatformerGame::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
-	if (key == Input::KEY_ESCAPE && action == Input::PRESS) {
+	if (key == Keys::KEY_ESCAPE && action == Actions::PRESS) {
 		shutdown();
 	}
-	if (key == Input::KEY_R && action == Input::PRESS) {
+	if (key == Keys::KEY_R && action == Actions::PRESS) {
 		ObjectComponent* component = m_player->findComponent(RIGIDBODY_COMPONENT);
 		if (component) {
 			RigidBodyComponent* rb = static_cast<RigidBodyComponent*>(component);

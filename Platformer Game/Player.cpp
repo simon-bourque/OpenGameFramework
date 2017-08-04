@@ -15,7 +15,6 @@
 #include "Graphics/RenderSystem.h"
 #include "Graphics/TextureManager.h"
 #include "Graphics/Texture.h"
-#include "Graphics/Window.h"
 
 #include "Input/Input.h"
 

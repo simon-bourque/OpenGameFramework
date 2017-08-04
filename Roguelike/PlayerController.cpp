@@ -188,44 +188,44 @@ void PlayerController::receiveEvent(const Event& event) {
 }
 
 void PlayerController::onKey(int32 key, int32 scancode, int32 action, int32 mods) {
-	if (key == Input::KEY_W || key == Input::KEY_UP) {
-		if (action == Input::PRESS) {
+	if (key == Keys::KEY_W || key == Keys::KEY_UP) {
+		if (action == Actions::PRESS) {
 			m_upAction = true;
 		}
-		if (action == Input::RELEASE) {
+		if (action == Actions::RELEASE) {
 			m_upAction = false;
 		}
 	}
 	
-	if (key == Input::KEY_A || key == Input::KEY_LEFT) {
-		if (action == Input::PRESS) {
+	if (key == Keys::KEY_A || key == Keys::KEY_LEFT) {
+		if (action == Actions::PRESS) {
 			m_leftAction = true;
 		}
-		if (action == Input::RELEASE) {
+		if (action == Actions::RELEASE) {
 			m_leftAction = false;
 		}
 	}
 	
-	if (key == Input::KEY_S || key == Input::KEY_DOWN) {
-		if (action == Input::PRESS) {
+	if (key == Keys::KEY_S || key == Keys::KEY_DOWN) {
+		if (action == Actions::PRESS) {
 			m_downAction = true;
 		}
-		if (action == Input::RELEASE) {
+		if (action == Actions::RELEASE) {
 			m_downAction = false;
 		}
 	}
 	
-	if (key == Input::KEY_D || key == Input::KEY_RIGHT) {
-		if (action == Input::PRESS) {
+	if (key == Keys::KEY_D || key == Keys::KEY_RIGHT) {
+		if (action == Actions::PRESS) {
 			m_rightAction = true;
 		}
-		if (action == Input::RELEASE) {
+		if (action == Actions::RELEASE) {
 			m_rightAction = false;
 		}
 	}
 
-	if (key == Input::KEY_SPACE) {
-		if (action == Input::PRESS && !m_swingingSword) {
+	if (key == Keys::KEY_SPACE) {
+		if (action == Actions::PRESS && !m_swingingSword) {
 			SpriteComponent* cp = (SpriteComponent*)(m_player->getSword()->findComponent(ComponentType::SPRITE_COMPONENT));
 			m_swordCountdown = 0.1f;
 			cp->setVisible(true);

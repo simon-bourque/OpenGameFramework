@@ -33,7 +33,11 @@ private:
 	void renderBounds() const;
 	void renderQuadTree() const;
 	void renderGrid() const;
+
 	void onKeyPress(int32 key, int32 scancode, int32 action, int32 mods);
+	void onMouseMove(float64 xPos, float64 yPos);
+	void onMousePress(int32 button, int32 action, int32 mods);
+	void onMouseScroll(float64 xOffset, float64 yOffset);
 
 	Debug();
 public:

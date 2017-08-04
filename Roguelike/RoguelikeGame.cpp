@@ -63,10 +63,10 @@ void RoguelikeGame::tick(float32 delta) {
 }
 
 void RoguelikeGame::onKey(int32 key, int32 scancode, int32 action, int32 mods) {
-	if (key == Input::KEY_MINUS && action == Input::PRESS) {
+	if (key == Keys::KEY_MINUS && action == Actions::PRESS) {
 		m_player->setCurrentHealth(m_player->getCurrentHealth() - 1);
 	}
-	if (key == Input::KEY_I && action == Input::PRESS) {
+	if (key == Keys::KEY_I && action == Actions::PRESS) {
 		// Toggle inventory
 		m_invUI->setVisible(!m_invUI->isVisible());
 		SoundEngine::get()->playSound("res/sound/inventory.wav");

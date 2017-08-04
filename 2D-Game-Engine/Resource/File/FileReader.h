@@ -6,7 +6,7 @@
 
 #include <type_traits>
 
-#ifdef PLATFORM_WINDOWS
+#ifdef USING_WIN32_FILES
 #include "Windows.h"
 #endif
 
@@ -14,7 +14,7 @@ class FileReader {
 private:
 
 	// Handles
-#ifdef PLATFORM_WINDOWS
+#ifdef USING_WIN32_FILES
 	HANDLE m_nativeHandle;
 #endif
 

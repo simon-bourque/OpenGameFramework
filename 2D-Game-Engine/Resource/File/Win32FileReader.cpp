@@ -1,6 +1,6 @@
 #include "FileReader.h"
 
-#ifdef PLATFORM_WINDOWS
+#ifdef USING_WIN32_FILES
 
 FileReader::FileReader(const string& path) : m_path(path), m_buffer(nullptr), m_bytesInBuffer(0), m_bufferCapacity(4096), m_bufferOffset(0), m_fileSize(0), m_bytesRead(0), m_closed(true) {
 	m_nativeHandle = CreateFile(m_path.c_str(),

@@ -11,9 +11,10 @@
 #include "Graphics/Renderer/TextRenderer.h"
 #include "Graphics/Renderer/ShapeRenderer.h"
 #include "Graphics/Color.h"
-#include "Graphics/Window.h"
 #include "Graphics/RenderSystem.h"
 #include "Graphics/Camera.h"
+
+#include "Window/Window.h"
 
 #include "Physics/Collision/CollisionSystem.h"
 #include "Physics/Collision/QuadTree.h"
@@ -42,6 +43,9 @@ Debug::Debug() :
 	m_zoomOut(false)
 {
 	Input::get()->addKeyListener(this, &Debug::onKeyPress);
+	Input::get()->addCursorPositionListener(this, &Debug::onMouseMove);
+	Input::get()->addMouseButtonListener(this, &Debug::onMousePress);
+	Input::get()->addScrollListener(this, &Debug::onMouseScroll);
 
 	Font* font = RenderSystem::get()->getFontManager()->createFont("font3");
 	m_fpsText = RenderSystem::get()->getTextManager()->createText("debug_fps_text_0", "fps: 00", font, Text::Usage::STREAM);
@@ -134,7 +138,14 @@ void Debug::renderGrid() const {
 }
 
 void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
-	if (key == Input::KEY_GRAVE_ACCENT && (mods & Input::MOD_ALT) && action == Input::PRESS) {
+	//if (action == Actions::PRESS) {
+	//	if (mods) {
+	//		DEBUG_LOG(std::to_string(mods) + "+");
+	//	}
+	//	DEBUG_LOG(std::to_string(key));
+	//}
+
+	if (key == Keys::KEY_GRAVE_ACCENT && (mods & Mods::MOD_ALT_BIT) && action == Actions::PRESS) {
 		m_debugMode = !m_debugMode;
 
 		if (m_debugMode) {
@@ -145,7 +156,7 @@ void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
 		}
 	}
 
-	if (key == Input::KEY_KP_DECIMAL && action == Input::PRESS && m_debugMode) {
+	if (key == Keys::KEY_KP_DECIMAL && action == Actions::PRESS && m_debugMode) {
 		DEBUG_LOG("---------- SHORTCUTS ----------");
 		DEBUG_LOG("KP 0:\t\tToggle performance stats");
 		DEBUG_LOG("KP 1:\t\tShow scene bounds");
@@ -155,57 +166,85 @@ void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
 		DEBUG_LOG("KP ENTER:\t\tReset zoom");
 	}
 
-	if (key == Input::KEY_KP_0 && m_debugMode) {
-		if (action == Input::PRESS) {
+	if (key == Keys::KEY_KP_0 && m_debugMode) {
+		if (action == Actions::PRESS) {
 			m_renderPerf = !m_renderPerf;
 		}
 	}
 
-	if (key == Input::KEY_KP_1 && m_debugMode) {
-		if (action == Input::PRESS) {
+	if (key == Keys::KEY_KP_1 && m_debugMode) {
+		if (action == Actions::PRESS) {
 			m_renderBounds = !m_renderBounds;
 		}
 	}
 
-	if (key == Input::KEY_KP_2 && m_debugMode) {
-		if (action == Input::PRESS) {
+	if (key == Keys::KEY_KP_2 && m_debugMode) {
+		if (action == Actions::PRESS) {
 			m_renderQuadTree = !m_renderQuadTree;
 		}
 	}
 
-	if (key == Input::KEY_KP_3 && m_debugMode) {
-		if (action == Input::PRESS) {
+	if (key == Keys::KEY_KP_3 && m_debugMode) {
+		if (action == Actions::PRESS) {
 			m_renderGrid = !m_renderGrid;
 		}
 	}
 
-	if (key == Input::KEY_KP_4 && m_debugMode) {
-		if (action == Input::PRESS) {
+	if (key == Keys::KEY_KP_4 && m_debugMode) {
+		if (action == Actions::PRESS) {
 			m_renderColliders = !m_renderColliders;
 		}
 	}
 
-	if (key == Input::KEY_KP_ADD) {
-		if (action == Input::PRESS) {
+	if (key == Keys::KEY_KP_ADD) {
+		if (action == Actions::PRESS) {
 			m_zoomIn = true;
 		}
-		if (action == Input::RELEASE) {
+		if (action == Actions::RELEASE) {
 			m_zoomIn = false;
 		}
 	}
-	if (key == Input::KEY_KP_SUBTRACT) {
-		if (action == Input::PRESS) {
+	if (key == Keys::KEY_KP_SUBTRACT) {
+		if (action == Actions::PRESS) {
 			m_zoomOut = true;
 		}
-		if (action == Input::RELEASE) {
+		if (action == Actions::RELEASE) {
 			m_zoomOut = false;
 		}
 	}
-	if (key == Input::KEY_KP_ENTER && action == Input::PRESS && m_debugMode) {
+	if (key == Keys::KEY_ENTER && action == Actions::PRESS && m_debugMode) {
 		// Reset zoom
 		RenderSystem::get()->getCamera().transform.xScale = 1.0f;
 		RenderSystem::get()->getCamera().transform.yScale = 1.0f;
 	}
+}
+
+void Debug::onMouseMove(float64 xPos, float64 yPos) {
+	//string str = std::to_string(xPos) + ", " + std::to_string(yPos);
+	//DEBUG_LOG(str);
+}
+
+void Debug::onMousePress(int32 button, int32 action, int32 mods) {
+	if (button == MouseButtons::MOUSE_BUTTON_LEFT && action == Actions::PRESS) {
+		DEBUG_LOG("LEFT CLICK");
+	}
+	if (button == MouseButtons::MOUSE_BUTTON_RIGHT && action == Actions::PRESS) {
+		DEBUG_LOG("RIGHT CLICK");
+	}
+	if (button == MouseButtons::MOUSE_BUTTON_MIDDLE && action == Actions::PRESS) {
+		DEBUG_LOG("MIDDLE CLICK");
+	}
+	if (button == MouseButtons::MOUSE_BUTTON_4 && action == Actions::PRESS) {
+		DEBUG_LOG("X1 CLICK");
+	}
+	if (button == MouseButtons::MOUSE_BUTTON_5 && action == Actions::PRESS) {
+		DEBUG_LOG("X2 CLICK");
+	}
+}
+
+void Debug::onMouseScroll(float64 xOffset, float64 yOffset) {
+	string str = std::to_string(xOffset) + ", " + std::to_string(yOffset);
+	DEBUG_LOG(str);
 }
 
 #endif

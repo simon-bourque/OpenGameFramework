@@ -195,7 +195,7 @@
     <ClCompile Include="Graphics\Shader\Uniform.cpp" />
     <ClCompile Include="Math\Vector2f.cpp" />
     <ClCompile Include="Graphics\Memory\VertexArrayObject.cpp" />
-    <ClCompile Include="Graphics\Window1.cpp" />
+    <ClCompile Include="Window\GLFWWindow.cpp" />
     <ClCompile Include="Graphics\Renderer\ShapeRenderer.cpp" />
     <ClCompile Include="Object\State\State.cpp" />
     <ClCompile Include="Object\State\StateTransition.cpp" />
@@ -205,8 +205,10 @@
     <ClCompile Include="UI\UIComponent.cpp" />
     <ClCompile Include="UI\UIImage.cpp" />
     <ClCompile Include="UI\UserInterface.cpp" />
+    <ClCompile Include="Window\Win32Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Input\InputConstants.h" />
     <ClInclude Include="Resource\File\FileReader.h" />
     <ClInclude Include="Graphics\Coordinates.h" />
     <ClInclude Include="Object\Component\CameraComponent.h" />
@@ -269,13 +271,14 @@
     <ClInclude Include="Graphics\Shader\Uniform.h" />
     <ClInclude Include="Math\Vector2f.h" />
     <ClInclude Include="Graphics\Memory\VertexArrayObject.h" />
-    <ClInclude Include="Graphics\Window.h" />
+    <ClInclude Include="Window\Window.h" />
     <ClInclude Include="Graphics\Renderer\ShapeRenderer.h" />
     <ClInclude Include="Object\State\State.h" />
     <ClInclude Include="Object\State\StateTransition.h" />
     <ClInclude Include="Object\State\StateMachine.h" />
     <ClInclude Include="Sound\SoundEngine.h" />
     <ClInclude Include="Scene\TileLayer.h" />
+    <ClInclude Include="Core\Time.h" />
     <ClInclude Include="UI\UIComponent.h" />
     <ClInclude Include="UI\UIImage.h" />
     <ClInclude Include="UI\UserInterface.h" />

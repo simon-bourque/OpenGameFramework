@@ -16,10 +16,10 @@ class GameObject;
 
 class AABBColliderComponent : public ObjectComponent {
 private:
-	typedef BaseDelegate<const Manifold&, GameObject*> CollisionResponse;
+	typedef Delegate<const Manifold&, GameObject*> CollisionResponse;
 
 	geo::Rectangle m_rectangle;
-	CollisionResponse* m_response;
+	CollisionResponse m_response;
 
 	float32 m_xOffset;
 	float32 m_yOffset;
@@ -36,8 +36,7 @@ public:
 	void onIntersectLevel(const Manifold& manifold);
 	void onIntersectObject(const Manifold& manifold, GameObject* other);
 
-	template<typename T>
-	void setCollisionResponse(T* object, void(T::*method)(const Manifold& manifold, GameObject* other));
+	void setCollisionResponse(const Delegate<const Manifold&, GameObject*>& response) { m_response = response; };
 
 	geo::Rectangle getRectangle() const { return m_rectangle; };
 
@@ -48,9 +47,3 @@ public:
 	virtual void debugRender() override;
 #endif
 };
-
-template<typename T>
-void AABBColliderComponent::setCollisionResponse(T* object, void(T::*method)(const Manifold& manifold, GameObject* other)) {
-	delete m_response;
-	m_response = new Delegate<AABBColliderComponent, const Manifold&, GameObject*>(object, method);
-}

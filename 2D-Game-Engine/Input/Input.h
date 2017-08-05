@@ -8,6 +8,10 @@
 
 #include "Input/InputConstants.h"
 
+typedef Delegate<int32, int32, int32, int32> KeyListener;
+typedef Delegate<float64, float64> CursorPositionListener, ScrollListener;
+typedef Delegate<int32, int32, int32> MouseButtonListener;
+
 class Input
 {
 	
@@ -18,14 +22,10 @@ class Input
 private:
 	static Input* s_instance;
 
-	typedef BaseDelegate<int32, int32, int32, int32> KeyListener;
-	typedef BaseDelegate<float64, float64> CursorPositionListener, ScrollListener;
-	typedef BaseDelegate<int32, int32, int32> MouseButtonListener;
-
-	std::vector<KeyListener*> m_keyListeners;
-	std::vector<CursorPositionListener*> m_cursorPositionListeners;
-	std::vector<MouseButtonListener*> m_mouseButtonListeners;
-	std::vector<ScrollListener*> m_scrollListeners;
+	std::vector<KeyListener> m_keyListeners;
+	std::vector<CursorPositionListener> m_cursorPositionListeners;
+	std::vector<MouseButtonListener> m_mouseButtonListeners;
+	std::vector<ScrollListener> m_scrollListeners;
 
 	Input();
 
@@ -36,17 +36,10 @@ private:
 public:
 	virtual ~Input();
 
-	template <typename T>
-	void addKeyListener(T* object, void(T::*method)(int32 key, int32 scancode, int32 action, int32 mods));
-
-	template <typename T>
-	void addCursorPositionListener(T* object, void(T::*method)(float64 xPos, float64 yPos));
-
-	template <typename T>
-	void addMouseButtonListener(T* object, void(T::*method)(int32 button, int32 action, int32 mods));
-
-	template <typename T>
-	void addScrollListener(T* object, void(T::*method)(float64 xOffset, float64 yOffset));
+	void addKeyListener(const Delegate<int32, int32, int32, int32>& keyListener);
+	void addCursorPositionListener(const Delegate<float64, float64>& cursorPositionListener);
+	void addMouseButtonListener(const Delegate<int32, int32, int32>& mouseButtonListener);
+	void addScrollListener(const Delegate<float64, float64>& scrollListener);
 
 	static Input* get() {
 		ASSERT(s_instance, "Input must be initialized before use.");
@@ -62,27 +55,3 @@ public:
 		delete s_instance;
 	}
 };
-
-template <typename T>
-void Input::addKeyListener(T* object, void(T::*method)(int32 key, int32 scancode, int32 action, int32 mods)) {
-	Delegate<T, int32, int32, int32, int32>* listener = new Delegate<T, int32, int32, int32, int32>(object, method);
-	m_keyListeners.push_back(listener);
-}
-
-template <typename T>
-void Input::addCursorPositionListener(T* object, void(T::*method)(float64 xPos, float64 yPos)) {
-	Delegate<T, float64, float64>* listener = new Delegate<T, float64, float64>(object, method);
-	m_cursorPositionListeners.push_back(listener);
-}
-
-template <typename T>
-void Input::addMouseButtonListener(T* object, void(T::*method)(int32 button, int32 action, int32 mods)) {
-	Delegate<T, int32, int32, int32>* listener = new Delegate<T, int32, int32, int32>(object, method);
-	m_mouseButtonListeners.push_back(listener);
-}
-
-template <typename T>
-void Input::addScrollListener(T* object, void(T::*method)(float64 xOffset, float64 yOffset)) {
-	Delegate<T, float64, float64>* listener = new Delegate<T, float64, float64>(object, method);
-	m_scrollListeners.push_back(listener);
-}

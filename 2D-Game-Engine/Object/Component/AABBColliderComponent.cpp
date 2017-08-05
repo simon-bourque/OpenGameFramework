@@ -23,13 +23,11 @@ AABBColliderComponent::AABBColliderComponent(GameObject* parentObject, const geo
 	m_xOffset(xOffset),
 	m_yOffset(yOffset)
 {
-	m_response = new Delegate<AABBColliderComponent, const Manifold&, GameObject*>(this, &AABBColliderComponent::emptyIntersectResponse);
+	m_response.bind<AABBColliderComponent, &AABBColliderComponent::emptyIntersectResponse>(this);
 }
 
 
-AABBColliderComponent::~AABBColliderComponent() {
-	delete m_response;
-}
+AABBColliderComponent::~AABBColliderComponent() {}
 
 void AABBColliderComponent::tick(float32 delta) {
 	resetPosition();
@@ -51,7 +49,7 @@ void AABBColliderComponent::onIntersectLevel(const Manifold& manifold) {
 }
 
 void AABBColliderComponent::onIntersectObject(const Manifold& manifold, GameObject* other) {
-	(*m_response)(manifold, other);
+	m_response(manifold, other);
 }
 
 void AABBColliderComponent::receiveEvent(const Event& event) {}

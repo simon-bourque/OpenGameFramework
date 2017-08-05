@@ -42,10 +42,10 @@ Debug::Debug() :
 	m_zoomIn(false),
 	m_zoomOut(false)
 {
-	Input::get()->addKeyListener(this, &Debug::onKeyPress);
-	Input::get()->addCursorPositionListener(this, &Debug::onMouseMove);
-	Input::get()->addMouseButtonListener(this, &Debug::onMousePress);
-	Input::get()->addScrollListener(this, &Debug::onMouseScroll);
+	Input::get()->addKeyListener(KeyListener::create<Debug, &Debug::onKeyPress>(this));
+	Input::get()->addCursorPositionListener(CursorPositionListener::create<Debug, &Debug::onMouseMove>(this));
+	Input::get()->addMouseButtonListener(MouseButtonListener::create<Debug, &Debug::onMousePress>(this));
+	Input::get()->addScrollListener(ScrollListener::create<Debug, &Debug::onMouseScroll>(this));
 
 	Font* font = RenderSystem::get()->getFontManager()->createFont("font3");
 	m_fpsText = RenderSystem::get()->getTextManager()->createText("debug_fps_text_0", "fps: 00", font, Text::Usage::STREAM);

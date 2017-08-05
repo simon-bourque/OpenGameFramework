@@ -32,7 +32,7 @@ RoguelikeGame::~RoguelikeGame() {
 }
 
 void RoguelikeGame::init() {
-	Input::get()->addKeyListener(this, &RoguelikeGame::onKey);
+	Input::get()->addKeyListener(KeyListener::create<RoguelikeGame, &RoguelikeGame::onKey>(this));
 
 	SceneManager::get()->loadTileLevel("level_test2.lvl");
 

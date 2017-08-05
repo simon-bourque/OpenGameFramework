@@ -30,7 +30,7 @@ PlatformerGame::PlatformerGame() : Game("Platformer", 720, 576, geo::Rectangle(2
 PlatformerGame::~PlatformerGame() {}
 
 void PlatformerGame::init() {
-	Input::get()->addKeyListener(this, &PlatformerGame::onKeyPress);
+	Input::get()->addKeyListener(KeyListener::create<PlatformerGame, &PlatformerGame::onKeyPress>(this));
 	SceneManager::get()->loadTileLevel("level_0.lvl");
 	SceneManager::get()->getCurrentScene().setGravity(9.8f * 4.0f);
 

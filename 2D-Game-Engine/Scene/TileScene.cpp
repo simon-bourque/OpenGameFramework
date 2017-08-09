@@ -7,7 +7,9 @@ TileScene::TileScene(const geo::Rectangle& bounds) : Scene(bounds) {}
 
 
 TileScene::~TileScene() {
-
+	for (TileLayer* layer : m_layers) {
+		delete layer;
+	}
 }
 
 void TileScene::addTileLayer(TileLayer* layer) {

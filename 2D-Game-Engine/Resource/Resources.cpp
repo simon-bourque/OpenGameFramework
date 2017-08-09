@@ -59,6 +59,7 @@ string loadSrc(const string& file) {
 	input.close();
 	
 	ss.write((char*)chars, bytesRead);
+	delete[] chars;
 
 	return ss.str();
 }

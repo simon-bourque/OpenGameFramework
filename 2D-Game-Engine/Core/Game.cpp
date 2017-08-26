@@ -20,7 +20,7 @@
 
 #include "Core/Time.h"
 
-#include <GLFW/glfw3.h>
+#include <gl/glew.h>
 
 #ifdef DEBUG_BUILD
 #include "Core/Debug.h"

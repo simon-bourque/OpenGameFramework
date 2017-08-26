@@ -3,6 +3,7 @@
 #include "Core/Core.h"
 #include "Core/Delegate.h"
 #include "Core/EngineAssert.h"
+#include "Core/Platform.h"
 
 #include <unordered_map>
 

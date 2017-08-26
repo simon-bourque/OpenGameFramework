@@ -10,10 +10,6 @@
 	#include "Windows.h"
 #endif
 
-#ifdef USING_GLFW_WINDOW
-struct GLFWwindow;
-#endif
-
 
 class Window {
 private:
@@ -25,11 +21,6 @@ private:
 
 	bool m_shouldClose;
 
-#ifdef USING_GLFW_WINDOW
-	friend void windowSizeCallback(GLFWwindow* window, int32 width, int32 height);
-
-	GLFWwindow* m_handle;
-#endif
 #ifdef USING_WIN32_WINDOW
 	HWND m_handle;
 	HDC m_deviceContext;

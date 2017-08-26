@@ -27,29 +27,3 @@ inline string getSystemTimeString() {
 }
 
 #endif
-
-#ifdef USING_GLFW_WINDOW
-
-#include <GLFW/glfw3.h>
-#include <ctime>
-
-inline float64 getCurrentTime() {
-	return glfwGetTime();
-}
-
-inline string getSystemTimeString() {
-	time_t currentTimeRaw = 0;
-	struct tm currentTime;
-
-	time(&currentTimeRaw);
-	localtime_s(&currentTime, &currentTimeRaw);
-
-	const static int32 dateStrSize = 128;
-	char dateStr[dateStrSize];
-
-	strftime(dateStr, dateStrSize, "[%T] ", &currentTime);
-
-	return string(dateStr);
-}
-
-#endif

@@ -83,7 +83,7 @@
       <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;ogg.lib;flac.lib;vorbis.lib;vorbisfile.lib;winmm.lib;vorbisenc.lib;openal32.lib;sfml-audio-s-d.lib;sfml-system-s-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32s.lib;opengl32.lib;ogg.lib;flac.lib;vorbis.lib;vorbisfile.lib;winmm.lib;vorbisenc.lib;openal32.lib;sfml-audio-s-d.lib;sfml-system-s-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)dependencies\lib;%(AdditionalLibraryDirectories);$(SolutionDir)dependencies\lib\$(ConfigurationName)</AdditionalLibraryDirectories>
@@ -117,7 +117,7 @@
       <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;ogg.lib;vorbis.lib;vorbisfile.lib;vorbisenc.lib;openal32.lib;sfml-audio-s.lib;sfml-system-s.lib;flac.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32s.lib;opengl32.lib;ogg.lib;vorbis.lib;vorbisfile.lib;vorbisenc.lib;openal32.lib;sfml-audio-s.lib;sfml-system-s.lib;flac.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)dependencies\lib;%(AdditionalLibraryDirectories);$(SolutionDir)dependencies\lib\$(ConfigurationName)</AdditionalLibraryDirectories>
@@ -196,7 +196,6 @@
     <ClCompile Include="Graphics\Shader\Uniform.cpp" />
     <ClCompile Include="Math\Vector2f.cpp" />
     <ClCompile Include="Graphics\Memory\VertexArrayObject.cpp" />
-    <ClCompile Include="Window\GLFWWindow.cpp" />
     <ClCompile Include="Graphics\Renderer\ShapeRenderer.cpp" />
     <ClCompile Include="Object\State\State.cpp" />
     <ClCompile Include="Object\State\StateTransition.cpp" />

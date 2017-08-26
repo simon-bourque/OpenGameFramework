@@ -14,6 +14,8 @@
 #include "Sound/SoundEngine.h"
 #include "Physics/Collision/CollisionSystem.h"
 
+#include "Console/Console.h"
+
 #include "Core/Platform.h"
 
 #include "Core/Time.h"
@@ -25,6 +27,8 @@
 #endif
 
 Game::Game(const string& title, int32 width, int32 height, const geo::Rectangle& viewPort) : m_shutdown(false), m_fps(0) {
+	Console::init();
+
 	DEBUG_LOG("Initializing game...");
 	printSystemInfo();
 
@@ -57,6 +61,7 @@ Game::~Game() {
 	RenderSystem::destroy();
 	Input::destroy();
 	Window::destroy();
+	Console::destroy();
 }
 
 void Game::run() {
@@ -74,6 +79,7 @@ void Game::run() {
 
 
 		Window::get()->pollEvents();
+		Console::get()->pollEvents();
 
 		currentTime = getCurrentTime();
 

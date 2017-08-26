@@ -8,6 +8,7 @@
 
 #define USING_WIN32_FILES
 #define USING_WIN32_WINDOW
+#define USING_WIN32_CONSOLE
 //#define USING_GLFW_WINDOW
 
 #else

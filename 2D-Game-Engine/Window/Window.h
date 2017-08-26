@@ -66,7 +66,7 @@ public:
 	}
 
 	static bool isInitialized() {
-		return (s_instance);
+		return (s_instance != nullptr);
 	}
 
 	static void destroy() {

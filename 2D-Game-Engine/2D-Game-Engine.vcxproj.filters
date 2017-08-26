@@ -64,6 +64,9 @@
     <Filter Include="Window">
       <UniqueIdentifier>{b998abf0-e021-4f6b-8166-c3acc510756b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Console">
+      <UniqueIdentifier>{5299e42e-1a73-4dde-8144-6ddb808f494d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Debug.cpp">
@@ -260,6 +263,9 @@
     </ClCompile>
     <ClCompile Include="Window\GLFWWindow.cpp">
       <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Console\Win32Console.cpp">
+      <Filter>Console</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -484,6 +490,9 @@
     </ClInclude>
     <ClInclude Include="Window\Window.h">
       <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\Console.h">
+      <Filter>Console</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

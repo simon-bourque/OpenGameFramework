@@ -56,7 +56,7 @@ void AABBColliderComponent::receiveEvent(const Event& event) {}
 
 #ifdef DEBUG_BUILD
 void AABBColliderComponent::debugRender() {
-	if (Debug::get()->shouldRenderColliders()) {
+	if (Debug::get()->flag("show_colliders")) {
 		RenderSystem::get()->getShapeRenderer()->drawRectangle(m_rectangle, Color::MAGENTA, false);
 	}
 }

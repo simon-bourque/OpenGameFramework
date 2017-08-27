@@ -6,6 +6,7 @@
 #include "Core/EngineAssert.h"
 
 #include <memory>
+#include <unordered_map>
 
 class Game;
 class Font;
@@ -15,16 +16,9 @@ class Debug {
 private:
 	static Debug* s_instance;
 
+	std::unordered_map<string, bool> m_debugFlags;
+
 	Text* m_fpsText;
-	Text* m_debugOnText;
-
-	bool m_renderColliders;
-
-	bool m_debugMode;
-	bool m_renderPerf;
-	bool m_renderBounds;
-	bool m_renderQuadTree;
-	bool m_renderGrid;
 
 	bool m_zoomIn;
 	bool m_zoomOut;
@@ -40,13 +34,16 @@ private:
 	void onMouseScroll(float64 xOffset, float64 yOffset);
 
 	Debug();
+
+	void listFlagCommand(string* args, uint32 numArgs);
+	void setFlagCommand(string* args, uint32 numArgs);
 public:
 	virtual ~Debug();
 
 	void tick(int32 fps);
 	void render();
 
-	bool shouldRenderColliders() const { return m_renderColliders && m_debugMode; };
+	bool flag(const string& flag) const;
 
 	Debug(const Debug&) = delete;
 	Debug& operator=(const Debug&) = delete;

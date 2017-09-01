@@ -6,10 +6,13 @@
 #include "Core/Platform.h"
 
 #include <unordered_map>
+#include <vector>
 
 #ifdef USING_WIN32_CONSOLE
 #include "Windows.h"
 #endif
+
+typedef Delegate<const std::vector<string>&> CommandDelegate;
 
 class Console {
 private:
@@ -23,7 +26,7 @@ private:
 	char* m_cmdBuffer;
 	uint8 m_charsInCmdBuffer;
 
-	std::unordered_map<string, Delegate<string*, uint32>> m_cmds;
+	std::unordered_map<string, CommandDelegate> m_cmds;
 
 	Console();
 
@@ -42,8 +45,8 @@ public:
 
 	void pollEvents();
 
-	void addCommand(const string& command, const Delegate<string*, uint32>& function);
-	void executeCommand(const string& command, string* args, uint32 numArgs);
+	void addCommand(const string& command, const CommandDelegate& del);
+	void executeCommand(const string& command, const std::vector<string>& args);
 
 	Console& operator<<(const string& msg);
 	Console& operator<<(char c);

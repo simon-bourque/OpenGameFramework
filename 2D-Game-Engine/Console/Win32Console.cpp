@@ -10,7 +10,7 @@
 Console* Console::s_instance = nullptr;
 
 // Test commands
-static void pingCommand(string* args, uint32 numArgs) {
+static void pingCommand(const std::vector<string>& args) {
 	Console::get()->write("pong");
 	Console::get()->newLine();
 }
@@ -39,7 +39,7 @@ Console::Console() : m_charsInCmdBuffer(0) {
 	m_cmdBuffer = new char[MAX_CMD_LENGTH];
 
 	// Add test command
-	addCommand("ping", Delegate<string*, uint32>::create<&pingCommand>());
+	addCommand("ping", CommandDelegate::create<&pingCommand>());
 }
 
 Console::~Console() {
@@ -117,16 +117,16 @@ void Console::pollEvents() {
 	delete[] inputEvents;
 }
 
-void Console::addCommand(const string& command, const Delegate<string*, uint32>& del) {
+void Console::addCommand(const string& command, const CommandDelegate& del) {
 	// TODO add check to see if command already exists
 	m_cmds[command] = del;
 }
 
-void Console::executeCommand(const string& command, string* args, uint32 numArgs) {
+void Console::executeCommand(const string& command, const std::vector<string>& args) {
 	auto commandIter = m_cmds.find(command);
 
 	if (commandIter != m_cmds.end()) {
-		commandIter->second(args, numArgs);
+		commandIter->second(args);
 	}
 	else {
 		(*this) << "Error: \'" << command << "\' is not a valid command.";
@@ -187,20 +187,11 @@ void Console::parseCommandBuffer() {
 
 	delete[] str;
 
-	if (tokens.size() > 1) {
-		uint32 numArgs = tokens.size() - 1;
-		string* args = new string[numArgs];
-		for (int32 i = 0; i < numArgs; i++) {
-			args[i] = tokens[i + 1];
-		}
+	// Remove the command itself from the list of tokens
+	string command(tokens[0]);
+	tokens.erase(tokens.begin());
 
-		executeCommand(tokens[0], args, numArgs);
-
-		delete[] args;
-	}
-	else {
-		executeCommand(tokens[0], nullptr, 0);
-	}
+	executeCommand(command, tokens);
 }
 
 #endif

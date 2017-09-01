@@ -152,7 +152,7 @@ void Debug::listFlagCommand(string* args, uint32 numArgs) {
 }
 
 void Debug::setFlagCommand(string* args, uint32 numArgs) {
-	if (numArgs != 2) {
+	if (numArgs > 2 || numArgs < 1) {
 		DEBUG_LOG("Error: invalid number of arguments.");
 		return;
 	}
@@ -160,15 +160,22 @@ void Debug::setFlagCommand(string* args, uint32 numArgs) {
 	auto flagIter = m_debugFlags.find(args[0]);
 
 	if (flagIter != m_debugFlags.end()) {
-		int32 i = 0;
-		try {
-			i = stoi(args[1]);
+		if (numArgs == 1) {
+			// Toggle flag
+			(*flagIter).second = !((*flagIter).second);
 		}
-		catch (std::invalid_argument& ex) {
-			DEBUG_LOG("Error: flags can only be set to either 1 or 0.");
-			return;
+		else {
+			// Set flag
+			int32 i = 0;
+			try {
+				i = stoi(args[1]);
+			}
+			catch (std::invalid_argument& ex) {
+				DEBUG_LOG("Error: flags can only be set to either 1 or 0.");
+				return;
+			}
+			(*flagIter).second = (i == 0) ? false : true;
 		}
-		(*flagIter).second = (i == 0) ? false : true;
 	}
 	else {
 		DEBUG_LOG("Error: flag \'" + args[0] + "\' does not exist.");

@@ -56,8 +56,8 @@ Debug::Debug() :
 	m_debugFlags["print_mouse_scroll"] = false;
 	m_debugFlags["print_mouse_pos"] = false;
 
-	Console::get()->addCommand("setflag", Delegate<string*, uint32>::create<Debug, &Debug::setFlagCommand>(this));
-	Console::get()->addCommand("listflag", Delegate<string*, uint32>::create<Debug, &Debug::listFlagCommand>(this));
+	Console::get()->addCommand("setflag", CommandDelegate::create<Debug, &Debug::setFlagCommand>(this));
+	Console::get()->addCommand("listflag", CommandDelegate::create<Debug, &Debug::listFlagCommand>(this));
 }
 
 
@@ -144,14 +144,16 @@ bool Debug::flag(const string& flag) const {
 	}
 }
 
-void Debug::listFlagCommand(string* args, uint32 numArgs) {
+void Debug::listFlagCommand(const std::vector<string>& args) {
 	DEBUG_LOG("---------- FLAGS ----------");
 	for (const auto& pair : m_debugFlags) {
 		DEBUG_LOG(pair.first);
 	}
 }
 
-void Debug::setFlagCommand(string* args, uint32 numArgs) {
+void Debug::setFlagCommand(const std::vector<string>& args) {
+	uint32 numArgs = args.size();
+	
 	if (numArgs > 2 || numArgs < 1) {
 		DEBUG_LOG("Error: invalid number of arguments.");
 		return;

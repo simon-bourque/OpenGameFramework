@@ -35,8 +35,8 @@ private:
 
 	Debug();
 
-	void listFlagCommand(string* args, uint32 numArgs);
-	void setFlagCommand(string* args, uint32 numArgs);
+	void listFlagCommand(const std::vector<string>& args);
+	void setFlagCommand(const std::vector<string>& args);
 public:
 	virtual ~Debug();
 

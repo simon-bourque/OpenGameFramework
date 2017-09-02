@@ -1,7 +1,5 @@
 #include "Resources.h"
 
-#include "Resource/RawImage.h"
-
 #include "Scene/TileScene.h"
 #include "Scene/TileLayer.h"
 #include "Scene/Tile.h"
@@ -24,11 +22,6 @@
 
 #include "Resource/File/FileReader.h"
 
-#define STB_IMAGE_STATIC
-#define STBI_FAILURE_USERMSG
-#define STB_IMAGE_IMPLEMENTATION
-#include <stb/stb_image.h>
-
 #include <sstream>
 #include <fstream>
 #include <ios>
@@ -38,10 +31,6 @@
 // Only for testing, remove later
 #include <chrono>
 #include <iostream>
-
-void readFloat(std::ifstream& input, float32& value);
-void readInt(std::ifstream& input, int32& value);
-void readUInt(std::ifstream& input, uint32& value);
 
 const static string SHADER_PATH = "res/shader/";
 const static string TEXTURE_PATH = "res/texture/";
@@ -117,90 +106,6 @@ uint8* loadTexture(const string& file, uint8 type, uint32& width, uint32& height
 	input.close();
 
 	return data;
-}
-
-RawImage* loadImage(string file) {
-	int32 width = 0;
-	int32 height = 0;
-	int32 channels = 0;
-	uint8* data = stbi_load((TEXTURE_PATH + file).c_str(), &width, &height, &channels, 4);
-
-	if (!data) {
-		const char* reason = stbi_failure_reason();
-		throw std::runtime_error("Failed to load image " + file + ": " + reason);
-	}
-
-	RawImage* img = new RawImage(data, width, height, channels);
-
-	stbi_image_free(data);
-
-	return img;
-}
-
-RawImage* loadImages(string file, int32 margin, int32 spacing, int32 tileWidth, int32 tileHeight, uint32& imgCount) {
-	RawImage* img = loadImage(file);
-
-	int32 numTilesPerWidth = (img->getWidth() - (margin * 2) + spacing) / (tileWidth + spacing);
-	int32 numTilesPerHeight = (img->getHeight() - (margin * 2) + spacing) / (tileHeight + spacing);
-
-	int32 maxWidth = (numTilesPerWidth * tileWidth) + (spacing * (numTilesPerWidth - 1)) + margin;
-	int32 maxHeight = (numTilesPerHeight * tileHeight) + (spacing * (numTilesPerHeight - 1)) + margin;
-
-	RawImage* imgs = new RawImage[numTilesPerWidth * numTilesPerHeight];
-
-	int32 tileCount = 0;
-	for (int32 y = margin; y < maxHeight; y += tileHeight + spacing) {
-		for (int32 x = margin; x < maxWidth; x += tileWidth + spacing) {
-
-			RawImage subImage = img->getSubImage(x, y, tileWidth, tileHeight);
-
-			imgs[tileCount++] = subImage;
-		}
-	}
-
-	delete img;
-
-	imgCount = numTilesPerWidth * numTilesPerHeight;
-	return imgs;
-}
-
-RawImage* loadImages(const string& imgFile, const string& infoFile, uint32& numberOfImages) {
-	RawImage* img = loadImage(imgFile);
-
-	std::ifstream input(TEXTURE_PATH + infoFile);
-
-	if (!input) {
-		delete img;
-		input.close();
-		throw std::runtime_error("Failed to load texture " + imgFile);
-	}
-
-	string line;
-	uint32 numberOfFrames = 0;
-	input >> numberOfFrames;
-	numberOfImages = numberOfFrames;
-
-	RawImage* imgs = new RawImage[numberOfFrames];
-
-	for (uint32 i = 0; i < numberOfFrames; i++) {
-		input >> line;
-		input >> line;
-		input >> line;
-		uint32 x = stoul(line);
-		input >> line;
-		uint32 y = stoul(line);
-		input >> line;
-		uint32 width = stoul(line);
-		input >> line;
-		uint32 height = stoul(line);
-
-		imgs[i] = img->getSubImage(x, y, width, height);
-	}
-
-	input.close();
-	delete img;
-
-	return imgs;
 }
 
 std::pair<char, Glyph>* loadFont(const string& file, uint32& charMapSize, Glyph& invalidCharacter) {
@@ -407,29 +312,4 @@ TileScene* loadTileLevel(string file) {
 	delete[] layers;
 	
 	return scene;
-}
-
-// TODO ensure correct endianness
-void readFloat(std::ifstream& input, float32& value) {
-	char b[4] = {0, 0, 0, 0};
-	
-	input.get(b[0]).get(b[1]).get(b[2]).get(b[3]);
-
-	memcpy(&value, b, 4);
-}
-
-void readInt(std::ifstream& input, int32& value) {
-	char b[4] = { 0, 0, 0, 0 };
-	
-	input.get(b[0]).get(b[1]).get(b[2]).get(b[3]);
-
-	memcpy(&value, b, 4);
-}
-
-void readUInt(std::ifstream& input, uint32& value) {
-	char b[4] = { 0, 0, 0, 0 };
-
-	input.get(b[0]).get(b[1]).get(b[2]).get(b[3]);
-
-	memcpy(&value, b, 4);
 }

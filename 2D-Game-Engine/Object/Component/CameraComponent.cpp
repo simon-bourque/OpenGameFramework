@@ -10,6 +10,8 @@
 #include "Scene/SceneManager.h"
 #include "Scene/Scene.h"
 
+GET_COMPONENT_TYPE_DEFINITION(CameraComponent)
+
 CameraComponent::CameraComponent(GameObject* parentObject, Camera* camera) : 
 	ObjectComponent(parentObject),
 	m_camera(camera),

@@ -36,10 +36,13 @@ public:
 	void setHorizontalFlip(bool horizontalFlip) { m_horizontalFlip = horizontalFlip; };
 	void setVerticalFlip(bool verticalFlip) { m_verticalFlip = verticalFlip; };
 
-	virtual ComponentType getType() override { return ANIMATOR_COMPONENT; };
 	virtual void receiveEvent(const Event& event) override;
 
 #ifdef DEBUG_BUILD
 	virtual void debugRender() override;
 #endif
+
+	GET_COMPONENT_TYPE_DECLERATION
 };
+
+REGISTER_COMPONENT_TYPE(AnimatorComponent)

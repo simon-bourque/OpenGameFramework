@@ -29,10 +29,13 @@ public:
 	virtual void tick(float32 delta) override;
 	virtual void render() override;
 
-	virtual ComponentType getType() override { return SPRITE_COMPONENT; };
 	virtual void receiveEvent(const Event& event) override;
 
 #ifdef DEBUG_BUILD
 	virtual void debugRender() override;
 #endif
+
+	GET_COMPONENT_TYPE_DECLERATION
 };
+
+REGISTER_COMPONENT_TYPE(SpriteComponent)

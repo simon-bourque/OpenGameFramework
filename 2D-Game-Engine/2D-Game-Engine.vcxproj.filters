@@ -264,6 +264,9 @@
     <ClCompile Include="Console\Win32Console.cpp">
       <Filter>Console</Filter>
     </ClCompile>
+    <ClCompile Include="Object\Component\ComponentType.cpp">
+      <Filter>Object\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Debug.h">

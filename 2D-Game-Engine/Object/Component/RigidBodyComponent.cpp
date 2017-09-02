@@ -10,6 +10,8 @@
 #include "Scene/SceneManager.h"
 #include "Scene/Scene.h"
 
+GET_COMPONENT_TYPE_DEFINITION(RigidBodyComponent)
+
 RigidBodyComponent::RigidBodyComponent(GameObject* parentObject, float32 mass) : ObjectComponent(parentObject), m_mass(mass) {}
 
 

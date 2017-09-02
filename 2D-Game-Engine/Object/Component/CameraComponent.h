@@ -33,8 +33,6 @@ public:
 	virtual void tick(float32 delta) override;
 	virtual void receiveEvent(const Event& event) override;
 
-	virtual ComponentType getType() override { return CAMERA_COMPONENT; };
-
 	float32 getXOffset() const { return m_xOffset; };
 	float32 getYOffset() const { return m_yOffset; };
 	bool isTrackingX() const { return m_trackX; };
@@ -51,4 +49,8 @@ public:
 #ifdef DEBUG_BUILD
 	virtual void debugRender() override;
 #endif
+
+	GET_COMPONENT_TYPE_DECLERATION
 };
+
+REGISTER_COMPONENT_TYPE(CameraComponent)

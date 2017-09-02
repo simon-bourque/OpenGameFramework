@@ -7,6 +7,8 @@
 
 #include "Core/Event.h"
 
+GET_COMPONENT_TYPE_DEFINITION(SpriteComponent)
+
 SpriteComponent::SpriteComponent(GameObject* parentObject, Texture* texture) : RenderableComponent(parentObject),
 	m_texture(texture),
 	m_horizontalFlip(false),

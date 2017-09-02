@@ -40,10 +40,13 @@ public:
 
 	geo::Rectangle getRectangle() const { return m_rectangle; };
 
-	virtual ComponentType getType() override { return AABB_COLLIDER_COMPONENT; };
 	virtual void receiveEvent(const Event& event) override;
 
 #ifdef DEBUG_BUILD
 	virtual void debugRender() override;
 #endif
+
+	GET_COMPONENT_TYPE_DECLERATION
 };
+
+REGISTER_COMPONENT_TYPE(AABBColliderComponent)

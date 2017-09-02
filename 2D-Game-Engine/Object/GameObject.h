@@ -5,11 +5,11 @@
 #include "Object/Transform.h"
 
 #include "Object/Component/ComponentType.h"
+#include "Object/Component/ObjectComponent.h"
+#include "Object/Component/RenderableComponent.h"
 
 #include <vector>
 
-class ObjectComponent;
-class RenderableComponent;
 class Game;
 class RenderSystem;
 struct Event;
@@ -34,9 +34,32 @@ public:
 
 	void broadcastEvent(const Event& event);
 
-	ObjectComponent* findComponent(ComponentType type);
+	template<typename T>
+	T* findComponent() const;
 
 #ifdef DEBUG_BUILD
 	void debugRender();
 #endif
 };
+
+template<typename T>
+T* GameObject::findComponent() const {
+	int64 id = ComponentType<T>::id();
+
+	if (id == -1) {
+		return nullptr;
+	}
+
+	for (ObjectComponent* component : m_components) {
+		if (component->getTypeId() == id) {
+			return static_cast<T*>(component);
+		}
+	}
+	for (ObjectComponent* component : m_renderableComponents) {
+		if (component->getTypeId() == id) {
+			return static_cast<T*>(component);
+		}
+	}
+
+	return nullptr;
+}

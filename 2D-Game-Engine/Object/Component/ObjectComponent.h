@@ -25,8 +25,9 @@ public:
 	void setActive(bool active) { m_active = active; };
 
 	virtual void tick(float32 delta) = 0;
-	virtual ComponentType getType() = 0;
 	virtual void receiveEvent(const Event& event) = 0;
+
+	virtual int64 getTypeId() const { return -1; };
 
 #ifdef DEBUG_BUILD
 	virtual void debugRender() = 0;

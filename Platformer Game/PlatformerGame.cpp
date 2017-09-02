@@ -57,9 +57,8 @@ void PlatformerGame::onKeyPress(int32 key, int32 scancode, int32 action, int32 m
 		shutdown();
 	}
 	if (key == Keys::KEY_R && action == Actions::PRESS) {
-		ObjectComponent* component = m_player->findComponent(RIGIDBODY_COMPONENT);
-		if (component) {
-			RigidBodyComponent* rb = static_cast<RigidBodyComponent*>(component);
+		RigidBodyComponent* rb = m_player->findComponent<RigidBodyComponent>();
+		if (rb) {
 			rb->stop();
 		}
 

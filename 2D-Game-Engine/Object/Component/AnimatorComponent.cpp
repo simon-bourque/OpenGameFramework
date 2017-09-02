@@ -5,6 +5,8 @@
 #include "Core/EngineAssert.h"
 #include "Core/Event.h"
 
+GET_COMPONENT_TYPE_DEFINITION(AnimatorComponent)
+
 AnimatorComponent::AnimatorComponent(GameObject* parentObject, const string& currentStateName, AnimState* currentState) :
 	RenderableComponent(parentObject),
 	m_currentState(currentState),

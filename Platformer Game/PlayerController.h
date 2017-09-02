@@ -48,7 +48,6 @@ public:
 	void setCanJump(bool canJump) { m_canJump = canJump; };
 
 	void onKey(int32 key, int32 scancode, int32 action, int32 mods);
-	virtual ComponentType getType() override { return DEFAULT; };
 
 #ifdef DEBUG_BUILD
 	virtual void debugRender() override;

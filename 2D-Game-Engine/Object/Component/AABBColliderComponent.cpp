@@ -16,6 +16,8 @@
 #include "Graphics/Renderer/ShapeRenderer.h"
 #endif
 
+GET_COMPONENT_TYPE_DEFINITION(AABBColliderComponent)
+
 void AABBColliderComponent::emptyIntersectResponse(const Manifold& manifold, GameObject* other) {}
 
 AABBColliderComponent::AABBColliderComponent(GameObject* parentObject, const geo::Rectangle& rectangle, float32 xOffset, float32 yOffset) : ObjectComponent(parentObject),

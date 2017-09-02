@@ -59,7 +59,7 @@ void PlayerController::tick(float32 delta) {
 		m_swordCountdown -= delta;
 
 		if (m_swordCountdown <= 0) {
-			SpriteComponent* cp = (SpriteComponent*)(m_player->getSword()->findComponent(ComponentType::SPRITE_COMPONENT));
+			SpriteComponent* cp = m_player->getSword()->findComponent<SpriteComponent>();
 			cp->setVisible(false);
 			m_swingingSword = false;
 		}
@@ -101,12 +101,12 @@ void PlayerController::flipSwordSprite(Direction direction) {
 	}
 
 	if (direction == EAST || direction == NORTH_EAST || direction == SOUTH_EAST) {
-		SpriteComponent* cp = (SpriteComponent*)(m_player->getSword()->findComponent(ComponentType::SPRITE_COMPONENT));
+		SpriteComponent* cp = m_player->getSword()->findComponent<SpriteComponent>();
 		cp->setHorizontalFlip(true);
 		m_swordOffset = 0.4f;
 	}
 	else if (direction == WEST || direction == NORTH_WEST || direction == SOUTH_WEST) {
-		SpriteComponent* cp = (SpriteComponent*)(m_player->getSword()->findComponent(ComponentType::SPRITE_COMPONENT));
+		SpriteComponent* cp = m_player->getSword()->findComponent<SpriteComponent>();
 		cp->setHorizontalFlip(false);
 		m_swordOffset = -0.4f;
 	}
@@ -179,10 +179,6 @@ void PlayerController::movePlayer(Direction direction, float32 delta) {
 	}
 }
 
-ComponentType PlayerController::getType() {
-	return ComponentType::DEFAULT;
-}
-
 void PlayerController::receiveEvent(const Event& event) {
 
 }
@@ -226,7 +222,7 @@ void PlayerController::onKey(int32 key, int32 scancode, int32 action, int32 mods
 
 	if (key == Keys::KEY_SPACE) {
 		if (action == Actions::PRESS && !m_swingingSword) {
-			SpriteComponent* cp = (SpriteComponent*)(m_player->getSword()->findComponent(ComponentType::SPRITE_COMPONENT));
+			SpriteComponent* cp = m_player->getSword()->findComponent<SpriteComponent>();
 			m_swordCountdown = 0.1f;
 			cp->setVisible(true);
 			m_swingingSword = true;

@@ -9,6 +9,7 @@
 #include "Object/GameObject.h"
 #include "Object/Component/ComponentType.h"
 #include "Object/Component/RigidBodyComponent.h"
+#include "Object/Component/AABBColliderComponent.h"
 #include "Object/Component/CameraComponent.h"
 
 NoClipState::NoClipState(PlayerController* pc) : PlayerState(pc) {}
@@ -20,37 +21,37 @@ void NoClipState::onEnter() {
 	const string str("IDLE");
 	m_pc->getParentObject()->broadcastEvent(Event(Event::Type::ANIM_STATE_CHANGE, &str));
 
-	ObjectComponent* rigidBody = m_pc->getParentObject()->findComponent(RIGIDBODY_COMPONENT);
+	RigidBodyComponent* rigidBody = m_pc->getParentObject()->findComponent<RigidBodyComponent>();
 	if (rigidBody) {
 		rigidBody->setActive(false);
 	}
 
-	ObjectComponent* collider = m_pc->getParentObject()->findComponent(AABB_COLLIDER_COMPONENT);
+	AABBColliderComponent* collider = m_pc->getParentObject()->findComponent<AABBColliderComponent>();
 	if (collider) {
 		collider->setActive(false);
 	}
 
-	ObjectComponent* camera = m_pc->getParentObject()->findComponent(CAMERA_COMPONENT);
+	CameraComponent* camera = m_pc->getParentObject()->findComponent<CameraComponent>();
 	if (camera) {
-		static_cast<CameraComponent*>(camera)->setSceneBounded(false);
+		camera->setSceneBounded(false);
 	}
 }
 
 void NoClipState::onExit() {
-	ObjectComponent* rigidBody = m_pc->getParentObject()->findComponent(RIGIDBODY_COMPONENT);
+	RigidBodyComponent* rigidBody = m_pc->getParentObject()->findComponent<RigidBodyComponent>();
 	if (rigidBody) {
 		rigidBody->setActive(true);
-		static_cast<RigidBodyComponent*>(rigidBody)->stop();
+		rigidBody->stop();
 	}
 
-	ObjectComponent* collider = m_pc->getParentObject()->findComponent(AABB_COLLIDER_COMPONENT);
+	AABBColliderComponent* collider = m_pc->getParentObject()->findComponent<AABBColliderComponent>();
 	if (collider) {
 		collider->setActive(true);
 	}
 
-	ObjectComponent* camera = m_pc->getParentObject()->findComponent(CAMERA_COMPONENT);
+	CameraComponent* camera = m_pc->getParentObject()->findComponent<CameraComponent>();
 	if (camera) {
-		static_cast<CameraComponent*>(camera)->setSceneBounded(true);
+		camera->setSceneBounded(true);
 	}
 }
 

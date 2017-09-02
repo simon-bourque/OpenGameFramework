@@ -43,7 +43,6 @@ public:
 	virtual ~PlayerController();
 
 	virtual void tick(float32 delta) override;
-	virtual ComponentType getType() override;
 	virtual void receiveEvent(const Event& event) override;
 
 	void onKey(int32 key, int32 scancode, int32 action, int32 mods);

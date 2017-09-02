@@ -102,11 +102,6 @@ static void writeTilesetsChunk(ofstream& output, const pugi::xml_node& mapNode, 
 			output.put(textureName[i]);
 		}
 
-		writeUnsignedInt(output, tilesetNode.attribute("margin").as_uint());
-		writeUnsignedInt(output, tilesetNode.attribute("spacing").as_uint());
-		writeUnsignedInt(output, tilesetNode.attribute("tilewidth").as_uint());
-		writeUnsignedInt(output, tilesetNode.attribute("tileheight").as_uint());
-
 		firstgids.push_back({ tilesetNode.attribute("firstgid").as_uint(), tilesetNode.attribute("tilecount").as_uint() });
 	}
 }

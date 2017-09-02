@@ -88,6 +88,7 @@ Texture* TextureManager::createTexture2DArray(const string& name, Texture::Filte
 	}
 	catch (std::runtime_error& ex) {
 		DEBUG_LOG(ex.what());
+		// TODO this doesnt work properly
 		return m_defaultTexture.get();
 	}
 

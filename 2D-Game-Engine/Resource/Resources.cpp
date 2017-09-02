@@ -352,8 +352,8 @@ TileScene* loadTileLevel(string file) {
 		uint32 spacing = input.read<uint32>();
 		uint32 tileWidth = input.read<uint32>();
 		uint32 tileHeight = input.read<uint32>();
-	
-		Texture* texture = RenderSystem::get()->getTextureManager()->createTexture2DArray(texPath, margin, spacing, tileWidth, tileHeight, Texture::Filter::NEAREST_NEIGHBOR);
+
+		Texture* texture = RenderSystem::get()->getTextureManager()->createTexture2DArray(texPath, Texture::Filter::NEAREST_NEIGHBOR);
 		textures[i] = texture;
 		delete[] texPath;
 	}

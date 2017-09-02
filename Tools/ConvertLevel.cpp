@@ -94,6 +94,9 @@ static void writeTilesetsChunk(ofstream& output, const pugi::xml_node& mapNode, 
 		string texturePath = imgNode.attribute("source").value();
 		string textureName = texturePath.substr(texturePath.find_last_of("/\\") + 1);
 
+		// Replace extension
+		textureName = textureName.substr(0, textureName.find_last_of(".")) + ".tx";
+
 		writeUnsignedInt(output, textureName.size());
 		for (uint32 i = 0; i < textureName.size(); i++) {
 			output.put(textureName[i]);

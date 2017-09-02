@@ -1,0 +1,5 @@
+conv l level_0.tmx
+conv t uncolored_forest.png
+conv t p1_spritesheet.png player_jump.tx 438 93 67 94
+conv ta p1_spritesheet.png player_walk.tx 0 0 72 97 73 0 72 97 146 0 72 97 0 98 72 97 73 98 72 97 146 98 72 97 219 0 72 97 292 0 72 97 219 98 72 97 365 0 72 97 292 98 72 97
+conv ta tiles_spritesheet.png tiles_spritesheet.tx auto 0 2 70 70

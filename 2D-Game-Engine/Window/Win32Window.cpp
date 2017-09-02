@@ -199,6 +199,9 @@ Window::Window(const string& title, int32 width, int32 height) : m_title(title),
 
 Window::~Window() {
 	// TODO error checking
+	if (!m_shouldClose) {
+		DestroyWindow(m_handle);
+	}
 	wglDeleteContext(m_openglRenderContext);
 	ReleaseDC(m_handle, m_deviceContext);
 }

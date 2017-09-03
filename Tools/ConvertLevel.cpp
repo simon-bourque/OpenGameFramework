@@ -107,40 +107,46 @@ static void writeTilesetsChunk(ofstream& output, const pugi::xml_node& mapNode, 
 }
 
 static void writeTilesChunk(ofstream& output, const pugi::xml_node& mapNode, vector<pair<uint32, uint32>>& firstgids, uint32 numTilesets, uint32 width) {
+	auto layersNode = mapNode.children("layer");
 
-	pugi::xml_node dataNode = mapNode.child("layer").child("data");
-	if (string(dataNode.attribute("encoding").value()) != "csv") {
-		//cout << "Failed to write new lvl file.  Encoding not supported." << endl;
-		output.close();
-		throw runtime_error("Failed to write new lvl file.  Encoding not supported.");
-		//return;
-	}
+	vector<pair<vector<Tile>, uint32>> finalLayers;
 
-	vector<Tile>* tileLayers = new vector<Tile>[numTilesets];
-
-	string data = dataNode.child_value();
-	stringstream ss;
-	float32 x = 0;
-	float32 y = 0;
-	for (uint32 i = 0; i < data.size(); i++) {
-		if (isdigit(data[i])) {
-			ss << data[i];
+	for (const pugi::xml_node& layerNode : layersNode) {
+		pugi::xml_node dataNode = layerNode.child("data");
+		if (string(dataNode.attribute("encoding").value()) != "csv") {
+			output.close();
+			throw runtime_error("Failed to write new lvl file.  Encoding not supported.");
 		}
-		else if (data[i] == ',') {
+
+		vector<Tile>* layers = new vector<Tile>[numTilesets];
+
+		string data = dataNode.child_value();
+		stringstream ss;
+		float32 x = 0;
+		float32 y = 0;
+
+		auto parseData = [&ss, &firstgids, &layers, &x, &y, &width]() {
 			int32 index = stoi(ss.str());
-			uint32 layer = 0;
-			for (uint32 i = 0; i < firstgids.size(); i++) {
-				if (index >= firstgids[i].first && index < firstgids[i].second + firstgids[i].first) {
-					layer = i;
-					index -= firstgids[i].first;
-					break;
+			uint32 tilesetIndex = 0;
+
+			// If tile is not empty
+			if (index > 0) {
+				for (int32 i = 0; i < firstgids.size(); i++) {
+					if (index >= firstgids[i].first && index < firstgids[i].second + firstgids[i].first) {
+						tilesetIndex = i;
+						index -= firstgids[i].first;
+						break;
+					}
 				}
 			}
-			//index--;
-
-			if (index > 0) {
+			else {
+				--index;
+			}
+			
+			// If tile is not empty
+			if (index >= 0) {
 				Tile tile(x, -y, index);
-				tileLayers[layer].push_back(tile);
+				layers[tilesetIndex].push_back(tile);
 			}
 			x++;
 			if (x >= width) {
@@ -148,38 +154,38 @@ static void writeTilesChunk(ofstream& output, const pugi::xml_node& mapNode, vec
 				y++;
 			}
 			ss.str("");
+		};
+
+		for (int32 i = 0; i < data.size(); i++) {
+			if (isdigit(data[i])) {
+				ss << data[i];
+			}
+			else if (data[i] == ',') {
+				parseData();
+			}
 		}
-	}
-	int32 index = stoi(ss.str());
-	uint32 layer = 0;
-	for (uint32 i = 0; i < firstgids.size(); i++) {
-		if (index >= firstgids[i].first && index < firstgids[i].second + firstgids[i].first) {
-			layer = i;
-			index -= firstgids[i].first;
-			break;
+		parseData();
+
+		for (int32 i = 0; i < numTilesets; i++) {
+			if (!layers[i].empty()) {
+				finalLayers.push_back({layers[i], i});
+			}
 		}
-	}
-	//index--;
 
-	if (index > -1) {
-		Tile tile(x, -y, index);
-		tileLayers[layer].push_back(tile);
+		delete[] layers;
 	}
 
-	writeUnsignedInt(output, numTilesets);
+	writeUnsignedInt(output, finalLayers.size());
+	for (auto& layer : finalLayers) {
+		writeUnsignedInt(output, layer.first.size());
+		writeUnsignedInt(output, layer.second);
 
-	for (uint32 i = 0; i < numTilesets; i++) {
-		const vector<Tile>& tiles = tileLayers[i];
-		writeUnsignedInt(output, tiles.size());
-
-		for (const Tile& tile : tiles) {
+		for (const Tile& tile : layer.first) {
 			writeFloat(output, tile.x);
 			writeFloat(output, tile.y);
 			writeInt(output, tile.index);
 		}
 	}
-
-	delete[] tileLayers;
 }
 
 static void writeCollidersChunk(ofstream& output, const pugi::xml_node& mapNode) {

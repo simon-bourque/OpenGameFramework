@@ -264,6 +264,7 @@ TileScene* loadTileLevel(string file) {
 	
 	for (uint32 i = 0; i < numLayers; i++) {
 		uint32 numTiles = input.read<uint32>();
+		uint32 tilesetIndex = input.read<uint32>();
 
 		Tile* tiles = new Tile[numTiles];
 		for (int32 i = 0; i < numTiles; i++) {
@@ -274,7 +275,7 @@ TileScene* loadTileLevel(string file) {
 			tiles[i] = { x, y, index };
 		}
 	
-		layers[i] = new TileLayer(tiles, numTiles, textures[i]);
+		layers[i] = new TileLayer(tiles, numTiles, textures[tilesetIndex]);
 		delete[] tiles;
 	}
 

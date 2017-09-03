@@ -9,7 +9,6 @@
 #include "Graphics/Background.h"
 
 #include "Math/Geometry/Rectangle.h"
-#include "Math/Vector2f.h"
 
 #include "Input/Input.h"
 
@@ -31,7 +30,8 @@ PlatformerGame::~PlatformerGame() {}
 
 void PlatformerGame::init() {
 	Input::get()->addKeyListener(KeyListener::create<PlatformerGame, &PlatformerGame::onKeyPress>(this));
-	SceneManager::get()->loadTileLevel("level_0.lvl");
+	//SceneManager::get()->loadTileLevel("level_0.lvl");
+	SceneManager::get()->loadTileLevel("layer_test.lvl");
 	SceneManager::get()->getCurrentScene().setGravity(9.8f * 4.0f);
 
 	// Load background
@@ -39,7 +39,10 @@ void PlatformerGame::init() {
 	SceneManager::get()->getCurrentScene().addBackground(new Background(bgTexture));
 
 	// load player
-	Player* player = new Player(this, Vector2f(0.5f, -10.8f));
+	//m_playerSpawn = Vector2f(0.5f, -10.8f);
+	m_playerSpawn = Vector2f(41.0f, -54.8f);
+
+	Player* player = new Player(this, m_playerSpawn);
 	SceneManager::get()->getCurrentScene().addGameObject(player);
 	m_player = player;
 }
@@ -52,18 +55,22 @@ void PlatformerGame::render() {
 	Game::render();
 }
 
+void PlatformerGame::resetPlayer() {
+	RigidBodyComponent* rb = m_player->findComponent<RigidBodyComponent>();
+	if (rb) {
+		rb->stop();
+	}
+
+	m_player->transform.xPos = m_playerSpawn.x;
+	m_player->transform.yPos = m_playerSpawn.y;
+}
+
 void PlatformerGame::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
 	if (key == Keys::KEY_ESCAPE && action == Actions::PRESS) {
 		shutdown();
 	}
 	if (key == Keys::KEY_R && action == Actions::PRESS) {
-		RigidBodyComponent* rb = m_player->findComponent<RigidBodyComponent>();
-		if (rb) {
-			rb->stop();
-		}
-
-		m_player->transform.xPos = 0.5f;
-		m_player->transform.yPos = -10.8f;
+		resetPlayer();
 	}
 }
 

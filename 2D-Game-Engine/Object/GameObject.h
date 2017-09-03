@@ -44,6 +44,7 @@ public:
 
 template<typename T>
 T* GameObject::findComponent() const {
+	static_assert(std::is_base_of<ObjectComponent, T>::value, "Type must derive from ObjectComponent.");
 	int64 id = ComponentType<T>::id();
 
 	if (id == -1) {

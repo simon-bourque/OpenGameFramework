@@ -64,7 +64,7 @@ template <typename... Params>
 template<typename void(*FUNCTION)(Params...)>
 void Delegate<Params...>::bind() {
 	m_object = nullptr;
-	m_function = &freeFunctionCaller<FIUNCTION>;
+	m_function = &freeFunctionCaller<FUNCTION>;
 }
 
 template <typename... Params>

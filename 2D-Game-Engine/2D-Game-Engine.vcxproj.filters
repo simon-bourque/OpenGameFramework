@@ -494,5 +494,8 @@
     <ClInclude Include="Console\Console.h">
       <Filter>Console</Filter>
     </ClInclude>
+    <ClInclude Include="Handle.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

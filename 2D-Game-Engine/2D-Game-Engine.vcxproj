@@ -210,6 +210,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Console\Console.h" />
+    <ClInclude Include="Handle.h" />
     <ClInclude Include="Input\InputConstants.h" />
     <ClInclude Include="Resource\File\FileReader.h" />
     <ClInclude Include="Graphics\Coordinates.h" />

@@ -243,3 +243,5 @@ ModelManifest.xml
 
 !dependencies/lib/Debug
 !dependencies/lib/Release
+!lib/x64
+!lib/x86

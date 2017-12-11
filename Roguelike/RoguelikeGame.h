@@ -2,8 +2,6 @@
 
 #include "Core/Game.h"
 
-#include "Sound/SoundEngine.h"
-
 class Font;
 class Text;
 class UserInterface;

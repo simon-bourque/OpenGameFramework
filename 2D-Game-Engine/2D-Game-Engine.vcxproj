@@ -201,7 +201,6 @@
     <ClCompile Include="Object\State\State.cpp" />
     <ClCompile Include="Object\State\StateTransition.cpp" />
     <ClCompile Include="Object\State\StateMachine.cpp" />
-    <ClCompile Include="Sound\SoundEngine.cpp" />
     <ClCompile Include="Scene\TileLayer.cpp" />
     <ClCompile Include="UI\UIComponent.cpp" />
     <ClCompile Include="UI\UIImage.cpp" />
@@ -279,7 +278,6 @@
     <ClInclude Include="Object\State\State.h" />
     <ClInclude Include="Object\State\StateTransition.h" />
     <ClInclude Include="Object\State\StateMachine.h" />
-    <ClInclude Include="Sound\SoundEngine.h" />
     <ClInclude Include="Scene\TileLayer.h" />
     <ClInclude Include="Core\Time.h" />
     <ClInclude Include="UI\UIComponent.h" />

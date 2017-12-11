@@ -11,7 +11,6 @@
 
 #include "Scene/SceneManager.h"
 #include "Scene/Scene.h"
-#include "Sound/SoundEngine.h"
 #include "Physics/Collision/CollisionSystem.h"
 
 #include "Console/Console.h"
@@ -42,8 +41,8 @@ Game::Game(const string& title, int32 width, int32 height, const geo::Rectangle&
 	DEBUG_LOG("Initializing scene manager...");
 	SceneManager::init();
 
-	DEBUG_LOG("Initializing sound engine...");
-	SoundEngine::init();
+	//DEBUG_LOG("Initializing sound engine...");
+	//SoundEngine::init();
 
 #ifdef DEBUG_BUILD
 	Debug::init();
@@ -56,7 +55,7 @@ Game::~Game() {
 #ifdef DEBUG_BUILD
 	Debug::destroy();
 #endif
-	SoundEngine::destroy();
+	//SoundEngine::destroy();
 	SceneManager::destroy();
 	RenderSystem::destroy();
 	Input::destroy();

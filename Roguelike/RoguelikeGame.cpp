@@ -69,7 +69,7 @@ void RoguelikeGame::onKey(int32 key, int32 scancode, int32 action, int32 mods) {
 	if (key == Keys::KEY_I && action == Actions::PRESS) {
 		// Toggle inventory
 		m_invUI->setVisible(!m_invUI->isVisible());
-		SoundEngine::get()->playSound("res/sound/inventory.wav");
+		//SoundEngine::get()->playSound("res/sound/inventory.wav");
 		SceneManager::get()->setPaused(!SceneManager::get()->isPaused());
 	}
 }

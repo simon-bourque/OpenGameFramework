@@ -10,8 +10,6 @@
 #include "Math/Vector2f.h"
 #include "Math/Constants.h"
 
-#include "Sound/SoundEngine.h"
-
 #include "RoguePlayer.h"
 
 PlayerController::PlayerController(GameObject* parentObject, RoguePlayer* player) :
@@ -45,7 +43,7 @@ void PlayerController::tick(float32 delta) {
 		m_walkDelay += delta;
 		if (m_walkDelay > 0.1f) {
 			m_walkDelay = 0.0f;
-			SoundEngine::get()->playSound("res/sound/walk.wav"); 
+			//SoundEngine::get()->playSound("res/sound/walk.wav"); 
 		}
 	}
 
@@ -226,7 +224,7 @@ void PlayerController::onKey(int32 key, int32 scancode, int32 action, int32 mods
 			m_swordCountdown = 0.1f;
 			cp->setVisible(true);
 			m_swingingSword = true;
-			SoundEngine::get()->playSound("res/sound/swish.wav");
+			//SoundEngine::get()->playSound("res/sound/swish.wav");
 		}
 	}
 }

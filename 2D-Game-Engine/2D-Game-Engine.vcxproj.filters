@@ -52,9 +52,6 @@
     <Filter Include="Object\State">
       <UniqueIdentifier>{e59efa09-4e47-41eb-b5a4-887c78e849ea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sound">
-      <UniqueIdentifier>{eae99159-0362-4935-92bc-a697fb8c1a4c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{40184a36-45f4-4c4f-b359-fd14e86f019b}</UniqueIdentifier>
     </Filter>
@@ -236,9 +233,6 @@
     </ClCompile>
     <ClCompile Include="Graphics\Coordinates.cpp">
       <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Sound\SoundEngine.cpp">
-      <Filter>Sound</Filter>
     </ClCompile>
     <ClCompile Include="UI\UIComponent.cpp">
       <Filter>UI</Filter>
@@ -463,9 +457,6 @@
     </ClInclude>
     <ClInclude Include="Graphics\Coordinates.h">
       <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound\SoundEngine.h">
-      <Filter>Sound</Filter>
     </ClInclude>
     <ClInclude Include="UI\UIComponent.h">
       <Filter>UI</Filter>

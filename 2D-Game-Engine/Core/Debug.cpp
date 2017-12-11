@@ -30,19 +30,17 @@
 
 #include "Math/Vector2f.h"
 
-Debug* Debug::s_instance = nullptr;
-
 Debug::Debug() : 
 	m_zoomIn(false),
 	m_zoomOut(false)
 {
-	Input::get()->addKeyListener(KeyListener::create<Debug, &Debug::onKeyPress>(this));
-	Input::get()->addCursorPositionListener(CursorPositionListener::create<Debug, &Debug::onMouseMove>(this));
-	Input::get()->addMouseButtonListener(MouseButtonListener::create<Debug, &Debug::onMousePress>(this));
-	Input::get()->addScrollListener(ScrollListener::create<Debug, &Debug::onMouseScroll>(this));
+	getInputInstance()->addKeyListener(KeyListener::create<Debug, &Debug::onKeyPress>(this));
+	getInputInstance()->addCursorPositionListener(CursorPositionListener::create<Debug, &Debug::onMouseMove>(this));
+	getInputInstance()->addMouseButtonListener(MouseButtonListener::create<Debug, &Debug::onMousePress>(this));
+	getInputInstance()->addScrollListener(ScrollListener::create<Debug, &Debug::onMouseScroll>(this));
 
-	Font* font = RenderSystem::get()->getFontManager()->createFont("font3");
-	m_fpsText = RenderSystem::get()->getTextManager()->createText("debug_fps_text_0", "fps: 00", font, Text::Usage::STREAM);
+	Font* font = getRenderSystemInstance()->getFontManager()->createFont("font3");
+	m_fpsText = getRenderSystemInstance()->getTextManager()->createText("debug_fps_text_0", "fps: 00", font, Text::Usage::STREAM);
 
 	m_fpsText->setScale(0.5f);
 
@@ -56,8 +54,8 @@ Debug::Debug() :
 	m_debugFlags["print_mouse_scroll"] = false;
 	m_debugFlags["print_mouse_pos"] = false;
 
-	Console::get()->addCommand("setflag", CommandDelegate::create<Debug, &Debug::setFlagCommand>(this));
-	Console::get()->addCommand("listflag", CommandDelegate::create<Debug, &Debug::listFlagCommand>(this));
+	getConsoleInstance()->addCommand("setflag", CommandDelegate::create<Debug, &Debug::setFlagCommand>(this));
+	getConsoleInstance()->addCommand("listflag", CommandDelegate::create<Debug, &Debug::listFlagCommand>(this));
 }
 
 
@@ -73,8 +71,8 @@ void Debug::tick(int32 fps) {
 		const static float32 MAX_ZOOM_IN = 0.01f;
 
 		float32 ds = (m_zoomIn) ? -SCALE_INCR : SCALE_INCR;
-		float32 scaleX = RenderSystem::get()->getCamera().transform.xScale + ds;
-		float32 scaleY = RenderSystem::get()->getCamera().transform.yScale + ds;
+		float32 scaleX = getRenderSystemInstance()->getCamera().transform.xScale + ds;
+		float32 scaleY = getRenderSystemInstance()->getCamera().transform.yScale + ds;
 
 		if (scaleX < MAX_ZOOM_IN) {
 			scaleX = MAX_ZOOM_IN;
@@ -84,8 +82,8 @@ void Debug::tick(int32 fps) {
 			scaleY = MAX_ZOOM_IN;
 		}
 
-		RenderSystem::get()->getCamera().transform.xScale = scaleX;
-		RenderSystem::get()->getCamera().transform.yScale = scaleY;
+		getRenderSystemInstance()->getCamera().transform.xScale = scaleX;
+		getRenderSystemInstance()->getCamera().transform.yScale = scaleY;
 	}
 }
 
@@ -108,28 +106,28 @@ void Debug::render() {
 }
 
 void Debug::renderPerf() const {
-	RenderSystem::get()->getTextRenderer()->renderText(m_fpsText, -0.98f, 0.98f, Color::BLACK);
+	getRenderSystemInstance()->getTextRenderer()->renderText(m_fpsText, -0.98f, 0.98f, Color::BLACK);
 }
 
 void Debug::renderBounds() const {
-	RenderSystem::get()->getShapeRenderer()->drawRectangle(SceneManager::get()->getCurrentScene().getBounds(), Color::WHITE, false);
+	getRenderSystemInstance()->getShapeRenderer()->drawRectangle(getSceneManagerInstance()->getCurrentScene().getBounds(), Color::WHITE, false);
 }
 
 void Debug::renderQuadTree() const {
-	SceneManager::get()->getCurrentScene().getCollisionSystem()->getQuadTree()->render();
+	getSceneManagerInstance()->getCurrentScene().getCollisionSystem()->getQuadTree()->render();
 }
 
 void Debug::renderGrid() const {
-	geo::Rectangle& bounds = SceneManager::get()->getCurrentScene().getBounds();
+	geo::Rectangle& bounds = getSceneManagerInstance()->getCurrentScene().getBounds();
 	Vector2f vertLine(0,-bounds.getHeight());
 	Vector2f horizLine(bounds.getWidth(), 0);
 	
 	for (int32 i = 0; i < bounds.getWidth() - 1; i++) {
-		RenderSystem::get()->getShapeRenderer()->drawVector(0.5f + i, 0.5f,vertLine, Color::WHITE);
+		getRenderSystemInstance()->getShapeRenderer()->drawVector(0.5f + i, 0.5f,vertLine, Color::WHITE);
 	}
 
 	for (int32 i = 0; i < bounds.getHeight() - 1; i++) {
-		RenderSystem::get()->getShapeRenderer()->drawVector(-0.5f, -i - 0.5f, horizLine, Color::WHITE);
+		getRenderSystemInstance()->getShapeRenderer()->drawVector(-0.5f, -i - 0.5f, horizLine, Color::WHITE);
 	}
 }
 
@@ -211,8 +209,8 @@ void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
 	}
 	if (key == Keys::KEY_ENTER && action == Actions::PRESS) {
 		// Reset zoom
-		RenderSystem::get()->getCamera().transform.xScale = 1.0f;
-		RenderSystem::get()->getCamera().transform.yScale = 1.0f;
+		getRenderSystemInstance()->getCamera().transform.xScale = 1.0f;
+		getRenderSystemInstance()->getCamera().transform.yScale = 1.0f;
 	}
 }
 

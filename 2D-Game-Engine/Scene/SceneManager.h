@@ -2,6 +2,7 @@
 
 #include "Core/Core.h"
 #include "Core/EngineAssert.h"
+#include "Core/Singleton.h"
 
 #include "Scene/Scene.h"
 
@@ -9,11 +10,9 @@
 
 class Game;
 
-class SceneManager
-{
+class SceneManager {
+	SINGLETON_DECLARATION(SceneManager)
 private:
-	static SceneManager* s_instance;
-
 	std::unique_ptr<Scene> m_currentScene;
 
 	bool m_paused;
@@ -30,18 +29,6 @@ public:
 
 	bool isPaused() const { return m_paused; };
 	void setPaused(bool paused) { m_paused = paused; };
-
-	static SceneManager* get() {
-		ASSERT(s_instance, "SceneManager must be initialized before use.");
-		return s_instance;
-	};
-
-	static void init() {
-		ASSERT(!s_instance, "SceneManager is already initialized.");
-		s_instance = new SceneManager();
-	}
-
-	static void destroy() {
-		delete s_instance;
-	}
 };
+
+SINGLETON_ACCESSOR(SceneManager)

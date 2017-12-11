@@ -33,7 +33,7 @@ PlayerController::PlayerController(GameObject* parentObject) : ObjectComponent(p
 	m_grounded(false),
 	m_lastDirection(0)
 {
-	Input::get()->addKeyListener(KeyListener::create<PlayerController, &PlayerController::onKey>(this));
+	getInputInstance()->addKeyListener(KeyListener::create<PlayerController, &PlayerController::onKey>(this));
 
 	m_sm = new StateMachine();
 

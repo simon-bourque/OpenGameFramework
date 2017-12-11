@@ -33,7 +33,7 @@ void RigidBodyComponent::stop() {
 void RigidBodyComponent::tick(float32 delta) {
 
 	// Apply Gravity
-	applyForce({0, -SceneManager::get()->getCurrentScene().getGravity() * m_mass});
+	applyForce({0, -getSceneManagerInstance()->getCurrentScene().getGravity() * m_mass});
 
 	Vector2f acceleration(m_netForce / m_mass);
 

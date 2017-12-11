@@ -4,8 +4,6 @@
 
 #include "Scene/TileScene.h"
 
-SceneManager* SceneManager::s_instance = nullptr;
-
 SceneManager::SceneManager() : m_paused(false) {
 	m_currentScene.reset(new Scene(geo::Rectangle(100,100)));
 }

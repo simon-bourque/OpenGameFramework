@@ -165,9 +165,9 @@ std::pair<char, Glyph>* loadFont(const string& file, uint32& charMapSize, Glyph&
 		input >> read;
 		float32 xAdvance = stof(read.substr(9));
 
-		convertPixelToOpenGLLength(xOffset, Window::get()->getWidth(), xOffset);
-		convertPixelToOpenGLLength(yOffset, Window::get()->getHeight(), yOffset);
-		convertPixelToOpenGLLength(xAdvance, Window::get()->getWidth(), xAdvance);
+		convertPixelToOpenGLLength(xOffset, getWindowInstance()->getWidth(), xOffset);
+		convertPixelToOpenGLLength(yOffset, getWindowInstance()->getHeight(), yOffset);
+		convertPixelToOpenGLLength(xAdvance, getWindowInstance()->getWidth(), xAdvance);
 
 		input >> read;
 		input >> read;
@@ -200,8 +200,8 @@ std::pair<char, Glyph>* loadFont(const string& file, uint32& charMapSize, Glyph&
 		textCoords[11] = topRight.y;
 
 		// Sorry its getting really messy here I should eventually re do all this code and clean it up
-		convertPixelToOpenGLLength(width, Window::get()->getWidth(), width);
-		convertPixelToOpenGLLength(height, Window::get()->getHeight(), height);
+		convertPixelToOpenGLLength(width, getWindowInstance()->getWidth(), width);
+		convertPixelToOpenGLLength(height, getWindowInstance()->getHeight(), height);
 
 		vertices[0] = 0; // bottom left x
 		vertices[1] = -height; // bottom left y
@@ -253,7 +253,7 @@ TileScene* loadTileLevel(string file) {
 		DEBUG_LOG("--- TILE SHEET PATH ---");
 		DEBUG_LOG(texPath);
 
-		Texture* texture = RenderSystem::get()->getTextureManager()->createTexture2DArray(texPath, Texture::Filter::NEAREST_NEIGHBOR);
+		Texture* texture = getRenderSystemInstance()->getTextureManager()->createTexture2DArray(texPath, Texture::Filter::NEAREST_NEIGHBOR);
 		textures[i] = texture;
 		delete[] texPath;
 	}

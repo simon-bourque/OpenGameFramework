@@ -86,5 +86,5 @@ TileLayer::TileLayer(Tile* tiles, int32 numberOfTiles, Texture* tileSheet) : m_t
 TileLayer::~TileLayer() {}
 
 void TileLayer::render() {
-	RenderSystem::get()->getSceneRenderer()->renderTiles(m_tileVAO.get(), m_tileSheet, m_numberOfTiles);
+	getRenderSystemInstance()->getSceneRenderer()->renderTiles(m_tileVAO.get(), m_tileSheet, m_numberOfTiles);
 }

@@ -32,16 +32,16 @@ RoguelikeGame::~RoguelikeGame() {
 }
 
 void RoguelikeGame::init() {
-	Input::get()->addKeyListener(KeyListener::create<RoguelikeGame, &RoguelikeGame::onKey>(this));
+	getInputInstance()->addKeyListener(KeyListener::create<RoguelikeGame, &RoguelikeGame::onKey>(this));
 
-	SceneManager::get()->loadTileLevel("level_test2.lvl");
+	getSceneManagerInstance()->loadTileLevel("level_test2.lvl");
 
 	m_player = new RoguePlayer();
 	m_player->transform.translate(6.5f, -89);
-	SceneManager::get()->getCurrentScene().addGameObject(m_player);
+	getSceneManagerInstance()->getCurrentScene().addGameObject(m_player);
 
-	m_mainFont = RenderSystem::get()->getFontManager()->createFont("const");
-	m_testText = RenderSystem::get()->getTextManager()->createText("test_text_69", "abcdefghijklmnopqrstuvwxyz", m_mainFont, Text::Usage::STATIC);
+	m_mainFont = getRenderSystemInstance()->getFontManager()->createFont("const");
+	m_testText = getRenderSystemInstance()->getTextManager()->createText("test_text_69", "abcdefghijklmnopqrstuvwxyz", m_mainFont, Text::Usage::STATIC);
 
 	m_ui = new UserInterface();
 	m_invUI = new InventoryUI();
@@ -54,7 +54,7 @@ void RoguelikeGame::init() {
 
 void RoguelikeGame::render() {
 	Game::render();
-	RenderSystem::get()->getTextRenderer()->renderText(m_testText, -0.9,0.9, Color::WHITE);
+	getRenderSystemInstance()->getTextRenderer()->renderText(m_testText, -0.9,0.9, Color::WHITE);
 	m_ui->render();
 }
 
@@ -70,6 +70,6 @@ void RoguelikeGame::onKey(int32 key, int32 scancode, int32 action, int32 mods) {
 		// Toggle inventory
 		m_invUI->setVisible(!m_invUI->isVisible());
 		//SoundEngine::get()->playSound("res/sound/inventory.wav");
-		SceneManager::get()->setPaused(!SceneManager::get()->isPaused());
+		getSceneManagerInstance()->setPaused(!getSceneManagerInstance()->isPaused());
 	}
 }

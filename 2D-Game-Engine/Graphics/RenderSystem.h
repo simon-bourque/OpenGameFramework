@@ -2,6 +2,7 @@
 
 #include "Core/Core.h"
 #include "Core/EngineAssert.h"
+#include "Core/Singleton.h"
 
 #include "Graphics/Camera.h"
 
@@ -18,11 +19,9 @@ class TextureManager;
 class FontManager;
 class TextManager;
 
-class RenderSystem
-{
+class RenderSystem {
+	SINGLETON_DECLARATION(RenderSystem)
 private:
-	static RenderSystem* s_instance;
-
 	Camera m_camera;
 	
 	std::unique_ptr<SpriteRenderer> m_spriteRenderer;
@@ -48,18 +47,6 @@ public:
 	TextureManager* getTextureManager() const { return m_textureManager.get(); };
 	FontManager* getFontManager() const { return m_fontManager.get(); };
 	TextManager* getTextManager() const { return m_textManager.get(); };
-
-	static RenderSystem* get() {
-		ASSERT(s_instance, "RenderSystem must be initialized before use.");
-		return s_instance;
-	};
-
-	static void init(const Camera& camera) {
-		ASSERT(!s_instance, "RenderSystem is already initialized.");
-		s_instance = new RenderSystem(camera);
-	}
-
-	static void destroy() {
-		delete s_instance;
-	}
 };
+
+SINGLETON_ACCESSOR(RenderSystem)

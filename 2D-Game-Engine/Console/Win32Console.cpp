@@ -7,12 +7,10 @@
 
 #define MAX_CMD_LENGTH 255
 
-Console* Console::s_instance = nullptr;
-
 // Test commands
 static void pingCommand(const std::vector<string>& args) {
-	Console::get()->write("pong");
-	Console::get()->newLine();
+	getConsoleInstance()->write("pong");
+	getConsoleInstance()->newLine();
 }
 
 Console::Console() : m_charsInCmdBuffer(0) {

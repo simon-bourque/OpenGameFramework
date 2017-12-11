@@ -9,5 +9,5 @@ Background::Background(Texture* texture, float32 xOffset) : m_texture(texture), 
 Background::~Background() {}
 
 void Background::render() {
-	RenderSystem::get()->getSceneRenderer()->renderBackground(*this);
+	getRenderSystemInstance()->getSceneRenderer()->renderBackground(*this);
 }

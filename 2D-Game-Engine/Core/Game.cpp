@@ -19,6 +19,8 @@
 
 #include "Core/Time.h"
 
+#include "Core/Singleton.h"
+
 #include <gl/glew.h>
 
 #ifdef DEBUG_BUILD
@@ -26,26 +28,27 @@
 #endif
 
 Game::Game(const string& title, int32 width, int32 height, const geo::Rectangle& viewPort) : m_shutdown(false), m_fps(0) {
-	Console::init();
+	Singleton<Console>::init();
 
 	DEBUG_LOG("Initializing game...");
 	printSystemInfo();
 
 	DEBUG_LOG("Initializing window...");
-	Window::init(title, width, height);
-	Input::init();
+	//Window::init(title, width, height);
+	Singleton<Window>::init(title, width, height);
+	Singleton<Input>::init();
 
 	DEBUG_LOG("Initializing render system...");
-	RenderSystem::init(Camera(viewPort));
+	Singleton<RenderSystem>::init(Camera(viewPort));
 
 	DEBUG_LOG("Initializing scene manager...");
-	SceneManager::init();
+	Singleton<SceneManager>::init();
 
 	//DEBUG_LOG("Initializing sound engine...");
 	//SoundEngine::init();
 
 #ifdef DEBUG_BUILD
-	Debug::init();
+	Singleton<Debug>::init();
 #endif
 }
 
@@ -53,14 +56,14 @@ Game::Game(const string& title, int32 width, int32 height, const geo::Rectangle&
 Game::~Game() {
 	DEBUG_LOG("Destroying game");
 #ifdef DEBUG_BUILD
-	Debug::destroy();
+	Singleton<Debug>::destroy();
 #endif
 	//SoundEngine::destroy();
-	SceneManager::destroy();
-	RenderSystem::destroy();
-	Input::destroy();
-	Window::destroy();
-	Console::destroy();
+	Singleton<SceneManager>::destroy();
+	Singleton<RenderSystem>::destroy();
+	Singleton<Input>::destroy();
+	Singleton<Window>::destroy();
+	Singleton<Console>::destroy();
 }
 
 void Game::run() {
@@ -74,11 +77,11 @@ void Game::run() {
 
 	DEBUG_LOG("Entering loop");
 
-	while (!Window::get()->shouldClose() && !m_shutdown) {
+	while (!getWindowInstance()->shouldClose() && !m_shutdown) {
 
 
-		Window::get()->pollEvents();
-		Console::get()->pollEvents();
+		getWindowInstance()->pollEvents();
+		getConsoleInstance()->pollEvents();
 
 		currentTime = getCurrentTime();
 
@@ -87,7 +90,7 @@ void Game::run() {
 		render();
 
 
-		Window::get()->swapBuffers();
+		getWindowInstance()->swapBuffers();
 		delta = getCurrentTime() - currentTime;
 
 		counter += delta;
@@ -104,19 +107,19 @@ void Game::run() {
 }
 
 void Game::tick(float32 delta) {
-	SceneManager::get()->tickCurrentScene(delta);
-	SceneManager::get()->getCurrentScene().getCollisionSystem()->narrowScan();
+	getSceneManagerInstance()->tickCurrentScene(delta);
+	getSceneManagerInstance()->getCurrentScene().getCollisionSystem()->narrowScan();
 #ifdef DEBUG_BUILD
-	Debug::get()->tick(m_fps);
+	getDebugInstance()->tick(m_fps);
 #endif
 }
 
 void Game::render() {
 	glClear(GL_COLOR_BUFFER_BIT);
-	RenderSystem::get()->getCamera().updateViewProjectionMatrix();
-	SceneManager::get()->renderCurrentScene();
+	getRenderSystemInstance()->getCamera().updateViewProjectionMatrix();
+	getSceneManagerInstance()->renderCurrentScene();
 
 #ifdef DEBUG_BUILD
-	Debug::get()->render();
+	getDebugInstance()->render();
 #endif
 }

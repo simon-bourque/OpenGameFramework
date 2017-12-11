@@ -6,15 +6,16 @@
 
 #include "Core/Platform.h"
 
+#include "Core/Singleton.h"
+
 #ifdef USING_WIN32_WINDOW
 	#include "Windows.h"
 #endif
 
 
 class Window {
+	SINGLETON_DECLARATION(Window)
 private:
-	static Window* s_instance;
-
 	string m_title;
 	int32 m_width;
 	int32 m_height;
@@ -41,26 +42,6 @@ public:
 	bool shouldClose() const;
 
 	void pollEvents();
-
-	// Prevent copying of window
-	Window(const Window&) = delete;
-	Window& operator=(const Window&) = delete;
-
-	static Window* get() {
-		ASSERT(s_instance, "Window must be initialized before use.");
-		return s_instance;
-	};
-
-	static void init(const string& title, int32 width, int32 height) {
-		ASSERT(!s_instance, "Window is already initialized.");
-		s_instance = new Window(title, width, height);
-	}
-
-	static bool isInitialized() {
-		return (s_instance != nullptr);
-	}
-
-	static void destroy() {
-		delete s_instance;
-	}
 };
+
+SINGLETON_ACCESSOR(Window);

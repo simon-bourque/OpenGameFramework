@@ -230,10 +230,10 @@ QuadTree& QuadTree::operator=(QuadTree&& qt) {
 
 void QuadTree::render() const {
 
-	RenderSystem::get()->getShapeRenderer()->drawRectangle(m_bounds, Color::BLUE, false);
+	getRenderSystemInstance()->getShapeRenderer()->drawRectangle(m_bounds, Color::BLUE, false);
 	
 	for (const geo::Rectangle& rect : m_bucket) {
-		RenderSystem::get()->getShapeRenderer()->drawRectangle(rect, Color::YELLOW, false);
+		getRenderSystemInstance()->getShapeRenderer()->drawRectangle(rect, Color::YELLOW, false);
 	}
 
 	if (m_northWest) {

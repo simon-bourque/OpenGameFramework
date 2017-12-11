@@ -2,8 +2,9 @@
 #include "Core/Time.h"
 
 #include "Console/Console.h"
+#include "Core/Singleton.h"
 
 void printToConsole(const string& message) {
-	(*Console::get()) << getSystemTimeString() << ' ' << message;
-	Console::get()->newLine();
+	(*getConsoleInstance()) << getSystemTimeString() << ' ' << message;
+	getConsoleInstance()->newLine();
 }

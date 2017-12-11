@@ -25,7 +25,7 @@ PlayerController::PlayerController(GameObject* parentObject, RoguePlayer* player
 	m_walkDelay(0.0f),
 	m_swingingSword(false)
 {
-	Input::get()->addKeyListener(KeyListener::create<PlayerController, &PlayerController::onKey>(this));
+	getInputInstance()->addKeyListener(KeyListener::create<PlayerController, &PlayerController::onKey>(this));
 }
 
 PlayerController::~PlayerController() {}

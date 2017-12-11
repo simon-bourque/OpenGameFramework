@@ -1,7 +1,5 @@
 #include "Input.h"
 
-Input* Input::s_instance = nullptr;
-
 Input::Input() {}
 
 Input::~Input() {}

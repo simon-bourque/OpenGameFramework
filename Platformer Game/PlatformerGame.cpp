@@ -29,21 +29,21 @@ PlatformerGame::PlatformerGame() : Game("Platformer", 720, 576, geo::Rectangle(2
 PlatformerGame::~PlatformerGame() {}
 
 void PlatformerGame::init() {
-	Input::get()->addKeyListener(KeyListener::create<PlatformerGame, &PlatformerGame::onKeyPress>(this));
-	//SceneManager::get()->loadTileLevel("level_0.lvl");
-	SceneManager::get()->loadTileLevel("layer_test.lvl");
-	SceneManager::get()->getCurrentScene().setGravity(9.8f * 4.0f);
+	getInputInstance()->addKeyListener(KeyListener::create<PlatformerGame, &PlatformerGame::onKeyPress>(this));
+	//getSceneManagerInstance()->loadTileLevel("level_0.lvl");
+	getSceneManagerInstance()->loadTileLevel("layer_test.lvl");
+	getSceneManagerInstance()->getCurrentScene().setGravity(9.8f * 4.0f);
 
 	// Load background
-	Texture* bgTexture = RenderSystem::get()->getTextureManager()->createTexture2D("uncolored_forest.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	SceneManager::get()->getCurrentScene().addBackground(new Background(bgTexture));
+	Texture* bgTexture = getRenderSystemInstance()->getTextureManager()->createTexture2D("uncolored_forest.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	getSceneManagerInstance()->getCurrentScene().addBackground(new Background(bgTexture));
 
 	// load player
 	//m_playerSpawn = Vector2f(0.5f, -10.8f);
 	m_playerSpawn = Vector2f(41.0f, -54.8f);
 
 	Player* player = new Player(this, m_playerSpawn);
-	SceneManager::get()->getCurrentScene().addGameObject(player);
+	getSceneManagerInstance()->getCurrentScene().addGameObject(player);
 	m_player = player;
 }
 

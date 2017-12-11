@@ -15,7 +15,7 @@ Font* FontManager::createFont(const string& name) {
 	img.append(".tx");
 	desc.append(".fnt");
 
-	Texture* tex = RenderSystem::get()->getTextureManager()->createTexture2D(img, Texture::Filter::LINEAR);
+	Texture* tex = getRenderSystemInstance()->getTextureManager()->createTexture2D(img, Texture::Filter::LINEAR);
 
 	Glyph invalidCharacter;
 	uint32 size = 0;

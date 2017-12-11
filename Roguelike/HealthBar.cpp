@@ -7,8 +7,8 @@
 #include "RoguePlayer.h"
 
 HealthBar::HealthBar(RoguePlayer* player) : UIComponent(geo::Rectangle(-0.93f, 0.93f, 0.1f, 0.1f)), m_player(player) {
-	m_fullTex = RenderSystem::get()->getTextureManager()->createTexture2D("heart_full.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	m_emptyTex = RenderSystem::get()->getTextureManager()->createTexture2D("heart_empty.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	m_fullTex = getRenderSystemInstance()->getTextureManager()->createTexture2D("heart_full.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	m_emptyTex = getRenderSystemInstance()->getTextureManager()->createTexture2D("heart_empty.tx", Texture::Filter::NEAREST_NEIGHBOR);
 }
 
 
@@ -22,6 +22,6 @@ void HealthBar::render() {
 		geo::Rectangle bounds = m_bounds;
 		bounds.setX(bounds.getX() + (i * 0.1f));
 
-		RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(bounds, (i < currentHealth) ? m_fullTex : m_emptyTex, false, false);
+		getRenderSystemInstance()->getSpriteRenderer()->renderSpriteUI(bounds, (i < currentHealth) ? m_fullTex : m_emptyTex, false, false);
 	}
 }

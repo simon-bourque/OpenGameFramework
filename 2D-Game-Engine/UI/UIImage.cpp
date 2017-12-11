@@ -9,5 +9,5 @@ UIImage::UIImage(const geo::Rectangle& bounds, Texture* texture) : UIComponent(b
 UIImage::~UIImage() {}
 
 void UIImage::render() {
-	RenderSystem::get()->getSpriteRenderer()->renderSpriteUI(m_bounds, m_texture, false, false);
+	getRenderSystemInstance()->getSpriteRenderer()->renderSpriteUI(m_bounds, m_texture, false, false);
 }

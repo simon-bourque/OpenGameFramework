@@ -8,19 +8,17 @@
 
 #include <Windowsx.h>
 
-Window* Window::s_instance = nullptr;
-
 LRESULT CALLBACK MainWndProc(HWND handle, UINT msg, WPARAM wParam, LPARAM lParam) {
 	switch (msg)
 	{
 	case WM_CLOSE:
-		Window::get()->m_shouldClose = true;
+		getWindowInstance()->m_shouldClose = true;
 		DestroyWindow(handle);
 		return 0;
 	case WM_SIZE:
-		if (Window::isInitialized()) {
-			Window::get()->m_width = LOWORD(lParam);
-			Window::get()->m_height = HIWORD(lParam);
+		if (Singleton<Window>::isInitialized()) {
+			getWindowInstance()->m_width = LOWORD(lParam);
+			getWindowInstance()->m_height = HIWORD(lParam);
 			glViewport(0, 0, LOWORD(lParam), HIWORD(lParam));
 		}
 		return 0;
@@ -228,19 +226,19 @@ void Window::pollEvents() {
 }
 
 static void keyCallback(int32 key, int32 scancode, int32 action, int32 mods) {
-	Input::get()->keyCallback(key, scancode, action, mods);
+	getInputInstance()->keyCallback(key, scancode, action, mods);
 }
 
 static void cursorPositionCallback(float64 xPos, float64 yPos) {
-	Input::get()->cursorPositionCallback(xPos, yPos);
+	getInputInstance()->cursorPositionCallback(xPos, yPos);
 }
 
 static void mouseButtonCallback(int32 button, int32 action, int32 mods) {
-	Input::get()->mouseButtonCallback(button, action, mods);
+	getInputInstance()->mouseButtonCallback(button, action, mods);
 }
 
 static void scrollCallback(float64 xOffset, float64 yOffset) {
-	Input::get()->scrollCallback(xOffset, yOffset);
+	getInputInstance()->scrollCallback(xOffset, yOffset);
 }
 
 #endif

@@ -23,15 +23,15 @@ RoguePlayer::RoguePlayer() : m_currentHealth(3), m_maxHealth(3), m_bonusAgility(
 
 	const static float32 ANIM_DELAY = 0.07f;
 
-	Texture* tex_walk_s = RenderSystem::get()->getTextureManager()->createTexture2DArray("Rogue_walk_s.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* tex_walk_w = RenderSystem::get()->getTextureManager()->createTexture2DArray("Rogue_walk_w.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* tex_walk_e = RenderSystem::get()->getTextureManager()->createTexture2DArray("Rogue_walk_e.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* tex_walk_n = RenderSystem::get()->getTextureManager()->createTexture2DArray("Rogue_walk_n.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* tex_walk_s = getRenderSystemInstance()->getTextureManager()->createTexture2DArray("Rogue_walk_s.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* tex_walk_w = getRenderSystemInstance()->getTextureManager()->createTexture2DArray("Rogue_walk_w.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* tex_walk_e = getRenderSystemInstance()->getTextureManager()->createTexture2DArray("Rogue_walk_e.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* tex_walk_n = getRenderSystemInstance()->getTextureManager()->createTexture2DArray("Rogue_walk_n.tx", Texture::Filter::NEAREST_NEIGHBOR);
 
-	Texture* tex_idle_s = RenderSystem::get()->getTextureManager()->createTexture2D("Rogue_idle_s.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* tex_idle_w = RenderSystem::get()->getTextureManager()->createTexture2D("Rogue_idle_w.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* tex_idle_e = RenderSystem::get()->getTextureManager()->createTexture2D("Rogue_idle_e.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* tex_idle_n = RenderSystem::get()->getTextureManager()->createTexture2D("Rogue_idle_n.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* tex_idle_s = getRenderSystemInstance()->getTextureManager()->createTexture2D("Rogue_idle_s.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* tex_idle_w = getRenderSystemInstance()->getTextureManager()->createTexture2D("Rogue_idle_w.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* tex_idle_e = getRenderSystemInstance()->getTextureManager()->createTexture2D("Rogue_idle_e.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* tex_idle_n = getRenderSystemInstance()->getTextureManager()->createTexture2D("Rogue_idle_n.tx", Texture::Filter::NEAREST_NEIGHBOR);
 
 	uint32 frames[4] = { 0,1,2,3 };
 	float32 delays[4] = { ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY };
@@ -62,19 +62,19 @@ RoguePlayer::RoguePlayer() : m_currentHealth(3), m_maxHealth(3), m_bonusAgility(
 	addComponent(new AABBColliderComponent(this, geo::Rectangle(1,1)));
 	addComponent(new PlayerController(this, this));
 
-	CameraComponent* camera = new CameraComponent(this, &RenderSystem::get()->getCamera());
+	CameraComponent* camera = new CameraComponent(this, &getRenderSystemInstance()->getCamera());
 	camera->setSceneBounded(true);
 	camera->setSceneBounds(CameraComponent::BOUNDED_ALL);
 	addComponent(camera);
 
 	// ################### SWORD #########################
-	Texture* swordTexture = RenderSystem::get()->getTextureManager()->createTexture2D("sword.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* swordTexture = getRenderSystemInstance()->getTextureManager()->createTexture2D("sword.tx", Texture::Filter::NEAREST_NEIGHBOR);
 	m_sword = new GameObject();
 	m_sword->transform.scale(0.5f);
 	SpriteComponent* spComp = new SpriteComponent(m_sword, swordTexture);
 	spComp->setVisible(false);
 	m_sword->addComponent(spComp);
-	SceneManager::get()->getCurrentScene().addGameObject(m_sword);
+	getSceneManagerInstance()->getCurrentScene().addGameObject(m_sword);
 }
 
 void RoguePlayer::tick(float32 delta) {

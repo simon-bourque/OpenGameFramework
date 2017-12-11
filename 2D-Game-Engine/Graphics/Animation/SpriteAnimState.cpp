@@ -17,5 +17,5 @@ void SpriteAnimState::onEnter() {}
 void SpriteAnimState::tick(float32 delta) {}
 
 void SpriteAnimState::render(const AnimatorComponent& component) {
-	RenderSystem::get()->getSpriteRenderer()->renderSprite(&component.getParentObject()->transform, m_texture, component.isHorizontallyFlipped(), component.isVerticallyFlipped());
+	getRenderSystemInstance()->getSpriteRenderer()->renderSprite(&component.getParentObject()->transform, m_texture, component.isHorizontallyFlipped(), component.isVerticallyFlipped());
 }

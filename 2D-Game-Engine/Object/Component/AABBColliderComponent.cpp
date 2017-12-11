@@ -33,7 +33,7 @@ AABBColliderComponent::~AABBColliderComponent() {}
 
 void AABBColliderComponent::tick(float32 delta) {
 	resetPosition();
-	SceneManager::get()->getCurrentScene().getCollisionSystem()->addCollider(this);
+	getSceneManagerInstance()->getCurrentScene().getCollisionSystem()->addCollider(this);
 }
 
 void AABBColliderComponent::resetPosition() {
@@ -58,8 +58,8 @@ void AABBColliderComponent::receiveEvent(const Event& event) {}
 
 #ifdef DEBUG_BUILD
 void AABBColliderComponent::debugRender() {
-	if (Debug::get()->flag("show_colliders")) {
-		RenderSystem::get()->getShapeRenderer()->drawRectangle(m_rectangle, Color::MAGENTA, false);
+	if (getDebugInstance()->flag("show_colliders")) {
+		getRenderSystemInstance()->getShapeRenderer()->drawRectangle(m_rectangle, Color::MAGENTA, false);
 	}
 }
 #endif

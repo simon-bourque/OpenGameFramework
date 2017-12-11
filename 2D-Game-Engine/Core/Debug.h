@@ -4,6 +4,7 @@
 
 #include "Core/Core.h"
 #include "Core/EngineAssert.h"
+#include "Core/Singleton.h"
 
 #include <memory>
 #include <unordered_map>
@@ -13,9 +14,8 @@ class Font;
 class Text;
 
 class Debug {
+	SINGLETON_DECLARATION(Debug)
 private:
-	static Debug* s_instance;
-
 	std::unordered_map<string, bool> m_debugFlags;
 
 	Text* m_fpsText;
@@ -44,23 +44,8 @@ public:
 	void render();
 
 	bool flag(const string& flag) const;
-
-	Debug(const Debug&) = delete;
-	Debug& operator=(const Debug&) = delete;
-
-	static Debug* get() {
-		ASSERT(s_instance, "Debug must be initialized before use.");
-		return s_instance;
-	};
-
-	static void init() {
-		ASSERT(!s_instance, "Debug is already initialized.");
-		s_instance = new Debug();
-	}
-
-	static void destroy() {
-		delete s_instance;
-	}
 };
+
+SINGLETON_ACCESSOR(Debug)
 
 #endif

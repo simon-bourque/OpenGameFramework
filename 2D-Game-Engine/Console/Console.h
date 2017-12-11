@@ -4,6 +4,7 @@
 #include "Core/Delegate.h"
 #include "Core/EngineAssert.h"
 #include "Core/Platform.h"
+#include "Core/Singleton.h"
 
 #include <unordered_map>
 #include <vector>
@@ -15,9 +16,8 @@
 typedef Delegate<const std::vector<string>&> CommandDelegate;
 
 class Console {
+	SINGLETON_DECLARATION(Console)
 private:
-	static Console* s_instance;
-	
 #ifdef USING_WIN32_CONSOLE
 	HANDLE m_inputBuffer;
 	HANDLE m_screenBuffer;
@@ -33,11 +33,7 @@ private:
 	void erase(uint32 numChars);
 	void parseCommandBuffer();
 public:
-	~Console();
-
-	// Prevent copying of the console
-	Console(const Console&) = delete;
-	Console& operator=(const Console&) = delete;
+	virtual ~Console();
 
 	void write(const string& msg);
 	void write(char c);
@@ -50,23 +46,6 @@ public:
 
 	Console& operator<<(const string& msg);
 	Console& operator<<(char c);
-
-	static Console* get() {
-		ASSERT(s_instance, "Console must be initialized before use.");
-		return s_instance;
-	};
-
-	static void init() {
-		ASSERT(!s_instance, "Console is already initialized.");
-		s_instance = new Console();
-	}
-
-	static bool isInitialized() {
-		return (s_instance != nullptr);
-	}
-
-	static void destroy() {
-		delete s_instance;
-	}
 };
 
+SINGLETON_ACCESSOR(Console)

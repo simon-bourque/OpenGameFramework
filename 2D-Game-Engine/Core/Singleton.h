@@ -1,18 +1,26 @@
 #pragma once
 
+#include "Core/EngineAssert.h"
+
+#define SINGLETON_DECLARATION(Type) friend Singleton<Type>;\
+									Type(const Type&) = delete;\
+									Type& operator=(const Type&) = delete;
+
+#define SINGLETON_ACCESSOR(Type) inline Type* get##Type##Instance() { return Singleton<Type>::get(); }
+
 template<typename T>
 class Singleton {
 private:
 	static T* s_instance;
 
-	Singleton() {}
+	Singleton() = default;
 public:
 	virtual ~Singleton() {}
 
 	static T* get() {
 		ASSERT(s_instance, "Singleton must be initialized before use.");
 		return s_instance;
-	};
+	}
 
 	template<typename... Params>
 	static void init(Params... args) {
@@ -27,6 +35,7 @@ public:
 	static void destroy() {
 		delete s_instance;
 	}
+
 };
 
 template<typename T>

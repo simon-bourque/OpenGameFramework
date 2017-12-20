@@ -2,7 +2,7 @@
 
 #include "Core/Core.h"
 
-#include <Gl/glew.h>
+#include <GL/glew.h>
 
 class RawImage;
 

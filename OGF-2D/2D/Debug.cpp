@@ -11,8 +11,10 @@
 #include "Graphics/Renderer/TextRenderer.h"
 #include "Graphics/Renderer/ShapeRenderer.h"
 #include "Graphics/Color.h"
-#include "Graphics/RenderSystem.h"
+#include "Graphics/GraphicsContext.h"
 #include "Graphics/Camera.h"
+
+#include "2D/Graphics/Graphics2D.h"
 
 #include "Window/Window.h"
 
@@ -39,8 +41,8 @@ Debug::Debug() :
 	getInputInstance()->addMouseButtonListener(MouseButtonListener::create<Debug, &Debug::onMousePress>(this));
 	getInputInstance()->addScrollListener(ScrollListener::create<Debug, &Debug::onMouseScroll>(this));
 
-	Font* font = getRenderSystemInstance()->getFontManager()->createFont("font3");
-	m_fpsText = getRenderSystemInstance()->getTextManager()->createText("debug_fps_text_0", "fps: 00", font, Text::Usage::STREAM);
+	Font* font = getGraphicsContextInstance()->getFontManager()->createFont("font3");
+	m_fpsText = getGraphicsContextInstance()->getTextManager()->createText("debug_fps_text_0", "fps: 00", font, Text::Usage::STREAM);
 
 	m_fpsText->setScale(0.5f);
 
@@ -71,8 +73,8 @@ void Debug::tick(int32 fps) {
 		const static float32 MAX_ZOOM_IN = 0.01f;
 
 		float32 ds = (m_zoomIn) ? -SCALE_INCR : SCALE_INCR;
-		float32 scaleX = getRenderSystemInstance()->getCamera().transform.xScale + ds;
-		float32 scaleY = getRenderSystemInstance()->getCamera().transform.yScale + ds;
+		float32 scaleX = getGraphics2DInstance()->getCamera().transform.xScale + ds;
+		float32 scaleY = getGraphics2DInstance()->getCamera().transform.yScale + ds;
 
 		if (scaleX < MAX_ZOOM_IN) {
 			scaleX = MAX_ZOOM_IN;
@@ -82,8 +84,8 @@ void Debug::tick(int32 fps) {
 			scaleY = MAX_ZOOM_IN;
 		}
 
-		getRenderSystemInstance()->getCamera().transform.xScale = scaleX;
-		getRenderSystemInstance()->getCamera().transform.yScale = scaleY;
+		getGraphics2DInstance()->getCamera().transform.xScale = scaleX;
+		getGraphics2DInstance()->getCamera().transform.yScale = scaleY;
 	}
 }
 
@@ -106,11 +108,11 @@ void Debug::render() {
 }
 
 void Debug::renderPerf() const {
-	getRenderSystemInstance()->getTextRenderer()->renderText(m_fpsText, -0.98f, 0.98f, Color::BLACK);
+	getGraphicsContextInstance()->getTextRenderer()->renderText(m_fpsText, -0.98f, 0.98f, Color::BLACK);
 }
 
 void Debug::renderBounds() const {
-	getRenderSystemInstance()->getShapeRenderer()->drawRectangle(getSceneManagerInstance()->getCurrentScene().getBounds(), Color::WHITE, false);
+	getGraphics2DInstance()->getShapeRenderer().drawRectangle(getSceneManagerInstance()->getCurrentScene().getBounds(), Color::WHITE, false);
 }
 
 void Debug::renderQuadTree() const {
@@ -123,11 +125,11 @@ void Debug::renderGrid() const {
 	Vector2f horizLine(bounds.getWidth(), 0);
 	
 	for (int32 i = 0; i < bounds.getWidth() - 1; i++) {
-		getRenderSystemInstance()->getShapeRenderer()->drawVector(0.5f + i, 0.5f,vertLine, Color::WHITE);
+		getGraphics2DInstance()->getShapeRenderer().drawVector(0.5f + i, 0.5f,vertLine, Color::WHITE);
 	}
 
 	for (int32 i = 0; i < bounds.getHeight() - 1; i++) {
-		getRenderSystemInstance()->getShapeRenderer()->drawVector(-0.5f, -i - 0.5f, horizLine, Color::WHITE);
+		getGraphics2DInstance()->getShapeRenderer().drawVector(-0.5f, -i - 0.5f, horizLine, Color::WHITE);
 	}
 }
 
@@ -209,8 +211,8 @@ void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
 	}
 	if (key == Keys::KEY_ENTER && action == Actions::PRESS) {
 		// Reset zoom
-		getRenderSystemInstance()->getCamera().transform.xScale = 1.0f;
-		getRenderSystemInstance()->getCamera().transform.yScale = 1.0f;
+		getGraphics2DInstance()->getCamera().transform.xScale = 1.0f;
+		getGraphics2DInstance()->getCamera().transform.yScale = 1.0f;
 	}
 }
 

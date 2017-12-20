@@ -7,7 +7,7 @@ int main() {
 	//ASSERT(false, "Test message");
 	try {
 		PlatformerGame game;
-		game.run();
+		game.start();
 	}
 	catch (std::runtime_error& ex) {
 		DEBUG_LOG("Exception occured.");

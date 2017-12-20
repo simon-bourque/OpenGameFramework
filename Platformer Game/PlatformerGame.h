@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/Game.h"
+#include "2D/Game2D.h"
 #include "Math/Vector2f.h"
 
 class Texture;
@@ -8,7 +8,7 @@ class TileScene;
 class AnimatorComponent;
 class Player;
 
-class PlatformerGame : public Game
+class PlatformerGame : public Game2D
 {
 private:
 	bool up;

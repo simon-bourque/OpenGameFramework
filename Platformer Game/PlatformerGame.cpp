@@ -2,28 +2,29 @@
 
 #include "Core/Core.h"
 
-#include "Graphics/Renderer/ShapeRenderer.h"
+#include "Graphics/GraphicsContext.h"
+#include "2D/Graphics/Renderer/ShapeRenderer.h"
 #include "Graphics/TextureManager.h"
-#include "Graphics/RenderSystem.h"
 #include "Graphics/Color.h"
-#include "Graphics/Background.h"
+
+#include "2D/Scene/Background.h"
 
 #include "Math/Geometry/Rectangle.h"
 
 #include "Input/Input.h"
 
-#include "Scene/SceneManager.h"
+#include "2D/Scene/SceneManager.h"
 
-#include "Object/Component/AABBColliderComponent.h"
-#include "Object/Component/ComponentType.h"
-#include "Object/Component/RigidBodyComponent.h"
+#include "2D/Object/Component/AABBColliderComponent.h"
+#include "2D/Object/Component/ComponentType.h"
+#include "2D/Object/Component/RigidBodyComponent.h"
 
-#include "Physics/Collision/CollisionSystem.h"
-#include "Physics/Collision/QuadTree.h"
+#include "2D/Physics/Collision/CollisionSystem.h"
+#include "2D/Physics/Collision/QuadTree.h"
 
 #include "Player.h"
 
-PlatformerGame::PlatformerGame() : Game("Platformer", 720, 576, geo::Rectangle(20, 16)), up(false), down(false), left(false), right(false) {}
+PlatformerGame::PlatformerGame() : Game2D("Platformer", 720, 576, geo::Rectangle(20, 16)), up(false), down(false), left(false), right(false) {}
 
 
 PlatformerGame::~PlatformerGame() {}
@@ -35,7 +36,7 @@ void PlatformerGame::init() {
 	getSceneManagerInstance()->getCurrentScene().setGravity(9.8f * 4.0f);
 
 	// Load background
-	Texture* bgTexture = getRenderSystemInstance()->getTextureManager()->createTexture2D("uncolored_forest.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* bgTexture = getGraphicsContextInstance()->getTextureManager()->createTexture2D("uncolored_forest.tx", Texture::Filter::NEAREST_NEIGHBOR);
 	getSceneManagerInstance()->getCurrentScene().addBackground(new Background(bgTexture));
 
 	// load player
@@ -48,11 +49,11 @@ void PlatformerGame::init() {
 }
 
 void PlatformerGame::tick(float32 delta) {
-	Game::tick(delta);
+	Game2D::tick(delta);
 }
 
 void PlatformerGame::render() {
-	Game::render();
+	Game2D::render();
 }
 
 void PlatformerGame::resetPlayer() {

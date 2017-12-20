@@ -6,11 +6,11 @@ class Game
 {
 private:
 	bool m_shutdown;
-	int32 m_fps;
 
 	void startLoop();
-
 protected:
+	int32 m_fps;
+	
 	Game();
 public:
 	virtual ~Game();

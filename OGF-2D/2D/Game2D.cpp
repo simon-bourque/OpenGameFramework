@@ -42,10 +42,10 @@ Game2D::~Game2D() {
 //#endif
 //	//SoundEngine::destroy();
 //	Singleton<SceneManager>::destroy();
-//	Singleton<RenderSystem>::destroy();
-//	Singleton<Input>::destroy();
-//	Singleton<Window>::destroy();
-//	Singleton<Console>::destroy();
+	Singleton<GraphicsContext>::destroy();
+	Singleton<Input>::destroy();
+	Singleton<Window>::destroy();
+	Singleton<Console>::destroy();
 }
 
 void Game2D::tick(float32 deltaSeconds) {

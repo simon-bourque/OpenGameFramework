@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Object\GameObject.h"
+#include "2D/Object/GameObject.h"
 
-class Game;
+class Game2D;
 struct Vector2f;
 
 class Player : public GameObject {
 public:
-	Player(Game* game, const Vector2f& spawnLocation);
+	Player(Game2D* game, const Vector2f& spawnLocation);
 	virtual ~Player();
 };

@@ -4,12 +4,12 @@
 
 #include "Input/Input.h"
 
-#include "Object/GameObject.h"
+#include "2D/Object/GameObject.h"
 
 #include "Math/Vector2f.h"
 
-#include "Object/State/StateMachine.h"
-#include "Object/State/StateTransition.h"
+#include "2D/Object/State/StateMachine.h"
+#include "2D/Object/State/StateTransition.h"
 
 #include "PlayerState.h"
 #include "IdleState.h"

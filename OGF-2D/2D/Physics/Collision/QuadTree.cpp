@@ -224,16 +224,16 @@ QuadTree& QuadTree::operator=(QuadTree&& qt) {
 }
 
 #ifdef DEBUG_BUILD
-#include "Graphics/RenderSystem.h"
-#include "Graphics/Renderer/ShapeRenderer.h"
+#include "2D/Graphics/Graphics2D.h"
+#include "2D/Graphics/Renderer/ShapeRenderer.h"
 #include "Graphics/Color.h"
 
 void QuadTree::render() const {
 
-	getRenderSystemInstance()->getShapeRenderer()->drawRectangle(m_bounds, Color::BLUE, false);
+	getGraphics2DInstance()->getShapeRenderer().drawRectangle(m_bounds, Color::BLUE, false);
 	
 	for (const geo::Rectangle& rect : m_bucket) {
-		getRenderSystemInstance()->getShapeRenderer()->drawRectangle(rect, Color::YELLOW, false);
+		getGraphics2DInstance()->getShapeRenderer().drawRectangle(rect, Color::YELLOW, false);
 	}
 
 	if (m_northWest) {

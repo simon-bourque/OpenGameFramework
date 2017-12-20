@@ -129,6 +129,7 @@
     <ClCompile Include="2D\Graphics\Camera.cpp">
       <Filter>2D\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="2D\Debug.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2D\Object\Component\AABBColliderComponent.h">
@@ -230,5 +231,6 @@
     <ClInclude Include="2D\Graphics\Camera.h">
       <Filter>2D\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="2D\Debug.h" />
   </ItemGroup>
 </Project>

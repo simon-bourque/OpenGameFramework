@@ -3,16 +3,17 @@
 #include "Core/Core.h"
 #include "Core/Game.h"
 
-#include "Object/Component/AnimatorComponent.h"
-#include "Object/Component/RigidBodyComponent.h"
-#include "Object/Component/AABBColliderComponent.h"
-#include "Object/Component/CameraComponent.h"
+#include "2D/Object/Component/AnimatorComponent.h"
+#include "2D/Object/Component/RigidBodyComponent.h"
+#include "2D/Object/Component/AABBColliderComponent.h"
+#include "2D/Object/Component/CameraComponent.h"
 
-#include "Graphics/Animation/Animation.h"
-#include "Graphics/Animation/AnimState.h"
-#include "Graphics/Animation/SpriteAnimState.h"
-#include "Graphics/Animation/SpriteSequenceAnimState.h"
-#include "Graphics/RenderSystem.h"
+#include "2D/Graphics/Animation/Animation.h"
+#include "2D/Graphics/Animation/AnimState.h"
+#include "2D/Graphics/Animation/SpriteAnimState.h"
+#include "2D/Graphics/Animation/SpriteSequenceAnimState.h"
+#include "2D/Graphics/Graphics2D.h"
+#include "Graphics/GraphicsContext.h"
 #include "Graphics/TextureManager.h"
 #include "Graphics/Texture.h"
 
@@ -20,7 +21,7 @@
 
 #include "PlayerController.h"
 
-Player::Player(Game* game, const Vector2f& spawnLocation) {
+Player::Player(Game2D* game, const Vector2f& spawnLocation) {
 	const static float32 PLAYER_WIDTH = 1.0f;
 	const static float32 PLAYER_HEIGHT = 1.4f;
 	const static float32 ANIM_DELAY = 0.05f;
@@ -29,10 +30,10 @@ Player::Player(Game* game, const Vector2f& spawnLocation) {
 	transform.translate(spawnLocation);
 
 	// ###################### Animations #####################################
-	Texture* walkTexture = getRenderSystemInstance()->getTextureManager()->createTexture2DArray("player_walk.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* standTexture = getRenderSystemInstance()->getTextureManager()->createTexture2D("player_stand.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* jumpTexture = getRenderSystemInstance()->getTextureManager()->createTexture2D("player_jump.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* duckTexture = getRenderSystemInstance()->getTextureManager()->createTexture2D("player_duck.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* walkTexture = getGraphicsContextInstance()->getTextureManager()->createTexture2DArray("player_walk.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* standTexture = getGraphicsContextInstance()->getTextureManager()->createTexture2D("player_stand.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* jumpTexture = getGraphicsContextInstance()->getTextureManager()->createTexture2D("player_jump.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	Texture* duckTexture = getGraphicsContextInstance()->getTextureManager()->createTexture2D("player_duck.tx", Texture::Filter::NEAREST_NEIGHBOR);
 
 	uint32 frames[11] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 	float32 delays[11] = { ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY };
@@ -57,7 +58,7 @@ Player::Player(Game* game, const Vector2f& spawnLocation) {
 	PlayerController* controller = new PlayerController(this);
 	addComponent(controller);
 
-	CameraComponent* camera = new CameraComponent(this, &getRenderSystemInstance()->getCamera());
+	CameraComponent* camera = new CameraComponent(this, &getGraphics2DInstance()->getCamera());
 	camera->setSceneBounded(true);
 	camera->setSceneBounds(CameraComponent::BOUNDED_BOTTOM_BIT | CameraComponent::BOUNDED_LEFT_BIT | CameraComponent::BOUNDED_RIGHT_BIT);
 	//camera.setYOffset(2f);

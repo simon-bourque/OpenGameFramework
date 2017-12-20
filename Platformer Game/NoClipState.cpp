@@ -6,11 +6,11 @@
 
 #include "PlayerController.h"
 
-#include "Object/GameObject.h"
-#include "Object/Component/ComponentType.h"
-#include "Object/Component/RigidBodyComponent.h"
-#include "Object/Component/AABBColliderComponent.h"
-#include "Object/Component/CameraComponent.h"
+#include "2D/Object/GameObject.h"
+#include "2D/Object/Component/ComponentType.h"
+#include "2D/Object/Component/RigidBodyComponent.h"
+#include "2D/Object/Component/AABBColliderComponent.h"
+#include "2D/Object/Component/CameraComponent.h"
 
 NoClipState::NoClipState(PlayerController* pc) : PlayerState(pc) {}
 

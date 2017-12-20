@@ -7,7 +7,7 @@ namespace geo {
 	class Rectangle;
 }
 
-class Game2D : Game {
+class Game2D : public Game {
 public:
 	Game2D(const string& title, int32 width, int32 height, const geo::Rectangle& viewPort);
 	virtual ~Game2D();

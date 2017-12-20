@@ -2,7 +2,7 @@
 
 #include "Core/Core.h"
 
-#include "Object/Component/ObjectComponent.h"
+#include "2D/Object/Component/ObjectComponent.h"
 
 class Game;
 class GameObject;

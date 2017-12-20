@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/Game.h"
+#include "2D/Game2D.h"
 
 class Font;
 class Text;
@@ -8,7 +8,7 @@ class UserInterface;
 class InventoryUI;
 class RoguePlayer;
 
-class RoguelikeGame : public Game {
+class RoguelikeGame : public Game2D {
 private:
 	Font* m_mainFont;
 	Text* m_testText;

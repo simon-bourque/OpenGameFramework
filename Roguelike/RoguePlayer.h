@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Core/Core.h"
-#include "Object/GameObject.h"
+#include "2D/Object/GameObject.h"
 #include "Effects.h"
 
 class RoguePlayer: public GameObject {

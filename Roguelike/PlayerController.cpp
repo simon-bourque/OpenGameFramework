@@ -2,9 +2,9 @@
 
 #include "Core/Event.h"
 
-#include "Object/GameObject.h"
-#include "Object/Component/ComponentType.h"
-#include "Object/Component/SpriteComponent.h"
+#include "2D/Object/GameObject.h"
+#include "2D/Object/Component/ComponentType.h"
+#include "2D/Object/Component/SpriteComponent.h"
 #include "Input/Input.h"
 
 #include "Math/Vector2f.h"

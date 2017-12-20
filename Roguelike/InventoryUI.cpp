@@ -1,5 +1,5 @@
 #include "InventoryUI.h"
-
+#if 0
 #include "Graphics/RenderSystem.h"
 #include "Graphics/TextureManager.h"
 #include "Graphics/Renderer/SpriteRenderer.h"
@@ -84,3 +84,4 @@ void InventoryUI::render() {
 	getRenderSystemInstance()->getSpriteRenderer()->renderSpriteUI(geo::Rectangle(xi + 4*SIZE - ((SIZE - EQUIPSIZE) / 2.0f), yi + ((SIZE - EQUIPSIZE) / 2.0f) - 2*EQUIPSIZE, EQUIPSIZE, EQUIPSIZE), m_ui_bag, false, false);
 
 }
+#endif

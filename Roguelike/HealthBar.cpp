@@ -1,5 +1,5 @@
 #include "HealthBar.h"
-
+#if 0
 #include "Graphics/RenderSystem.h"
 #include "Graphics/TextureManager.h"
 #include "Graphics/Renderer/SpriteRenderer.h"
@@ -25,3 +25,4 @@ void HealthBar::render() {
 		getRenderSystemInstance()->getSpriteRenderer()->renderSpriteUI(bounds, (i < currentHealth) ? m_fullTex : m_emptyTex, false, false);
 	}
 }
+#endif

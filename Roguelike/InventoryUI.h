@@ -1,5 +1,5 @@
 #pragma once
-
+#if 0
 #include "UI/UIComponent.h"
 
 class Texture;
@@ -35,3 +35,4 @@ public:
 	virtual void render() override;
 };
 
+#endif

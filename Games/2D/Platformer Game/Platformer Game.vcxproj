@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{5F9853E9-7EA1-4962-A05B-2DD3701C796A}</ProjectGuid>
+    <ProjectGuid>{22D8FB70-62DB-4925-8543-A7B64216D377}</ProjectGuid>
     <RootNamespace>PlatformerGame</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -75,7 +75,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include;$(SolutionDir)OGF-Core;$(SolutionDir)OGF-2D;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include;$(SolutionDir)Engine\OGF-Core;$(SolutionDir)Engine\OGF-2D;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;DEBUG_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -91,7 +91,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include;$(SolutionDir)OGF-Core;$(SolutionDir)OGF-2D;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include;$(SolutionDir)Engine\OGF-Core;$(SolutionDir)Engine\OGF-2D;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;DEBUG_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link />
@@ -103,7 +103,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include;$(SolutionDir)OGF-Core;$(SolutionDir)OGF-2D;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include;$(SolutionDir)Engine\OGF-Core;$(SolutionDir)Engine\OGF-2D;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -124,7 +124,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include;$(SolutionDir)OGF-Core;$(SolutionDir)OGF-2D;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include;$(SolutionDir)Engine\OGF-Core;$(SolutionDir)Engine\OGF-2D;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -154,11 +154,11 @@
     <ClInclude Include="WalkState.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OGF-2D\OGF-2D.vcxproj">
-      <Project>{b1314c0d-21a8-470b-9cfb-a964f4c3d077}</Project>
+    <ProjectReference Include="..\..\..\Engine\OGF-2D\OGF-2D.vcxproj">
+      <Project>{a75cdacf-0386-484b-bc3d-55fe64d5e3cd}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\OGF-Core\OGF-Core.vcxproj">
-      <Project>{3a798dec-b2a9-4a8e-988b-0ea26232cecb}</Project>
+    <ProjectReference Include="..\..\..\Engine\OGF-Core\OGF-Core.vcxproj">
+      <Project>{4b5c8478-ee0c-4cc8-8b7f-15ac2e8b1e47}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

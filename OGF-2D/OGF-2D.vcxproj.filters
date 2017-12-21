@@ -132,6 +132,9 @@
     <ClCompile Include="2D\Debug.cpp">
       <Filter>2D</Filter>
     </ClCompile>
+    <ClCompile Include="2D\Event.cpp">
+      <Filter>2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2D\Object\Component\AABBColliderComponent.h">
@@ -234,6 +237,9 @@
       <Filter>2D\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="2D\Debug.h">
+      <Filter>2D</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Event.h">
       <Filter>2D</Filter>
     </ClInclude>
   </ItemGroup>

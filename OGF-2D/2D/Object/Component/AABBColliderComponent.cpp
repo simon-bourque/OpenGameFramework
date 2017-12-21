@@ -3,7 +3,7 @@
 #include "2D/Object/GameObject.h"
 
 #include "Core/Game.h"
-#include "Core/Event.h"
+#include "2D/Event.h"
 
 #include "2D/Scene/Scene.h"
 #include "2D/Scene/SceneManager.h"

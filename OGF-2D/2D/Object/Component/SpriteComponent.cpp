@@ -5,7 +5,7 @@
 
 #include "2D/Object/GameObject.h"
 
-#include "Core/Event.h"
+#include "2D/Event.h"
 
 GET_COMPONENT_TYPE_DEFINITION(SpriteComponent)
 

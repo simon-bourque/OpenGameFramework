@@ -3,7 +3,7 @@
 #include "2D/Graphics/Animation/AnimState.h"
 
 #include "Core/EngineAssert.h"
-#include "Core/Event.h"
+#include "2D/Event.h"
 
 GET_COMPONENT_TYPE_DEFINITION(AnimatorComponent)
 

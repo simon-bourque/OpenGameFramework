@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2D\Debug.cpp" />
+    <ClCompile Include="2D\Event.cpp" />
     <ClCompile Include="2D\Game2D.cpp" />
     <ClCompile Include="2D\Graphics\Animation\Animation.cpp" />
     <ClCompile Include="2D\Graphics\Animation\AnimState.cpp" />
@@ -55,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2D\Debug.h" />
+    <ClInclude Include="2D\Event.h" />
     <ClInclude Include="2D\Game2D.h" />
     <ClInclude Include="2D\Graphics\Animation\Animation.h" />
     <ClInclude Include="2D\Graphics\Animation\AnimState.h" />

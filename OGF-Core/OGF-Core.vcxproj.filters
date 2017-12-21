@@ -54,9 +54,6 @@
     <ClInclude Include="Core\EngineAssert.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Event.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Game.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -171,9 +168,6 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Core\Game.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Event.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Core\Platform.cpp">

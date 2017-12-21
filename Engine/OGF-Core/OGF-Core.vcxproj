@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{3A798DEC-B2A9-4A8E-988B-0EA26232CECB}</ProjectGuid>
+    <ProjectGuid>{4B5C8478-EE0C-4CC8-8B7F-15AC2E8B1E47}</ProjectGuid>
     <RootNamespace>OGFCore</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>

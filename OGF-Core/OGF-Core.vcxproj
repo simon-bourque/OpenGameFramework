@@ -134,7 +134,6 @@
     <ClInclude Include="Core\Core.h" />
     <ClInclude Include="Core\Delegate.h" />
     <ClInclude Include="Core\EngineAssert.h" />
-    <ClInclude Include="Core\Event.h" />
     <ClInclude Include="Core\Game.h" />
     <ClInclude Include="Core\Logging.h" />
     <ClInclude Include="Core\Platform.h" />
@@ -174,7 +173,6 @@
   <ItemGroup>
     <ClCompile Include="Console\Win32Console.cpp" />
     <ClCompile Include="Core\EngineAssert.cpp" />
-    <ClCompile Include="Core\Event.cpp" />
     <ClCompile Include="Core\Game.cpp" />
     <ClCompile Include="Core\Logging.cpp" />
     <ClCompile Include="Core\Platform.cpp" />

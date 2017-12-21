@@ -5,7 +5,7 @@
 #include "2D/Object/GameObject.h"
 
 #include "Core/Core.h"
-#include "Core/Event.h"
+#include "2D/Event.h"
 
 WalkState::WalkState(PlayerController* pc) : PlayerState(pc) {}
 

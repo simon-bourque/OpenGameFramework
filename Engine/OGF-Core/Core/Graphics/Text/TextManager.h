@@ -2,9 +2,9 @@
 
 #include "Core/Core.h"
 
-#include "Resource/ResourceManager.h"
+#include "Core/Resource/ResourceManager.h"
 
-#include "Graphics/Text/Text.h"
+#include "Core/Graphics/Text/Text.h"
 
 class TextManager : public ResourceManager<Text> {
 public:

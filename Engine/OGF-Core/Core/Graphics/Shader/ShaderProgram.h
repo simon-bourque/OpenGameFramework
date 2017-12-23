@@ -2,7 +2,7 @@
 
 #include "Core/Core.h"
 
-#include "Graphics/Shader/Uniform.h"
+#include "Core/Graphics/Shader/Uniform.h"
 
 #include <GL/glew.h>
 

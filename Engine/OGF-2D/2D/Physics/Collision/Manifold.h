@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Math/Vector2f.h"
+#include "Core/Math/Vector2f.h"
 
 class Shape;
 

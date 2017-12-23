@@ -2,9 +2,9 @@
 
 #include "Core/Core.h"
 
-#include "Resource/ResourceManager.h"
+#include "Core/Resource/ResourceManager.h"
 
-#include "Graphics/Text/Font.h"
+#include "Core/Graphics/Text/Font.h"
 
 class FontManager : public ResourceManager<Font> {
 public:

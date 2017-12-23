@@ -2,21 +2,21 @@
 
 #include "Debug.h"
 
-#include "Console/Console.h"
+#include "Core/Console/Console.h"
 
-#include "Graphics/Text/Font.h"
-#include "Graphics/Text/FontManager.h"
-#include "Graphics/Text/TextManager.h"
-#include "Graphics/Text/Text.h"
-#include "Graphics/Renderer/TextRenderer.h"
+#include "Core/Graphics/Text/Font.h"
+#include "Core/Graphics/Text/FontManager.h"
+#include "Core/Graphics/Text/TextManager.h"
+#include "Core/Graphics/Text/Text.h"
+#include "Core/Graphics/Renderer/TextRenderer.h"
 #include "Graphics/Renderer/ShapeRenderer.h"
-#include "Graphics/Color.h"
-#include "Graphics/GraphicsContext.h"
+#include "Core/Graphics/Color.h"
+#include "Core/Graphics/GraphicsContext.h"
 #include "Graphics/Camera.h"
 
 #include "2D/Graphics/Graphics2D.h"
 
-#include "Window/Window.h"
+#include "Core/Window/Window.h"
 
 #include "Physics/Collision/CollisionSystem.h"
 #include "Physics/Collision/QuadTree.h"
@@ -24,13 +24,13 @@
 #include "Scene/SceneManager.h"
 #include "Scene/Scene.h"
 
-#include "Input/Input.h"
+#include "Core/Input/Input.h"
 
 #include "Object/Transform.h"
 
-#include "Resource/Resources.h"
+#include "Core/Resource/Resources.h"
 
-#include "Math/Vector2f.h"
+#include "Core/Math/Vector2f.h"
 
 Debug::Debug() : 
 	m_zoomIn(false),

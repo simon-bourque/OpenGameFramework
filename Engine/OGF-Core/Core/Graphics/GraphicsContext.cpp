@@ -1,12 +1,12 @@
 #include "GraphicsContext.h"
 
-#include "Graphics/Renderer/TextRenderer.h"
+#include "Core/Graphics/Renderer/TextRenderer.h"
 
-#include "Graphics/Text/FontManager.h"
-#include "Graphics/Text/TextManager.h"
-#include "Graphics/TextureManager.h"
+#include "Core/Graphics/Text/FontManager.h"
+#include "Core/Graphics/Text/TextManager.h"
+#include "Core/Graphics/TextureManager.h"
 
-#include "Graphics/Color.h"
+#include "Core/Graphics/Color.h"
 
 #include <GL/glew.h>
 

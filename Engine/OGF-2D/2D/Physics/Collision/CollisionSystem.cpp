@@ -1,6 +1,6 @@
 #include "CollisionSystem.h"
 
-#include "Math/Vector2f.h"
+#include "Core/Math/Vector2f.h"
 
 #include "2D/Physics/Collision/QuadTree.h"
 #include "2D/Object/Component/AABBColliderComponent.h"

@@ -3,9 +3,9 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
 
-#include <Resource/RawImage.h>
+#include <Core/Resource/RawImage.h>
 #include <Core/Core.h>
-#include <Math/Geometry/Rectangle.h>
+#include <Core/Math/Geometry/Rectangle.h>
 
 #include <iostream>
 #include <fstream>

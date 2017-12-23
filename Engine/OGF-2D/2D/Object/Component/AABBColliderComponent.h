@@ -6,11 +6,11 @@
 #include "Core/Delegate.h"
 #include "2D/Physics/Collision/Manifold.h"
 
-#include "Math/Geometry/Shape.h"
+#include "Core/Math/Geometry/Shape.h"
 
 #include "2D/Object/Component/ComponentType.h"
 
-#include "Math/Geometry/Rectangle.h"
+#include "Core/Math/Geometry/Rectangle.h"
 
 class GameObject;
 

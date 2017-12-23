@@ -1,20 +1,20 @@
 #include "ShapeRenderer.h"
 
-#include "Graphics/Shader/ShaderProgram.h"
-#include "Graphics/Memory/VertexArrayObject.h"
-#include "Graphics/Memory/Buffer.h"
-#include "Graphics/Color.h"
+#include "Core/Graphics/Shader/ShaderProgram.h"
+#include "Core/Graphics/Memory/VertexArrayObject.h"
+#include "Core/Graphics/Memory/Buffer.h"
+#include "Core/Graphics/Color.h"
 
 #include "2D/Graphics/Graphics2D.h"
 
-#include "Resource/Resources.h"
+#include "Core/Resource/Resources.h"
 
-#include "Math/Matrix3f.h"
-#include "Math/Vector2f.h"
+#include "Core/Math/Matrix3f.h"
+#include "Core/Math/Vector2f.h"
 
 #include <cmath>
 
-#include "Math/Constants.h"
+#include "Core/Math/Constants.h"
 
 const uint32 ShapeRenderer::CIRCLE_DIVS = 128;
 

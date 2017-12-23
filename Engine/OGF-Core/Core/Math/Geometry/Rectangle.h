@@ -2,8 +2,8 @@
 
 #include "Core/Core.h"
 
-#include "Math/Geometry/Shape.h"
-#include "Math/Geometry/Point.h"
+#include "Core/Math/Geometry/Shape.h"
+#include "Core/Math/Geometry/Point.h"
 
 namespace geo {
 	class Rectangle : public Shape

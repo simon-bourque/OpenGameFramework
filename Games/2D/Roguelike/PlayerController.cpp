@@ -5,10 +5,10 @@
 #include "2D/Object/GameObject.h"
 #include "2D/Object/Component/ComponentType.h"
 #include "2D/Object/Component/SpriteComponent.h"
-#include "Input/Input.h"
+#include "Core/Input/Input.h"
 
-#include "Math/Vector2f.h"
-#include "Math/Constants.h"
+#include "Core/Math/Vector2f.h"
+#include "Core/Math/Constants.h"
 
 #include "RoguePlayer.h"
 

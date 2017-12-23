@@ -13,7 +13,7 @@
 #include "2D/Debug.h"
 #include "2D/Graphics/Graphics2D.h"
 #include "2D/Graphics/Renderer/ShapeRenderer.h"
-#include "Graphics/Color.h"
+#include "Core/Graphics/Color.h"
 #endif
 
 GET_COMPONENT_TYPE_DEFINITION(AABBColliderComponent)

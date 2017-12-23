@@ -2,7 +2,7 @@
 
 #include "Core/Core.h"
 
-#include "Math/Geometry/Rectangle.h"
+#include "Core/Math/Geometry/Rectangle.h"
 
 #include <vector>
 

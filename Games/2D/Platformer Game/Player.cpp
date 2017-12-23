@@ -13,11 +13,11 @@
 #include "2D/Graphics/Animation/SpriteAnimState.h"
 #include "2D/Graphics/Animation/SpriteSequenceAnimState.h"
 #include "2D/Graphics/Graphics2D.h"
-#include "Graphics/GraphicsContext.h"
-#include "Graphics/TextureManager.h"
-#include "Graphics/Texture.h"
+#include "Core/Graphics/GraphicsContext.h"
+#include "Core/Graphics/TextureManager.h"
+#include "Core/Graphics/Texture.h"
 
-#include "Input/Input.h"
+#include "Core/Input/Input.h"
 
 #include "PlayerController.h"
 

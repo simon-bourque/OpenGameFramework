@@ -2,16 +2,16 @@
 
 #include "Core/Core.h"
 
-#include "Graphics/GraphicsContext.h"
+#include "Core/Graphics/GraphicsContext.h"
 #include "2D/Graphics/Renderer/ShapeRenderer.h"
-#include "Graphics/TextureManager.h"
-#include "Graphics/Color.h"
+#include "Core/Graphics/TextureManager.h"
+#include "Core/Graphics/Color.h"
 
 #include "2D/Scene/Background.h"
 
-#include "Math/Geometry/Rectangle.h"
+#include "Core/Math/Geometry/Rectangle.h"
 
-#include "Input/Input.h"
+#include "Core/Input/Input.h"
 
 #include "2D/Scene/SceneManager.h"
 

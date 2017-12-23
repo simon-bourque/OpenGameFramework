@@ -3,13 +3,13 @@
 #include "Core/Singleton.h"
 #include "Core/Platform.h"
 
-#include "Console/Console.h"
+#include "Core/Console/Console.h"
 
-#include "Window/Window.h"
+#include "Core/Window/Window.h"
 
-#include "Input/Input.h"
+#include "Core/Input/Input.h"
 
-#include "Graphics/GraphicsContext.h"
+#include "Core/Graphics/GraphicsContext.h"
 #include "2D/Graphics/Graphics2D.h"
 
 #include "2D/Scene/SceneManager.h"

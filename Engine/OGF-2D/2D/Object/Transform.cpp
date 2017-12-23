@@ -1,7 +1,7 @@
 #include "Transform.h"
 
-#include "Math/Matrix3f.h"
-#include "Math/Vector2f.h"
+#include "Core/Math/Matrix3f.h"
+#include "Core/Math/Vector2f.h"
 
 Transform::Transform() : xPos(0), yPos(0), rotation(0), xScale(1), yScale(1) {}
 

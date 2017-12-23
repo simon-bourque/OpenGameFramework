@@ -2,7 +2,7 @@
 
 #include "Core/Core.h"
 
-#include "Graphics/Text/Glyph.h"
+#include "Core/Graphics/Text/Glyph.h"
 
 #include <map>
 #include <utility>

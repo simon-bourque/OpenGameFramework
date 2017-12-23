@@ -2,7 +2,7 @@
 
 #include "Core/Core.h"
 
-#include "Graphics/Memory/Buffer.h"
+#include "Core/Graphics/Memory/Buffer.h"
 
 #include <GL/glew.h>
 #include <vector>

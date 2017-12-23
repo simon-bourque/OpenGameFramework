@@ -1,23 +1,23 @@
 #include "RoguelikeGame.h"
 
-#include "Math/Geometry/Rectangle.h"
+#include "Core/Math/Geometry/Rectangle.h"
 #include "2D/Scene/SceneManager.h"
-#include "Graphics/GraphicsContext.h"
+#include "Core/Graphics/GraphicsContext.h"
 #include "2D/Graphics/Camera.h"
 #include "2D/Object/Transform.h"
 
-#include "Graphics/Text/Font.h"
-#include "Graphics/Text/FontManager.h"
-#include "Graphics/Text/TextManager.h"
-#include "Graphics/Text/Text.h"
-#include "Graphics/Renderer/TextRenderer.h"
-#include "Graphics/Color.h"
-#include "Graphics/TextureManager.h"
-#include "Graphics/Texture.h"
+#include "Core/Graphics/Text/Font.h"
+#include "Core/Graphics/Text/FontManager.h"
+#include "Core/Graphics/Text/TextManager.h"
+#include "Core/Graphics/Text/Text.h"
+#include "Core/Graphics/Renderer/TextRenderer.h"
+#include "Core/Graphics/Color.h"
+#include "Core/Graphics/TextureManager.h"
+#include "Core/Graphics/Texture.h"
 
 #include "RoguePlayer.h"
 
-#include "Input/Input.h"
+#include "Core/Input/Input.h"
 
 #if 0
 #include "UI/UserInterface.h"

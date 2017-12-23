@@ -4,7 +4,7 @@
 
 #include <GL/glew.h>
 
-#include "Input/Input.h"
+#include "Core/Input/Input.h"
 
 #include <Windowsx.h>
 

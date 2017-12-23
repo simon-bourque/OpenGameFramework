@@ -1,7 +1,7 @@
 #pragma once
 
 #include "2D/Game2D.h"
-#include "Math/Vector2f.h"
+#include "Core/Math/Vector2f.h"
 
 class Texture;
 class TileScene;

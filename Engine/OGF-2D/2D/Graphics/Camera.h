@@ -2,8 +2,8 @@
 
 #include "2D/Object/Transform.h"
 
-#include "Math/Geometry/Rectangle.h"
-#include "Math/Matrix3f.h"
+#include "Core/Math/Geometry/Rectangle.h"
+#include "Core/Math/Matrix3f.h"
 
 class Camera
 {

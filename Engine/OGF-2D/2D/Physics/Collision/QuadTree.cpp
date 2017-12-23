@@ -226,7 +226,7 @@ QuadTree& QuadTree::operator=(QuadTree&& qt) {
 #ifdef DEBUG_BUILD
 #include "2D/Graphics/Graphics2D.h"
 #include "2D/Graphics/Renderer/ShapeRenderer.h"
-#include "Graphics/Color.h"
+#include "Core/Graphics/Color.h"
 
 void QuadTree::render() const {
 

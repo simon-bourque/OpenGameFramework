@@ -1,9 +1,9 @@
 #include "Text.h"
 
-#include "Graphics/Memory/VertexArrayObject.h"
-#include "Graphics/Memory/Buffer.h"
+#include "Core/Graphics/Memory/VertexArrayObject.h"
+#include "Core/Graphics/Memory/Buffer.h"
 
-#include "Graphics/Text/Font.h"
+#include "Core/Graphics/Text/Font.h"
 
 Text::Text(const string& text, Font* font, Usage usage) : m_font(font), m_usage(usage), m_scale(1.0f) {
 	m_numCharacters = text.length();

@@ -1,14 +1,14 @@
 #include "SceneRenderer.h"
 
-#include "Graphics/Shader/ShaderProgram.h"
-#include "Graphics/Memory/VertexArrayObject.h"
-#include "Graphics/Texture.h"
+#include "Core/Graphics/Shader/ShaderProgram.h"
+#include "Core/Graphics/Memory/VertexArrayObject.h"
+#include "Core/Graphics/Texture.h"
 
 #include "2D/Graphics/Graphics2D.h"
 
 #include "2D/Scene/Background.h"
 
-#include "Resource/Resources.h"
+#include "Core/Resource/Resources.h"
 
 #include <GL/glew.h>
 

@@ -1,15 +1,15 @@
 #include "TextRenderer.h"
 
-#include "Graphics/Shader/ShaderProgram.h"
-#include "Graphics/Text/Text.h"
-#include "Graphics/Text/Font.h"
-#include "Graphics/Memory/VertexArrayObject.h"
-#include "Graphics/Texture.h"
-#include "Graphics/Color.h"
+#include "Core/Graphics/Shader/ShaderProgram.h"
+#include "Core/Graphics/Text/Text.h"
+#include "Core/Graphics/Text/Font.h"
+#include "Core/Graphics/Memory/VertexArrayObject.h"
+#include "Core/Graphics/Texture.h"
+#include "Core/Graphics/Color.h"
 
-#include "Resource/Resources.h"
+#include "Core/Resource/Resources.h"
 
-#include "Math/Matrix3f.h"
+#include "Core/Math/Matrix3f.h"
 
 #include <GL/glew.h>
 

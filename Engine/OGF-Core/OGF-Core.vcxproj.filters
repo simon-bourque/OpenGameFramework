@@ -1,50 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Console">
-      <UniqueIdentifier>{08658667-0d7f-4c18-aca9-1ced46f29937}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{88d89596-6985-4eef-a597-36b83d544071}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Input">
-      <UniqueIdentifier>{7411ca6d-a783-4d77-9af4-ad0d413e0cab}</UniqueIdentifier>
+    <Filter Include="Core\Console">
+      <UniqueIdentifier>{08658667-0d7f-4c18-aca9-1ced46f29937}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Math">
-      <UniqueIdentifier>{472e4438-03ff-4081-932e-2988cb493991}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\Geometry">
-      <UniqueIdentifier>{8ea106d4-f235-4da2-8db5-5795c7d105b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics">
+    <Filter Include="Core\Graphics">
       <UniqueIdentifier>{9ebe3d66-3379-470f-b34e-021a8fa250e9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Window">
-      <UniqueIdentifier>{e36a2c2b-7d5c-4827-a535-974a40f2283a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Memory">
+    <Filter Include="Core\Graphics\Memory">
       <UniqueIdentifier>{a358d228-8156-40dd-afde-137b06877490}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphics\Renderer">
+    <Filter Include="Core\Graphics\Renderer">
       <UniqueIdentifier>{a5952a43-bf86-4be3-9112-7d4351a39956}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphics\Shader">
+    <Filter Include="Core\Graphics\Shader">
       <UniqueIdentifier>{1173d818-8d93-49be-8d17-27da43095276}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphics\Text">
+    <Filter Include="Core\Graphics\Text">
       <UniqueIdentifier>{c1509209-8cfd-4f85-be79-d06544ca14ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource">
+    <Filter Include="Core\Input">
+      <UniqueIdentifier>{7411ca6d-a783-4d77-9af4-ad0d413e0cab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Math">
+      <UniqueIdentifier>{472e4438-03ff-4081-932e-2988cb493991}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Math\Geometry">
+      <UniqueIdentifier>{8ea106d4-f235-4da2-8db5-5795c7d105b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Resource">
       <UniqueIdentifier>{f882ae71-ce89-4ea8-8ea3-02c37433b0ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource\File">
+    <Filter Include="Core\Resource\File">
       <UniqueIdentifier>{6b60bf5d-2989-4cf6-806a-e7d3846026d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Window">
+      <UniqueIdentifier>{e36a2c2b-7d5c-4827-a535-974a40f2283a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Console\Console.h">
-      <Filter>Console</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Core.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -72,98 +69,98 @@
     <ClInclude Include="Core\Singleton.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Input\Input.h">
-      <Filter>Input</Filter>
+    <ClInclude Include="Core\Graphics\Color.h">
+      <Filter>Core\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Input\InputConstants.h">
-      <Filter>Input</Filter>
+    <ClInclude Include="Core\Console\Console.h">
+      <Filter>Core\Console</Filter>
     </ClInclude>
-    <ClInclude Include="Math\Constants.h">
-      <Filter>Math</Filter>
+    <ClInclude Include="Core\Math\Constants.h">
+      <Filter>Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Math\Vector2f.h">
-      <Filter>Math</Filter>
+    <ClInclude Include="Core\Graphics\Coordinates.h">
+      <Filter>Core\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Math\Matrix3f.h">
-      <Filter>Math</Filter>
+    <ClInclude Include="Core\Resource\File\FileReader.h">
+      <Filter>Core\Resource\File</Filter>
     </ClInclude>
-    <ClInclude Include="Math\Geometry\Shape.h">
-      <Filter>Math\Geometry</Filter>
+    <ClInclude Include="Core\Graphics\Text\Font.h">
+      <Filter>Core\Graphics\Text</Filter>
     </ClInclude>
-    <ClInclude Include="Math\Geometry\Rectangle.h">
-      <Filter>Math\Geometry</Filter>
+    <ClInclude Include="Core\Graphics\Memory\Buffer.h">
+      <Filter>Core\Graphics\Memory</Filter>
     </ClInclude>
-    <ClInclude Include="Math\Geometry\Point.h">
-      <Filter>Math\Geometry</Filter>
+    <ClInclude Include="Core\Graphics\Text\Glyph.h">
+      <Filter>Core\Graphics\Text</Filter>
     </ClInclude>
-    <ClInclude Include="Window\Window.h">
-      <Filter>Window</Filter>
+    <ClInclude Include="Core\Graphics\Text\FontManager.h">
+      <Filter>Core\Graphics\Text</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Color.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Core\Graphics\GraphicsContext.h">
+      <Filter>Core\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Coordinates.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Core\Resource\Handle.h">
+      <Filter>Core\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\TextureManager.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Core\Input\Input.h">
+      <Filter>Core\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Texture.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Core\Input\InputConstants.h">
+      <Filter>Core\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\GraphicsContext.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Core\Math\Matrix3f.h">
+      <Filter>Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Memory\Buffer.h">
-      <Filter>Graphics\Memory</Filter>
+    <ClInclude Include="Core\Math\Geometry\Point.h">
+      <Filter>Core\Math\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Memory\VertexArrayObject.h">
-      <Filter>Graphics\Memory</Filter>
+    <ClInclude Include="Core\Resource\RawImage.h">
+      <Filter>Core\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Renderer\TextRenderer.h">
-      <Filter>Graphics\Renderer</Filter>
+    <ClInclude Include="Core\Math\Geometry\Rectangle.h">
+      <Filter>Core\Math\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Shader\Uniform.h">
-      <Filter>Graphics\Shader</Filter>
+    <ClInclude Include="Core\Resource\ResourceManager.h">
+      <Filter>Core\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Shader\ShaderProgram.h">
-      <Filter>Graphics\Shader</Filter>
+    <ClInclude Include="Core\Resource\Resources.h">
+      <Filter>Core\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Text\Text.h">
-      <Filter>Graphics\Text</Filter>
+    <ClInclude Include="Core\Graphics\Shader\ShaderProgram.h">
+      <Filter>Core\Graphics\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Text\Glyph.h">
-      <Filter>Graphics\Text</Filter>
+    <ClInclude Include="Core\Math\Geometry\Shape.h">
+      <Filter>Core\Math\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Text\FontManager.h">
-      <Filter>Graphics\Text</Filter>
+    <ClInclude Include="Core\Graphics\Text\Text.h">
+      <Filter>Core\Graphics\Text</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Text\Font.h">
-      <Filter>Graphics\Text</Filter>
+    <ClInclude Include="Core\Graphics\Text\TextManager.h">
+      <Filter>Core\Graphics\Text</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Text\TextManager.h">
-      <Filter>Graphics\Text</Filter>
+    <ClInclude Include="Core\Graphics\Renderer\TextRenderer.h">
+      <Filter>Core\Graphics\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\Handle.h">
-      <Filter>Resource</Filter>
+    <ClInclude Include="Core\Graphics\Texture.h">
+      <Filter>Core\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\RawImage.h">
-      <Filter>Resource</Filter>
+    <ClInclude Include="Core\Graphics\TextureManager.h">
+      <Filter>Core\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\ResourceManager.h">
-      <Filter>Resource</Filter>
+    <ClInclude Include="Core\Graphics\Shader\Uniform.h">
+      <Filter>Core\Graphics\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\Resources.h">
-      <Filter>Resource</Filter>
+    <ClInclude Include="Core\Math\Vector2f.h">
+      <Filter>Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\File\FileReader.h">
-      <Filter>Resource\File</Filter>
+    <ClInclude Include="Core\Graphics\Memory\VertexArrayObject.h">
+      <Filter>Core\Graphics\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Window\Window.h">
+      <Filter>Core\Window</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Console\Win32Console.cpp">
-      <Filter>Console</Filter>
-    </ClCompile>
     <ClCompile Include="Core\EngineAssert.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -176,77 +173,80 @@
     <ClCompile Include="Core\Logging.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Input\Input.cpp">
-      <Filter>Input</Filter>
+    <ClCompile Include="Core\Graphics\Color.cpp">
+      <Filter>Core\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Math\Matrix3f.cpp">
-      <Filter>Math</Filter>
+    <ClCompile Include="Core\Graphics\Coordinates.cpp">
+      <Filter>Core\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Math\Vector2f.cpp">
-      <Filter>Math</Filter>
+    <ClCompile Include="Core\Graphics\Text\Font.cpp">
+      <Filter>Core\Graphics\Text</Filter>
     </ClCompile>
-    <ClCompile Include="Math\Geometry\Shape.cpp">
-      <Filter>Math\Geometry</Filter>
+    <ClCompile Include="Core\Graphics\Memory\Buffer.cpp">
+      <Filter>Core\Graphics\Memory</Filter>
     </ClCompile>
-    <ClCompile Include="Math\Geometry\Rectangle.cpp">
-      <Filter>Math\Geometry</Filter>
+    <ClCompile Include="Core\Graphics\Text\Glyph.cpp">
+      <Filter>Core\Graphics\Text</Filter>
     </ClCompile>
-    <ClCompile Include="Window\Win32Window.cpp">
-      <Filter>Window</Filter>
+    <ClCompile Include="Core\Graphics\Text\FontManager.cpp">
+      <Filter>Core\Graphics\Text</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Coordinates.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Core\Graphics\GraphicsContext.cpp">
+      <Filter>Core\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Color.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Core\Input\Input.cpp">
+      <Filter>Core\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Texture.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Core\Math\Matrix3f.cpp">
+      <Filter>Core\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\TextureManager.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Core\Resource\RawImage.cpp">
+      <Filter>Core\Resource</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\GraphicsContext.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Core\Math\Geometry\Rectangle.cpp">
+      <Filter>Core\Math\Geometry</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Memory\Buffer.cpp">
-      <Filter>Graphics\Memory</Filter>
+    <ClCompile Include="Core\Resource\Resources.cpp">
+      <Filter>Core\Resource</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Memory\VertexArrayObject.cpp">
-      <Filter>Graphics\Memory</Filter>
+    <ClCompile Include="Core\Graphics\Shader\ShaderProgram.cpp">
+      <Filter>Core\Graphics\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Renderer\TextRenderer.cpp">
-      <Filter>Graphics\Renderer</Filter>
+    <ClCompile Include="Core\Math\Geometry\Shape.cpp">
+      <Filter>Core\Math\Geometry</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Shader\Uniform.cpp">
-      <Filter>Graphics\Shader</Filter>
+    <ClCompile Include="Core\Graphics\Text\Text.cpp">
+      <Filter>Core\Graphics\Text</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Shader\ShaderProgram.cpp">
-      <Filter>Graphics\Shader</Filter>
+    <ClCompile Include="Core\Graphics\Text\TextManager.cpp">
+      <Filter>Core\Graphics\Text</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Text\Text.cpp">
-      <Filter>Graphics\Text</Filter>
+    <ClCompile Include="Core\Graphics\Renderer\TextRenderer.cpp">
+      <Filter>Core\Graphics\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Text\Glyph.cpp">
-      <Filter>Graphics\Text</Filter>
+    <ClCompile Include="Core\Graphics\Texture.cpp">
+      <Filter>Core\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Text\FontManager.cpp">
-      <Filter>Graphics\Text</Filter>
+    <ClCompile Include="Core\Graphics\TextureManager.cpp">
+      <Filter>Core\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Text\Font.cpp">
-      <Filter>Graphics\Text</Filter>
+    <ClCompile Include="Core\Graphics\Shader\Uniform.cpp">
+      <Filter>Core\Graphics\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Text\TextManager.cpp">
-      <Filter>Graphics\Text</Filter>
+    <ClCompile Include="Core\Math\Vector2f.cpp">
+      <Filter>Core\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\RawImage.cpp">
-      <Filter>Resource</Filter>
+    <ClCompile Include="Core\Graphics\Memory\VertexArrayObject.cpp">
+      <Filter>Core\Graphics\Memory</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\Resources.cpp">
-      <Filter>Resource</Filter>
+    <ClCompile Include="Core\Console\Win32Console.cpp">
+      <Filter>Core\Console</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\File\Win32FileReader.cpp">
-      <Filter>Resource\File</Filter>
+    <ClCompile Include="Core\Window\Win32Window.cpp">
+      <Filter>Core\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Resource\File\Win32FileReader.cpp">
+      <Filter>Core\Resource\File</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

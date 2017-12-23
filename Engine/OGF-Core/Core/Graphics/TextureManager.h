@@ -2,9 +2,9 @@
 
 #include "Core/Core.h"
 
-#include "Graphics/Texture.h"
+#include "Core/Graphics/Texture.h"
 
-#include "Resource/ResourceManager.h"
+#include "Core/Resource/ResourceManager.h"
 
 #include <memory>
 

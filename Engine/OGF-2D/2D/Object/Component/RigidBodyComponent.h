@@ -4,7 +4,7 @@
 
 #include "2D/Object/Component/ObjectComponent.h"
 
-#include "Math/Vector2f.h"
+#include "Core/Math/Vector2f.h"
 
 #include "2D/Object/Component/ComponentType.h"
 

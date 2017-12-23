@@ -1,9 +1,9 @@
 #include "FontManager.h"
 
-#include "Resource/Resources.h"
+#include "Core/Resource/Resources.h"
 
-#include "Graphics/GraphicsContext.h"
-#include "Graphics/TextureManager.h"
+#include "Core/Graphics/GraphicsContext.h"
+#include "Core/Graphics/TextureManager.h"
 
 FontManager::FontManager() {}
 

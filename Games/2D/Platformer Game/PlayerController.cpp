@@ -2,11 +2,11 @@
 
 #include "2D/Event.h"
 
-#include "Input/Input.h"
+#include "Core/Input/Input.h"
 
 #include "2D/Object/GameObject.h"
 
-#include "Math/Vector2f.h"
+#include "Core/Math/Vector2f.h"
 
 #include "2D/Object/State/StateMachine.h"
 #include "2D/Object/State/StateTransition.h"

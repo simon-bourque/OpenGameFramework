@@ -1,15 +1,15 @@
 #include "SpriteRenderer.h"
 
-#include "Graphics/Texture.h"
-#include "Graphics/Shader/ShaderProgram.h"
-#include "Graphics/Memory/VertexArrayObject.h"
-#include "Graphics/Memory/Buffer.h"
+#include "Core/Graphics/Texture.h"
+#include "Core/Graphics/Shader/ShaderProgram.h"
+#include "Core/Graphics/Memory/VertexArrayObject.h"
+#include "Core/Graphics/Memory/Buffer.h"
 
-#include "Math/Geometry/Rectangle.h"
+#include "Core/Math/Geometry/Rectangle.h"
 
 #include "2D/Object/Transform.h"
 
-#include "Resource/Resources.h"
+#include "Core/Resource/Resources.h"
 
 #include "2D/Graphics/Graphics2D.h"
 

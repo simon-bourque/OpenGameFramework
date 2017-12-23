@@ -6,21 +6,21 @@
 
 #include "Core/Game.h"
 
-#include "Graphics/Text/Font.h"
-#include "Graphics/Text/Glyph.h"
+#include "Core/Graphics/Text/Font.h"
+#include "Core/Graphics/Text/Glyph.h"
 //#include "Graphics/RenderSystem.h"
-#include "Graphics/TextureManager.h"
-#include "Graphics/Texture.h"
-#include "Graphics/Coordinates.h"
+#include "Core/Graphics/TextureManager.h"
+#include "Core/Graphics/Texture.h"
+#include "Core/Graphics/Coordinates.h"
 
-#include "Window/Window.h"
+#include "Core/Window/Window.h"
 
-#include "Math/Geometry/Rectangle.h"
-#include "Math/Vector2f.h"
+#include "Core/Math/Geometry/Rectangle.h"
+#include "Core/Math/Vector2f.h"
 
 //#include "Physics/Collision/CollisionSystem.h"
 
-#include "Resource/File/FileReader.h"
+#include "Core/Resource/File/FileReader.h"
 
 #include <sstream>
 #include <fstream>

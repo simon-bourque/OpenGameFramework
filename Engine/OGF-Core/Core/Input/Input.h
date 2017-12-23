@@ -7,7 +7,7 @@
 
 #include <vector>
 
-#include "Input/InputConstants.h"
+#include "Core/Input/InputConstants.h"
 
 typedef Delegate<int32, int32, int32, int32> KeyListener;
 typedef Delegate<float64, float64> CursorPositionListener, ScrollListener;

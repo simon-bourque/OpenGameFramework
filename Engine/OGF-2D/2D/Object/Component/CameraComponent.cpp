@@ -5,7 +5,7 @@
 #include "2D/Object/GameObject.h"
 #include "2D/Object/Transform.h"
 
-#include "Math/Geometry/Rectangle.h"
+#include "Core/Math/Geometry/Rectangle.h"
 
 #include "2D/Scene/SceneManager.h"
 #include "2D/Scene/Scene.h"

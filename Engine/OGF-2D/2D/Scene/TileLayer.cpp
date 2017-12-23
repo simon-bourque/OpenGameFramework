@@ -1,12 +1,12 @@
 #include "TileLayer.h"
 
-#include "Graphics/Memory/VertexArrayObject.h"
+#include "Core/Graphics/Memory/VertexArrayObject.h"
 
 #include "2D/Graphics/Graphics2D.h"
 #include "2D/Graphics/Renderer/SpriteRenderer.h"
 #include "2D/Graphics/Renderer/SceneRenderer.h"
 
-#include "Math/Matrix3f.h"
+#include "Core/Math/Matrix3f.h"
 
 #include "2D/Scene/Tile.h"
 

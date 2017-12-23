@@ -12,9 +12,9 @@
 #include "2D/Object/Component/AnimatorComponent.h"
 #include "2D/Object/Component/SpriteComponent.h"
 
-#include "Graphics/TextureManager.h"
-#include "Graphics/Texture.h"
-#include "Graphics/GraphicsContext.h"
+#include "Core/Graphics/TextureManager.h"
+#include "Core/Graphics/Texture.h"
+#include "Core/Graphics/GraphicsContext.h"
 #include "2D/Graphics/Animation/Animation.h"
 #include "2D/Graphics/Animation/SpriteSequenceAnimState.h"
 #include "2D/Graphics/Animation/SpriteAnimState.h"

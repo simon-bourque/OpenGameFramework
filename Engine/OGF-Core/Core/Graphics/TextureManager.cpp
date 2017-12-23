@@ -1,10 +1,10 @@
 #include "TextureManager.h"
 
-#include "Resource/RawImage.h"
-#include "Resource/Resources.h"
+#include "Core/Resource/RawImage.h"
+#include "Core/Resource/Resources.h"
 
-#include "Graphics/Memory/Buffer.h"
-#include "Graphics/Color.h"
+#include "Core/Graphics/Memory/Buffer.h"
+#include "Core/Graphics/Color.h"
 
 TextureManager::TextureManager() {
 	const Color& red = Color::RED;

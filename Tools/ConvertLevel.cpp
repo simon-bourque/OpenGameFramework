@@ -1,7 +1,7 @@
 
 #include <Core/Core.h>
 #include <2D/Scene/Tile.h>
-#include <Math/Geometry/Rectangle.h>
+#include <Core/Math/Geometry/Rectangle.h>
 
 #include <pugixml.hpp>
 

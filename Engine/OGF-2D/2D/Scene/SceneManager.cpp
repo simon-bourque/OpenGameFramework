@@ -1,6 +1,6 @@
 #include "SceneManager.h"
 
-#include "Resource/Resources.h"
+#include "Core/Resource/Resources.h"
 
 #include "2D/Scene/TileScene.h"
 #include "2D/Scene/Tile.h"
@@ -8,11 +8,11 @@
 
 #include "2D/Physics/Collision/CollisionSystem.h"
 
-#include "Resource/File/FileReader.h"
+#include "Core/Resource/File/FileReader.h"
 
-#include "Graphics/GraphicsContext.h"
-#include "Graphics/Texture.h"
-#include "Graphics/TextureManager.h"
+#include "Core/Graphics/GraphicsContext.h"
+#include "Core/Graphics/Texture.h"
+#include "Core/Graphics/TextureManager.h"
 
 static TileScene* loadTileLevelFromDisk(string file);
 const static string LEVEL_PATH = "res/level/";

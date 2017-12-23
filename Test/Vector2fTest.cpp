@@ -1,7 +1,7 @@
 
 #include <gtest/gtest.h>
 
-#include "Math/Vector2f.h"
+#include "Core/Math/Vector2f.h"
 
 Vector2f v1;
 Vector2f v2(1, 2);

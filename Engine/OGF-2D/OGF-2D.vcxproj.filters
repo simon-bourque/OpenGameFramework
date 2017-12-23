@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="2D">
+      <UniqueIdentifier>{6c3bb67e-c70c-4438-b038-56802a13ea58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D\Object">
+      <UniqueIdentifier>{601b8063-0eba-420e-87b1-e43b84ab256a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D\Physics">
+      <UniqueIdentifier>{49d23b2c-0b21-42b4-9368-79c13eb87310}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D\Scene">
+      <UniqueIdentifier>{c711cd4b-e24a-4a35-85d3-8de064a237d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D\Object\Component">
+      <UniqueIdentifier>{d052d3b6-5064-4aec-a8d1-9f852f8ad1be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D\Object\State">
+      <UniqueIdentifier>{63d87e0a-8a7c-4cc7-a043-aa1b223ed147}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D\Physics\Collision">
+      <UniqueIdentifier>{48c1ddbb-6f55-4315-a07c-633f632bd3d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D\Graphics">
+      <UniqueIdentifier>{ba6d84b6-3dd8-4168-b452-ad319d67de75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D\Graphics\Animation">
+      <UniqueIdentifier>{b1b3ea77-68a9-4704-9e36-60d81e370f1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D\Graphics\Renderer">
+      <UniqueIdentifier>{435903e3-a928-465c-9238-74878f2f8b91}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="2D\Object\Component\AABBColliderComponent.cpp">
+      <Filter>2D\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Object\Component\AnimatorComponent.cpp">
+      <Filter>2D\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Object\Component\CameraComponent.cpp">
+      <Filter>2D\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Object\Component\ComponentType.cpp">
+      <Filter>2D\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Object\Component\ObjectComponent.cpp">
+      <Filter>2D\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Object\Component\RenderableComponent.cpp">
+      <Filter>2D\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Object\Component\RigidBodyComponent.cpp">
+      <Filter>2D\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Object\Component\SpriteComponent.cpp">
+      <Filter>2D\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Object\State\StateMachine.cpp">
+      <Filter>2D\Object\State</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Object\State\State.cpp">
+      <Filter>2D\Object\State</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Object\State\StateTransition.cpp">
+      <Filter>2D\Object\State</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Object\Transform.cpp">
+      <Filter>2D\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Object\GameObject.cpp">
+      <Filter>2D\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Scene\Scene.cpp">
+      <Filter>2D\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Scene\SceneManager.cpp">
+      <Filter>2D\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Scene\Tile.cpp">
+      <Filter>2D\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Scene\TileLayer.cpp">
+      <Filter>2D\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Scene\TileScene.cpp">
+      <Filter>2D\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Physics\Collision\QuadTree.cpp">
+      <Filter>2D\Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Physics\Collision\Manifold.cpp">
+      <Filter>2D\Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Physics\Collision\CollisionSystem.cpp">
+      <Filter>2D\Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Game2D.cpp">
+      <Filter>2D</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Scene\Background.cpp">
+      <Filter>2D\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Graphics\Animation\Animation.cpp">
+      <Filter>2D\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Graphics\Animation\AnimState.cpp">
+      <Filter>2D\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Graphics\Renderer\SceneRenderer.cpp">
+      <Filter>2D\Graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Graphics\Renderer\ShapeRenderer.cpp">
+      <Filter>2D\Graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Graphics\Animation\SpriteAnimState.cpp">
+      <Filter>2D\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Graphics\Animation\SpriteSequenceAnimState.cpp">
+      <Filter>2D\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Graphics\Renderer\SpriteRenderer.cpp">
+      <Filter>2D\Graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Graphics\Graphics2D.cpp">
+      <Filter>2D\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Graphics\Camera.cpp">
+      <Filter>2D\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Debug.cpp">
+      <Filter>2D</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Event.cpp">
+      <Filter>2D</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="2D\Object\Component\AABBColliderComponent.h">
+      <Filter>2D\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Object\Component\AnimatorComponent.h">
+      <Filter>2D\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Object\Component\CameraComponent.h">
+      <Filter>2D\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Object\Component\ComponentType.h">
+      <Filter>2D\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Object\Component\ObjectComponent.h">
+      <Filter>2D\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Object\Component\RenderableComponent.h">
+      <Filter>2D\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Object\Component\RigidBodyComponent.h">
+      <Filter>2D\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Object\Component\SpriteComponent.h">
+      <Filter>2D\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Object\State\Condition.h">
+      <Filter>2D\Object\State</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Object\State\State.h">
+      <Filter>2D\Object\State</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Object\State\StateTransition.h">
+      <Filter>2D\Object\State</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Object\State\StateMachine.h">
+      <Filter>2D\Object\State</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Object\Transform.h">
+      <Filter>2D\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Object\GameObject.h">
+      <Filter>2D\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Scene\TileScene.h">
+      <Filter>2D\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Scene\Tile.h">
+      <Filter>2D\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Scene\TileLayer.h">
+      <Filter>2D\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Scene\SceneManager.h">
+      <Filter>2D\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Scene\Scene.h">
+      <Filter>2D\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Physics\Collision\CollisionSystem.h">
+      <Filter>2D\Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Physics\Collision\Manifold.h">
+      <Filter>2D\Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Physics\Collision\QuadTree.h">
+      <Filter>2D\Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Game2D.h">
+      <Filter>2D</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Scene\Background.h">
+      <Filter>2D\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Graphics\Animation\Animation.h">
+      <Filter>2D\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Graphics\Animation\AnimState.h">
+      <Filter>2D\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Graphics\Renderer\SceneRenderer.h">
+      <Filter>2D\Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Graphics\Renderer\ShapeRenderer.h">
+      <Filter>2D\Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Graphics\Animation\SpriteAnimState.h">
+      <Filter>2D\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Graphics\Animation\SpriteSequenceAnimState.h">
+      <Filter>2D\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Graphics\Renderer\SpriteRenderer.h">
+      <Filter>2D\Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Graphics\Graphics2D.h">
+      <Filter>2D\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Graphics\Camera.h">
+      <Filter>2D\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Debug.h">
+      <Filter>2D</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Event.h">
+      <Filter>2D</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

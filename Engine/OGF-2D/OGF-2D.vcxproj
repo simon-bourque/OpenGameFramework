@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="2D\Debug.cpp" />
+    <ClCompile Include="2D\Event.cpp" />
+    <ClCompile Include="2D\Game2D.cpp" />
+    <ClCompile Include="2D\Graphics\Animation\Animation.cpp" />
+    <ClCompile Include="2D\Graphics\Animation\AnimState.cpp" />
+    <ClCompile Include="2D\Graphics\Animation\SpriteAnimState.cpp" />
+    <ClCompile Include="2D\Graphics\Animation\SpriteSequenceAnimState.cpp" />
+    <ClCompile Include="2D\Graphics\Camera.cpp" />
+    <ClCompile Include="2D\Graphics\Graphics2D.cpp" />
+    <ClCompile Include="2D\Graphics\Renderer\SceneRenderer.cpp" />
+    <ClCompile Include="2D\Graphics\Renderer\ShapeRenderer.cpp" />
+    <ClCompile Include="2D\Graphics\Renderer\SpriteRenderer.cpp" />
+    <ClCompile Include="2D\Object\Component\AABBColliderComponent.cpp" />
+    <ClCompile Include="2D\Object\Component\AnimatorComponent.cpp" />
+    <ClCompile Include="2D\Object\Component\CameraComponent.cpp" />
+    <ClCompile Include="2D\Object\Component\ComponentType.cpp" />
+    <ClCompile Include="2D\Object\Component\ObjectComponent.cpp" />
+    <ClCompile Include="2D\Object\Component\RenderableComponent.cpp" />
+    <ClCompile Include="2D\Object\Component\RigidBodyComponent.cpp" />
+    <ClCompile Include="2D\Object\Component\SpriteComponent.cpp" />
+    <ClCompile Include="2D\Object\GameObject.cpp" />
+    <ClCompile Include="2D\Object\State\State.cpp" />
+    <ClCompile Include="2D\Object\State\StateMachine.cpp" />
+    <ClCompile Include="2D\Object\State\StateTransition.cpp" />
+    <ClCompile Include="2D\Object\Transform.cpp" />
+    <ClCompile Include="2D\Physics\Collision\CollisionSystem.cpp" />
+    <ClCompile Include="2D\Physics\Collision\Manifold.cpp" />
+    <ClCompile Include="2D\Physics\Collision\QuadTree.cpp" />
+    <ClCompile Include="2D\Scene\Background.cpp" />
+    <ClCompile Include="2D\Scene\Scene.cpp" />
+    <ClCompile Include="2D\Scene\SceneManager.cpp" />
+    <ClCompile Include="2D\Scene\Tile.cpp" />
+    <ClCompile Include="2D\Scene\TileLayer.cpp" />
+    <ClCompile Include="2D\Scene\TileScene.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="2D\Debug.h" />
+    <ClInclude Include="2D\Event.h" />
+    <ClInclude Include="2D\Game2D.h" />
+    <ClInclude Include="2D\Graphics\Animation\Animation.h" />
+    <ClInclude Include="2D\Graphics\Animation\AnimState.h" />
+    <ClInclude Include="2D\Graphics\Animation\SpriteAnimState.h" />
+    <ClInclude Include="2D\Graphics\Animation\SpriteSequenceAnimState.h" />
+    <ClInclude Include="2D\Graphics\Camera.h" />
+    <ClInclude Include="2D\Graphics\Graphics2D.h" />
+    <ClInclude Include="2D\Graphics\Renderer\SceneRenderer.h" />
+    <ClInclude Include="2D\Graphics\Renderer\ShapeRenderer.h" />
+    <ClInclude Include="2D\Graphics\Renderer\SpriteRenderer.h" />
+    <ClInclude Include="2D\Object\Component\AABBColliderComponent.h" />
+    <ClInclude Include="2D\Object\Component\AnimatorComponent.h" />
+    <ClInclude Include="2D\Object\Component\CameraComponent.h" />
+    <ClInclude Include="2D\Object\Component\ComponentType.h" />
+    <ClInclude Include="2D\Object\Component\ObjectComponent.h" />
+    <ClInclude Include="2D\Object\Component\RenderableComponent.h" />
+    <ClInclude Include="2D\Object\Component\RigidBodyComponent.h" />
+    <ClInclude Include="2D\Object\Component\SpriteComponent.h" />
+    <ClInclude Include="2D\Object\GameObject.h" />
+    <ClInclude Include="2D\Object\State\Condition.h" />
+    <ClInclude Include="2D\Object\State\State.h" />
+    <ClInclude Include="2D\Object\State\StateMachine.h" />
+    <ClInclude Include="2D\Object\State\StateTransition.h" />
+    <ClInclude Include="2D\Object\Transform.h" />
+    <ClInclude Include="2D\Physics\Collision\CollisionSystem.h" />
+    <ClInclude Include="2D\Physics\Collision\Manifold.h" />
+    <ClInclude Include="2D\Physics\Collision\QuadTree.h" />
+    <ClInclude Include="2D\Scene\Background.h" />
+    <ClInclude Include="2D\Scene\Scene.h" />
+    <ClInclude Include="2D\Scene\SceneManager.h" />
+    <ClInclude Include="2D\Scene\Tile.h" />
+    <ClInclude Include="2D\Scene\TileLayer.h" />
+    <ClInclude Include="2D\Scene\TileScene.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A75CDACF-0386-484B-BC3D-55FE64D5E3CD}</ProjectGuid>
+    <RootNamespace>OGF2D</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include;$(SolutionDir)Engine\OGF-Core;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLEW_STATIC;DEBUG_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include;$(SolutionDir)Engine\OGF-Core;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLEW_STATIC;DEBUG_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include;$(SolutionDir)Engine\OGF-Core;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include;$(SolutionDir)Engine\OGF-Core;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

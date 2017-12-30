@@ -1,9 +1,8 @@
 #include "FreeCameraController.h"
 
 #include "Camera.h"
-#include "InputManager.h"
+#include "Core/Input/Input.h"
 
-#include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
 glm::vec2 getMouseAxis();
@@ -20,8 +19,8 @@ FreeCameraController::FreeCameraController(Camera* camera) :
 	m_rollRightPressed(false),
 	m_rightMouseButtonPressed(false)
 {
-	InputManager::instance()->registerKeyCallback(std::bind(&FreeCameraController::onKey, this, std::placeholders::_1, std::placeholders::_2));
-	InputManager::instance()->registerMouseBtnCallback(std::bind(&FreeCameraController::onMouseButton, this, std::placeholders::_1, std::placeholders::_2));
+	getInputInstance()->addKeyListener(KeyListener::create<FreeCameraController, &FreeCameraController::onKey>(this));
+	getInputInstance()->addMouseButtonListener(MouseButtonListener::create<FreeCameraController, &FreeCameraController::onMouseButton>(this));
 }
 
 FreeCameraController::~FreeCameraController() {}
@@ -88,79 +87,79 @@ void FreeCameraController::update(float32 deltaSeconds) {
 	}
 }
 
-void FreeCameraController::onKey(int32 key, int32 action) {
-	if (key == GLFW_KEY_W) {
-		if (action == GLFW_PRESS) {
+void FreeCameraController::onKey(int32 key, int32 scancode, int32 action, int32 mods) {
+	if (key == Keys::KEY_W) {
+		if (action == Actions::PRESS) {
 			m_forwardPressed = true;
 		}
-		else if (action == GLFW_RELEASE) {
+		else if (action == Actions::RELEASE) {
 			m_forwardPressed = false;
 		}
 	}
-	if (key == GLFW_KEY_S) {
-		if (action == GLFW_PRESS) {
+	if (key == Keys::KEY_S) {
+		if (action == Actions::PRESS) {
 			m_backwardPressed = true;
 		}
-		else if (action == GLFW_RELEASE) {
+		else if (action == Actions::RELEASE) {
 			m_backwardPressed = false;
 		}
 	}
-	if (key == GLFW_KEY_A) {
-		if (action == GLFW_PRESS) {
+	if (key == Keys::KEY_A) {
+		if (action == Actions::PRESS) {
 			m_leftPressed = true;
 		}
-		else if (action == GLFW_RELEASE) {
+		else if (action == Actions::RELEASE) {
 			m_leftPressed = false;
 		}
 	}
-	if (key == GLFW_KEY_D) {
-		if (action == GLFW_PRESS) {
+	if (key == Keys::KEY_D) {
+		if (action == Actions::PRESS) {
 			m_rightPressed = true;
 		}
-		else if (action == GLFW_RELEASE) {
+		else if (action == Actions::RELEASE) {
 			m_rightPressed = false;
 		}
 	}
-	if (key == GLFW_KEY_SPACE) {
-		if (action == GLFW_PRESS) {
+	if (key == Keys::KEY_SPACE) {
+		if (action == Actions::PRESS) {
 			m_upPressed = true;
 		}
-		else if (action == GLFW_RELEASE) {
+		else if (action == Actions::RELEASE) {
 			m_upPressed = false;
 		}
 	}
-	if (key == GLFW_KEY_LEFT_CONTROL) {
-		if (action == GLFW_PRESS) {
+	if (key == Keys::KEY_LEFT_CONTROL) {
+		if (action == Actions::PRESS) {
 			m_downPressed = true;
 		}
-		else if (action == GLFW_RELEASE) {
+		else if (action == Actions::RELEASE) {
 			m_downPressed = false;
 		}
 	}
-	if (key == GLFW_KEY_Q) {
-		if (action == GLFW_PRESS) {
+	if (key == Keys::KEY_Q) {
+		if (action == Actions::PRESS) {
 			m_rollLeftPressed = true;
 		}
-		else if (action == GLFW_RELEASE) {
+		else if (action == Actions::RELEASE) {
 			m_rollLeftPressed = false;
 		}
 	}
-	if (key == GLFW_KEY_E) {
-		if (action == GLFW_PRESS) {
+	if (key == Keys::KEY_E) {
+		if (action == Actions::PRESS) {
 			m_rollRightPressed = true;
 		}
-		else if (action == GLFW_RELEASE) {
+		else if (action == Actions::RELEASE) {
 			m_rollRightPressed = false;
 		}
 	}
 }
 
-void FreeCameraController::onMouseButton(int32 button, int32 action) {
-	if (button == GLFW_MOUSE_BUTTON_RIGHT) {
-		if (action == GLFW_PRESS) {
+void FreeCameraController::onMouseButton(int32 button, int32 action, int32 mods) {
+	if (button == MouseButtons::MOUSE_BUTTON_RIGHT) {
+		if (action == Actions::PRESS) {
 			m_rightMouseButtonPressed = true;
 		}
-		else if (action == GLFW_RELEASE) {
+		else if (action == Actions::RELEASE) {
 			m_rightMouseButtonPressed = false;
 		}
 	}

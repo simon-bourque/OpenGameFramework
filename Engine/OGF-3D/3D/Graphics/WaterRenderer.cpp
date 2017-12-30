@@ -4,9 +4,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "RenderingContext.h"
-#include "ShaderProgram.h"
-#include "Texture.h"
+#include "3D/Graphics/Renderer/RenderingContext.h"
+#include "3D/Graphics/Shader/ShaderProgram.h"
+#include "Core/Graphics/Texture.h"
 
 WaterRenderer* WaterRenderer::s_instance = nullptr;
 
@@ -118,9 +118,9 @@ void WaterRenderer::buildFBO(uint32 width, uint32 height) {
 void WaterRenderer::prepare() {
 	m_waterShader->use();
 	glBindVertexArray(m_vao);
-	m_waterNormal->bind(Texture::UNIT_0);
-	m_waterNormal2->bind(Texture::UNIT_1);
-	m_waterDuDv->bind(Texture::UNIT_2);
+	m_waterNormal->bind(Texture::Unit::UNIT_0);
+	m_waterNormal2->bind(Texture::Unit::UNIT_1);
+	m_waterDuDv->bind(Texture::Unit::UNIT_2);
 
 	glActiveTexture(GL_TEXTURE3);
 	glBindTexture(GL_TEXTURE_2D, m_refractionColorTexture);

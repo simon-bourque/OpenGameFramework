@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Types.h"
+#include "Core/Types.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>

@@ -2,7 +2,7 @@
 
 #include "glm/glm.hpp"
 
-#include "Types.h"
+#include "Core/Types.h"
 
 /**
  * A light source class meant to simulate light coming from the sun or the moon for example.

@@ -114,12 +114,17 @@
     <ClInclude Include="Chunking\Chunk.h" />
     <ClInclude Include="Chunking\ChunkManager.h" />
     <ClInclude Include="Chunking\Primitives.h" />
+    <ClInclude Include="Graphics\ShadowMap.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Procedural\TerrainBuilder.h" />
     <ClInclude Include="Procedural\TreeBuilder.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Chunking\ChunkManager.cpp" />
     <ClCompile Include="Chunking\Primitives.cpp" />
+    <ClCompile Include="Graphics\ShadowMap.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Procedural\TerrainBuilder.cpp" />
     <ClCompile Include="Procedural\TreeBuilder.cpp" />
   </ItemGroup>

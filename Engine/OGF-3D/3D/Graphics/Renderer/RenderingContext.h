@@ -1,12 +1,12 @@
 #pragma once
 
-#include "ShaderCache.h"
-#include "ModelCache.h"
-#include "TextureCache.h"
+#include "3D/Graphics/Shader/ShaderCache.h"
+#include "3D/Graphics/Meshes/ModelCache.h"
+#include "3D/Graphics/TextureCache.h"
 
-#include "WaterRenderer.h"
+#include "3D/Graphics/WaterRenderer.h"
 
-#include "Camera.h"
+#include "3D/Graphics/Camera.h"
 
 class RenderingContext {
 private: // Member variables

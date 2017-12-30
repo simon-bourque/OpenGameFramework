@@ -16,7 +16,8 @@ public:
 	enum class Target : GLenum {
 		TEXTURE_2D = GL_TEXTURE_2D,
 		TEXTURE_2D_ARRAY = GL_TEXTURE_2D_ARRAY,
-		TEXTURE_BUFFER = GL_TEXTURE_BUFFER
+		TEXTURE_BUFFER = GL_TEXTURE_BUFFER,
+		TEXTURE_CUBE_MAP = GL_TEXTURE_CUBE_MAP
 	};
 
 	enum class Filter : GLint {
@@ -33,7 +34,10 @@ public:
 
 	enum class Unit : GLenum {
 		UNIT_0 = GL_TEXTURE0,
-		UNIT_1 = GL_TEXTURE1
+		UNIT_1 = GL_TEXTURE1,
+		UNIT_2 = GL_TEXTURE2,
+		UNIT_3 = GL_TEXTURE3,
+		UNIT_4 = GL_TEXTURE4
 	};
 
 private:

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Types.h"
-#include "Texture.h"
+#include "Core/Types.h"
+#include "Core/Graphics/Texture.h"
 
 #include "glm\glm.hpp"
 

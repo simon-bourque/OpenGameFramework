@@ -3,10 +3,7 @@
 
 //External includes
 #include <GL/glew.h>
-#include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
-
-#include "Profiling.h"
 
 //Local headers
 #include "ChunkManager.h"

@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Transform.h"
-#include "Types.h"
+#include "3D/Objects/Transform.h"
+#include "Core/Types.h"
 
-#include "Chunk.h"
+//#include "Chunk.h"
+// TODO Remove hardcoding for the frustum culling
 
 #include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
@@ -44,6 +45,6 @@ public:
 
 	void setPerspective(float32 fov, float32 aspectRatio, float32 nearPlane = 0.1f, float32 farPlane = 1000.0f);
 
-	bool intersectsFrustum(const Chunk& chunk);
+//	bool intersectsFrustum(const Chunk& chunk);
 };
 

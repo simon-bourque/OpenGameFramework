@@ -2,11 +2,9 @@
 
 #include <vector>
 
-#include "Types.h"
+#include "Core/Types.h"
 
-#include "Chunk.h"
-
-#include "LightSource.h"
+#include "3D/Graphics/Lighting/LightSource.h"
 
 class ShaderProgram;
 class Texture;

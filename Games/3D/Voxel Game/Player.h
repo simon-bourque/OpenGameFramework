@@ -2,11 +2,11 @@
 
 #include <vector>
 
-#include "Camera.h"
-#include "Entity.h"
-#include "Collision.h"
-#include "Manifold.h"
-#include "AABBCollider.h"
+#include "3D/Graphics/Camera.h"
+#include "3D/Entities/Entity.h"
+#include "3D/Physics/Collision/Collision.h"
+#include "3D/Physics/Collision/Manifold.h"
+#include "3D/Physics/Collision/AABBCollider.h"
 
 struct Chunk;
 

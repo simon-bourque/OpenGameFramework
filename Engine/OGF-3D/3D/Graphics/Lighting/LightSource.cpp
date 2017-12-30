@@ -1,6 +1,6 @@
 #include "LightSource.h"
 
-#include "RenderingContext.h"
+#include "3D/Graphics/Renderer/RenderingContext.h"
 
 // Light caster constructor
 LightSource::LightSource(glm::vec3 direction, glm::vec3 color)

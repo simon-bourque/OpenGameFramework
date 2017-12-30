@@ -1,8 +1,6 @@
 #include "Camera.h"
 
-#include "ChunkManager.h"
-
-#include "Profiling.h"
+//#include "ChunkManager.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -60,6 +58,7 @@ void Camera::setPerspective(float32 fov, float32 aspectRatio, float32 nearPlane,
 	m_frustum[5] = glm::vec4(glm::vec3(0, 0, -1), -farPlane);
 }
 
+/*
 bool Camera::intersectsFrustum(const Chunk& chunk) {
 	INSTRUMENT_FUNCTION("FrustumCulling", Profiler::Color::Crimson);
 
@@ -98,7 +97,7 @@ bool Camera::intersectsFrustum(const Chunk& chunk) {
 
 	return true;
 }
-
+*/
 
 bool Camera::intersectPlane(const glm::vec4& plane, const glm::vec3& point) {
 	float32 result = (plane.x * point.x) + (plane.y * point.y) + (plane.z * point.z) + plane.w;

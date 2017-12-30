@@ -4,7 +4,7 @@
 
 #include <vector>
 
-#include "Types.h"
+#include "Core/Types.h"
 
 class Model {
 	friend class ModelCache;

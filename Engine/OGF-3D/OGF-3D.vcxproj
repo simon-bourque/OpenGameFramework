@@ -25,26 +25,26 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -74,6 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include;$(SolutionDir)Engine\OGF-Core;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -81,6 +82,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include;$(SolutionDir)Engine\OGF-Core;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -90,6 +92,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include;$(SolutionDir)Engine\OGF-Core;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -103,6 +106,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include;$(SolutionDir)Engine\OGF-Core;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -110,6 +114,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="3D\Entities\Entity.cpp" />
+    <ClCompile Include="3D\Graphics\Camera.cpp" />
+    <ClCompile Include="3D\Graphics\FreeCameraController.cpp" />
+    <ClCompile Include="3D\Graphics\Lighting\LightSource.cpp" />
+    <ClCompile Include="3D\Graphics\Meshes\Model.cpp" />
+    <ClCompile Include="3D\Graphics\Meshes\ModelCache.cpp" />
+    <ClCompile Include="3D\Graphics\Renderer\RenderingContext.cpp" />
+    <ClCompile Include="3D\Graphics\Shader\ShaderCache.cpp" />
+    <ClCompile Include="3D\Graphics\Shader\ShaderProgram.cpp" />
+    <ClCompile Include="3D\Graphics\Texture.cpp" />
+    <ClCompile Include="3D\Graphics\TextureCache.cpp" />
+    <ClCompile Include="3D\Graphics\WaterRenderer.cpp" />
+    <ClCompile Include="3D\Objects\Transform.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="3D\Entities\Entity.h" />
+    <ClInclude Include="3D\Graphics\Camera.h" />
+    <ClInclude Include="3D\Graphics\FreeCameraController.h" />
+    <ClInclude Include="3D\Graphics\Lighting\LightSource.h" />
+    <ClInclude Include="3D\Graphics\Meshes\Model.h" />
+    <ClInclude Include="3D\Graphics\Meshes\ModelCache.h" />
+    <ClInclude Include="3D\Graphics\Renderer\RenderingContext.h" />
+    <ClInclude Include="3D\Graphics\Shader\ShaderCache.h" />
+    <ClInclude Include="3D\Graphics\Shader\ShaderProgram.h" />
+    <ClInclude Include="3D\Graphics\Texture.h" />
+    <ClInclude Include="3D\Graphics\TextureCache.h" />
+    <ClInclude Include="3D\Graphics\WaterRenderer.h" />
+    <ClInclude Include="3D\Objects\Transform.h" />
+    <ClInclude Include="3D\Physics\Collision\AABBCollider.h" />
+    <ClInclude Include="3D\Physics\Collision\Collision.h" />
+    <ClInclude Include="3D\Physics\Collision\Manifold.h" />
+    <ClInclude Include="3D\Physics\Collision\SphereCollider.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Types.h"
+#include "Core/Types.h"
 
 class Camera;
 
@@ -25,7 +25,7 @@ public:
 
 	void update(float32 deltaSeconds);
 
-	void onKey(int32 key, int32 action);
-	void onMouseButton(int32 button, int32 action);
+	void onKey(int32 key, int32 scancode, int32 action, int32 mods);
+	void onMouseButton(int32 button, int32 action, int32 mods);
 };
 

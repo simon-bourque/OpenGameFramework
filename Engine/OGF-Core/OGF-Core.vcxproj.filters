@@ -40,6 +40,9 @@
     <Filter Include="Core\Window">
       <UniqueIdentifier>{e36a2c2b-7d5c-4827-a535-974a40f2283a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{7da972b3-bd74-4e84-aa04-34482daab972}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Core.h">

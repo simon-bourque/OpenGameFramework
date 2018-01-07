@@ -14,7 +14,8 @@
 #include "2D/Graphics/Animation/SpriteSequenceAnimState.h"
 #include "2D/Graphics/Graphics2D.h"
 #include "Core/Graphics/GraphicsContext.h"
-#include "Core/Graphics/TextureManager.h"
+//#include "Core/Graphics/TextureManager.h"
+#include "Core/Graphics/TextureCache.h"
 #include "Core/Graphics/Texture.h"
 
 #include "Core/Input/Input.h"
@@ -30,19 +31,23 @@ Player::Player(Game2D* game, const Vector2f& spawnLocation) {
 	transform.translate(spawnLocation);
 
 	// ###################### Animations #####################################
-	Texture* walkTexture = getGraphicsContextInstance()->getTextureManager()->createTexture2DArray("player_walk.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* standTexture = getGraphicsContextInstance()->getTextureManager()->createTexture2D("player_stand.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* jumpTexture = getGraphicsContextInstance()->getTextureManager()->createTexture2D("player_jump.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	Texture* duckTexture = getGraphicsContextInstance()->getTextureManager()->createTexture2D("player_duck.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	//Texture* walkTexture = getGraphicsContextInstance()->getTextureManager()->createTexture2DArray("player_walk.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	//Texture* standTexture = getGraphicsContextInstance()->getTextureManager()->createTexture2D("player_stand.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	//Texture* jumpTexture = getGraphicsContextInstance()->getTextureManager()->createTexture2D("player_jump.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	//Texture* duckTexture = getGraphicsContextInstance()->getTextureManager()->createTexture2D("player_duck.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	TextureRef walkTextureRef = getGraphicsContextInstance()->getTextureCache()->loadTexture("player_walk.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	TextureRef standTextureRef = getGraphicsContextInstance()->getTextureCache()->loadTexture("player_stand.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	TextureRef jumpTextureRef = getGraphicsContextInstance()->getTextureCache()->loadTexture("player_jump.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	TextureRef duckTextureRef = getGraphicsContextInstance()->getTextureCache()->loadTexture("player_duck.tx", Texture::Filter::NEAREST_NEIGHBOR);
 
 	uint32 frames[11] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 	float32 delays[11] = { ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY };
 	Animation walkAnim(frames, delays, 11);
 
-	AnimState* walkAnimState = new SpriteSequenceAnimState(walkTexture, walkAnim);
-	AnimState* standAnimState = new SpriteAnimState(standTexture);
-	AnimState* inAirAnimState = new SpriteAnimState(jumpTexture);
-	AnimState* duckAnimState = new SpriteAnimState(duckTexture);
+	AnimState* walkAnimState = new SpriteSequenceAnimState(walkTextureRef, walkAnim);
+	AnimState* standAnimState = new SpriteAnimState(standTextureRef);
+	AnimState* inAirAnimState = new SpriteAnimState(jumpTextureRef);
+	AnimState* duckAnimState = new SpriteAnimState(duckTextureRef);
 
 	AnimatorComponent* animator = new AnimatorComponent(this, "IDLE", standAnimState);
 	animator->addState("WALK", walkAnimState);

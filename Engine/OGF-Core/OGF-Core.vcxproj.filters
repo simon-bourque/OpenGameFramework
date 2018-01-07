@@ -159,6 +159,9 @@
     <ClInclude Include="Core\Window\Window.h">
       <Filter>Core\Window</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Graphics\TextureCache.h">
+      <Filter>Core\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\EngineAssert.cpp">
@@ -247,6 +250,9 @@
     </ClCompile>
     <ClCompile Include="Core\Resource\File\Win32FileReader.cpp">
       <Filter>Core\Resource\File</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Graphics\TextureCache.cpp">
+      <Filter>Core\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

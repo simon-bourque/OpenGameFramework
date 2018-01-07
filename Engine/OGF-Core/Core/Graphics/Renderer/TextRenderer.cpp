@@ -1,11 +1,14 @@
 #include "TextRenderer.h"
 
+#include "Core/Graphics/GraphicsContext.h"
 #include "Core/Graphics/Shader/ShaderProgram.h"
 #include "Core/Graphics/Text/Text.h"
 #include "Core/Graphics/Text/Font.h"
 #include "Core/Graphics/Memory/VertexArrayObject.h"
 #include "Core/Graphics/Texture.h"
 #include "Core/Graphics/Color.h"
+
+#include "Core/Graphics/TextureCache.h"
 
 #include "Core/Resource/Resources.h"
 
@@ -26,7 +29,8 @@ void TextRenderer::renderText(const Text* text, float32 x, float32 y, const Colo
 
 	Matrix3f modelMatrix = Matrix3f::translation(x, y) * Matrix3f::scale(text->getScale(), text->getScale());
 
-	text->getFont().getBitmap()->bind(Texture::Unit::UNIT_0);
+	TextureRef textureRef = text->getFont().getBitmap();
+	getGraphicsContextInstance()->getTextureCache()->getTexture(textureRef)->bind(Texture::Unit::UNIT_0);
 
 	glUniformMatrix3fv(m_textShaderProgram->getUniform("modelMatrix").getLocation(), 1, true, modelMatrix.values);
 	glUniform1i(m_textShaderProgram->getUniform("diffuseTexture").getLocation(), 0);

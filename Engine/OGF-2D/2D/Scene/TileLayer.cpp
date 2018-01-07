@@ -10,7 +10,7 @@
 
 #include "2D/Scene/Tile.h"
 
-TileLayer::TileLayer(Tile* tiles, int32 numberOfTiles, Texture* tileSheet) : m_tileSheet(tileSheet), m_numberOfTiles(numberOfTiles) {
+TileLayer::TileLayer(Tile* tiles, int32 numberOfTiles, TextureRef tileSheet) : m_tileSheet(tileSheet), m_numberOfTiles(numberOfTiles) {
 	float32* matrices = new float32[numberOfTiles * 9];
 	int32* indices = new int32[numberOfTiles];
 

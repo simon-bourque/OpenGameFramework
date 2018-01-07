@@ -4,6 +4,7 @@
 #include "Core/Graphics/Shader/ShaderProgram.h"
 #include "Core/Graphics/Memory/VertexArrayObject.h"
 #include "Core/Graphics/Memory/Buffer.h"
+#include "Core/Graphics/GraphicsContext.h"
 
 #include "Core/Math/Geometry/Rectangle.h"
 
@@ -46,11 +47,12 @@ SpriteRenderer::SpriteRenderer() {
 
 SpriteRenderer::~SpriteRenderer() {}
 
-void SpriteRenderer::renderSprite(const Transform* transform, const Texture* texture, bool hFlip, bool vFlip) const {
+void SpriteRenderer::renderSprite(const Transform* transform, TextureRef textureRef, bool hFlip, bool vFlip) const {
 	glUseProgram(m_spriteShaderProgram->getProgramId());
 
 	m_spriteVAO->bind();
 
+	Texture* texture = getGraphicsContextInstance()->getTextureCache()->getTexture(textureRef);
 	texture->bind(Texture::Unit::UNIT_0);
 
 	Matrix3f finalMatrix = getGraphics2DInstance()->getCamera().getViewProjectionMatrix() * transform->toMatrix();
@@ -64,11 +66,12 @@ void SpriteRenderer::renderSprite(const Transform* transform, const Texture* tex
 
 }
 
-void SpriteRenderer::renderSpriteUI(const geo::Rectangle& bounds, const Texture* texture, bool hFlip, bool vFlip) const {
+void SpriteRenderer::renderSpriteUI(const geo::Rectangle& bounds, TextureRef textureRef, bool hFlip, bool vFlip) const {
 	glUseProgram(m_spriteShaderProgram->getProgramId());
 
 	m_spriteVAO->bind();
 
+	Texture* texture = getGraphicsContextInstance()->getTextureCache()->getTexture(textureRef);
 	texture->bind(Texture::Unit::UNIT_0);
 
 	Matrix3f finalMatrix = Matrix3f::translation(bounds.getX(), bounds.getY()) * Matrix3f::scale(bounds.getWidth(), bounds.getHeight());
@@ -83,7 +86,7 @@ void SpriteRenderer::renderSpriteUI(const geo::Rectangle& bounds, const Texture*
 
 }
 
-void SpriteRenderer::renderAnimationFrame(const Transform& transform, uint32 frame, const Texture& texture, bool hFlip, bool vFlip) const {
+void SpriteRenderer::renderAnimationFrame(const Transform& transform, uint32 frame, TextureRef textureRef, bool hFlip, bool vFlip) const {
 	glUseProgram(m_animSpriteShaderProgram->getProgramId());
 
 	m_spriteVAO->bind();
@@ -91,7 +94,8 @@ void SpriteRenderer::renderAnimationFrame(const Transform& transform, uint32 fra
 	Matrix3f finalMatrix = getGraphics2DInstance()->getCamera().getViewProjectionMatrix() * transform.toMatrix();
 
 	// Diffuse Texture
-	texture.bind(Texture::Unit::UNIT_0);
+	Texture* texture = getGraphicsContextInstance()->getTextureCache()->getTexture(textureRef);
+	texture->bind(Texture::Unit::UNIT_0);
 
 	glUniformMatrix3fv(m_animSpriteShaderProgram->getUniform("mvpMatrix").getLocation(), 1, true, finalMatrix.values);
 	glUniform1i(m_animSpriteShaderProgram->getUniform("diffuseTextureAtlas").getLocation(), 0);

@@ -4,7 +4,7 @@
 
 #include "Core/Graphics/GraphicsContext.h"
 #include "2D/Graphics/Renderer/ShapeRenderer.h"
-#include "Core/Graphics/TextureManager.h"
+#include "Core/Graphics/TextureCache.h"
 #include "Core/Graphics/Color.h"
 
 #include "2D/Scene/Background.h"
@@ -36,8 +36,8 @@ void PlatformerGame::init() {
 	getSceneManagerInstance()->getCurrentScene().setGravity(9.8f * 4.0f);
 
 	// Load background
-	Texture* bgTexture = getGraphicsContextInstance()->getTextureManager()->createTexture2D("uncolored_forest.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	getSceneManagerInstance()->getCurrentScene().addBackground(new Background(bgTexture));
+	TextureRef bgTextureRef = getGraphicsContextInstance()->getTextureCache()->loadTexture("uncolored_forest.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	getSceneManagerInstance()->getCurrentScene().addBackground(new Background(bgTextureRef));
 
 	// load player
 	//m_playerSpawn = Vector2f(0.5f, -10.8f);

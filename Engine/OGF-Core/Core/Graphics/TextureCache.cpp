@@ -6,11 +6,14 @@
 
 #include "Core/Graphics/Color.h"
 
-#include <functional>
+#include "3rdparty/SpookyHash/SpookyV2.h"
+
+#define HASH_SEED 0xFF1A2B3C4D5E6FFF
 
 const static string TEXTURE_PATH = "res/texture/";
 const static uint8 TEXTURE_2D_TYPE = 0x1;
 const static uint8 TEXTURE_2D_ARRAY_TYPE = 0x2;
+
 
 TextureCache::TextureCache() {
 	const Color& red = Color::RED;
@@ -48,7 +51,7 @@ TextureCache::~TextureCache() {
 
 TextureRef TextureCache::loadTexture(const string& path, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT) {
 
-	uint64 pathHash = std::hash<string>{}(path);
+	uint64 pathHash = SpookyHash::Hash64(path.c_str(), path.length(), HASH_SEED);
 
 	// Check if texture is already loaded
 	auto iter = m_loadedTextures.find(pathHash);

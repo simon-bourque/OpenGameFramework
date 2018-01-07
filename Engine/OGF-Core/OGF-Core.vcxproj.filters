@@ -40,6 +40,12 @@
     <Filter Include="Core\Window">
       <UniqueIdentifier>{e36a2c2b-7d5c-4827-a535-974a40f2283a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3rdparty">
+      <UniqueIdentifier>{ed5a975c-48a5-486b-82e6-1ffe58636da3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\SpookyHash">
+      <UniqueIdentifier>{ce57e5f4-39ec-4104-bbd6-91304190ef81}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Core.h">
@@ -162,6 +168,9 @@
     <ClInclude Include="Core\Graphics\TextureCache.h">
       <Filter>Core\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="3rdparty\SpookyHash\SpookyV2.h">
+      <Filter>3rdparty\SpookyHash</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\EngineAssert.cpp">
@@ -253,6 +262,9 @@
     </ClCompile>
     <ClCompile Include="Core\Graphics\TextureCache.cpp">
       <Filter>Core\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdparty\SpookyHash\SpookyV2.cpp">
+      <Filter>3rdparty\SpookyHash</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

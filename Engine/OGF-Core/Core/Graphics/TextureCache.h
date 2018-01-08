@@ -21,13 +21,13 @@ private:
 	std::unordered_map<TextureRef, Texture*, TextureReferenceHash> m_loadedTextures;
 	std::unique_ptr<Texture> m_defaultTexture;
 
-	Texture* loadTexture2DFromFile(FileReader& input, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT) const;
-	Texture* loadTexture2DArrayFromFile(FileReader& input, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT) const;
+	Texture* loadTexture2DFromFile(FileReader& input) const;
+	Texture* loadTexture2DArrayFromFile(FileReader& input) const;
 public:
 	TextureCache();
 	~TextureCache();
 
-	TextureRef loadTexture(const string& path, Texture::Filter filtering, Texture::Wrap textureWrapS = Texture::Wrap::CLAMP_TO_EDGE, Texture::Wrap textureWrapT = Texture::Wrap::CLAMP_TO_EDGE);
+	TextureRef loadTexture(const string& path);
 
 	Texture* getTexture(TextureRef reference) const;
 

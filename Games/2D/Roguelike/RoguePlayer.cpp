@@ -24,15 +24,15 @@ RoguePlayer::RoguePlayer() : m_currentHealth(3), m_maxHealth(3), m_bonusAgility(
 
 	const static float32 ANIM_DELAY = 0.07f;
 
-	TextureRef tex_walk_s = getGraphicsContextInstance()->getTextureCache()->loadTexture("Rogue_walk_s.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	TextureRef tex_walk_w = getGraphicsContextInstance()->getTextureCache()->loadTexture("Rogue_walk_w.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	TextureRef tex_walk_e = getGraphicsContextInstance()->getTextureCache()->loadTexture("Rogue_walk_e.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	TextureRef tex_walk_n = getGraphicsContextInstance()->getTextureCache()->loadTexture("Rogue_walk_n.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	TextureRef tex_walk_s = getGraphicsContextInstance()->getTextureCache()->loadTexture("Rogue_walk_s.tx");
+	TextureRef tex_walk_w = getGraphicsContextInstance()->getTextureCache()->loadTexture("Rogue_walk_w.tx");
+	TextureRef tex_walk_e = getGraphicsContextInstance()->getTextureCache()->loadTexture("Rogue_walk_e.tx");
+	TextureRef tex_walk_n = getGraphicsContextInstance()->getTextureCache()->loadTexture("Rogue_walk_n.tx");
 
-	TextureRef tex_idle_s = getGraphicsContextInstance()->getTextureCache()->loadTexture("Rogue_idle_s.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	TextureRef tex_idle_w = getGraphicsContextInstance()->getTextureCache()->loadTexture("Rogue_idle_w.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	TextureRef tex_idle_e = getGraphicsContextInstance()->getTextureCache()->loadTexture("Rogue_idle_e.tx", Texture::Filter::NEAREST_NEIGHBOR);
-	TextureRef tex_idle_n = getGraphicsContextInstance()->getTextureCache()->loadTexture("Rogue_idle_n.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	TextureRef tex_idle_s = getGraphicsContextInstance()->getTextureCache()->loadTexture("Rogue_idle_s.tx");
+	TextureRef tex_idle_w = getGraphicsContextInstance()->getTextureCache()->loadTexture("Rogue_idle_w.tx");
+	TextureRef tex_idle_e = getGraphicsContextInstance()->getTextureCache()->loadTexture("Rogue_idle_e.tx");
+	TextureRef tex_idle_n = getGraphicsContextInstance()->getTextureCache()->loadTexture("Rogue_idle_n.tx");
 
 	uint32 frames[4] = { 0,1,2,3 };
 	float32 delays[4] = { ANIM_DELAY, ANIM_DELAY, ANIM_DELAY, ANIM_DELAY };
@@ -69,7 +69,7 @@ RoguePlayer::RoguePlayer() : m_currentHealth(3), m_maxHealth(3), m_bonusAgility(
 	addComponent(camera);
 
 	// ################### SWORD #########################
-	TextureRef swordTexture = getGraphicsContextInstance()->getTextureCache()->loadTexture("sword.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	TextureRef swordTexture = getGraphicsContextInstance()->getTextureCache()->loadTexture("sword.tx");
 	m_sword = new GameObject();
 	m_sword->transform.scale(0.5f);
 	SpriteComponent* spComp = new SpriteComponent(m_sword, swordTexture);

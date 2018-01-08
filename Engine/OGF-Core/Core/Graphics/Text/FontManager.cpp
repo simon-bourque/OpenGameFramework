@@ -15,7 +15,7 @@ Font* FontManager::createFont(const string& name) {
 	img.append(".tx");
 	desc.append(".fnt");
 
-	TextureRef textureRef = getGraphicsContextInstance()->getTextureCache()->loadTexture(img, Texture::Filter::LINEAR);
+	TextureRef textureRef = getGraphicsContextInstance()->getTextureCache()->loadTexture(img);
 
 	Glyph invalidCharacter;
 	uint32 size = 0;

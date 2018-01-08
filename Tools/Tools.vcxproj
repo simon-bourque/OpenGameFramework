@@ -74,6 +74,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <TargetName>conv</TargetName>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>conv</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <TargetName>conv</TargetName>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -127,10 +133,12 @@
   <ItemGroup>
     <ClCompile Include="ConvertLevel.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="TextureWriter.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConvertLevel.h" />
+    <ClInclude Include="TextureWriter.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>

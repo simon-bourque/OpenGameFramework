@@ -36,7 +36,7 @@ void PlatformerGame::init() {
 	getSceneManagerInstance()->getCurrentScene().setGravity(9.8f * 4.0f);
 
 	// Load background
-	TextureRef bgTextureRef = getGraphicsContextInstance()->getTextureCache()->loadTexture("uncolored_forest.tx", Texture::Filter::NEAREST_NEIGHBOR);
+	TextureRef bgTextureRef = getGraphicsContextInstance()->getTextureCache()->loadTexture("uncolored_forest.tx");
 	getSceneManagerInstance()->getCurrentScene().addBackground(new Background(bgTextureRef));
 
 	// load player

@@ -11,9 +11,6 @@
 #define HASH_SEED 0xFF1A2B3C4D5E6FFF
 
 const static string TEXTURE_PATH = "res/texture/";
-const static uint8 TEXTURE_2D_TYPE = 0x1;
-const static uint8 TEXTURE_2D_ARRAY_TYPE = 0x2;
-
 
 TextureCache::TextureCache() {
 	const Color& red = Color::RED;
@@ -49,7 +46,7 @@ TextureCache::~TextureCache() {
 	}
 }
 
-TextureRef TextureCache::loadTexture(const string& path, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT) {
+TextureRef TextureCache::loadTexture(const string& path) {
 
 	uint64 pathHash = SpookyHash::Hash64(path.c_str(), path.length(), HASH_SEED);
 
@@ -65,14 +62,14 @@ TextureRef TextureCache::loadTexture(const string& path, Texture::Filter filteri
 	try {
 		FileReader input(TEXTURE_PATH + path);
 	
-		uint8 type = input.read<uint8>();
+		Texture::Target type = static_cast<Texture::Target>(input.read<uint32>());
 
 		switch (type) {
-		case TEXTURE_2D_TYPE:
-			texture = loadTexture2DFromFile(input, filtering, textureWrapS, textureWrapT);
+		case Texture::Target::TEXTURE_2D:
+			texture = loadTexture2DFromFile(input);
 			break;
-		case TEXTURE_2D_ARRAY_TYPE:
-			texture = loadTexture2DArrayFromFile(input, filtering, textureWrapS, textureWrapT);
+		case Texture::Target::TEXTURE_2D_ARRAY:
+			texture = loadTexture2DArrayFromFile(input);
 			break;
 		default:
 			input.close();
@@ -103,10 +100,14 @@ Texture* TextureCache::getTexture(TextureRef reference) const {
 	return m_defaultTexture.get();
 }
 
-Texture* TextureCache::loadTexture2DFromFile(FileReader& input, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT) const {
+Texture* TextureCache::loadTexture2DFromFile(FileReader& input) const {
+	Texture::Filter filter = static_cast<Texture::Filter>(input.read<uint32>());
+	Texture::Wrap wrapS = static_cast<Texture::Wrap>(input.read<uint32>());
+	Texture::Wrap wrapT = static_cast<Texture::Wrap>(input.read<uint32>());
+
+	uint8 channels = input.read<uint8>();
 	uint32 width = input.read<uint32>();
 	uint32 height = input.read<uint32>();
-	uint8 channels = input.read<uint8>();
 
 	uint32 numBytes = width * height * channels;
 	uint8* data = new uint8[numBytes];
@@ -119,10 +120,10 @@ Texture* TextureCache::loadTexture2DFromFile(FileReader& input, Texture::Filter 
 	tex->bind(Texture::Unit::UNIT_0);
 
 	glTexImage2D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filtering));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filtering));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(textureWrapS));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(textureWrapT));
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filter));
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filter));
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(wrapS));
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(wrapT));
 
 	tex->unbind();
 
@@ -131,10 +132,14 @@ Texture* TextureCache::loadTexture2DFromFile(FileReader& input, Texture::Filter 
 	return tex;
 }
 
-Texture* TextureCache::loadTexture2DArrayFromFile(FileReader& input, Texture::Filter filtering, Texture::Wrap textureWrapS, Texture::Wrap textureWrapT) const {
+Texture* TextureCache::loadTexture2DArrayFromFile(FileReader& input) const {
+	Texture::Filter filter = static_cast<Texture::Filter>(input.read<uint32>());
+	Texture::Wrap wrapS = static_cast<Texture::Wrap>(input.read<uint32>());
+	Texture::Wrap wrapT = static_cast<Texture::Wrap>(input.read<uint32>());
+
+	uint8 channels = input.read<uint8>();
 	uint32 width = input.read<uint32>();
 	uint32 height = input.read<uint32>();
-	uint8 channels = input.read<uint8>();
 	uint32 depth = input.read<uint32>();
 
 	uint32 numBytes = width * height * channels * depth;
@@ -148,10 +153,10 @@ Texture* TextureCache::loadTexture2DArrayFromFile(FileReader& input, Texture::Fi
 	tex->bind(Texture::Unit::UNIT_0);
 
 	glTexImage3D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, width, height, depth, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filtering));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filtering));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(textureWrapS));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(textureWrapT));
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filter));
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filter));
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(wrapS));
+	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(wrapT));
 	
 	tex->unbind();
 

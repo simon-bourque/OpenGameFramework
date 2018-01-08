@@ -64,7 +64,7 @@ static TileScene* loadTileLevelFromDisk(string file) {
 		DEBUG_LOG("--- TILE SHEET PATH ---");
 		DEBUG_LOG(texPath);
 
-		textures[i] = getGraphicsContextInstance()->getTextureCache()->loadTexture(texPath, Texture::Filter::NEAREST_NEIGHBOR);
+		textures[i] = getGraphicsContextInstance()->getTextureCache()->loadTexture(texPath);
 		delete[] texPath;
 	}
 

@@ -133,12 +133,10 @@
   <ItemGroup>
     <ClCompile Include="ConvertLevel.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="TextureWriter.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConvertLevel.h" />
-    <ClInclude Include="TextureWriter.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>

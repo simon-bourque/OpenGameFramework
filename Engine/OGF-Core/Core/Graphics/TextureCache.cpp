@@ -89,6 +89,12 @@ TextureRef TextureCache::loadTexture(const string& path) {
 	return pathHash;
 }
 
+bool TextureCache::isValid(TextureRef textureRef) const {
+	auto iter = m_loadedTextures.find(textureRef);
+
+	return (iter != m_loadedTextures.end());
+}
+
 Texture* TextureCache::getTexture(TextureRef reference) const {
 	auto iter = m_loadedTextures.find(reference);
 

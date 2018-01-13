@@ -28,6 +28,7 @@ public:
 	~TextureCache();
 
 	TextureRef loadTexture(const string& path);
+	bool isValid(TextureRef textureRef) const;
 
 	Texture* getTexture(TextureRef reference) const;
 

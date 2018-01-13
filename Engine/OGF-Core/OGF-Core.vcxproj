@@ -182,7 +182,6 @@
     <ClInclude Include="Core\Graphics\Shader\Uniform.h" />
     <ClInclude Include="Core\Graphics\Texture.h" />
     <ClInclude Include="Core\Graphics\TextureCache.h" />
-    <ClInclude Include="Core\Graphics\TextureManager.h" />
     <ClInclude Include="Core\Graphics\Text\Font.h" />
     <ClInclude Include="Core\Graphics\Text\FontManager.h" />
     <ClInclude Include="Core\Graphics\Text\Glyph.h" />
@@ -223,7 +222,6 @@
     <ClCompile Include="Core\Graphics\Shader\Uniform.cpp" />
     <ClCompile Include="Core\Graphics\Texture.cpp" />
     <ClCompile Include="Core\Graphics\TextureCache.cpp" />
-    <ClCompile Include="Core\Graphics\TextureManager.cpp" />
     <ClCompile Include="Core\Graphics\Text\Font.cpp" />
     <ClCompile Include="Core\Graphics\Text\FontManager.cpp" />
     <ClCompile Include="Core\Graphics\Text\Glyph.cpp" />

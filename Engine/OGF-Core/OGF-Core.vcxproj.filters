@@ -150,9 +150,6 @@
     <ClInclude Include="Core\Graphics\Texture.h">
       <Filter>Core\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Graphics\TextureManager.h">
-      <Filter>Core\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Graphics\Shader\Uniform.h">
       <Filter>Core\Graphics\Shader</Filter>
     </ClInclude>
@@ -237,9 +234,6 @@
       <Filter>Core\Graphics\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Core\Graphics\Texture.cpp">
-      <Filter>Core\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Graphics\TextureManager.cpp">
       <Filter>Core\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Core\Graphics\Shader\Uniform.cpp">

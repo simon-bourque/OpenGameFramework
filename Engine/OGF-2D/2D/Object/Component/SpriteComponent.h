@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core/Core.h"
+#include "Core/Graphics/TextureCache.h"
 
 #include "2D/Object/Component/RenderableComponent.h"
 
@@ -8,17 +9,16 @@
 
 class GameObject;
 class Game;
-class Texture;
 class RenderSystem;
 
 class SpriteComponent : public RenderableComponent {
 private:
-	Texture* m_texture;
+	TextureRef m_textureRef;
 
 	bool m_horizontalFlip;
 	bool m_verticalFlip;
 public:
-	SpriteComponent(GameObject* parentObject, Texture* texture);
+	SpriteComponent(GameObject* parentObject, TextureRef textureRef);
 	virtual ~SpriteComponent();
 
 	bool isHorizontallyFlipped() const { return m_horizontalFlip; };

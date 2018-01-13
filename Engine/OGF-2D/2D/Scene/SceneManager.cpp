@@ -12,7 +12,7 @@
 
 #include "Core/Graphics/GraphicsContext.h"
 #include "Core/Graphics/Texture.h"
-#include "Core/Graphics/TextureManager.h"
+#include "Core/Graphics/TextureCache.h"
 
 static TileScene* loadTileLevelFromDisk(string file);
 const static string LEVEL_PATH = "res/level/";
@@ -50,7 +50,7 @@ static TileScene* loadTileLevelFromDisk(string file) {
 
 	// Load tilesets
 	uint32 numTilesets = input.read<uint32>();
-	Texture** textures = new Texture*[numTilesets];
+	TextureRef* textures = new TextureRef[numTilesets];
 
 	for (uint32 i = 0; i < numTilesets; i++) {
 
@@ -64,8 +64,7 @@ static TileScene* loadTileLevelFromDisk(string file) {
 		DEBUG_LOG("--- TILE SHEET PATH ---");
 		DEBUG_LOG(texPath);
 
-		Texture* texture = getGraphicsContextInstance()->getTextureManager()->createTexture2DArray(texPath, Texture::Filter::NEAREST_NEIGHBOR);
-		textures[i] = texture;
+		textures[i] = getGraphicsContextInstance()->getTextureCache()->loadTexture(texPath);
 		delete[] texPath;
 	}
 

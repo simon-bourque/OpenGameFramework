@@ -1,9 +1,9 @@
 #include "Font.h"
 
 
-Font::Font(Texture* bitmap, const Glyph& invalidCharacter) : m_bitmap(bitmap), m_invalidCharacter(invalidCharacter) {}
+Font::Font(TextureRef bitmap, const Glyph& invalidCharacter) : m_bitmap(bitmap), m_invalidCharacter(invalidCharacter) {}
 
-Font::Font(Texture* bitmap, const Glyph& invalidCharacter, std::pair<char, Glyph>* characterMap, uint32 characterMapSize) : m_bitmap(bitmap), m_invalidCharacter(invalidCharacter) {
+Font::Font(TextureRef bitmap, const Glyph& invalidCharacter, std::pair<char, Glyph>* characterMap, uint32 characterMapSize) : m_bitmap(bitmap), m_invalidCharacter(invalidCharacter) {
 	for (uint32 i = 0; i < characterMapSize; i++) {
 		m_glyphMap[characterMap[i].first] = characterMap[i].second;
 	}

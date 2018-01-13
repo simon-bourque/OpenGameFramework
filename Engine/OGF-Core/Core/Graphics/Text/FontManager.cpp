@@ -3,7 +3,7 @@
 #include "Core/Resource/Resources.h"
 
 #include "Core/Graphics/GraphicsContext.h"
-#include "Core/Graphics/TextureManager.h"
+#include "Core/Graphics/TextureCache.h"
 
 FontManager::FontManager() {}
 
@@ -15,13 +15,13 @@ Font* FontManager::createFont(const string& name) {
 	img.append(".tx");
 	desc.append(".fnt");
 
-	Texture* tex = getGraphicsContextInstance()->getTextureManager()->createTexture2D(img, Texture::Filter::LINEAR);
+	TextureRef textureRef = getGraphicsContextInstance()->getTextureCache()->loadTexture(img);
 
 	Glyph invalidCharacter;
 	uint32 size = 0;
 	std::pair<char, Glyph>* map = loadFont(desc, size, invalidCharacter);
 	
-	Font* font = new Font(tex, invalidCharacter, map, size);
+	Font* font = new Font(textureRef, invalidCharacter, map, size);
 	delete[] map;
 
 	m_loadedResources[name] = font;

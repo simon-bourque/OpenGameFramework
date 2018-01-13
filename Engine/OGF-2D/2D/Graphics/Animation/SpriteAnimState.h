@@ -3,13 +3,13 @@
 #include "Core/Core.h"
 
 #include "2D/Graphics/Animation/AnimState.h"
+#include "Core/Graphics/TextureCache.h"
 
-class Texture;
 class AnimatorComponent;
 
 class SpriteAnimState : public AnimState {
 public:
-	SpriteAnimState(Texture* texture);
+	SpriteAnimState(TextureRef textureRef);
 	virtual ~SpriteAnimState();
 
 	virtual void onEnter() override;

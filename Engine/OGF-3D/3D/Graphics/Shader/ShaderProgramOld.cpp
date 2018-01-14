@@ -1,31 +1,31 @@
-#include "ShaderProgram.h"
+#include "ShaderProgramOld.h"
 
 #include <glm/gtc/type_ptr.hpp>
 
-ShaderProgram::ShaderProgram(GLuint shaderHandle) : m_shaderHandle(shaderHandle) {}
-ShaderProgram::~ShaderProgram() {}
+ShaderProgramOld::ShaderProgramOld(GLuint shaderHandle) : m_shaderHandle(shaderHandle) {}
+ShaderProgramOld::~ShaderProgramOld() {}
 
-void ShaderProgram::use() const {
+void ShaderProgramOld::use() const {
 	glUseProgram(m_shaderHandle);
 }
 
-void ShaderProgram::setUniform(const std::string& uniformName, const glm::mat4& matrix) {
+void ShaderProgramOld::setUniform(const std::string& uniformName, const glm::mat4& matrix) {
 	glUniformMatrix4fv(glGetUniformLocation(m_shaderHandle, uniformName.c_str()), 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
-void ShaderProgram::setUniform(const std::string& uniformName, const glm::vec3& vector) {
+void ShaderProgramOld::setUniform(const std::string& uniformName, const glm::vec3& vector) {
 	glUniform3fv(glGetUniformLocation(m_shaderHandle, uniformName.c_str()), 1, glm::value_ptr(vector));
 }
 
-void ShaderProgram::setUniform(const std::string& uniformName, int32 integer) {
+void ShaderProgramOld::setUniform(const std::string& uniformName, int32 integer) {
 	glUniform1i(glGetUniformLocation(m_shaderHandle, uniformName.c_str()), integer);
 }
 
-void ShaderProgram::setUniform(const std::string& uniformName, float32 floatdata) {
+void ShaderProgramOld::setUniform(const std::string& uniformName, float32 floatdata) {
 	glUniform1f(glGetUniformLocation(m_shaderHandle, uniformName.c_str()), floatdata);
 }
 
-void ShaderProgram::setUniform(const std::string& uniformName, const std::vector<glm::vec3>& vectors) {
+void ShaderProgramOld::setUniform(const std::string& uniformName, const std::vector<glm::vec3>& vectors) {
 	GLint location = glGetUniformLocation(m_shaderHandle, uniformName.c_str());
 
 	for (int32 i = 0; i < vectors.size(); i++) {

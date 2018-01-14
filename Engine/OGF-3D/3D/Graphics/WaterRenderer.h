@@ -6,7 +6,7 @@
 
 #include "3D/Graphics/Lighting/LightSource.h"
 
-class ShaderProgram;
+class ShaderProgramOld;
 class Texture;
 
 class WaterRenderer {
@@ -15,7 +15,7 @@ private:
 
 	float32 m_textureTileFactor;
 
-	ShaderProgram* m_waterShader;
+	ShaderProgramOld* m_waterShader;
 	
 	float32 m_y;
 

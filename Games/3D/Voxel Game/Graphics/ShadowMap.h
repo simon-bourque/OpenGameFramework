@@ -5,7 +5,7 @@
 
 #include "glm\glm.hpp"
 
-class ShaderProgram;
+class ShaderProgramOld;
 
 class ShadowMap
 {
@@ -30,7 +30,7 @@ private:
 
 	glm::mat4 m_lightSpaceMVP;
 
-	ShaderProgram* m_shadowShader;
+	ShaderProgramOld* m_shadowShader;
 
 	uint32 m_shadowFBO;
 	uint32 m_depthTexture;

@@ -16,7 +16,7 @@ ShaderCache::~ShaderCache() {
 	m_shaders.clear();
 }
 
-ShaderProgram* ShaderCache::loadShaderProgram(const std::string& name, const std::string& vertPath, const std::string& fragPath) {
+ShaderProgramOld* ShaderCache::loadShaderProgram(const std::string& name, const std::string& vertPath, const std::string& fragPath) {
 	GLint vertShader = compileShader(loadShaderText(vertPath), GL_VERTEX_SHADER);
 	GLint fragShader = compileShader(loadShaderText(fragPath), GL_FRAGMENT_SHADER);
 
@@ -45,12 +45,12 @@ ShaderProgram* ShaderCache::loadShaderProgram(const std::string& name, const std
 	glDeleteShader(vertShader);
 	glDeleteShader(fragShader);
 
-	m_shaders[name] = new ShaderProgram(shaderProgram);
+	m_shaders[name] = new ShaderProgramOld(shaderProgram);
 	
 	return m_shaders[name];
 }
 
-ShaderProgram* ShaderCache::loadShaderProgram(const std::string& name, const std::string& vertPath, const std::string& fragPath, const std::string& geoPath) {
+ShaderProgramOld* ShaderCache::loadShaderProgram(const std::string& name, const std::string& vertPath, const std::string& fragPath, const std::string& geoPath) {
 	GLint vertShader = compileShader(loadShaderText(vertPath), GL_VERTEX_SHADER);
 	GLint geoShader = compileShader(loadShaderText(geoPath), GL_GEOMETRY_SHADER);
 	GLint fragShader = compileShader(loadShaderText(fragPath), GL_FRAGMENT_SHADER);
@@ -83,7 +83,7 @@ ShaderProgram* ShaderCache::loadShaderProgram(const std::string& name, const std
 	glDeleteShader(geoShader);
 	glDeleteShader(fragShader);
 
-	m_shaders[name] = new ShaderProgram(shaderProgram);
+	m_shaders[name] = new ShaderProgramOld(shaderProgram);
 
 	return m_shaders[name];
 }

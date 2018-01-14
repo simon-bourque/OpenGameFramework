@@ -6,7 +6,7 @@
 
 #include "3D/Graphics/Renderer/RenderingContext.h"
 #include "Chunking/ChunkManager.h"
-#include "3D/Graphics/Shader/ShaderProgram.h"
+#include "3D/Graphics/Shader/ShaderProgramOld.h"
 
 #include <iostream>
 

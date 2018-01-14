@@ -5,12 +5,12 @@
 
 #include <GL/glew.h>
 
-#include "3D/Graphics/Shader/ShaderProgram.h"
+#include "3D/Graphics/Shader/ShaderProgramOld.h"
 
 class ShaderCache {
 	friend class RenderingContext;
 private:
-	std::unordered_map<std::string, ShaderProgram*> m_shaders;
+	std::unordered_map<std::string, ShaderProgramOld*> m_shaders;
 
 	ShaderCache();
 	virtual ~ShaderCache();
@@ -18,8 +18,8 @@ private:
 	GLint compileShader(const std::string& source, GLenum type) const;
 public:
 	
-	ShaderProgram* loadShaderProgram(const std::string& name, const std::string& vertPath, const std::string& fragPath);
-	ShaderProgram* loadShaderProgram(const std::string& name, const std::string& vertPath, const std::string& fragPath, const std::string& geoPath);
-	ShaderProgram* getShaderProgram(const std::string& name) { return m_shaders[name]; };
+	ShaderProgramOld* loadShaderProgram(const std::string& name, const std::string& vertPath, const std::string& fragPath);
+	ShaderProgramOld* loadShaderProgram(const std::string& name, const std::string& vertPath, const std::string& fragPath, const std::string& geoPath);
+	ShaderProgramOld* getShaderProgram(const std::string& name) { return m_shaders[name]; };
 };
 

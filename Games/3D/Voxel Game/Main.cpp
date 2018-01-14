@@ -36,7 +36,7 @@ void render();
 // Test cube, will be removed later
 #include "Chunking/Primitives.h"
 void initTestCube();
-ShaderProgram* cubeShader = nullptr;
+ShaderProgramOld* cubeShader = nullptr;
 Model* cubeModel = nullptr;
 Texture* cubeTexture = nullptr;
 
@@ -46,12 +46,12 @@ LightSource* sun = nullptr;
 ShadowMap* shadowMap = nullptr;
 glm::vec3 lightDirection(0.0f, -0.2f, -0.5f);
 
-ShaderProgram* chunkShader = nullptr;
+ShaderProgramOld* chunkShader = nullptr;
 Texture* chunkTexture = nullptr;
 
 void initSkybox();
 unsigned int skyboxVAO, skyboxVBO;
-ShaderProgram* skyboxShader = nullptr;
+ShaderProgramOld* skyboxShader = nullptr;
 Model* skyboxModel = nullptr;
 Texture* skyboxTexture = nullptr;
 

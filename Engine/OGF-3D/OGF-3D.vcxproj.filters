@@ -31,14 +31,14 @@
     <ClCompile Include="3D\Graphics\Shader\ShaderCache.cpp">
       <Filter>3D\Graphics\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="3D\Graphics\Shader\ShaderProgram.cpp">
-      <Filter>3D\Graphics\Shader</Filter>
-    </ClCompile>
     <ClCompile Include="3D\Graphics\Texture.cpp">
       <Filter>3D\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="3D\Graphics\TextureCacheOld.cpp">
       <Filter>3D\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="3D\Graphics\Shader\ShaderProgramOld.cpp">
+      <Filter>3D\Graphics\Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -72,14 +72,14 @@
     <ClInclude Include="3D\Graphics\Shader\ShaderCache.h">
       <Filter>3D\Graphics\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="3D\Graphics\Shader\ShaderProgram.h">
-      <Filter>3D\Graphics\Shader</Filter>
-    </ClInclude>
     <ClInclude Include="3D\Graphics\Texture.h">
       <Filter>3D\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="3D\Graphics\TextureCacheOld.h">
       <Filter>3D\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="3D\Graphics\Shader\ShaderProgramOld.h">
+      <Filter>3D\Graphics\Shader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

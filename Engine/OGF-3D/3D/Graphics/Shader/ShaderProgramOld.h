@@ -9,16 +9,16 @@
 
 #include "Core/Types.h"
 
-class ShaderProgram {
+class ShaderProgramOld {
 	friend class ShaderCache;
 private:
 	GLuint m_shaderHandle;
 
-	ShaderProgram(GLuint shaderHandle);
-	virtual ~ShaderProgram();
+	ShaderProgramOld(GLuint shaderHandle);
+	virtual ~ShaderProgramOld();
 public:
-	ShaderProgram(const ShaderProgram&) = delete;
-	ShaderProgram& operator=(const ShaderProgram&) = delete;
+	ShaderProgramOld(const ShaderProgramOld&) = delete;
+	ShaderProgramOld& operator=(const ShaderProgramOld&) = delete;
 
 	void use() const;
 

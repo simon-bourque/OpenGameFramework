@@ -5,7 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "3D/Graphics/Renderer/RenderingContext.h"
-#include "3D/Graphics/Shader/ShaderProgram.h"
+#include "3D/Graphics/Shader/ShaderProgramOld.h"
 #include "Core/Graphics/Texture.h"
 
 WaterRenderer* WaterRenderer::s_instance = nullptr;

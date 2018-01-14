@@ -23,7 +23,7 @@ LightSource::LightSource(glm::vec3 position, glm::vec3 direction, glm::vec3 colo
 
 void LightSource::initShaders()
 {
-	ShaderProgram* chunkShader = RenderingContext::get()->shaderCache.getShaderProgram("chunk_shader");
+	ShaderProgramOld* chunkShader = RenderingContext::get()->shaderCache.getShaderProgram("chunk_shader");
 	if (m_type == SourceType::POINT) { chunkShader->setUniform("lightPosition", m_position); }
 	chunkShader->setUniform("lightColor", m_color);
 	chunkShader->setUniform("lightDirection", m_direction);

@@ -4,8 +4,8 @@
 
 #include "PlayerController.h"
 
-#include "2D/Scene/SceneManager.h"
-#include "2D/Scene/Scene.h"
+#include "2D/Scene/SceneManager2D.h"
+#include "2D/Scene/Scene2D.h"
 
 #include "2D/Object/Component/CameraComponent.h"
 #include "2D/Object/Component/AABBColliderComponent.h"
@@ -75,7 +75,7 @@ RoguePlayer::RoguePlayer() : m_currentHealth(3), m_maxHealth(3), m_bonusAgility(
 	SpriteComponent* spComp = new SpriteComponent(m_sword, swordTexture);
 	spComp->setVisible(false);
 	m_sword->addComponent(spComp);
-	getSceneManagerInstance()->getCurrentScene().addGameObject(m_sword);
+	getSceneManager2DInstance()->getCurrentScene().addGameObject(m_sword);
 }
 
 void RoguePlayer::tick(float32 delta) {

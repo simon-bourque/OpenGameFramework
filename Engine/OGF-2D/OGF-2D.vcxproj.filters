@@ -72,12 +72,6 @@
     <ClCompile Include="2D\Object\GameObject.cpp">
       <Filter>2D\Object</Filter>
     </ClCompile>
-    <ClCompile Include="2D\Scene\Scene.cpp">
-      <Filter>2D\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="2D\Scene\SceneManager.cpp">
-      <Filter>2D\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="2D\Scene\Tile.cpp">
       <Filter>2D\Scene</Filter>
     </ClCompile>
@@ -135,6 +129,12 @@
     <ClCompile Include="2D\Event.cpp">
       <Filter>2D</Filter>
     </ClCompile>
+    <ClCompile Include="2D\Scene\SceneManager2D.cpp">
+      <Filter>2D\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Scene\Scene2D.cpp">
+      <Filter>2D\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2D\Object\Component\AABBColliderComponent.h">
@@ -188,12 +188,6 @@
     <ClInclude Include="2D\Scene\TileLayer.h">
       <Filter>2D\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="2D\Scene\SceneManager.h">
-      <Filter>2D\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="2D\Scene\Scene.h">
-      <Filter>2D\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="2D\Physics\Collision\CollisionSystem.h">
       <Filter>2D\Physics\Collision</Filter>
     </ClInclude>
@@ -241,6 +235,12 @@
     </ClInclude>
     <ClInclude Include="2D\Event.h">
       <Filter>2D</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Scene\SceneManager2D.h">
+      <Filter>2D\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Scene\Scene2D.h">
+      <Filter>2D\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

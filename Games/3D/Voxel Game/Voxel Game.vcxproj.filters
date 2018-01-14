@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Chunking">
+      <UniqueIdentifier>{8ad5ba14-d9fc-4a53-b490-712e895b10e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Procedural">
+      <UniqueIdentifier>{8b7537d8-55ca-4ffd-a125-964c338c5c18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{17f3e218-80ac-4b2f-85b2-cac92731f5a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Images">
+      <UniqueIdentifier>{ae538493-2f0a-447d-86e5-527209507dc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders">
+      <UniqueIdentifier>{357ca4ff-f100-45a3-8141-a25f1bae5403}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{b2c1dfd0-9642-4791-8a7a-683169ebca50}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Chunking\Block.h">
+      <Filter>Chunking</Filter>
+    </ClInclude>
+    <ClInclude Include="Chunking\Chunk.h">
+      <Filter>Chunking</Filter>
+    </ClInclude>
+    <ClInclude Include="Chunking\ChunkManager.h">
+      <Filter>Chunking</Filter>
+    </ClInclude>
+    <ClInclude Include="Chunking\Primitives.h">
+      <Filter>Chunking</Filter>
+    </ClInclude>
+    <ClInclude Include="Procedural\TerrainBuilder.h">
+      <Filter>Procedural</Filter>
+    </ClInclude>
+    <ClInclude Include="Procedural\TreeBuilder.h">
+      <Filter>Procedural</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\ShadowMap.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Chunking\ChunkManager.cpp">
+      <Filter>Chunking</Filter>
+    </ClCompile>
+    <ClCompile Include="Chunking\Primitives.cpp">
+      <Filter>Chunking</Filter>
+    </ClCompile>
+    <ClCompile Include="Procedural\TerrainBuilder.cpp">
+      <Filter>Procedural</Filter>
+    </ClCompile>
+    <ClCompile Include="Procedural\TreeBuilder.cpp">
+      <Filter>Procedural</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Graphics\ShadowMap.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shaders\chunk_frag.glsl">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\chunk_normals_frag.glsl">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\chunk_normals_geo.glsl">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\chunk_vert.glsl">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\shadowmap_frag.glsl">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\shadowmap_vert.glsl">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\skybox_frag.glsl">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\skybox_vert.glsl">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\test_cube_frag.glsl">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\test_cube_vert.glsl">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\water_frag.glsl">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\water_vert.glsl">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Images\MCLITEbk.tga">
+      <Filter>Resources\Images</Filter>
+    </Image>
+    <Image Include="Resources\Images\MCLITEdn.tga">
+      <Filter>Resources\Images</Filter>
+    </Image>
+    <Image Include="Resources\Images\MCLITEft.tga">
+      <Filter>Resources\Images</Filter>
+    </Image>
+    <Image Include="Resources\Images\MCLITElf.tga">
+      <Filter>Resources\Images</Filter>
+    </Image>
+    <Image Include="Resources\Images\MCLITErt.tga">
+      <Filter>Resources\Images</Filter>
+    </Image>
+    <Image Include="Resources\Images\MCLITEup.tga">
+      <Filter>Resources\Images</Filter>
+    </Image>
+    <Image Include="Resources\Images\test.png">
+      <Filter>Resources\Images</Filter>
+    </Image>
+    <Image Include="Resources\Images\tiles.png">
+      <Filter>Resources\Images</Filter>
+    </Image>
+    <Image Include="Resources\Images\water_dudv.png">
+      <Filter>Resources\Images</Filter>
+    </Image>
+    <Image Include="Resources\Images\water_normal.png">
+      <Filter>Resources\Images</Filter>
+    </Image>
+    <Image Include="Resources\Images\water_normal2.png">
+      <Filter>Resources\Images</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

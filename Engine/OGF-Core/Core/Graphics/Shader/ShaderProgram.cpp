@@ -83,3 +83,32 @@ const Uniform& ShaderProgram::getUniform(const string& name) const {
 	// TODO check if uniform actually exists
 	return m_uniforms.at(name);
 }
+
+void ShaderProgram::use() const {
+	glUseProgram(m_programId);
+}
+
+void ShaderProgram::setUniform(const std::string& uniformName, const Matrix4f& matrix) {
+	glUniformMatrix4fv(glGetUniformLocation(m_programId, uniformName.c_str()), 1, GL_TRUE, matrix.values);
+}
+
+void ShaderProgram::setUniform(const std::string& uniformName, const Vector3f& vector) {
+	glUniform3fv(glGetUniformLocation(m_programId, uniformName.c_str()), 1, vector.values);
+}
+
+void ShaderProgram::setUniform(const std::string& uniformName, int32 integer) {
+	glUniform1i(glGetUniformLocation(m_programId, uniformName.c_str()), integer);
+}
+
+void ShaderProgram::setUniform(const std::string& uniformName, float32 floatdata) {
+	glUniform1f(glGetUniformLocation(m_programId, uniformName.c_str()), floatdata);
+}
+
+void ShaderProgram::setUniform(const std::string& uniformName, const std::vector<Vector3f>& vectors) {
+	GLint location = glGetUniformLocation(m_programId, uniformName.c_str());
+
+	for (int32 i = 0; i < vectors.size(); i++) {
+		Vector3f vector = vectors[i];
+		glUniform3fv(location + i, 1, vector.values);
+	}
+}

@@ -21,8 +21,8 @@
 #include "Physics/Collision/CollisionSystem.h"
 #include "Physics/Collision/QuadTree.h"
 
-#include "Scene/SceneManager.h"
-#include "Scene/Scene.h"
+#include "Scene/SceneManager2D.h"
+#include "Scene/Scene2D.h"
 
 #include "Core/Input/Input.h"
 
@@ -112,15 +112,15 @@ void Debug::renderPerf() const {
 }
 
 void Debug::renderBounds() const {
-	getGraphics2DInstance()->getShapeRenderer().drawRectangle(getSceneManagerInstance()->getCurrentScene().getBounds(), Color::WHITE, false);
+	getGraphics2DInstance()->getShapeRenderer().drawRectangle(getSceneManager2DInstance()->getCurrentScene().getBounds(), Color::WHITE, false);
 }
 
 void Debug::renderQuadTree() const {
-	getSceneManagerInstance()->getCurrentScene().getCollisionSystem()->getQuadTree()->render();
+	getSceneManager2DInstance()->getCurrentScene().getCollisionSystem()->getQuadTree()->render();
 }
 
 void Debug::renderGrid() const {
-	geo::Rectangle& bounds = getSceneManagerInstance()->getCurrentScene().getBounds();
+	geo::Rectangle& bounds = getSceneManager2DInstance()->getCurrentScene().getBounds();
 	Vector2f vertLine(0,-bounds.getHeight());
 	Vector2f horizLine(bounds.getWidth(), 0);
 	

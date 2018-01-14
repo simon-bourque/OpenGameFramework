@@ -39,6 +39,8 @@ public:
 	void addCursorPositionListener(const Delegate<float64, float64>& cursorPositionListener);
 	void addMouseButtonListener(const Delegate<int32, int32, int32>& mouseButtonListener);
 	void addScrollListener(const Delegate<float64, float64>& scrollListener);
+
+	void getCursorPos(float64& xPos, float64& yPos);
 };
 
 SINGLETON_ACCESSOR(Input)

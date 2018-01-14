@@ -195,7 +195,9 @@
     <ClInclude Include="Core\Math\Geometry\Rectangle.h" />
     <ClInclude Include="Core\Math\Geometry\Shape.h" />
     <ClInclude Include="Core\Math\Matrix3f.h" />
+    <ClInclude Include="Core\Math\Matrix4f.h" />
     <ClInclude Include="Core\Math\Vector2f.h" />
+    <ClInclude Include="Core\Math\Vector3f.h" />
     <ClInclude Include="Core\Platform.h" />
     <ClInclude Include="Core\Resource\File\FileReader.h" />
     <ClInclude Include="Core\Resource\Handle.h" />
@@ -232,7 +234,9 @@
     <ClCompile Include="Core\Math\Geometry\Rectangle.cpp" />
     <ClCompile Include="Core\Math\Geometry\Shape.cpp" />
     <ClCompile Include="Core\Math\Matrix3f.cpp" />
+    <ClCompile Include="Core\Math\Matrix4f.cpp" />
     <ClCompile Include="Core\Math\Vector2f.cpp" />
+    <ClCompile Include="Core\Math\Vector3f.cpp" />
     <ClCompile Include="Core\Platform.cpp" />
     <ClCompile Include="Core\Resource\File\Win32FileReader.cpp" />
     <ClCompile Include="Core\Resource\RawImage.cpp" />

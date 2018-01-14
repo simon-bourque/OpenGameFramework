@@ -2,13 +2,13 @@
 
 #include "Core/Core.h"
 
-#include "2D/Scene/Scene.h"
+#include "2D/Scene/Scene2D.h"
 
 #include <vector>
 
 class TileLayer;
 
-class TileScene : public Scene {
+class TileScene : public Scene2D {
 private:
 	std::vector<TileLayer*> m_layers;
 public:

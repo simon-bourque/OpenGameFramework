@@ -1,5 +1,7 @@
 #include "Input.h"
 
+#include "Windows.h"
+
 Input::Input() {}
 
 Input::~Input() {}
@@ -42,4 +44,11 @@ void Input::addMouseButtonListener(const Delegate<int32, int32, int32>& mouseBut
 
 void Input::addScrollListener(const Delegate<float64, float64>& scrollListener) {
 	m_scrollListeners.push_back(scrollListener);
+}
+
+void Input::getCursorPos(float64& xPos, float64& yPos) {
+	POINT cursorPos;
+	GetCursorPos(&cursorPos);
+	xPos = cursorPos.x;
+	yPos = cursorPos.y;
 }

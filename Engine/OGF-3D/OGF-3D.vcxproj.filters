@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="3D\Entities\Entity.cpp">
+      <Filter>3D\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="3D\Graphics\Lighting\LightSource.cpp">
+      <Filter>3D\Graphics\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="3D\Graphics\Meshes\Model.cpp">
+      <Filter>3D\Graphics\Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="3D\Graphics\Meshes\ModelCache.cpp">
+      <Filter>3D\Graphics\Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="3D\Graphics\Renderer\RenderingContext.cpp">
+      <Filter>3D\Graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="3D\Graphics\Camera.cpp">
+      <Filter>3D\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="3D\Graphics\FreeCameraController.cpp">
+      <Filter>3D\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="3D\Graphics\WaterRenderer.cpp">
+      <Filter>3D\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="3D\Objects\Transform.cpp">
+      <Filter>3D\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="3D\Graphics\Shader\ShaderCache.cpp">
+      <Filter>3D\Graphics\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="3D\Graphics\Texture.cpp">
+      <Filter>3D\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="3D\Graphics\TextureCacheOld.cpp">
+      <Filter>3D\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="3D\Graphics\Shader\ShaderProgramOld.cpp">
+      <Filter>3D\Graphics\Shader</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="3D\Entities\Entity.h">
+      <Filter>3D\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="3D\Graphics\Lighting\LightSource.h">
+      <Filter>3D\Graphics\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="3D\Graphics\Meshes\Model.h">
+      <Filter>3D\Graphics\Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="3D\Graphics\Meshes\ModelCache.h">
+      <Filter>3D\Graphics\Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="3D\Graphics\Renderer\RenderingContext.h">
+      <Filter>3D\Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="3D\Graphics\Camera.h">
+      <Filter>3D\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="3D\Graphics\FreeCameraController.h">
+      <Filter>3D\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="3D\Graphics\WaterRenderer.h">
+      <Filter>3D\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="3D\Objects\Transform.h">
+      <Filter>3D\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="3D\Graphics\Shader\ShaderCache.h">
+      <Filter>3D\Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="3D\Graphics\Texture.h">
+      <Filter>3D\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="3D\Graphics\TextureCacheOld.h">
+      <Filter>3D\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="3D\Graphics\Shader\ShaderProgramOld.h">
+      <Filter>3D\Graphics\Shader</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="3D">
+      <UniqueIdentifier>{6ddfc382-a802-4100-9444-bab9391e1305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Entities">
+      <UniqueIdentifier>{9b5d958e-4f65-4c95-b358-d6e3a93db824}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Graphics">
+      <UniqueIdentifier>{e8df643c-0831-483e-a397-addcd6678f3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Objects">
+      <UniqueIdentifier>{965f08cc-07d7-4c4c-85e2-2ae84cfdace7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Physics">
+      <UniqueIdentifier>{cceb971e-be72-4df7-b557-68d406396e55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Graphics\Lighting">
+      <UniqueIdentifier>{3f459414-b4d3-4db5-b2ac-2a521fd7ebf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Graphics\Meshes">
+      <UniqueIdentifier>{11aeb83c-e174-4fa2-a68d-7f526200b6e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Graphics\Renderer">
+      <UniqueIdentifier>{8c3b5fe8-cc18-436f-9213-1967d98db1ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Physics\Collision">
+      <UniqueIdentifier>{909d5b5f-751a-40ea-a980-9d71b982543c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Graphics\Shader">
+      <UniqueIdentifier>{f3690881-dbf7-42ca-a814-2c5d95d3e630}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Scene">
+      <UniqueIdentifier>{e72909b9-1f0f-4223-ab7b-f068b42f9b27}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -168,6 +168,12 @@
     <ClInclude Include="3rdparty\SpookyHash\SpookyV2.h">
       <Filter>3rdparty\SpookyHash</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Math\Matrix4f.h">
+      <Filter>Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Math\Vector3f.h">
+      <Filter>Core\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\EngineAssert.cpp">
@@ -259,6 +265,12 @@
     </ClCompile>
     <ClCompile Include="3rdparty\SpookyHash\SpookyV2.cpp">
       <Filter>3rdparty\SpookyHash</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Math\Matrix4f.cpp">
+      <Filter>Core\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Math\Vector3f.cpp">
+      <Filter>Core\Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

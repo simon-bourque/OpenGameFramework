@@ -7,8 +7,8 @@
 
 #include "Core/Math/Geometry/Rectangle.h"
 
-#include "2D/Scene/SceneManager.h"
-#include "2D/Scene/Scene.h"
+#include "2D/Scene/SceneManager2D.h"
+#include "2D/Scene/Scene2D.h"
 
 GET_COMPONENT_TYPE_DEFINITION(CameraComponent)
 
@@ -36,7 +36,7 @@ void CameraComponent::tick(float32 delta) {
 
 	if (m_sceneBounded) {
 		//Rectangle bounds = game.getScene().getBounds();
-		const geo::Rectangle& bounds = getSceneManagerInstance()->getCurrentScene().getBounds();
+		const geo::Rectangle& bounds = getSceneManager2DInstance()->getCurrentScene().getBounds();
 		const geo::Rectangle& viewPort = m_camera->getViewPort();
 
 		float32 cameraX = m_camera->transform.xPos;

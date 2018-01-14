@@ -13,7 +13,7 @@
 
 #include "Core/Input/Input.h"
 
-#include "2D/Scene/SceneManager.h"
+#include "2D/Scene/SceneManager2D.h"
 
 #include "2D/Object/Component/AABBColliderComponent.h"
 #include "2D/Object/Component/ComponentType.h"
@@ -32,19 +32,19 @@ PlatformerGame::~PlatformerGame() {}
 void PlatformerGame::init() {
 	getInputInstance()->addKeyListener(KeyListener::create<PlatformerGame, &PlatformerGame::onKeyPress>(this));
 	//getSceneManagerInstance()->loadTileLevel("level_0.lvl");
-	getSceneManagerInstance()->loadTileLevel("layer_test.lvl");
-	getSceneManagerInstance()->getCurrentScene().setGravity(9.8f * 4.0f);
+	getSceneManager2DInstance()->loadTileLevel("layer_test.lvl");
+	getSceneManager2DInstance()->getCurrentScene().setGravity(9.8f * 4.0f);
 
 	// Load background
 	TextureRef bgTextureRef = getGraphicsContextInstance()->getTextureCache()->loadTexture("uncolored_forest.tx");
-	getSceneManagerInstance()->getCurrentScene().addBackground(new Background(bgTextureRef));
+	getSceneManager2DInstance()->getCurrentScene().addBackground(new Background(bgTextureRef));
 
 	// load player
 	//m_playerSpawn = Vector2f(0.5f, -10.8f);
 	m_playerSpawn = Vector2f(41.0f, -54.8f);
 
 	Player* player = new Player(this, m_playerSpawn);
-	getSceneManagerInstance()->getCurrentScene().addGameObject(player);
+	getSceneManager2DInstance()->getCurrentScene().addGameObject(player);
 	m_player = player;
 }
 

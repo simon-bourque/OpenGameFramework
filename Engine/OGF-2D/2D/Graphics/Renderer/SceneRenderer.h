@@ -2,6 +2,8 @@
 
 #include "Core/Core.h"
 
+#include "Core/Graphics/TextureCache.h"
+
 #include <memory>
 
 class ShaderProgram;
@@ -25,5 +27,5 @@ public:
 	virtual ~SceneRenderer();
 
 	void renderBackground(const Background& bg) const;
-	void renderTiles(const VertexArrayObject* tileVAO, const Texture* tileSheet, int32 numberOfTiles) const;
+	void renderTiles(const VertexArrayObject* tileVAO, TextureRef tileSheet, int32 numberOfTiles) const;
 };

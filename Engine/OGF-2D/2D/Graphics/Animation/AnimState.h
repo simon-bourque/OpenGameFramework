@@ -1,16 +1,15 @@
 #pragma once
 
 #include "Core/Core.h"
+#include "Core/Graphics/TextureCache.h"
 
-class Texture;
-class RenderSystem;
 class AnimatorComponent;
 
 class AnimState {
 protected:
-	Texture* m_texture;
+	TextureRef m_textureRef;
 public:
-	AnimState(Texture* texture);
+	AnimState(TextureRef textureRef);
 	virtual ~AnimState();
 
 	virtual void onEnter() = 0;

@@ -1,7 +1,7 @@
 #include "AnimState.h"
 
 
-AnimState::AnimState(Texture* texture) : m_texture(texture) {}
+AnimState::AnimState(TextureRef textureRef) : m_textureRef(textureRef) {}
 
 
 AnimState::~AnimState() {}

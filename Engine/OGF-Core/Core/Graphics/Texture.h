@@ -4,12 +4,11 @@
 
 #include <GL/glew.h>
 
-class RawImage;
-
 class Texture
 {
 
 	friend class TextureManager;
+	friend class TextureCache;
 
 public:
 
@@ -50,7 +49,6 @@ public:
 	void bind(Unit unit) const;
 	void unbind() const;
 
-	GLuint getName() const { return m_name; };
 	Target getTarget() const { return m_target; };
 
 	// Prevent copying of texture

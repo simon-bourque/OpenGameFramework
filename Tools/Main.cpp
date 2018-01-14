@@ -7,6 +7,8 @@
 #include <Core/Core.h>
 #include <Core/Math/Geometry/Rectangle.h>
 
+#include "Core/Graphics/Texture.h"
+
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -15,18 +17,18 @@
 #include "ConvertLevel.h"
 #include "Utils.h"
 
-enum Headers : char {
-	TEX2D = 0x1,
-	TEX2DARRAY = 0x2
-};
-
 using namespace std;
 
-void convertImageToTexture2D(const RawImage& img, const string& newPath);
-void convertImageToTexture2DArray(const RawImage& img, const string& newPath, const vector<geo::Rectangle>& dims);
-void convertImageToTexture2DArray(const RawImage& img, const string& newPath, uint32 margin, uint32 spacing, uint32 tileWidth, uint32 tileHeight);
-RawImage loadImage(const string& path);
+void convertTexture(std::queue<string>& args);
+void convertTexture2D(const RawImage& img, ofstream& output, std::queue<string>& args);
+void convertTexture2DArray(const RawImage& img, ofstream& output, std::queue<string>& args);
 
+
+string readArgument(std::queue<string>& args) {
+	string arg(args.front());
+	args.pop();
+	return arg;
+}
 
 int main(int argc, char *argv[]) {
 	std::queue<string> args;
@@ -40,8 +42,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	// Check first argument for type of file
-	string fileType(args.front());
-	args.pop();
+	string fileType(readArgument(args));
 
 	if (fileType == "l") {
 		if (args.empty()) {
@@ -53,123 +54,17 @@ int main(int argc, char *argv[]) {
 		convertLevel(path);
 	}
 	else if (fileType == "t") {
-		if (args.empty()) {
+		if (args.size() < 6) {
 			cout << "Error: invalid number of arguments for texture." << endl;
 			return 1;
 		}
-		string path(args.front());
-		args.pop();
-		RawImage img = loadImage(path);
 
-		// If there are no more arguments assume user wants to convert whole image
-		if (args.empty()) {
-			string originalFileName = path.substr(path.find_last_of("/\\") + 1);
-			string newFileName = originalFileName.substr(0, originalFileName.find_last_of(".")).append(".tx");
-			string newPath = path.substr(0, path.find_last_of("/\\") + 1).append(newFileName);
-
-			convertImageToTexture2D(img, newPath);
+		try {
+			convertTexture(args);
 		}
-		else {
-			if (args.size() != 5) {
-				cout << "Error: invalid number of arguments for texture." << endl;
-				return 1;
-			}
-			string newPath(args.front());
-			args.pop();
-
-			uint32 x = 0;
-			uint32 y = 0;
-			uint32 width = 0;
-			uint32 height = 0;
-
-			try {
-				x = stoul(args.front());
-				args.pop();
-				y = stoul(args.front());
-				args.pop();
-				width = stoul(args.front());
-				args.pop();
-				height = stoul(args.front());
-				args.pop();
-			}
-			catch (std::invalid_argument& ex) {
-				cout << "Error: invalid arguments for texture." << endl;
-				return 1;
-			}
-
-			RawImage subImg = img.getSubImage(x, y, width, height);
-			convertImageToTexture2D(subImg, newPath);
-		}
-	}
-	else if (fileType == "ta") {
-		if (args.size() < 6) {
-			cout << "Error: invalid number of arguments for texture array." << endl;
+		catch (runtime_error& ex) {
+			cout << ex.what() << endl;
 			return 1;
-		}
-		string path(args.front());
-		args.pop();
-		RawImage img = loadImage(path);
-
-		string newPath(args.front());
-		args.pop();
-
-		if (args.front() == "auto") {
-			args.pop();
-			if (args.size() == 4) {
-				uint32 margin = 0;
-				uint32 spacing = 0;
-				uint32 tileWidth = 0;
-				uint32 tileHeight = 0;
-				try {
-					margin = stoul(args.front());
-					args.pop();
-					spacing = stoul(args.front());
-					args.pop();
-					tileWidth = stoul(args.front());
-					args.pop();
-					tileHeight = stoul(args.front());
-					args.pop();
-				}
-				catch (std::invalid_argument& ex) {
-					cout << "Error: invalid arguments for texture array." << endl;
-					return 1;
-				}
-
-				convertImageToTexture2DArray(img, newPath, margin, spacing, tileWidth, tileHeight);
-			}
-			else {
-				cout << "Error: invalid number of arguments for texture array." << endl;
-				return 1;
-			}
-		}
-		else {
-			std::vector<geo::Rectangle> dims;
-
-			while (!args.empty()) {
-				if (args.size() >= 4) {
-					try {
-						uint32 x = stoul(args.front());
-						args.pop();
-						uint32 y = stoul(args.front());
-						args.pop();
-						uint32 width = stoul(args.front());
-						args.pop();
-						uint32 height = stoul(args.front());
-						args.pop();
-						dims.push_back(geo::Rectangle(x, y, width, height));
-					}
-					catch (std::invalid_argument& ex) {
-						cout << "Error: invalid arguments for texture array." << endl;
-						return 1;
-					}
-				}
-				else {
-					cout << "Error: invalid number of arguments for texture array." << endl;
-					return 1;
-				}
-			}
-
-			convertImageToTexture2DArray(img, newPath, dims);
 		}
 	}
 	else {
@@ -180,148 +75,188 @@ int main(int argc, char *argv[]) {
 	return 0;
 }
 
-RawImage loadImage(const string& path) {
+Texture::Target stringToTarget(const string& str) {
+	if (str == "2d") { return Texture::Target::TEXTURE_2D; }
+	if (str == "2da") { return Texture::Target::TEXTURE_2D_ARRAY; }
+	throw std::runtime_error("Error: invalid texture target.");
+}
+
+Texture::Filter stringToFilter(const string& str) {
+	if (str == "n") { return Texture::Filter::NEAREST_NEIGHBOR; }
+	if (str == "l") { return Texture::Filter::LINEAR; }
+	throw std::runtime_error("Error: invalid texture filter.");
+}
+
+Texture::Wrap stringToWrap(const string& str) {
+	if (str == "r") { return Texture::Wrap::REPEAT; }
+	if (str == "mr") { return Texture::Wrap::MIRRORED_REPEAT; }
+	if (str == "ce") { return Texture::Wrap::CLAMP_TO_EDGE; }
+	if (str == "cb") { return Texture::Wrap::CLAMP_TO_BORDER; }
+	throw std::runtime_error("Error: invalid texture wrap.");
+}
+
+void convertTexture(std::queue<string>& args) {
+	string srcFile(readArgument(args));
+	string destFile(readArgument(args));
+
+	// Load image data
 	int width = 0;
 	int height = 0;
 	int channels = 0;
-	unsigned char* data = stbi_load(path.c_str(), &width, &height, &channels, 4);
+	unsigned char* data = stbi_load(srcFile.c_str(), &width, &height, &channels, 4);
 
 	if (!data) {
 		const char* reason = stbi_failure_reason();
-		throw std::runtime_error("Failed to load texture \'" + path + "\': " + reason);
+		throw std::runtime_error("Failed to load texture \'" + srcFile + "\': " + reason);
 	}
 
 	RawImage img(data, width, height, channels);
 
 	stbi_image_free(data);
-
-	return std::move(img);
-}
-
-void convertImageToTexture2D(const RawImage& img, const string& newPath) {
-
-	// Convert and save tx file
-	ofstream output(newPath, std::ios_base::out | std::ios_base::binary);
-
-	if (!output) {
-		cout << "Failed to write new texture file." << endl;
-		output.close();
-		return;
-	}
-
-	output.put(TEX2D);
-
-	writeUnsignedInt(output, img.getWidth()); // WIDTH
-	writeUnsignedInt(output, img.getHeight()); // HEIGHT
-	output.put(img.getChannels()); // CHANNELS
-
-	output.write(reinterpret_cast<char*>(img.getData()), img.getSizeInBytes());
-
-	cout << "Done." << endl;
-
-	output.close();
-}
-
-void convertImageToTexture2DArray(const RawImage& img, const string& newPath, const vector<geo::Rectangle>& dims) {
 	
-	RawImage* imgs = new RawImage[dims.size()];
+	Texture::Target target = stringToTarget(readArgument(args));
+	Texture::Filter filter = stringToFilter(readArgument(args));
+	Texture::Wrap wrapS = stringToWrap(readArgument(args));
+	Texture::Wrap wrapT = stringToWrap(readArgument(args));
 
-	for (int32 i = 0; i < dims.size(); i++) {
-		geo::Rectangle rect = dims[i];
-		imgs[i] = img.getSubImage(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
-	}
-
-	uint32 dataSize = imgs[0].getWidth() * imgs[0].getHeight() * imgs[0].getChannels() * dims.size();
-	uint8* data = new uint8[dataSize];
-
-	for (int32 i = 0; i < dims.size(); i++) {
-		for (int32 j = 0; j < imgs[i].getSizeInBytes(); j++) {
-			data[(i * imgs[i].getSizeInBytes()) + j] = imgs[i].getData()[j];
-		}
-	}
-
-	// Convert and save tx file
-	ofstream output(newPath, std::ios_base::out | std::ios_base::binary);
-
+	ofstream output(destFile, std::ios_base::out | std::ios_base::binary);
 	if (!output) {
 		cout << "Failed to write new texture file." << endl;
 		output.close();
-		delete[] imgs;
-		delete[] data;
-		return;
 	}
 
-	output.put(TEX2DARRAY);
-
-	writeUnsignedInt(output, imgs[0].getWidth()); // WIDTH
-	writeUnsignedInt(output, imgs[0].getHeight()); // HEIGHT
-	output.put(imgs[0].getChannels()); // CHANNELS
-	writeUnsignedInt(output, dims.size()); // DEPTH
-
-	output.write(reinterpret_cast<char*>(data), dataSize);
-
-	cout << "Done." << endl;
+	// TODO write header
+	writeUnsignedInt(output, static_cast<uint32>(target));
+	writeUnsignedInt(output, static_cast<uint32>(filter));
+	writeUnsignedInt(output, static_cast<uint32>(wrapS));
+	writeUnsignedInt(output, static_cast<uint32>(wrapT));
+	output.put(img.getChannels());
+	
+	switch (target) {
+	case Texture::Target::TEXTURE_2D:
+		convertTexture2D(img, output, args);
+		break;
+	case Texture::Target::TEXTURE_2D_ARRAY:
+		convertTexture2DArray(img, output, args);
+		break;
+	default:
+		output.close();
+		throw std::runtime_error("Error: invalid texture target.");
+	}
 
 	output.close();
-
-	delete[] imgs;
-	delete[] data;
 }
 
-void convertImageToTexture2DArray(const RawImage& img, const string& newPath, uint32 margin, uint32 spacing, uint32 tileWidth, uint32 tileHeight) {
-	int32 numTilesPerWidth = (img.getWidth() - (margin * 2) + spacing) / (tileWidth + spacing);
-	int32 numTilesPerHeight = (img.getHeight() - (margin * 2) + spacing) / (tileHeight + spacing);
-
-	int32 maxWidth = (numTilesPerWidth * tileWidth) + (spacing * (numTilesPerWidth - 1)) + margin;
-	int32 maxHeight = (numTilesPerHeight * tileHeight) + (spacing * (numTilesPerHeight - 1)) + margin;
-
-	uint32 numImgs = numTilesPerWidth * numTilesPerHeight;
-	RawImage* imgs = new RawImage[numImgs];
-
-
-	int32 tileCount = 0;
-	for (int32 y = margin; y < maxHeight; y += tileHeight + spacing) {
-		for (int32 x = margin; x < maxWidth; x += tileWidth + spacing) {
-
-			RawImage subImage = img.getSubImage(x, y, tileWidth, tileHeight);
-
-			imgs[tileCount++] = subImage;
-		}
+void convertTexture2D(const RawImage& img, ofstream& output, std::queue<string>& args) {
+	if (args.empty()) {
+		writeUnsignedInt(output, img.getWidth());
+		writeUnsignedInt(output, img.getHeight());
+		output.write(reinterpret_cast<char*>(img.getData()), img.getSizeInBytes());
 	}
-
-	uint32 dataSize = imgs[0].getWidth() * imgs[0].getHeight() * imgs[0].getChannels() * numImgs;
-	uint8* data = new uint8[dataSize];
-
-	for (int32 i = 0; i < numImgs; i++) {
-		for (int32 j = 0; j < imgs[i].getSizeInBytes(); j++) {
-			data[(i * imgs[i].getSizeInBytes()) + j] = imgs[i].getData()[j];
+	else if (args.size() == 4){
+		uint32 x = 0;
+		uint32 y = 0;
+		uint32 width = 0;
+		uint32 height = 0;
+		try {
+			x = stoul(readArgument(args));
+			y = stoul(readArgument(args));
+			width = stoul(readArgument(args));
+			height = stoul(readArgument(args));
 		}
+		catch (std::invalid_argument& ex) {
+			output.close();
+			throw std::runtime_error("Error: invalid texture dimensions for TEXTURE_2D target.");
+		}
+
+		RawImage subImage = img.getSubImage(x, y, width, height);
+
+		writeUnsignedInt(output, subImage.getWidth());
+		writeUnsignedInt(output, subImage.getHeight());
+		output.write(reinterpret_cast<char*>(subImage.getData()), subImage.getSizeInBytes());
 	}
-
-	// Convert and save tx file
-	ofstream output(newPath, std::ios_base::out | std::ios_base::binary);
-
-	if (!output) {
-		cout << "Failed to write new texture file." << endl;
+	else {
 		output.close();
-		delete[] imgs;
-		delete[] data;
-		return;
+		throw std::runtime_error("Error: invalid texture arguments.");
 	}
+}
 
-	output.put(TEX2DARRAY);
+void convertTexture2DArray(const RawImage& img, ofstream& output, std::queue<string>& args) {
+	if (args.front() == "auto") {
+		args.pop();
 
-	writeUnsignedInt(output, imgs[0].getWidth()); // WIDTH
-	writeUnsignedInt(output, imgs[0].getHeight()); // HEIGHT
-	output.put(imgs[0].getChannels()); // CHANNELS
-	writeUnsignedInt(output, numImgs); // DEPTH
+		uint32 margin = 0;
+		uint32 spacing = 0;
+		uint32 tileWidth = 0;
+		uint32 tileHeight = 0;
+		try {
+			margin = stoul(readArgument(args));
+			spacing = stoul(readArgument(args));
+			tileWidth = stoul(readArgument(args));
+			tileHeight = stoul(readArgument(args));
+		}
+		catch (std::invalid_argument& ex) {
+			output.close();
+			throw std::runtime_error("Error: invalid texture dimensions for TEXTURE_2D target.");
+		}
 
-	output.write(reinterpret_cast<char*>(data), dataSize);
+		int32 numTilesPerWidth = (img.getWidth() - (margin * 2) + spacing) / (tileWidth + spacing);
+		int32 numTilesPerHeight = (img.getHeight() - (margin * 2) + spacing) / (tileHeight + spacing);
 
-	cout << "Done." << endl;
+		int32 maxWidth = (numTilesPerWidth * tileWidth) + (spacing * (numTilesPerWidth - 1)) + margin;
+		int32 maxHeight = (numTilesPerHeight * tileHeight) + (spacing * (numTilesPerHeight - 1)) + margin;
 
-	output.close();
+		uint32 numImgs = numTilesPerWidth * numTilesPerHeight;
 
-	delete[] imgs;
-	delete[] data;
+		writeUnsignedInt(output, tileWidth);
+		writeUnsignedInt(output, tileHeight);
+		writeUnsignedInt(output, numImgs);
+
+		int32 tileCount = 0;
+		for (int32 y = margin; y < maxHeight; y += tileHeight + spacing) {
+			for (int32 x = margin; x < maxWidth; x += tileWidth + spacing) {
+
+				RawImage subImage = img.getSubImage(x, y, tileWidth, tileHeight);
+
+				output.write(reinterpret_cast<char*>(subImage.getData()), subImage.getSizeInBytes());
+			}
+		}
+	}
+	else if (!args.empty()) {
+
+		std::vector<geo::Rectangle> dimensions;
+
+		while (!args.empty()) {
+			uint32 x = 0;
+			uint32 y = 0;
+			uint32 width = 0;
+			uint32 height = 0;
+
+			try {
+				x = stoul(readArgument(args));
+				y = stoul(readArgument(args));
+				width = stoul(readArgument(args));
+				height = stoul(readArgument(args));
+
+				dimensions.push_back(geo::Rectangle(x, y, width, height));
+			}
+			catch (std::invalid_argument& ex) {
+				output.close();
+				throw std::runtime_error("Error: invalid texture dimensions.");
+			}
+		}
+
+		writeUnsignedInt(output, dimensions[0].getWidth());
+		writeUnsignedInt(output, dimensions[0].getHeight());
+		writeUnsignedInt(output, dimensions.size());
+
+		for (const geo::Rectangle& dimension : dimensions) {
+			RawImage subImage = img.getSubImage(dimension.getX(), dimension.getY(), dimension.getWidth(), dimension.getHeight());
+			output.write(reinterpret_cast<char*>(subImage.getData()), subImage.getSizeInBytes());
+		}
+	}
+	else {
+		output.close();
+		throw std::runtime_error("Error: invalid texture arguments.");
+	}
 }

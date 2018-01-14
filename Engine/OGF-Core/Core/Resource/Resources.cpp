@@ -9,7 +9,6 @@
 #include "Core/Graphics/Text/Font.h"
 #include "Core/Graphics/Text/Glyph.h"
 //#include "Graphics/RenderSystem.h"
-#include "Core/Graphics/TextureManager.h"
 #include "Core/Graphics/Texture.h"
 #include "Core/Graphics/Coordinates.h"
 

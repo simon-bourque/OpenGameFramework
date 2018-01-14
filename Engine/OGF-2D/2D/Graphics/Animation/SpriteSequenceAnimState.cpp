@@ -7,7 +7,7 @@
 #include "2D/Graphics/Graphics2D.h"
 #include "2D/Graphics/Renderer/SpriteRenderer.h"
 
-SpriteSequenceAnimState::SpriteSequenceAnimState(Texture* texture, const Animation& animation) : AnimState(texture), m_animation(animation) {}
+SpriteSequenceAnimState::SpriteSequenceAnimState(TextureRef textureRef, const Animation& animation) : AnimState(textureRef), m_animation(animation) {}
 
 SpriteSequenceAnimState::~SpriteSequenceAnimState() {}
 
@@ -20,5 +20,5 @@ void SpriteSequenceAnimState::tick(float32 delta) {
 }
 
 void SpriteSequenceAnimState::render(const AnimatorComponent& component) {
-	getGraphics2DInstance()->getSpriteRenderer().renderAnimationFrame(component.getParentObject()->transform, m_animation.getCurrentFrame(), *m_texture, component.isHorizontallyFlipped(), component.isVerticallyFlipped());
+	getGraphics2DInstance()->getSpriteRenderer().renderAnimationFrame(component.getParentObject()->transform, m_animation.getCurrentFrame(), m_textureRef, component.isHorizontallyFlipped(), component.isVerticallyFlipped());
 }

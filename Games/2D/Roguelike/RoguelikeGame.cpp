@@ -12,7 +12,6 @@
 #include "Core/Graphics/Text/Text.h"
 #include "Core/Graphics/Renderer/TextRenderer.h"
 #include "Core/Graphics/Color.h"
-#include "Core/Graphics/TextureManager.h"
 #include "Core/Graphics/Texture.h"
 
 #include "RoguePlayer.h"

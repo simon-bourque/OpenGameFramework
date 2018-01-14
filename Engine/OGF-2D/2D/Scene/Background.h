@@ -2,18 +2,18 @@
 
 #include "Core/Core.h"
 
-class Texture;
+#include "Core/Graphics/TextureCache.h"
 
 class Background {
 private:
-	Texture* m_texture;
+	TextureRef m_textureRef;
 	
 	float32 m_xOffset;
 public:
-	Background(Texture* texture, float32 xOffset = 0.0f);
+	Background(TextureRef textureRef, float32 xOffset = 0.0f);
 	virtual ~Background();
 
-	const Texture* getTexture() const { return m_texture; };
+	TextureRef getTexture() const { return m_textureRef; };
 	float32 getXOffset() const { return m_xOffset; };
 
 	void setXOffset(float32 xOffset) { m_xOffset = xOffset; };

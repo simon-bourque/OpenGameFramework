@@ -2,6 +2,7 @@
 
 #include "Core/Graphics/Shader/ShaderProgram.h"
 #include "Core/Graphics/Memory/VertexArrayObject.h"
+#include "Core/Graphics/GraphicsContext.h"
 #include "Core/Graphics/Texture.h"
 
 #include "2D/Graphics/Graphics2D.h"
@@ -45,7 +46,8 @@ void SceneRenderer::renderBackground(const Background& bg) const {
 	glUseProgram(m_backgroundShaderProgram->getProgramId());
 
 	m_backgroundVAO->bind();
-	bg.getTexture()->bind(Texture::Unit::UNIT_0);
+
+	getGraphicsContextInstance()->getTextureCache()->getTexture(bg.getTexture())->bind(Texture::Unit::UNIT_0);
 
 	glUniform1i(m_backgroundShaderProgram->getUniform("diffuseTexture").getLocation(), 0);
 	glUniform1f(m_backgroundShaderProgram->getUniform("xOffset").getLocation(), bg.getXOffset());
@@ -53,11 +55,12 @@ void SceneRenderer::renderBackground(const Background& bg) const {
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, BACKGROUND_NUM_VERTICES);
 }
 
-void SceneRenderer::renderTiles(const VertexArrayObject* tileVAO, const Texture* tileSheet, int32 numberOfTiles) const {
+void SceneRenderer::renderTiles(const VertexArrayObject* tileVAO, TextureRef tileSheet, int32 numberOfTiles) const {
 	glUseProgram(m_tileShaderProgram->getProgramId());
 
 	tileVAO->bind();
-	tileSheet->bind(Texture::Unit::UNIT_0);
+
+	getGraphicsContextInstance()->getTextureCache()->getTexture(tileSheet)->bind(Texture::Unit::UNIT_0);
 
 	glUniform1i(m_tileShaderProgram->getUniform("tilesheet").getLocation(), 0);
 	glUniformMatrix3fv(m_tileShaderProgram->getUniform("vpMatrix").getLocation(), 1, true, getGraphics2DInstance()->getCamera().getViewProjectionMatrix().values);

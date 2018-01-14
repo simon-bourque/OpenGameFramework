@@ -11,8 +11,8 @@
 #include "glm\glm.hpp"
 
 //Local headers
-#include "TerrainBuilder.h"
-#include "Types.h"
+#include "Procedural/TerrainBuilder.h"
+#include "Core/Types.h"
 #include "Block.h"
 #include "Chunk.h"
 

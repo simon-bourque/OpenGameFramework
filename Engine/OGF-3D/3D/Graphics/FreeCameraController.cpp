@@ -5,7 +5,7 @@
 
 #include <glm/glm.hpp>
 
-glm::vec2 getMouseAxis();
+glm::vec2 getMouseDelta();
 
 FreeCameraController::FreeCameraController(Camera* camera) : 
 	m_camera(camera),
@@ -60,7 +60,7 @@ void FreeCameraController::update(float32 deltaSeconds) {
 	}
 
 	// ###############################
-	glm::vec2 mouseAxis = getMouseAxis() * ROTATE_SPEED;
+	glm::vec2 mouseAxis = getMouseDelta() * ROTATE_SPEED;
 	if (m_rightMouseButtonPressed) {
 
 		if (abs(mouseAxis.x) > abs(mouseAxis.y)) {

@@ -14,10 +14,10 @@ WaterRenderer::WaterRenderer() :
 	m_y(100.0f),
 	m_textureTileFactor(1.0f)
 {
-	m_waterShader = RenderingContext::get()->shaderCache.loadShaderProgram("water_shader", "water_vert.glsl", "water_frag.glsl");
-	m_waterNormal = RenderingContext::get()->textureCache.loadTexture2D("water_normal", "water_normal.png");
-	m_waterNormal2 = RenderingContext::get()->textureCache.loadTexture2D("water_normal2", "water_normal2.png");
-	m_waterDuDv = RenderingContext::get()->textureCache.loadTexture2D("water_dudv", "water_dudv.png");
+	m_waterShader = RenderingContext::get()->shaderCache.loadShaderProgram("water_shader", "Resources/Shaders/water_vert.glsl", "Resources/Shaders/water_frag.glsl");
+	m_waterNormal = RenderingContext::get()->textureCache.loadTexture2D("water_normal", "Resources/Images/water_normal.png");
+	m_waterNormal2 = RenderingContext::get()->textureCache.loadTexture2D("water_normal2", "Resources/Images/water_normal2.png");
+	m_waterDuDv = RenderingContext::get()->textureCache.loadTexture2D("water_dudv", "Resources/Images/water_dudv.png");
 
 	glGenVertexArrays(1, &m_vao);
 	glBindVertexArray(m_vao);

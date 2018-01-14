@@ -5,8 +5,8 @@
 #include "glm/gtc/matrix_transform.hpp"
 
 #include "3D/Graphics/Renderer/RenderingContext.h"
-#include "ChunkManager.h"
-#include "ShaderProgram.h"
+#include "Chunking/ChunkManager.h"
+#include "3D/Graphics/Shader/ShaderProgram.h"
 
 #include <iostream>
 
@@ -16,7 +16,7 @@ ShadowMap::ShadowMap(uint32 width, uint32 height, glm::vec3 lightDirection)
 	:m_width(width)
 	,m_height(height)
 {
-	m_shadowShader = RenderingContext::get()->shaderCache.loadShaderProgram("sm_shader", "shadowmap_vert.glsl", "shadowmap_frag.glsl");
+	m_shadowShader = RenderingContext::get()->shaderCache.loadShaderProgram("sm_shader", "Resources/Shaders/shadowmap_vert.glsl", "Resources/Shaders/shadowmap_frag.glsl");
 	updateMVP(lightDirection);
 	buildFBO();
 }
@@ -85,7 +85,7 @@ void ShadowMap::bindForWriting()
 
 void ShadowMap::bindForReading()
 {
-	glActiveTexture(Texture::UNIT_1);
+	glActiveTexture(static_cast<GLenum>(Texture::Unit::UNIT_1));
 	glBindTexture(GL_TEXTURE_2D, m_depthTexture);
 }
 

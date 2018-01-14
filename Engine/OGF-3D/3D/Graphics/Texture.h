@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 
 class Texture {
-	friend class TextureCache;
+	friend class TextureCacheOld;
 public:
 	enum Type : GLenum {
 		TEXTURE_2D = GL_TEXTURE_2D,

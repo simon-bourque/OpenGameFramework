@@ -1,47 +1,40 @@
-//Standard library
+// Standard library
 #include <iostream>
+#include <vector>
 
-//External includes
+// External includes
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
-//Local headers
-#include "ChunkManager.h"
-#include "Types.h"
+// OGF Core
+#include "Core/Game.h"
+#include "Core/Types.h"
+#include "Core/Time.h"
+#include "Core/Input/Input.h"
+#include "Core/Console/Console.h"
+#include "Core/Window/Window.h"
+#include "Core/Graphics/TextureCache.h"
+#include "Core/Graphics/Texture.h"
 
-#include "ShaderCache.h"
+// OGF 3D
+#include "3D/Graphics/Camera.h"
+#include "3D/Graphics/FreeCameraController.h"
+#include "3D/Graphics/WaterRenderer.h"
+#include "3D/Graphics/Meshes/Model.h"
+#include "3D/Graphics/Meshes/ModelCache.h"
+#include "3D/Graphics/Shader/ShaderCache.h"
+#include "3D/Graphics/Lighting/LightSource.h"
+#include "3D/Graphics/Renderer/RenderingContext.h"
 
-#include "Camera.h"
+//VoxelGame
+#include "Graphics/ShadowMap.h"
+#include "Chunking/ChunkManager.h"
 
-#include "RenderingContext.h"
-
-#include "LightSource.h"
-#include "ShadowMap.h"
-
-#include "ModelCache.h"
-#include "Model.h"
-
-#include "TextureCache.h"
-#include "Texture.h"
-
-#include <vector>
-
-#include "InputManager.h"
-
-#include "FreeCameraController.h"
-#include "Player.h"
-#include "Collision.h"
-
-#include "WaterRenderer.h"
-
-#include "InputManager.h"
-
-GLFWwindow* initGLFW();
 void update(float32 deltaSeconds);
 void render();
 
 // Test cube, will be removed later
-#include "Primitives.h"
+#include "Chunking/Primitives.h"
 void initTestCube();
 ShaderProgram* cubeShader = nullptr;
 Model* cubeModel = nullptr;
@@ -62,15 +55,10 @@ ShaderProgram* skyboxShader = nullptr;
 Model* skyboxModel = nullptr;
 Texture* skyboxTexture = nullptr;
 
-GLFWwindow* gWindow = nullptr;
+Window* gWindow = nullptr;
 
-bool FREE_CAM_ON = false;
 glm::vec3 camPositionVector;
 FreeCameraController* gCameraController;
-bool PLAYER_COLLISION_AABB = true;
-Player* gPlayer;
-
-bool gFullscreen = false;
 
 //#define COMPILE_DRAW_NORMALS // Uncomment me if you want to render normals
 
@@ -85,92 +73,25 @@ int main() {
 
 	try {
 		
-		// Initialize GLFW
-		gWindow = initGLFW();
-
-		// Set fullscreen toggle
-		InputManager::instance()->registerKeyCallback([](int32 key, int32 action) { 
-			if (key == GLFW_KEY_F2 && action == GLFW_PRESS) {
-				if (gFullscreen) {
-					const GLFWvidmode* videoMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-					
-					// Set size slightly smaller than fullscreen and center the window.
-					int32 width = videoMode->width * 0.9;
-					int32 height = videoMode->height * 0.9;
-					int32 x = (videoMode->width - width) / 2.0;
-					int32 y = (videoMode->height - height) / 2.0;
-					
-					glfwSetWindowMonitor(gWindow, NULL, x, y, width, height, 0);
-					gFullscreen = false;
-				}
-				else {
-					GLFWmonitor* monitor = glfwGetPrimaryMonitor();
-					const GLFWvidmode* videoMode = glfwGetVideoMode(monitor);
-					glfwSetWindowMonitor(gWindow, monitor, 0, 0, videoMode->width, videoMode->height, videoMode->refreshRate);
-					gFullscreen = true;
-				}
-			}
-
-			if (key == GLFW_KEY_F3 && action == GLFW_PRESS)
-			{
-				FREE_CAM_ON = !FREE_CAM_ON;
-				if (FREE_CAM_ON)
-					std::cout << "Switched to Controlling FreeCam" << std::endl;
-				else
-				{
-					std::cout << "Switched to Controlling Player" << std::endl;
-					RenderingContext::get()->camera.transform.orient(glm::degrees(-0.0f), 0, 0);
-					gPlayer->transform.orient(glm::degrees(-0.0f), 0, 0);
-				}
-			}
-
-			if (key == GLFW_KEY_F4 && action == GLFW_PRESS)
-			{
-				PLAYER_COLLISION_AABB = !PLAYER_COLLISION_AABB;
-
-				gPlayer->setCollisionMode(PLAYER_COLLISION_AABB ? CollisionMode::AABB : CollisionMode::Sphere);
-
-				if (PLAYER_COLLISION_AABB)
-					std::cout << "Switched to Player Collision AABB testing" << std::endl;
-				else
-					std::cout << "Switched to Player Collision Sphere testing" << std::endl;
-			}
-
-			if (key == GLFW_KEY_HOME && action == GLFW_PRESS)
-			{
-				gPlayer->transform.xPos = playerPosition.x;
-				gPlayer->transform.yPos = playerPosition.y;
-				gPlayer->transform.zPos = playerPosition.z;
-			}
-
-			if (key == GLFW_KEY_C && action == GLFW_PRESS)
-			{
-				std::cout << "Player at (" << gPlayer->transform.xPos << "," << gPlayer->transform.yPos << "," << gPlayer->transform.zPos << ")" << std::endl;
-				std::cout << "currentChunk at (" << gPlayer->getCurrentChunkPosition().x << "," << gPlayer->getCurrentChunkPosition().y << "," << gPlayer->getCurrentChunkPosition().z << ")" << std::endl;
-			}
-		});
-
-		// Close application when esc is pressed
-		InputManager::instance()->registerKeyCallback([](int32 key, int32 action) {
-			if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
-				glfwSetWindowShouldClose(gWindow, 1);
-			}
-		});
+		// Initialize Window and Input
+		Singleton<Console>::init();
+		Singleton<Window>::init("Voxel Game", SCREENWIDTH, SCREENHEIGHT);
+		Singleton<Input>::init();
 
 		RenderingContext::init();
 		RenderingContext::get()->camera.setPerspective(45, SCREENWIDTH/(float32)SCREENHEIGHT);
-		chunkShader = RenderingContext::get()->shaderCache.loadShaderProgram("chunk_shader", "chunk_vert.glsl", "chunk_frag.glsl");
-		chunkTexture = RenderingContext::get()->textureCache.loadTexture2DArray("chunk_texture", 7, "tiles.png");
+		chunkShader = RenderingContext::get()->shaderCache.loadShaderProgram("chunk_shader", "Resources/Shaders/chunk_vert.glsl", "Resources/Shaders/chunk_frag.glsl");
+		chunkTexture = RenderingContext::get()->textureCache.loadTexture2DArray("chunk_texture", 7, "Resources/Images/tiles.png");
 
 		// Load skybox texture
 		CubeMapPaths paths;
-		paths.bk = "MCLITEbk.tga";
-		paths.ft = "MCLITEft.tga";
-		paths.up = "MCLITEup.tga";
-		paths.dn = "MCLITEdn.tga";
-		paths.lf = "MCLITElf.tga";
-		paths.rt = "MCLITErt.tga";
-		skyboxShader = RenderingContext::get()->shaderCache.loadShaderProgram("skybox_shader", "skybox_vert.glsl", "skybox_frag.glsl");
+		paths.bk = "Resources/Images/MCLITEbk.tga";
+		paths.ft = "Resources/Images/MCLITEft.tga";
+		paths.up = "Resources/Images/MCLITEup.tga";
+		paths.dn = "Resources/Images/MCLITEdn.tga";
+		paths.lf = "Resources/Images/MCLITElf.tga";
+		paths.rt = "Resources/Images/MCLITErt.tga";
+		skyboxShader = RenderingContext::get()->shaderCache.loadShaderProgram("skybox_shader", "Resources/Shaders/skybox_vert.glsl", "Resources/Shaders/skybox_frag.glsl");
 		skyboxTexture = RenderingContext::get()->textureCache.loadTextureCubeMap("skybox_texture", paths);
 
 		initSkybox();
@@ -192,11 +113,6 @@ int main() {
 
 	// FreeCam
 	gCameraController = new FreeCameraController(&RenderingContext::get()->camera);
-
-	// Player
-	gPlayer = new Player(&RenderingContext::get()->camera);
-	gPlayer->transform.translateLocal(playerPosition.x, playerPosition.y, playerPosition.z);
-	gPlayer->setWaterHeight(WaterRenderer::get()->getY());
 
 	RenderingContext::get()->camera.transform.translateLocal(playerPosition.x, playerPosition.y, playerPosition.z);
 	RenderingContext::get()->camera.transform.orient(glm::degrees(-0.0f), 0, 0);
@@ -227,21 +143,21 @@ int main() {
 	float64 delta = 0;
 	float64 currentTime = 0;
 
-	while (!glfwWindowShouldClose(gWindow)) {
+	while (!getWindowInstance()->shouldClose()) {
 
 #ifdef DEBUG_BUILD
 		BROFILER_FRAME("MainThread")
 #endif
-		glfwPollEvents();
+		getWindowInstance()->pollEvents();
 
-		currentTime = glfwGetTime();
+		currentTime = getCurrentTime();
 
 		update((float32)delta);
 		render();
 		
-		glfwSwapBuffers(gWindow);
+		getWindowInstance()->swapBuffers();
 
-		delta = glfwGetTime() - currentTime;
+		delta = getCurrentTime() - currentTime;
 
 		counter += delta;
 		if (counter >= 1) {
@@ -255,49 +171,17 @@ int main() {
 	}
 
 	delete gCameraController;
-	delete gPlayer;
 	delete shadowMap;
 	delete sun;
 
 	WaterRenderer::destroy();
 	RenderingContext::destroy();
 
-	glfwTerminate();
-
 	return 0;
 }
 
-GLFWwindow* initGLFW() {
-	if (!glfwInit()) {
-		throw std::runtime_error("Error: failed to initialize GLFW.");
-	}
-
-	glfwDefaultWindowHints();
-	// 8x MSAA
-	glfwWindowHint(GLFW_SAMPLES, 8);
-
-	GLFWwindow* window = nullptr;
-
-	if (gFullscreen) {
-		GLFWmonitor* monitor = glfwGetPrimaryMonitor();
-		const GLFWvidmode* videoMode = glfwGetVideoMode(monitor);
-		SCREENWIDTH = videoMode->width;
-		SCREENHEIGHT = videoMode->height;
-		window = glfwCreateWindow(SCREENWIDTH, SCREENHEIGHT, "Final Project", monitor, nullptr);
-	}
-	else {
-		window = glfwCreateWindow(SCREENWIDTH, SCREENHEIGHT, "Final Project", nullptr, nullptr);
-	}
-
-	if (!window) {
-		glfwTerminate();
-		throw std::runtime_error("Error: failed to initialize window.");
-	}
-
-	glfwMakeContextCurrent(window);
-	glfwSwapInterval(1);
-
-	glfwSetFramebufferSizeCallback(window, [](GLFWwindow* window, int32 width, int32 height) -> void {
+/*
+glfwSetFramebufferSizeCallback(window, [](GLFWwindow* window, int32 width, int32 height) -> void {
 		
 		// Width and height are 0 when we alt-tab while in fullscreen, I have no idea why it's done that way.
 		if (width == 0 || height == 0) {
@@ -310,21 +194,20 @@ GLFWwindow* initGLFW() {
 		SCREENWIDTH = width;
 		SCREENHEIGHT = height;
 		RenderingContext::get()->camera.setPerspective(45, SCREENWIDTH / (float32)SCREENHEIGHT);
-	});
-
-	return window;
-}
+});
+*/
 
 void update(float32 deltaSeconds) {
-	INSTRUMENT_FUNCTION("Update", Profiler::Color::Orchid);
-
 	// Update logic...
-	if(FREE_CAM_ON)
-		gCameraController->update(deltaSeconds);
-	else
-		gPlayer->update(deltaSeconds);
+	gCameraController->update(deltaSeconds);
 
-	glm::vec3 currentChunk = ChunkManager::instance()->getCurrentChunk(gPlayer->getPosition());
+	static glm::vec3 position;
+
+	position = glm::vec3(RenderingContext::get()->camera.transform.xPos,
+		RenderingContext::get()->camera.transform.yPos,
+		RenderingContext::get()->camera.transform.zPos);
+
+	glm::vec3 currentChunk = ChunkManager::instance()->getCurrentChunk(position);
 
 	// Spooky hack lol
 	static glm::vec3 lastChunk(currentChunk.x + 1.0f, currentChunk.y, currentChunk.z);
@@ -334,19 +217,6 @@ void update(float32 deltaSeconds) {
 		lastChunk = currentChunk;
 	}
 	ChunkManager::instance()->uploadQueuedChunk();
-
-	static glm::vec3 position;
-
-	if (FREE_CAM_ON)
-	{
-		position = glm::vec3(RenderingContext::get()->camera.transform.xPos,
-			RenderingContext::get()->camera.transform.yPos,
-			RenderingContext::get()->camera.transform.zPos);
-	}
-	else
-	{
-		position = gPlayer->getPosition();
-	}
 
 	chunkShader->use();
 	chunkShader->setUniform("viewPos", position);
@@ -359,8 +229,6 @@ void update(float32 deltaSeconds) {
 }
 
 void render() {
-	INSTRUMENT_FUNCTION("Render", Profiler::Color::Bisque);
-
 	RenderingContext::get()->prepareFrame();
 
 #ifdef COMPILE_DRAW_NORMALS
@@ -383,13 +251,16 @@ void render() {
 #endif
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-	// Cull chunks not visible to the camera
 	std::vector<const Chunk*> visibleChunks;
+
+	/*
+	// Cull chunks not visible to the camera
 	for (const auto& chunk : chunks) {
 		if (RenderingContext::get()->camera.intersectsFrustum(chunk.second)) {
 			visibleChunks.push_back(&chunk.second);
 		}
 	}
+	*/
 	//std::cout << visibleChunks.size() << std::endl;
 
 	// Second Pass (render refraction texture)
@@ -398,7 +269,7 @@ void render() {
 	chunkShader->setUniform("vpMatrix", RenderingContext::get()->camera.getViewProjectionMatrix());
 	chunkShader->setUniform("waterPlaneHeight", WaterRenderer::get()->getY());
 	chunkShader->setUniform("lightSpaceMatrix", shadowMap->getMVP());
-	chunkTexture->bind(Texture::UNIT_0);
+	chunkTexture->bind(Texture::Unit::UNIT_0);
 	shadowMap->bindForReading();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 #ifdef RENDER_WATER
@@ -449,7 +320,7 @@ void render() {
 	skyboxShader->use();
 	skyboxShader->setUniform("view", glm::mat4(glm::mat3(RenderingContext::get()->camera.getViewMatrix())));
 	skyboxShader->setUniform("projection", RenderingContext::get()->camera.getProjectionMatrix());
-	skyboxTexture->bind(Texture::UNIT_0);
+	skyboxTexture->bind(Texture::Unit::UNIT_0);
 	glBindVertexArray(skyboxVAO);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glDepthFunc(GL_LESS); // set depth function back to default
@@ -464,8 +335,8 @@ void initTestCube() {
 	cube::fill(vertices, uvCoords, normals, indices);
 
 	cubeModel = RenderingContext::get()->modelCache.loadModel("cube", vertices, indices);
-	cubeShader = RenderingContext::get()->shaderCache.loadShaderProgram("test_cube", "test_cube_vert.glsl", "test_cube_frag.glsl");
-	cubeTexture = RenderingContext::get()->textureCache.loadTexture2D("test_cube_texture", "test.png");
+	cubeShader = RenderingContext::get()->shaderCache.loadShaderProgram("test_cube", "Resources/Shaders/test_cube_vert.glsl", "Resources/Shaders/test_cube_frag.glsl");
+	cubeTexture = RenderingContext::get()->textureCache.loadTexture2D("test_cube_texture", "Resources/Images/test.png");
 }
 
 void initSkybox() {
@@ -523,11 +394,11 @@ void initSkybox() {
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 }
 
-glm::vec2 getMouseAxis() {
+glm::vec2 getMouseDelta() {
 	// Poll mouse position
 	float64 mPosX;
 	float64 mPosY;
-	glfwGetCursorPos(gWindow, &mPosX, &mPosY);
+	getInputInstance()->getCursorPos(mPosX, mPosY);
 
 	static float64 lastMousePosX = mPosX;
 	static float64 lastMousePosY = mPosY;

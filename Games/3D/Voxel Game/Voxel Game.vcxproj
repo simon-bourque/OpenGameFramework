@@ -74,14 +74,24 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\OGF-Core;$(SolutionDir)Engine\OGF-3D;$(SolutionDir)dependencies\include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\lib\$(PlatformShortName)\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>FastNoiseLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\OGF-Core;$(SolutionDir)Engine\OGF-3D;$(SolutionDir)dependencies\include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\lib\$(PlatformShortName)\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>FastNoiseLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -90,10 +100,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\OGF-Core;$(SolutionDir)Engine\OGF-3D;$(SolutionDir)dependencies\include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\lib\$(PlatformShortName)\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>FastNoiseLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -103,10 +116,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\OGF-Core;$(SolutionDir)Engine\OGF-3D;$(SolutionDir)dependencies\include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\lib\$(PlatformShortName)\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>FastNoiseLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -115,7 +131,6 @@
     <ClInclude Include="Chunking\ChunkManager.h" />
     <ClInclude Include="Chunking\Primitives.h" />
     <ClInclude Include="Graphics\ShadowMap.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="Procedural\TerrainBuilder.h" />
     <ClInclude Include="Procedural\TreeBuilder.h" />
   </ItemGroup>
@@ -124,7 +139,6 @@
     <ClCompile Include="Chunking\Primitives.cpp" />
     <ClCompile Include="Graphics\ShadowMap.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Procedural\TerrainBuilder.cpp" />
     <ClCompile Include="Procedural\TreeBuilder.cpp" />
   </ItemGroup>
@@ -154,6 +168,14 @@
     <Image Include="Resources\Images\water_dudv.png" />
     <Image Include="Resources\Images\water_normal.png" />
     <Image Include="Resources\Images\water_normal2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Engine\OGF-3D\OGF-3D.vcxproj">
+      <Project>{eff994bd-6321-4980-afb0-52040bcacf68}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Engine\OGF-Core\OGF-Core.vcxproj">
+      <Project>{4b5c8478-ee0c-4cc8-8b7f-15ac2e8b1e47}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

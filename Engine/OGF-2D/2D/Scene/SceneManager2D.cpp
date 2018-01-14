@@ -1,4 +1,4 @@
-#include "SceneManager.h"
+#include "SceneManager2D.h"
 
 #include "Core/Resource/Resources.h"
 
@@ -17,25 +17,25 @@
 static TileScene* loadTileLevelFromDisk(string file);
 const static string LEVEL_PATH = "res/level/";
 
-SceneManager::SceneManager() : m_paused(false) {
-	m_currentScene.reset(new Scene(geo::Rectangle(100,100)));
+SceneManager2D::SceneManager2D() : m_paused(false) {
+	m_currentScene.reset(new Scene2D(geo::Rectangle(100,100)));
 }
 
 
-SceneManager::~SceneManager() {}
+SceneManager2D::~SceneManager2D() {}
 
-void SceneManager::loadTileLevel(const string& file) {
+void SceneManager2D::loadTileLevel(const string& file) {
 	TileScene* scene = loadTileLevelFromDisk(file);
-	m_currentScene.reset(static_cast<Scene*>(scene));
+	m_currentScene.reset(static_cast<Scene2D*>(scene));
 }
 
-void SceneManager::tickCurrentScene(float32 delta) {
+void SceneManager2D::tickCurrentScene(float32 delta) {
 	if (!m_paused) {
 		m_currentScene->tick(delta);
 	}
 }
 
-void SceneManager::renderCurrentScene() {
+void SceneManager2D::renderCurrentScene() {
 	m_currentScene->render();
 }
 

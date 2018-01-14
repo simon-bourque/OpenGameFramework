@@ -48,8 +48,8 @@
     <ClCompile Include="2D\Physics\Collision\Manifold.cpp" />
     <ClCompile Include="2D\Physics\Collision\QuadTree.cpp" />
     <ClCompile Include="2D\Scene\Background.cpp" />
-    <ClCompile Include="2D\Scene\Scene.cpp" />
-    <ClCompile Include="2D\Scene\SceneManager.cpp" />
+    <ClCompile Include="2D\Scene\Scene2D.cpp" />
+    <ClCompile Include="2D\Scene\SceneManager2D.cpp" />
     <ClCompile Include="2D\Scene\Tile.cpp" />
     <ClCompile Include="2D\Scene\TileLayer.cpp" />
     <ClCompile Include="2D\Scene\TileScene.cpp" />
@@ -85,8 +85,8 @@
     <ClInclude Include="2D\Physics\Collision\Manifold.h" />
     <ClInclude Include="2D\Physics\Collision\QuadTree.h" />
     <ClInclude Include="2D\Scene\Background.h" />
-    <ClInclude Include="2D\Scene\Scene.h" />
-    <ClInclude Include="2D\Scene\SceneManager.h" />
+    <ClInclude Include="2D\Scene\Scene2D.h" />
+    <ClInclude Include="2D\Scene\SceneManager2D.h" />
     <ClInclude Include="2D\Scene\Tile.h" />
     <ClInclude Include="2D\Scene\TileLayer.h" />
     <ClInclude Include="2D\Scene\TileScene.h" />

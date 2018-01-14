@@ -3,7 +3,7 @@
 #include "glm\glm.hpp"
 
 //Local headers
-#include "Types.h"
+#include "Core/Types.h"
 
 enum class BlockType
 {

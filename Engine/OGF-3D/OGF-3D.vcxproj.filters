@@ -34,10 +34,10 @@
     <ClCompile Include="3D\Graphics\Shader\ShaderProgram.cpp">
       <Filter>3D\Graphics\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="3D\Graphics\TextureCache.cpp">
+    <ClCompile Include="3D\Graphics\Texture.cpp">
       <Filter>3D\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="3D\Graphics\Texture.cpp">
+    <ClCompile Include="3D\Graphics\TextureCacheOld.cpp">
       <Filter>3D\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
@@ -57,18 +57,6 @@
     <ClInclude Include="3D\Graphics\Renderer\RenderingContext.h">
       <Filter>3D\Graphics\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="3D\Physics\Collision\AABBCollider.h">
-      <Filter>3D\Physics\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="3D\Physics\Collision\Collision.h">
-      <Filter>3D\Physics\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="3D\Physics\Collision\Manifold.h">
-      <Filter>3D\Physics\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="3D\Physics\Collision\SphereCollider.h">
-      <Filter>3D\Physics\Collision</Filter>
-    </ClInclude>
     <ClInclude Include="3D\Graphics\Camera.h">
       <Filter>3D\Graphics</Filter>
     </ClInclude>
@@ -87,10 +75,10 @@
     <ClInclude Include="3D\Graphics\Shader\ShaderProgram.h">
       <Filter>3D\Graphics\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="3D\Graphics\TextureCache.h">
+    <ClInclude Include="3D\Graphics\Texture.h">
       <Filter>3D\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="3D\Graphics\Texture.h">
+    <ClInclude Include="3D\Graphics\TextureCacheOld.h">
       <Filter>3D\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
@@ -124,6 +112,9 @@
     </Filter>
     <Filter Include="3D\Graphics\Shader">
       <UniqueIdentifier>{f3690881-dbf7-42ca-a814-2c5d95d3e630}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D\Scene">
+      <UniqueIdentifier>{e72909b9-1f0f-4223-ab7b-f068b42f9b27}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

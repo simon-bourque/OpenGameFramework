@@ -7,13 +7,11 @@
 #include <vector>
 #include <memory>
 
-class Game;
-class RenderSystem;
 class GameObject;
 class CollisionSystem;
 class Background;
 
-class Scene {
+class Scene2D {
 private:
 	geo::Rectangle m_bounds;
 
@@ -27,8 +25,8 @@ protected:
 	void renderObjects();
 	void renderBackgrounds();
 public:
-	Scene(const geo::Rectangle& bounds);
-	virtual ~Scene();
+	Scene2D(const geo::Rectangle& bounds);
+	virtual ~Scene2D();
 
 	virtual void tick(float32 delta);
 	virtual void render();

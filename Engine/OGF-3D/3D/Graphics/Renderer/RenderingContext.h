@@ -2,7 +2,7 @@
 
 #include "3D/Graphics/Shader/ShaderCache.h"
 #include "3D/Graphics/Meshes/ModelCache.h"
-#include "3D/Graphics/TextureCache.h"
+#include "3D/Graphics/TextureCacheOld.h"
 
 #include "3D/Graphics/WaterRenderer.h"
 
@@ -16,7 +16,7 @@ public:
 
 	ShaderCache shaderCache;
 	ModelCache modelCache;
-	TextureCache textureCache;
+	TextureCacheOld textureCache;
 private: // Member functions
 	RenderingContext();
 	virtual ~RenderingContext();

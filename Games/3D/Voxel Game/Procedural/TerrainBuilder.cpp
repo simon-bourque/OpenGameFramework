@@ -1,6 +1,7 @@
 #include "TerrainBuilder.h"
-#include "ChunkManager.h"
 #include "TreeBuilder.h"
+
+#include "Chunking/ChunkManager.h"
 
 TerrainBuilder::TerrainBuilder(int seed)
 {

@@ -6,8 +6,6 @@
 #include <GL/glew.h>
 #include "Primitives.h"
 
-#include "Profiling.h"
-
 //#define SEPERATE_FOLIAGE_VOXELS	// Comment me to filter out foliage voxels
 
 constexpr int64 encodePosition(int32 x, int32 z)
@@ -59,7 +57,6 @@ DWORD WINAPI cmRoutine(LPVOID p)
 
 void ChunkManager::loadChunks(glm::vec3 currentChunk) 
 {
-	INSTRUMENT_FUNCTION("LoadChunks", Profiler::Color::DarkViolet);
 
 	// Unload out of range chunks
 	unloadChunks(currentChunk);
@@ -168,7 +165,6 @@ glm::vec3 ChunkManager::fetchQueueIn()
 
 void ChunkManager::uploadQueuedChunk()
 {
-	INSTRUMENT_FUNCTION("UploadChunk", Profiler::Color::AliceBlue);
 
 	cmOutMutex.lock();
 	

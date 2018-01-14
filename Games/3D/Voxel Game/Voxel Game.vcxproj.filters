@@ -39,7 +39,6 @@
     <ClInclude Include="Procedural\TreeBuilder.h">
       <Filter>Procedural</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h" />
     <ClInclude Include="Graphics\ShadowMap.h">
       <Filter>Graphics</Filter>
     </ClInclude>
@@ -58,7 +57,6 @@
       <Filter>Procedural</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Graphics\ShadowMap.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>

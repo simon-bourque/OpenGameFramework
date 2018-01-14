@@ -1,4 +1,4 @@
-#include "Game2D.h"
+#include "Game3D.h"
 
 #include "Core/Singleton.h"
 #include "Core/Platform.h"
@@ -9,18 +9,13 @@
 
 #include "Core/Input/Input.h"
 
+#include "3D/Scene/SceneManager3D.h"
+
 #include "Core/Graphics/GraphicsContext.h"
-#include "2D/Graphics/Graphics2D.h"
-
-#include "2D/Scene/SceneManager2D.h"
-
-#include "2D/Physics/Collision/CollisionSystem.h"
-
-#include "2D/Debug.h"
 
 #include <GL/glew.h>
 
-Game2D::Game2D(const string& title, int32 width, int32 height, const geo::Rectangle& viewPort) {
+Game3D::Game3D(const string& title, int32 width, int32 height) {
 	Singleton<Console>::init();
 
 	DEBUG_LOG("Initializing game...");
@@ -32,45 +27,42 @@ Game2D::Game2D(const string& title, int32 width, int32 height, const geo::Rectan
 
 	DEBUG_LOG("Initializing graphics...");
 	Singleton<GraphicsContext>::init();
-	Singleton<Graphics2D>::init(Camera(viewPort));
 
 	DEBUG_LOG("Initializing scene manager...");
-	Singleton<SceneManager2D>::init();
-//
-//	//DEBUG_LOG("Initializing sound engine...");
-//	//SoundEngine::init();
-//
+	Singleton<SceneManager3D>::init();
+	//
+	//	//DEBUG_LOG("Initializing sound engine...");
+	//	//SoundEngine::init();
+	//
 #ifdef DEBUG_BUILD
 	Singleton<Debug>::init();
 #endif
 }
 
-Game2D::~Game2D() {
+Game3D::~Game3D() {
 	DEBUG_LOG("Destroying game");
 #ifdef DEBUG_BUILD
 	Singleton<Debug>::destroy();
 #endif
-//	//SoundEngine::destroy();
-	Singleton<SceneManager2D>::destroy();
-	Singleton<Graphics2D>::destroy();
+	//	//SoundEngine::destroy();
 	Singleton<GraphicsContext>::destroy();
 	Singleton<Input>::destroy();
 	Singleton<Window>::destroy();
 	Singleton<Console>::destroy();
 }
 
-void Game2D::tick(float32 deltaSeconds) {
-	getSceneManager2DInstance()->tickCurrentScene(deltaSeconds);
-	getSceneManager2DInstance()->getCurrentScene().getCollisionSystem()->narrowScan();
+void Game3D::tick(float32 deltaSeconds) {
+	getSceneManager3DInstance()->tickCurrentScene(deltaSeconds);
+	getSceneManager3DInstance()->getCurrentScene().getCollisionSystem()->narrowScan();
 #ifdef DEBUG_BUILD
 	getDebugInstance()->tick(m_fps);
 #endif
 }
 
-void Game2D::render() {
+void Game3D::render() {
 	glClear(GL_COLOR_BUFFER_BIT);
-	getGraphics2DInstance()->getCamera().updateViewProjectionMatrix();
-	getSceneManager2DInstance()->renderCurrentScene();
+	getGraphics3DInstance()->getCamera().updateViewProjectionMatrix();
+	getSceneManager3DInstance()->renderCurrentScene();
 
 #ifdef DEBUG_BUILD
 	getDebugInstance()->render();

@@ -5,8 +5,8 @@
 #include "Core/Game.h"
 #include "2D/Event.h"
 
-#include "2D/Scene/Scene.h"
-#include "2D/Scene/SceneManager.h"
+#include "2D/Scene/Scene2D.h"
+#include "2D/Scene/SceneManager2D.h"
 #include "2D/Physics/Collision/CollisionSystem.h"
 
 #ifdef DEBUG_BUILD
@@ -33,7 +33,7 @@ AABBColliderComponent::~AABBColliderComponent() {}
 
 void AABBColliderComponent::tick(float32 delta) {
 	resetPosition();
-	getSceneManagerInstance()->getCurrentScene().getCollisionSystem()->addCollider(this);
+	getSceneManager2DInstance()->getCurrentScene().getCollisionSystem()->addCollider(this);
 }
 
 void AABBColliderComponent::resetPosition() {

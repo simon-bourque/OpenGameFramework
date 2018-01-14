@@ -1,4 +1,4 @@
-#include "TextureCache.h"
+#include "TextureCacheOld.h"
 
 #include "3D/Graphics/Texture.h"
 
@@ -7,10 +7,10 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb/stb_image.h"
 
-TextureCache::TextureCache() {}
+TextureCacheOld::TextureCacheOld() {}
 
 
-TextureCache::~TextureCache() {
+TextureCacheOld::~TextureCacheOld() {
 	for (const auto& pair : m_textures) {
 		glDeleteTextures(1, &pair.second->m_texture);
 		delete pair.second;
@@ -18,7 +18,7 @@ TextureCache::~TextureCache() {
 	m_textures.clear();
 }
 
-Texture* TextureCache::loadTexture2D(const std::string& name, const std::string& imgPath) {
+Texture* TextureCacheOld::loadTexture2D(const std::string& name, const std::string& imgPath) {
 	// Load image
 	int32 width = 0;
 	int32 height = 0;
@@ -51,7 +51,7 @@ Texture* TextureCache::loadTexture2D(const std::string& name, const std::string&
 	return m_textures[name];
 }
 
-Texture* TextureCache::loadTexture2DArray(const std::string& name, uint32 numTiles, const std::string& imgPath) {
+Texture* TextureCacheOld::loadTexture2DArray(const std::string& name, uint32 numTiles, const std::string& imgPath) {
 	// Load image
 	int32 width = 0;
 	int32 height = 0;
@@ -84,7 +84,7 @@ Texture* TextureCache::loadTexture2DArray(const std::string& name, uint32 numTil
 	return m_textures[name];
 }
 
-Texture* TextureCache::loadTextureCubeMap(const std::string& name, const CubeMapPaths& imgPaths) {
+Texture* TextureCacheOld::loadTextureCubeMap(const std::string& name, const CubeMapPaths& imgPaths) {
 	// Load images
 	int32 width = 0;
 	int32 height = 0;

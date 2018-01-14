@@ -16,13 +16,13 @@ struct CubeMapPaths {
 	std::string rt; // Right
 };
 
-class TextureCache {
+class TextureCacheOld {
 	friend class RenderingContext;
 private:
 	std::unordered_map<std::string, Texture*> m_textures;
 
-	TextureCache();
-	virtual ~TextureCache();
+	TextureCacheOld();
+	virtual ~TextureCacheOld();
 public:
 
 	Texture* loadTexture2D(const std::string& name, const std::string& imgPath);

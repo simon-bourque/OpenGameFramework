@@ -1,8 +1,8 @@
 #pragma once
 
 #include "FastNoise/FastNoise.h"
-#include "Chunk.h"
-#include "Block.h"
+#include "Chunking/Chunk.h"
+#include "Chunking/Block.h"
 
 #include <vector>
 

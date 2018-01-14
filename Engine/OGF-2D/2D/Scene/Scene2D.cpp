@@ -1,4 +1,4 @@
-#include "Scene.h"
+#include "Scene2D.h"
 
 #include "2D/Object/GameObject.h"
 
@@ -6,11 +6,11 @@
 
 #include "2D/Scene/Background.h"
 
-Scene::Scene(const geo::Rectangle& bounds) : m_bounds(bounds), m_gravity(0.0f) {
+Scene2D::Scene2D(const geo::Rectangle& bounds) : m_bounds(bounds), m_gravity(0.0f) {
 	m_collisionSystem.reset(new CollisionSystem(bounds));
 }
 
-Scene::~Scene() {
+Scene2D::~Scene2D() {
 	for (GameObject* object : m_objects) {
 		delete object;
 	}
@@ -19,26 +19,26 @@ Scene::~Scene() {
 	}
 }
 
-void Scene::tick(float32 delta) {
+void Scene2D::tick(float32 delta) {
 	for (GameObject* object : m_objects) {
 		object->tick(delta);
 	}
 }
 
-void Scene::render() {
+void Scene2D::render() {
 	renderBackgrounds();
 	renderObjects();
 }
 
-void Scene::addGameObject(GameObject* object) {
+void Scene2D::addGameObject(GameObject* object) {
 	m_objects.push_back(object);
 }
 
-void Scene::addBackground(Background* background) {
+void Scene2D::addBackground(Background* background) {
 	m_backgrounds.push_back(background);
 }
 
-void Scene::renderObjects() {
+void Scene2D::renderObjects() {
 	for (GameObject* object : m_objects) {
 		object->render();
 #ifdef DEBUG_BUILD
@@ -47,7 +47,7 @@ void Scene::renderObjects() {
 	}
 }
 
-void Scene::renderBackgrounds() {
+void Scene2D::renderBackgrounds() {
 	for (Background* bg : m_backgrounds) {
 		bg->render();
 	}

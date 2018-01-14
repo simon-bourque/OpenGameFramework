@@ -7,8 +7,8 @@
 
 #include "2D/Physics/Collision/Manifold.h"
 
-#include "2D/Scene/SceneManager.h"
-#include "2D/Scene/Scene.h"
+#include "2D/Scene/SceneManager2D.h"
+#include "2D/Scene/Scene2D.h"
 
 GET_COMPONENT_TYPE_DEFINITION(RigidBodyComponent)
 
@@ -33,7 +33,7 @@ void RigidBodyComponent::stop() {
 void RigidBodyComponent::tick(float32 delta) {
 
 	// Apply Gravity
-	applyForce({0, -getSceneManagerInstance()->getCurrentScene().getGravity() * m_mass});
+	applyForce({0, -getSceneManager2DInstance()->getCurrentScene().getGravity() * m_mass});
 
 	Vector2f acceleration(m_netForce / m_mass);
 

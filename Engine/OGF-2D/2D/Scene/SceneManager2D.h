@@ -4,31 +4,29 @@
 #include "Core/EngineAssert.h"
 #include "Core/Singleton.h"
 
-#include "2D/Scene/Scene.h"
+#include "2D/Scene/Scene2D.h"
 
 #include <memory>
 
-class Game;
-
-class SceneManager {
-	SINGLETON_DECLARATION(SceneManager)
+class SceneManager2D {
+	SINGLETON_DECLARATION(SceneManager2D)
 private:
-	std::unique_ptr<Scene> m_currentScene;
+	std::unique_ptr<Scene2D> m_currentScene;
 
 	bool m_paused;
 public:
-	SceneManager();
-	virtual ~SceneManager();
+	SceneManager2D();
+	virtual ~SceneManager2D();
 
 	void loadTileLevel(const string& file);
 	void tickCurrentScene(float32 delta);
 	void renderCurrentScene();
 
-	const Scene& getCurrentScene() const { return *m_currentScene; };
-	Scene& getCurrentScene() { return *m_currentScene; };
+	const Scene2D& getCurrentScene() const { return *m_currentScene; };
+	Scene2D& getCurrentScene() { return *m_currentScene; };
 
 	bool isPaused() const { return m_paused; };
 	void setPaused(bool paused) { m_paused = paused; };
 };
 
-SINGLETON_ACCESSOR(SceneManager)
+SINGLETON_ACCESSOR(SceneManager2D)

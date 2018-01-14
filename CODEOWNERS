@@ -9,5 +9,9 @@
 # will be requested to review.
 #*.js    @octocat @github/js
 
+# Gabriel
+Engine/OGF-3D/* @Gabbell
+Games/3D/Voxel Game/* @Gabbell
+
 # You can also use email addresses if you prefer.
 #docs/*  docs@example.com

@@ -253,14 +253,14 @@ void render() {
 
 	std::vector<const Chunk*> visibleChunks;
 
-	/*
+	
 	// Cull chunks not visible to the camera
 	for (const auto& chunk : chunks) {
-		if (RenderingContext::get()->camera.intersectsFrustum(chunk.second)) {
-			visibleChunks.push_back(&chunk.second);
-		}
+		//if (RenderingContext::get()->camera.intersectsFrustum(chunk.second)) {
+		visibleChunks.push_back(&chunk.second);
+		//}
 	}
-	*/
+	
 	//std::cout << visibleChunks.size() << std::endl;
 
 	// Second Pass (render refraction texture)

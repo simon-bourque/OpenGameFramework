@@ -3,6 +3,8 @@
 #include "Core/Core.h"
 #include "Core/Platform.h"
 
+//#include "Core/EngineAssert.h"
+
 int main() {
 	//ASSERT(false, "Test message");
 	try {

@@ -5,28 +5,25 @@
 
 #include "Windows.h"
 #include <cstdlib>
+#include <memory>
+#include <sstream>
 
 #define ID_BREAK 150
 #define ID_TEXT 200
 #define ID_IGNORE 250
 #define ID_TERMINATE 300
 
-LPWORD lpwAlign(LPWORD lpIn)
-{
-	//ULONG ul;
+union DialogueBuffer {
+	void* ptr;
+	LPDLGTEMPLATE templatePtr;
+	LPDLGITEMTEMPLATE itemTemplatePtr;
+	LPWORD longPtr;
+	LPWSTR wideStringPtr;
+};
 
-	//ul = (ULONG)lpIn;
-	//ul++;
-	//ul >>= 1;
-	//ul <<= 1;
 
-	ULONG ul;
-	ul = (ULONG)lpIn;
-	if (ul % 4) {
-		ul += (4 - (ul % 4));
-	}
-	return (LPWORD)ul;
-}
+static void addButtonToDialogue(DialogueBuffer& buffer, size_t& space, int16 x, int16 y, WORD id, const wchar_t* label, uint32 labelLength);
+static void addTextToDialogue(DialogueBuffer& buffer, size_t& space, int16 x, int16 y, const wchar_t* text, uint32 textLength);
 
 INT_PTR CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 	switch (uMsg)
@@ -46,142 +43,106 @@ INT_PTR CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lPara
 }
 
 bool showAssertDialogWindows(const string& msg, const string& fileName, uint32 lineNumber) {
-	HGLOBAL hgbl;
-	LPDLGTEMPLATE templatePtr;
-	LPDLGITEMTEMPLATE itemPtr;
-	LPWORD longPtr;
-	LPWSTR stringPtr;
-	LRESULT ret;
-	int32 nchar;
+	const static size_t BUFF_SIZE = 1024;
 
-	hgbl = GlobalAlloc(GMEM_ZEROINIT, 1024);
-	if (!hgbl)
+	// Init buffer
+	HGLOBAL globalHandle = GlobalAlloc(GMEM_ZEROINIT, BUFF_SIZE);
+	if (globalHandle == NULL) {
 		return false;
-
-	//setupDialogTemplate(hgbl);
-	templatePtr = (LPDLGTEMPLATE)GlobalLock(hgbl);
-
-	// Define a dialog box
-	templatePtr->style = WS_POPUP | WS_BORDER | DS_MODALFRAME | WS_CAPTION | DS_CENTER;
-	templatePtr->cdit = 4;         // Number of controls
-	templatePtr->x = 0;
-	templatePtr->y = 0;
-	templatePtr->cx = 350;
-	templatePtr->cy = 200;
-
-	longPtr = (LPWORD)(templatePtr + 1);
-	*longPtr++ = 0;             // No menu
-	*longPtr++ = 0;             // Predefined dialog box class (by default)
-
-	stringPtr = (LPWSTR)longPtr;
-	nchar = MultiByteToWideChar(CP_ACP, 0, "Assert", -1, stringPtr, 50);
-	longPtr += nchar;
-
-
-	// Break button ---------------------------------------------------------------------------
-	longPtr = lpwAlign(longPtr);    // Align DLGITEMTEMPLATE on DWORD boundary
-	itemPtr = (LPDLGITEMTEMPLATE)longPtr;
-	itemPtr->x = 55;
-	itemPtr->y = 10;
-	itemPtr->cx = 40;
-	itemPtr->cy = 20;
-	itemPtr->id = ID_BREAK;    // Help button identifier
-	itemPtr->style = WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON;
-
-	longPtr = (LPWORD)(itemPtr + 1);
-	*longPtr++ = 0xFFFF;
-	*longPtr++ = 0x0080;        // Button class atom
-
-	stringPtr = (LPWSTR)longPtr;
-	nchar = MultiByteToWideChar(CP_ACP, 0, "Break", -1, stringPtr, 50);
-	longPtr += nchar;
-	*longPtr++ = 0;             // No creation data
-
-	
-	// Ignore button ---------------------------------------------------------------------------
-	longPtr = lpwAlign(longPtr);    // Align DLGITEMTEMPLATE on DWORD boundary
-	itemPtr = (LPDLGITEMTEMPLATE)longPtr;
-	itemPtr->x = 95;
-	itemPtr->y = 10;
-	itemPtr->cx = 40;
-	itemPtr->cy = 20;
-	itemPtr->id = ID_IGNORE;    // Help button identifier
-	itemPtr->style = WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON;
-
-	longPtr = (LPWORD)(itemPtr + 1);
-	*longPtr++ = 0xFFFF;
-	*longPtr++ = 0x0080;        // Button class atom
-
-	stringPtr = (LPWSTR)longPtr;
-	nchar = MultiByteToWideChar(CP_ACP, 0, "Ignore", -1, stringPtr, 50);
-	longPtr += nchar;
-	*longPtr++ = 0;             // No creation data
-
-	
-	// Terminate button ---------------------------------------------------------------------------
-	longPtr = lpwAlign(longPtr);    // Align DLGITEMTEMPLATE on DWORD boundary
-	itemPtr = (LPDLGITEMTEMPLATE)longPtr;
-	itemPtr->x = 135;
-	itemPtr->y = 10;
-	itemPtr->cx = 40;
-	itemPtr->cy = 20;
-	itemPtr->id = ID_TERMINATE;    // Help button identifier
-	itemPtr->style = WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON;
-
-	longPtr = (LPWORD)(itemPtr + 1);
-	*longPtr++ = 0xFFFF;
-	*longPtr++ = 0x0080;        // Button class atom
-
-	stringPtr = (LPWSTR)longPtr;
-	nchar = MultiByteToWideChar(CP_ACP, 0, "Terminate", -1, stringPtr, 50);
-	longPtr += nchar;
-	*longPtr++ = 0;             // No creation data
-
-	
-	// Text ---------------------------------------------------------------------------
-	longPtr = lpwAlign(longPtr);    // Align DLGITEMTEMPLATE on DWORD boundary
-	itemPtr = (LPDLGITEMTEMPLATE)longPtr;
-	itemPtr->x = 10;
-	itemPtr->y = 55;
-	itemPtr->cx = 100;
-	itemPtr->cy = 20;
-	itemPtr->id = ID_TEXT;    // Text identifier
-	itemPtr->style = WS_CHILD | WS_VISIBLE | SS_LEFT;
-
-	longPtr = (LPWORD)(itemPtr + 1);
-	*longPtr++ = 0xFFFF;
-	*longPtr++ = 0x0082;        // Static class
-
-	// Convert string to unicode
-	string finalMessage(fileName.substr(fileName.find_last_of("/\\") + 1));
-	finalMessage.append(" : ");
-	finalMessage.append(std::to_string(lineNumber));
-	finalMessage.append(" - ");
-	finalMessage.append(msg);
-	uint32 size = finalMessage.size() + 1;
-
-	const char* cString = finalMessage.c_str();
-	wchar_t* newString = new wchar_t[size];
-	nchar = MultiByteToWideChar(CP_ACP, 0, cString, -1, newString, size);
-
-	stringPtr = (LPWSTR)longPtr;
-	for (uint32 i = 0; i < size; i++) {
-		*stringPtr++ = newString[i];
 	}
-	//for (stringPtr = (LPWSTR)longPtr; *stringPtr++ = (WCHAR)*newString++;);
-	longPtr = (LPWORD)stringPtr;
-	*longPtr++ = 0;             // No creation data
-	delete[] newString;
 
-	GlobalUnlock(hgbl);
-	ret = DialogBoxIndirect(NULL, (LPDLGTEMPLATE)hgbl, NULL, (DLGPROC)DialogProc);
-	GlobalFree(hgbl);
+	DialogueBuffer buffer;
 
-	if (ret == ID_TERMINATE) {
+	buffer.ptr = GlobalLock(globalHandle);
+
+	if (buffer.ptr == nullptr) {
+		return false;
+	}
+
+	// Define the dialogue box
+	buffer.templatePtr->style = WS_POPUP | WS_BORDER | DS_MODALFRAME | WS_CAPTION | DS_CENTER;
+	buffer.templatePtr->cdit = 4;         // Number of controls
+	buffer.templatePtr->x = 0;
+	buffer.templatePtr->y = 0;
+	buffer.templatePtr->cx = 350;
+	buffer.templatePtr->cy = 200;
+	buffer.templatePtr++;
+
+	*buffer.longPtr++ = 0; // No menu
+	*buffer.longPtr++ = 0; // Predefined dialog box class (by default)
+
+	memcpy(buffer.wideStringPtr, L"Assert", 7 * sizeof(wchar_t));
+	buffer.wideStringPtr += 7;
+
+	// Calculate space left
+	size_t space = BUFF_SIZE - sizeof(LPDLGTEMPLATE) - (7 * sizeof(wchar_t)) - (2 * sizeof(WORD));
+
+	// Add buttons
+	addButtonToDialogue(buffer, space, 55, 10, ID_BREAK, L"Break", 5);
+	addButtonToDialogue(buffer, space, 95, 10, ID_IGNORE, L"Ignore", 6);
+	addButtonToDialogue(buffer, space, 135, 10, ID_TERMINATE, L"Terminate", 9);
+
+	// Add text
+	std::wstringstream sstream;
+	sstream << fileName.substr(fileName.find_last_of("/\\") + 1).c_str() << L" : " << lineNumber << L" - " << msg.c_str();
+	addTextToDialogue(buffer, space, 10, 55, sstream.str().c_str(), sstream.str().length());
+
+	// Display dialogue
+	GlobalUnlock(globalHandle);
+	INT_PTR retVal = DialogBoxIndirect(NULL, reinterpret_cast<LPDLGTEMPLATE>(globalHandle), NULL, (DLGPROC)DialogProc);
+
+	// Cleanup
+	GlobalFree(globalHandle);
+
+	if (retVal == ID_TERMINATE) {
 		std::exit(1);
 	}
 
-	return (ret == ID_BREAK);
+	return (retVal == ID_BREAK);
+}
+
+static void addButtonToDialogue(DialogueBuffer& buffer, size_t& space, int16 x, int16 y, WORD id, const wchar_t* label, uint32 labelLength) {
+	const size_t buttonSize = sizeof(LPDLGITEMTEMPLATE) + ((labelLength + 1) * sizeof(wchar_t)) + (sizeof(WORD) * 3);
+
+	if (std::align(alignof(DWORD), buttonSize, buffer.ptr, space)) {
+		buffer.itemTemplatePtr->x = x;
+		buffer.itemTemplatePtr->y = y;
+		buffer.itemTemplatePtr->cx = 40;
+		buffer.itemTemplatePtr->cy = 20;
+		buffer.itemTemplatePtr->id = id;
+		buffer.itemTemplatePtr->style = WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON;
+		buffer.itemTemplatePtr++;
+
+		*buffer.longPtr++ = 0xFFFF;
+		*buffer.longPtr++ = 0x0080;        // Button class atom
+
+		memcpy(buffer.wideStringPtr, label, (labelLength + 1) * sizeof(wchar_t));
+		buffer.wideStringPtr += labelLength + 1;
+
+		*buffer.longPtr++ = 0;             // No creation data
+	}
+}
+
+static void addTextToDialogue(DialogueBuffer& buffer, size_t& space, int16 x, int16 y, const wchar_t* text, uint32 textLength) {
+	const size_t textSize = sizeof(LPDLGITEMTEMPLATE) + ((textLength + 1) * sizeof(wchar_t)) + (sizeof(WORD) * 3);
+
+	if (std::align(alignof(DWORD), textSize, buffer.ptr, space)) {
+		buffer.itemTemplatePtr->x = x;
+		buffer.itemTemplatePtr->y = y;
+		buffer.itemTemplatePtr->cx = 100;
+		buffer.itemTemplatePtr->cy = 20;
+		buffer.itemTemplatePtr->id = ID_TEXT;    // Text identifier
+		buffer.itemTemplatePtr->style = WS_CHILD | WS_VISIBLE | SS_LEFT;
+		buffer.itemTemplatePtr++;
+
+		*buffer.longPtr++ = 0xFFFF;
+		*buffer.longPtr++ = 0x0082;        // Static class
+
+		memcpy(buffer.wideStringPtr, text, (textLength + 1) * sizeof(wchar_t));
+		buffer.wideStringPtr += textLength + 1;
+
+		*buffer.longPtr++ = 0;             // No creation data
+	}
 }
 
 void debugBreakWindows() {

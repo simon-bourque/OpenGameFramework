@@ -7,14 +7,17 @@
 
 #ifdef PLATFORM_WINDOWS
 
-void debugBreakWindows();
+#include <Windows.h>
+
 bool showAssertDialogWindows(const string& msg, const string& fileName, uint32 lineNumber);
 
-#define ASSERT(expr, msg)	if (!expr) { \
-								if (showAssertDialogWindows(msg, __FILE__, __LINE__)) { \
-									debugBreakWindows(); \
+#define ASSERT(expr, msg)	do { \
+								if (!expr) { \
+									if (showAssertDialogWindows(msg, __FILE__, __LINE__)) { \
+											DebugBreak(); \
+									} \
 								} \
-							}
+							} while (0)
 #else
 	#define ASSERT(expr, msg) ((void)0)
 #endif

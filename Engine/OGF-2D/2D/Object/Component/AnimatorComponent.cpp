@@ -2,7 +2,7 @@
 
 #include "2D/Graphics/Animation/AnimState.h"
 
-#include "Core/EngineAssert.h"
+#include "Core/Assert.h"
 #include "2D/Event.h"
 
 GET_COMPONENT_TYPE_DEFINITION(AnimatorComponent)
@@ -27,7 +27,7 @@ void AnimatorComponent::changeState(const string& name) {
 	auto it = m_states.find(name);
 
 	if (it == m_states.end()) {
-		ASSERT(false, "AnimState \"" + name + "\" does not exist. Add AnimState to the AnimatorComponent first.");
+		OGF_ASSERT(false, "AnimState \"%s\" does not exist. Add AnimState to the AnimatorComponent first.", name);
 		return;
 	}
 	m_currentState = it->second;

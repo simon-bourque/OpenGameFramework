@@ -169,8 +169,9 @@
     <ClInclude Include="3rdparty\SpookyHash\SpookyV2.h" />
     <ClInclude Include="Core\Console\Console.h" />
     <ClInclude Include="Core\Core.h" />
+    <ClInclude Include="Core\Debug\Debug.h" />
     <ClInclude Include="Core\Delegate.h" />
-    <ClInclude Include="Core\EngineAssert.h" />
+    <ClInclude Include="Core\Assert.h" />
     <ClInclude Include="Core\Game.h" />
     <ClInclude Include="Core\Graphics\Color.h" />
     <ClInclude Include="Core\Graphics\Coordinates.h" />
@@ -212,7 +213,8 @@
   <ItemGroup>
     <ClCompile Include="3rdparty\SpookyHash\SpookyV2.cpp" />
     <ClCompile Include="Core\Console\Win32Console.cpp" />
-    <ClCompile Include="Core\EngineAssert.cpp" />
+    <ClCompile Include="Core\Debug\Debug.cpp" />
+    <ClCompile Include="Core\Assert.cpp" />
     <ClCompile Include="Core\Game.cpp" />
     <ClCompile Include="Core\Graphics\Color.cpp" />
     <ClCompile Include="Core\Graphics\Coordinates.cpp" />

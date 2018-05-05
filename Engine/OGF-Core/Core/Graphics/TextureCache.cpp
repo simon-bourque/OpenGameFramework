@@ -1,6 +1,6 @@
 #include "TextureCache.h"
 
-#include "Core/EngineAssert.h"
+#include "Core/Assert.h"
 
 #include "Core/Resource/File/FileReader.h"
 

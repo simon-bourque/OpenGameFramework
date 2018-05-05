@@ -3,7 +3,7 @@
 #pragma once
 
 #include "Core/Core.h"
-#include "Core/EngineAssert.h"
+#include "Core/Assert.h"
 #include "Core/Singleton.h"
 
 #include <memory>
@@ -13,8 +13,8 @@ class Game;
 class Font;
 class Text;
 
-class Debug {
-	SINGLETON_DECLARATION(Debug)
+class DebugOLD {
+	SINGLETON_DECLARATION(DebugOLD)
 private:
 	std::unordered_map<string, bool> m_debugFlags;
 
@@ -33,12 +33,12 @@ private:
 	void onMousePress(int32 button, int32 action, int32 mods);
 	void onMouseScroll(float64 xOffset, float64 yOffset);
 
-	Debug();
+	DebugOLD();
 
 	void listFlagCommand(const std::vector<string>& args);
 	void setFlagCommand(const std::vector<string>& args);
 public:
-	virtual ~Debug();
+	virtual ~DebugOLD();
 
 	void tick(int32 fps);
 	void render();
@@ -46,6 +46,6 @@ public:
 	bool flag(const string& flag) const;
 };
 
-SINGLETON_ACCESSOR(Debug)
+SINGLETON_ACCESSOR(DebugOLD)
 
 #endif

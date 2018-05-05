@@ -3,22 +3,14 @@
 #include "Core/Core.h"
 #include "Core/Platform.h"
 
-#include "Core/EngineAssert.h"
+#include "Core/Assert.h"
 
-#include <DbgHelp.h>
+#include "Core/Debug/Debug.h"
 
 int main() {
-	SymSetOptions(SYMOPT_UNDNAME | SYMOPT_DEFERRED_LOADS);
-	HANDLE process = GetCurrentProcess();
-	if (!SymInitialize(process, NULL, TRUE))
-	{
-		// SymInitialize failed
-		DWORD error = GetLastError();
-		printf("SymInitialize returned error : %d\n", error);
-		return 1;
-	}
+	Debug::loadSymbols();
 
-	ASSERT(false, "Test message");
+	OGF_ASSERT(false, "%s:%f Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",  "THE NUMBER IS", 1.5f);
 	try {
 		PlatformerGame game;
 		game.start();
@@ -31,16 +23,7 @@ int main() {
 	}
 	//system("pause");
 
-	if (SymCleanup(process))
-	{
-		// SymCleanup returned success
-	}
-	else
-	{
-		// SymCleanup failed
-		DWORD error = GetLastError();
-		printf("SymCleanup returned error : %d\n", error);
-	}
+	Debug::unloadSymbols();
 
 	return 0;
 }

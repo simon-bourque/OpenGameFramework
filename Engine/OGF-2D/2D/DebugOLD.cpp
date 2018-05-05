@@ -1,6 +1,6 @@
 #ifdef DEBUG_BUILD
 
-#include "Debug.h"
+#include "DebugOLD.h"
 
 #include "Core/Console/Console.h"
 
@@ -32,14 +32,14 @@
 
 #include "Core/Math/Vector2f.h"
 
-Debug::Debug() : 
+DebugOLD::DebugOLD() : 
 	m_zoomIn(false),
 	m_zoomOut(false)
 {
-	getInputInstance()->addKeyListener(KeyListener::create<Debug, &Debug::onKeyPress>(this));
-	getInputInstance()->addCursorPositionListener(CursorPositionListener::create<Debug, &Debug::onMouseMove>(this));
-	getInputInstance()->addMouseButtonListener(MouseButtonListener::create<Debug, &Debug::onMousePress>(this));
-	getInputInstance()->addScrollListener(ScrollListener::create<Debug, &Debug::onMouseScroll>(this));
+	getInputInstance()->addKeyListener(KeyListener::create<DebugOLD, &DebugOLD::onKeyPress>(this));
+	getInputInstance()->addCursorPositionListener(CursorPositionListener::create<DebugOLD, &DebugOLD::onMouseMove>(this));
+	getInputInstance()->addMouseButtonListener(MouseButtonListener::create<DebugOLD, &DebugOLD::onMousePress>(this));
+	getInputInstance()->addScrollListener(ScrollListener::create<DebugOLD, &DebugOLD::onMouseScroll>(this));
 
 	Font* font = getGraphicsContextInstance()->getFontManager()->createFont("font3");
 	m_fpsText = getGraphicsContextInstance()->getTextManager()->createText("debug_fps_text_0", "fps: 00", font, Text::Usage::STREAM);
@@ -56,14 +56,14 @@ Debug::Debug() :
 	m_debugFlags["print_mouse_scroll"] = false;
 	m_debugFlags["print_mouse_pos"] = false;
 
-	getConsoleInstance()->addCommand("setflag", CommandDelegate::create<Debug, &Debug::setFlagCommand>(this));
-	getConsoleInstance()->addCommand("listflag", CommandDelegate::create<Debug, &Debug::listFlagCommand>(this));
+	getConsoleInstance()->addCommand("setflag", CommandDelegate::create<DebugOLD, &DebugOLD::setFlagCommand>(this));
+	getConsoleInstance()->addCommand("listflag", CommandDelegate::create<DebugOLD, &DebugOLD::listFlagCommand>(this));
 }
 
 
-Debug::~Debug() {}
+DebugOLD::~DebugOLD() {}
 
-void Debug::tick(int32 fps) {
+void DebugOLD::tick(int32 fps) {
 	if (m_debugFlags["show_fps"]) {
 		m_fpsText->setText("fps: " + std::to_string(fps));
 	}
@@ -89,7 +89,7 @@ void Debug::tick(int32 fps) {
 	}
 }
 
-void Debug::render() {
+void DebugOLD::render() {
 	if (m_debugFlags["show_fps"]) {
 		renderPerf();
 	}
@@ -107,19 +107,19 @@ void Debug::render() {
 	}
 }
 
-void Debug::renderPerf() const {
+void DebugOLD::renderPerf() const {
 	getGraphicsContextInstance()->getTextRenderer()->renderText(m_fpsText, -0.98f, 0.98f, Color::BLACK);
 }
 
-void Debug::renderBounds() const {
+void DebugOLD::renderBounds() const {
 	getGraphics2DInstance()->getShapeRenderer().drawRectangle(getSceneManager2DInstance()->getCurrentScene().getBounds(), Color::WHITE, false);
 }
 
-void Debug::renderQuadTree() const {
+void DebugOLD::renderQuadTree() const {
 	getSceneManager2DInstance()->getCurrentScene().getCollisionSystem()->getQuadTree()->render();
 }
 
-void Debug::renderGrid() const {
+void DebugOLD::renderGrid() const {
 	geo::Rectangle& bounds = getSceneManager2DInstance()->getCurrentScene().getBounds();
 	Vector2f vertLine(0,-bounds.getHeight());
 	Vector2f horizLine(bounds.getWidth(), 0);
@@ -133,7 +133,7 @@ void Debug::renderGrid() const {
 	}
 }
 
-bool Debug::flag(const string& flag) const {
+bool DebugOLD::flag(const string& flag) const {
 	auto flagIter = m_debugFlags.find(flag);
 
 	if (flagIter != m_debugFlags.end()) {
@@ -144,14 +144,14 @@ bool Debug::flag(const string& flag) const {
 	}
 }
 
-void Debug::listFlagCommand(const std::vector<string>& args) {
+void DebugOLD::listFlagCommand(const std::vector<string>& args) {
 	DEBUG_LOG("---------- FLAGS ----------");
 	for (const auto& pair : m_debugFlags) {
 		DEBUG_LOG(pair.first);
 	}
 }
 
-void Debug::setFlagCommand(const std::vector<string>& args) {
+void DebugOLD::setFlagCommand(const std::vector<string>& args) {
 	uint32 numArgs = args.size();
 	
 	if (numArgs > 2 || numArgs < 1) {
@@ -184,7 +184,7 @@ void Debug::setFlagCommand(const std::vector<string>& args) {
 	}
 }
 
-void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
+void DebugOLD::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
 	if (m_debugFlags["print_key_press"] && action == Actions::PRESS) {
 		string str("KEY: " + std::to_string(key));
 		if (mods) {
@@ -216,14 +216,14 @@ void Debug::onKeyPress(int32 key, int32 scancode, int32 action, int32 mods) {
 	}
 }
 
-void Debug::onMouseMove(float64 xPos, float64 yPos) {
+void DebugOLD::onMouseMove(float64 xPos, float64 yPos) {
 	if (m_debugFlags["print_mouse_pos"]) {
 		string str = std::to_string(xPos) + ", " + std::to_string(yPos);
 		DEBUG_LOG(str);
 	}
 }
 
-void Debug::onMousePress(int32 button, int32 action, int32 mods) {
+void DebugOLD::onMousePress(int32 button, int32 action, int32 mods) {
 	if (m_debugFlags["print_mouse_press"]) {
 		if (button == MouseButtons::MOUSE_BUTTON_LEFT && action == Actions::PRESS) {
 			DEBUG_LOG("LEFT CLICK");
@@ -243,7 +243,7 @@ void Debug::onMousePress(int32 button, int32 action, int32 mods) {
 	}
 }
 
-void Debug::onMouseScroll(float64 xOffset, float64 yOffset) {
+void DebugOLD::onMouseScroll(float64 xOffset, float64 yOffset) {
 	if (m_debugFlags["print_mouse_scroll"]) {
 		string str = std::to_string(xOffset) + ", " + std::to_string(yOffset);
 		DEBUG_LOG(str);

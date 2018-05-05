@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Core/Core.h"
-#include "Core/EngineAssert.h"
+#include "Core/Assert.h"
 #include "Core/Singleton.h"
 
 #include "2D/Scene/Scene2D.h"

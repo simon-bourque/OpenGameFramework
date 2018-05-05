@@ -20,8 +20,8 @@ constexpr uint16 ID_DONT_CARE = 500;
 
 // Styles
 constexpr uint32 STYLE_ITEM = WS_CHILD | WS_VISIBLE;
-constexpr uint32 STYLE_BUTTON = STYLE_ITEM | BS_PUSHBUTTON;
-constexpr uint32 STYLE_DEFAULT_BUTTON = STYLE_ITEM | BS_DEFPUSHBUTTON;
+constexpr uint32 STYLE_BUTTON = STYLE_ITEM | BS_PUSHBUTTON | BS_TEXT;
+constexpr uint32 STYLE_DEFAULT_BUTTON = STYLE_ITEM | BS_DEFPUSHBUTTON | BS_TEXT;
 constexpr uint32 STYLE_EDITABLE_TEXT = STYLE_ITEM | ES_LEFT | ES_READONLY | ES_MULTILINE | WS_VSCROLL | WS_BORDER;
 constexpr uint32 STYLE_STATIC_TEXT = STYLE_ITEM;
 constexpr uint32 STYLE_WHITE_RECT = STYLE_ITEM | SS_WHITERECT;
@@ -32,7 +32,7 @@ constexpr uint16 CLASS_BUTTON = 0x0080;
 constexpr uint16 CLASS_EDIT = 0x0081;
 constexpr uint16 CLASS_STATIC = 0x0082;
 
-static void addButtonToDialog(void** buffer, size_t& space, int16 x, int16 y, WORD id, const wchar_t* text, uint32 textLength, bool isDefButton = false);
+static void addButtonToDialog(void** buffer, size_t& space, int16 x, int16 y, WORD id, DWORD style, const wchar_t* text, uint32 textLength);
 static void addEditableTextToDialog(void** buffer, size_t& space, int16 x, int16 y, const wchar_t* text, uint32 textLength);
 static void addStaticTextToDialog(void** buffer, size_t& space, int16 x, int16 y, const wchar_t* text, uint32 textLength);
 static void addWhiteRectToDialog(void** buffer, size_t& space, int16 x, int16 y);
@@ -120,9 +120,9 @@ bool showAssertDialogWindows(const std::wstring& msg) {
 	size_t space = BUFF_SIZE - sizeof(LPDLGTEMPLATE) - (20 * sizeof(wchar_t)) - (3 * sizeof(WORD));
 
 	// Add buttons
-	addButtonToDialog(&buffer, space, 5, 230, ID_IGNORE, L"Ignore", 6, true);
-	addButtonToDialog(&buffer, space, 60, 230, ID_BREAK, L"Break", 5);
-	addButtonToDialog(&buffer, space, 115, 230, ID_TERMINATE, L"Terminate", 9);
+	addButtonToDialog(&buffer, space, 5, 230, ID_IGNORE, STYLE_BUTTON, L"Ignore", 6);
+	addButtonToDialog(&buffer, space, 60, 230, ID_BREAK, STYLE_BUTTON | (Debug::isDebuggerAttached() ? 0 : WS_DISABLED), L"Break", 5);
+	addButtonToDialog(&buffer, space, 115, 230, ID_TERMINATE, STYLE_BUTTON, L"Terminate", 9);
 
 	addWhiteRectToDialog(&buffer, space, 0, 0);
 	addEditableTextToDialog(&buffer, space, 5, 45, msg.c_str(), msg.length());
@@ -172,8 +172,8 @@ static void addDialogItem(void** buffer, size_t& space, int16 x, int16 y, int16 
 	}
 }
 
-static void addButtonToDialog(void** buffer, size_t& space, int16 x, int16 y, WORD id, const wchar_t* text, uint32 textLength, bool isDefButton) {
-	addDialogItem(buffer, space, x, y, 50, 14, id, (isDefButton) ? STYLE_DEFAULT_BUTTON : STYLE_BUTTON, CLASS_BUTTON, text, textLength);
+static void addButtonToDialog(void** buffer, size_t& space, int16 x, int16 y, WORD id, DWORD style, const wchar_t* text, uint32 textLength) {
+	addDialogItem(buffer, space, x, y, 50, 14, id, style, CLASS_BUTTON, text, textLength);
 }
 
 static void addEditableTextToDialog(void** buffer, size_t& space, int16 x, int16 y, const wchar_t* text, uint32 textLength) {

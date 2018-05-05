@@ -249,5 +249,4 @@ ModelManifest.xml
 !dependencies/lib/x86/Debug
 !dependencies/lib/x86/Release
 
-!Debug.cpp
-!Debug.h
+!Engine/OGF-Core/Core/Debug

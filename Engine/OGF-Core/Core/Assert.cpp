@@ -11,25 +11,32 @@
 
 #include "Core/Debug/Debug.h"
 
-#define ID_BREAK 110
-#define ID_IGNORE 111
-#define ID_TERMINATE 112
-#define ID_EDITABLE_TEXT 113
-#define ID_NO_COMMAND 500
+// IDs
+constexpr uint16 ID_BREAK = 110;
+constexpr uint16 ID_IGNORE = 111;
+constexpr uint16 ID_TERMINATE = 112;
+constexpr uint16 ID_EDITABLE_TEXT = 113;
+constexpr uint16 ID_DONT_CARE = 500;
 
-union DialogBuffer {
-	void* ptr;
-	LPDLGTEMPLATE templatePtr;
-	LPDLGITEMTEMPLATE itemTemplatePtr;
-	LPWORD longPtr;
-	LPWSTR wideStringPtr;
-};
+// Styles
+constexpr uint32 STYLE_ITEM = WS_CHILD | WS_VISIBLE;
+constexpr uint32 STYLE_BUTTON = STYLE_ITEM | BS_PUSHBUTTON;
+constexpr uint32 STYLE_DEFAULT_BUTTON = STYLE_ITEM | BS_DEFPUSHBUTTON;
+constexpr uint32 STYLE_EDITABLE_TEXT = STYLE_ITEM | ES_LEFT | ES_READONLY | ES_MULTILINE | WS_VSCROLL | WS_BORDER;
+constexpr uint32 STYLE_STATIC_TEXT = STYLE_ITEM;
+constexpr uint32 STYLE_WHITE_RECT = STYLE_ITEM | SS_WHITERECT;
+constexpr uint32 STYLE_ICON = STYLE_ITEM | SS_ICON;
 
-static void addButtonToDialog(DialogBuffer& buffer, size_t& space, int16 x, int16 y, WORD id, const wchar_t* label, uint32 labelLength, bool isDefButton = false);
-static void addEditableTextToDialog(DialogBuffer& buffer, size_t& space, int16 x, int16 y, const wchar_t* text, uint32 textLength);
-static void addStaticTextToDialog(DialogBuffer& buffer, size_t& space, int16 x, int16 y, const wchar_t* text, uint32 textLength);
-static void addWhiteRectToDialog(DialogBuffer& buffer, size_t& space, int16 x, int16 y);
-static void addIconToDialog(DialogBuffer& buffer, size_t& space, int16 x, int16 y);
+// Class ordinal values
+constexpr uint16 CLASS_BUTTON = 0x0080;
+constexpr uint16 CLASS_EDIT = 0x0081;
+constexpr uint16 CLASS_STATIC = 0x0082;
+
+static void addButtonToDialog(void** buffer, size_t& space, int16 x, int16 y, WORD id, const wchar_t* text, uint32 textLength, bool isDefButton = false);
+static void addEditableTextToDialog(void** buffer, size_t& space, int16 x, int16 y, const wchar_t* text, uint32 textLength);
+static void addStaticTextToDialog(void** buffer, size_t& space, int16 x, int16 y, const wchar_t* text, uint32 textLength);
+static void addWhiteRectToDialog(void** buffer, size_t& space, int16 x, int16 y);
+static void addIconToDialog(void** buffer, size_t& space, int16 x, int16 y);
 
 INT_PTR CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam) {	
 	switch (uMsg)
@@ -73,52 +80,54 @@ bool showAssertDialogWindows(const std::wstring& msg) {
 		return false;
 	}
 
-	DialogBuffer buffer;
+	void* buffer = nullptr;
 
-	buffer.ptr = GlobalLock(globalHandle);
+	buffer = GlobalLock(globalHandle);
 
-	if (buffer.ptr == nullptr) {
+	if (buffer == nullptr) {
 		return false;
 	}
 
 	// Define the dialogue box
-	buffer.templatePtr->style = WS_POPUP | WS_BORDER | DS_MODALFRAME | WS_CAPTION | DS_CENTER | WS_SYSMENU | DS_MODALFRAME | DS_SHELLFONT;
-	buffer.templatePtr->cdit = 7;         // Number of controls
-	buffer.templatePtr->x = 0;
-	buffer.templatePtr->y = 0;
-	buffer.templatePtr->cx = 350;
-	buffer.templatePtr->cy = 250;
-	buffer.templatePtr++;
+	LPDLGTEMPLATE templatePtr = reinterpret_cast<LPDLGTEMPLATE>(buffer);
+	templatePtr->style = WS_POPUP | WS_BORDER | DS_MODALFRAME | WS_CAPTION | DS_CENTER | WS_SYSMENU | DS_MODALFRAME | DS_SHELLFONT;
+	templatePtr->cdit = 7;         // Number of controls
+	templatePtr->x = 0;
+	templatePtr->y = 0;
+	templatePtr->cx = 350;
+	templatePtr->cy = 250;
+	templatePtr++;
 	
-	*buffer.longPtr++ = 0; // No menu
-	*buffer.longPtr++ = 0; // Predefined dialog box class (by default)
+	LPWORD wordPtr = reinterpret_cast<LPWORD>(templatePtr);
+	*wordPtr++ = 0; // No menu
+	*wordPtr++ = 0; // Predefined dialog box class (by default)
 
-	memcpy(buffer.wideStringPtr, L"Open Game Framework", 20 * sizeof(wchar_t));
-	buffer.wideStringPtr += 20;
+	LPWSTR wideStringPtr = reinterpret_cast<LPWSTR>(wordPtr);
+	memcpy(wideStringPtr, L"Open Game Framework", 20 * sizeof(wchar_t));
+	wideStringPtr += 20;
 
-	*buffer.longPtr++ = 8;
-	memcpy(buffer.wideStringPtr, L"MS Shell Dlg", 13 * sizeof(wchar_t));
-	buffer.wideStringPtr += 13;
+	// Font
+	wordPtr = reinterpret_cast<LPWORD>(wideStringPtr);
+	*wordPtr++ = 8;
 
+	wideStringPtr = reinterpret_cast<LPWSTR>(wordPtr);
+	memcpy(wideStringPtr, L"MS Shell Dlg", 13 * sizeof(wchar_t));
+	wideStringPtr += 13;
+
+	buffer = reinterpret_cast<void*>(wideStringPtr);
+	
 	// Calculate space left
 	size_t space = BUFF_SIZE - sizeof(LPDLGTEMPLATE) - (20 * sizeof(wchar_t)) - (3 * sizeof(WORD));
 
 	// Add buttons
-	addButtonToDialog(buffer, space, 5, 230, ID_IGNORE, L"Ignore", 6, true);
-	addButtonToDialog(buffer, space, 60, 230, ID_BREAK, L"Break", 5);
-	addButtonToDialog(buffer, space, 115, 230, ID_TERMINATE, L"Terminate", 9);
+	addButtonToDialog(&buffer, space, 5, 230, ID_IGNORE, L"Ignore", 6, true);
+	addButtonToDialog(&buffer, space, 60, 230, ID_BREAK, L"Break", 5);
+	addButtonToDialog(&buffer, space, 115, 230, ID_TERMINATE, L"Terminate", 9);
 
-	// Add text
-	//std::wstringstream sstream;
-	//sstream << L"File: " << fileName.c_str() << "\r\n" << "Line: " << lineNumber << "\r\n\r\n" << msg.c_str() << "\r\n\r\n";
-	//for (const std::string& str : stackTrace) {
-	//	sstream << str.c_str() << "\r\n";
-	//}
-
-	addWhiteRectToDialog(buffer, space, 0, 0);
-	addEditableTextToDialog(buffer, space, 5, 45, msg.c_str(), msg.length());
-	addIconToDialog(buffer, space, 10, 10);
-	addStaticTextToDialog(buffer, space, 38, 18, L"Assertion Failed!", 17);
+	addWhiteRectToDialog(&buffer, space, 0, 0);
+	addEditableTextToDialog(&buffer, space, 5, 45, msg.c_str(), msg.length());
+	addIconToDialog(&buffer, space, 10, 10);
+	addStaticTextToDialog(&buffer, space, 38, 18, L"Assertion Failed!", 17);
 
 	// Display dialogue
 	GlobalUnlock(globalHandle);
@@ -135,114 +144,53 @@ bool showAssertDialogWindows(const std::wstring& msg) {
 	return (retVal == ID_BREAK);
 }
 
-static void addButtonToDialog(DialogBuffer& buffer, size_t& space, int16 x, int16 y, WORD id, const wchar_t* label, uint32 labelLength, bool isDefButton) {
-	const size_t buttonSize = sizeof(DLGITEMTEMPLATE) + ((labelLength + 1) * sizeof(wchar_t)) + (sizeof(WORD) * 3);
+static void addDialogItem(void** buffer, size_t& space, int16 x, int16 y, int16 width, int16 height, WORD id, DWORD style, WORD classOrdinalValue, const wchar_t* title, uint32 titleLength) {
+	const size_t itemSize = sizeof(DLGITEMTEMPLATE) + ((titleLength + 1) * sizeof(wchar_t)) + (sizeof(WORD) * 3);
 
-	if (std::align(alignof(DWORD), buttonSize, buffer.ptr, space)) {
-		buffer.itemTemplatePtr->x = x;
-		buffer.itemTemplatePtr->y = y;
-		buffer.itemTemplatePtr->cx = 50;
-		buffer.itemTemplatePtr->cy = 14;
-		buffer.itemTemplatePtr->id = id;
-		buffer.itemTemplatePtr->style = WS_CHILD | WS_VISIBLE | ((isDefButton) ? BS_DEFPUSHBUTTON : BS_PUSHBUTTON);
-		buffer.itemTemplatePtr++;
+	if (std::align(alignof(DWORD), itemSize, *buffer, space)) {
+		LPDLGITEMTEMPLATE itemTemplatePtr = reinterpret_cast<LPDLGITEMTEMPLATE>(*buffer);
+		itemTemplatePtr->x = x;
+		itemTemplatePtr->y = y;
+		itemTemplatePtr->cx = width;
+		itemTemplatePtr->cy = height;
+		itemTemplatePtr->id = id;
+		itemTemplatePtr->style = style;
+		itemTemplatePtr++;
 
-		*buffer.longPtr++ = 0xFFFF;
-		*buffer.longPtr++ = 0x0080;        // Button class atom
+		LPWORD wordPtr = reinterpret_cast<LPWORD>(itemTemplatePtr);
+		*wordPtr++ = 0xFFFF;
+		*wordPtr++ = classOrdinalValue;
 
-		memcpy(buffer.wideStringPtr, label, (labelLength + 1) * sizeof(wchar_t));
-		buffer.wideStringPtr += labelLength + 1;
+		LPWSTR wideStringPtr = reinterpret_cast<LPWSTR>(wordPtr);
+		memcpy(wideStringPtr, title, (titleLength + 1) * sizeof(wchar_t));
+		wideStringPtr += titleLength + 1;
 
-		*buffer.longPtr++ = 0;             // No creation data
+		wordPtr = reinterpret_cast<LPWORD>(wideStringPtr);
+		*wordPtr++ = 0;             // No creation data
+
+		*buffer = reinterpret_cast<void*>(wordPtr);
 	}
 }
 
-static void addEditableTextToDialog(DialogBuffer& buffer, size_t& space, int16 x, int16 y, const wchar_t* text, uint32 textLength) {
-	const size_t textSize = sizeof(DLGITEMTEMPLATE) + (sizeof(wchar_t) * textLength + 1) + (sizeof(WORD) * 3);
-
-	if (std::align(alignof(DWORD), textSize, buffer.ptr, space)) {
-		buffer.itemTemplatePtr->x = x;
-		buffer.itemTemplatePtr->y = y;
-		buffer.itemTemplatePtr->cx = 340;
-		buffer.itemTemplatePtr->cy = 165;
-		buffer.itemTemplatePtr->id = ID_EDITABLE_TEXT;    // Text identifier
-		buffer.itemTemplatePtr->style = WS_CHILD | WS_VISIBLE | ES_LEFT | ES_READONLY | ES_MULTILINE | WS_VSCROLL | WS_BORDER;
-		buffer.itemTemplatePtr++;
-
-		*buffer.longPtr++ = 0xFFFF;
-		*buffer.longPtr++ = 0x0081;        // Edit class
-
-		memcpy(buffer.wideStringPtr, text, (textLength + 1) * sizeof(wchar_t));
-		buffer.wideStringPtr += textLength + 1;
-
-		*buffer.longPtr++ = 0;             // No creation data
-	}
+static void addButtonToDialog(void** buffer, size_t& space, int16 x, int16 y, WORD id, const wchar_t* text, uint32 textLength, bool isDefButton) {
+	addDialogItem(buffer, space, x, y, 50, 14, id, (isDefButton) ? STYLE_DEFAULT_BUTTON : STYLE_BUTTON, CLASS_BUTTON, text, textLength);
 }
 
-static void addStaticTextToDialog(DialogBuffer& buffer, size_t& space, int16 x, int16 y, const wchar_t* text, uint32 textLength) {
-	const size_t textSize = sizeof(DLGITEMTEMPLATE) + (sizeof(wchar_t) * (textLength + 1)) + (sizeof(WORD) * 3);
-
-	if (std::align(alignof(DWORD), textSize, buffer.ptr, space)) {
-		buffer.itemTemplatePtr->x = x;
-		buffer.itemTemplatePtr->y = y;
-		buffer.itemTemplatePtr->cx = 100;
-		buffer.itemTemplatePtr->cy = 20;
-		buffer.itemTemplatePtr->id = ID_NO_COMMAND;    // Text identifier
-		buffer.itemTemplatePtr->style = WS_CHILD | WS_VISIBLE;
-		buffer.itemTemplatePtr++;
-
-		*buffer.longPtr++ = 0xFFFF;
-		*buffer.longPtr++ = 0x0082;        // Static class
-
-		memcpy(buffer.wideStringPtr, text, (textLength + 1) * sizeof(wchar_t));
-		buffer.wideStringPtr += textLength + 1;
-
-		*buffer.longPtr++ = 0;             // No creation data
-	}
+static void addEditableTextToDialog(void** buffer, size_t& space, int16 x, int16 y, const wchar_t* text, uint32 textLength) {
+	addDialogItem(buffer, space, x, y, 340, 165, ID_EDITABLE_TEXT, STYLE_EDITABLE_TEXT, CLASS_EDIT, text, textLength);
 }
 
-static void addWhiteRectToDialog(DialogBuffer& buffer, size_t& space, int16 x, int16 y) {
-	const size_t rectSize = sizeof(DLGITEMTEMPLATE) + sizeof(wchar_t) + (sizeof(WORD) * 3);
-
-	if (std::align(alignof(DWORD), rectSize, buffer.ptr, space)) {
-		buffer.itemTemplatePtr->x = x;
-		buffer.itemTemplatePtr->y = y;
-		buffer.itemTemplatePtr->cx = 500;
-		buffer.itemTemplatePtr->cy = 220;
-		buffer.itemTemplatePtr->id = ID_NO_COMMAND;    // Text identifier
-		buffer.itemTemplatePtr->style = WS_CHILD | WS_VISIBLE | SS_WHITERECT;
-		buffer.itemTemplatePtr++;
-
-		*buffer.longPtr++ = 0xFFFF;
-		*buffer.longPtr++ = 0x0082;        // Static class
-
-		*buffer.wideStringPtr++ = L'\0';
-
-		*buffer.longPtr++ = 0;             // No creation data
-	}
+static void addStaticTextToDialog(void** buffer, size_t& space, int16 x, int16 y, const wchar_t* text, uint32 textLength) {
+	addDialogItem(buffer, space, x, y, 100, 20, ID_DONT_CARE, STYLE_STATIC_TEXT, CLASS_STATIC, text, textLength);
 }
 
-static void addIconToDialog(DialogBuffer& buffer, size_t& space, int16 x, int16 y) {
-	const size_t iconSize = sizeof(DLGITEMTEMPLATE) + (sizeof(WORD) * 5);
-	
-	if (std::align(alignof(DWORD), iconSize, buffer.ptr, space)) {
-		buffer.itemTemplatePtr->x = x;
-		buffer.itemTemplatePtr->y = y;
-		buffer.itemTemplatePtr->cx = SM_CXICON;
-		buffer.itemTemplatePtr->cy = SM_CYICON;
-		buffer.itemTemplatePtr->id = ID_NO_COMMAND;    // Text identifier
-		buffer.itemTemplatePtr->style = WS_CHILD | WS_VISIBLE | SS_ICON;
-		buffer.itemTemplatePtr++;
-	
-		*buffer.longPtr++ = 0xFFFF;
-		*buffer.longPtr++ = 0x0082;        // Static class
-	
-		*buffer.longPtr++ = 0xFFFF;
-		*buffer.longPtr++ = (WORD)IDI_WARNING;
-	
-		*buffer.longPtr++ = 0;             // No creation data
-	}
+static void addWhiteRectToDialog(void** buffer, size_t& space, int16 x, int16 y) {
+	addDialogItem(buffer, space, x, y, 500, 220, ID_DONT_CARE, STYLE_WHITE_RECT, CLASS_STATIC, L"\0", 1);
+}
 
+static void addIconToDialog(void** buffer, size_t& space, int16 x, int16 y) {
+	wchar_t iconStr[2] = { 0xFFFF, (WORD)IDI_WARNING };
+	addDialogItem(buffer, space, x, y, SM_CXICON, SM_CYICON, ID_DONT_CARE, STYLE_ICON, CLASS_STATIC, iconStr, 1);
 }
 
 std::wstring formatAssertMessage(const char* fileName, uint32 lineNumber, const std::vector<string>& stackTrace, const char* msg, ...) {
@@ -264,6 +212,7 @@ std::wstring formatAssertMessage(const char* fileName, uint32 lineNumber, const 
 	{
 		// Error
 		va_end(args);
+		delete[] buffer;
 		return std::wstring();
 	}
 	
@@ -275,6 +224,7 @@ std::wstring formatAssertMessage(const char* fileName, uint32 lineNumber, const 
 		sstream << str.c_str() << "\r\n";
 	}
 
+	delete[] buffer;
 	return sstream.str();
 
 }

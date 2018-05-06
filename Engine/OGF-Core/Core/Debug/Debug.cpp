@@ -1,8 +1,10 @@
 #include "Debug.h"
 
-#include <sstream>
-
 #include <Windows.h>
+
+#ifdef DEBUG_BUILD
+
+#include <sstream>
 #include <DbgHelp.h>
 
 bool Debug::s_symbolsLoaded = false;
@@ -153,6 +155,7 @@ uint32 Debug::getLineNumberFromAddress(uint64 address) {
 		return 0;
 	}
 }
+#endif
 
 string Debug::getStringFromErrorCode(uint32 errorCode) {
 	

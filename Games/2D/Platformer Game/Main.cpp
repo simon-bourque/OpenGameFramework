@@ -8,7 +8,9 @@
 #include "Core/Debug/Debug.h"
 
 int main() {
+#ifdef DEBUG_BUILD
 	Debug::loadSymbols();
+#endif
 
 	try {
 		PlatformerGame game;
@@ -21,8 +23,9 @@ int main() {
 		return 1;
 	}
 	//system("pause");
-
+#ifdef DEBUG_BUILD
 	Debug::unloadSymbols();
+#endif
 
 	return 0;
 }

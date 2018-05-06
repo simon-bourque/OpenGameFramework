@@ -3,10 +3,15 @@
 #include "Core/Core.h"
 #include "Core/Platform.h"
 
-//#include "Core/EngineAssert.h"
+#include "Core/Assert.h"
+
+#include "Core/Debug/Debug.h"
 
 int main() {
-	//ASSERT(false, "Test message");
+#ifdef DEBUG_BUILD
+	Debug::loadSymbols();
+#endif
+
 	try {
 		PlatformerGame game;
 		game.start();
@@ -18,6 +23,9 @@ int main() {
 		return 1;
 	}
 	//system("pause");
+#ifdef DEBUG_BUILD
+	Debug::unloadSymbols();
+#endif
 
 	return 0;
 }

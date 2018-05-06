@@ -2,7 +2,7 @@
 
 #include "Core/Core.h"
 
-#include "Core/EngineAssert.h"
+#include "Core/Assert.h"
 
 #include "Core/Platform.h"
 

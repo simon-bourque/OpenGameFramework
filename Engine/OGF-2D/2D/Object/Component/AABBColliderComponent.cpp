@@ -10,7 +10,7 @@
 #include "2D/Physics/Collision/CollisionSystem.h"
 
 #ifdef DEBUG_BUILD
-#include "2D/Debug.h"
+#include "2D/DebugOLD.h"
 #include "2D/Graphics/Graphics2D.h"
 #include "2D/Graphics/Renderer/ShapeRenderer.h"
 #include "Core/Graphics/Color.h"
@@ -58,7 +58,7 @@ void AABBColliderComponent::receiveEvent(const Event& event) {}
 
 #ifdef DEBUG_BUILD
 void AABBColliderComponent::debugRender() {
-	if (getDebugInstance()->flag("show_colliders")) {
+	if (getDebugOLDInstance()->flag("show_colliders")) {
 		getGraphics2DInstance()->getShapeRenderer().drawRectangle(m_rectangle, Color::MAGENTA, false);
 	}
 }

@@ -1,6 +1,6 @@
 #include "QuadTree.h"
 
-#include "Core/EngineAssert.h"
+#include "Core/Assert.h"
 
 #include <utility>
 
@@ -104,7 +104,7 @@ void QuadTree::retrieve(const geo::Rectangle& rect, std::vector<geo::Rectangle>&
 }
 
 void QuadTree::split() {
-	ASSERT(!m_northWest, "Quadtree should never split more than once.");
+	OGF_ASSERT(!m_northWest, "Quadtree should never split more than once.");
 
 	float32 quarterWidth = m_bounds.getHalfWidth() / 2.0f;
 	float32 quarterHeight = m_bounds.getHalfHeight() / 2.0f;

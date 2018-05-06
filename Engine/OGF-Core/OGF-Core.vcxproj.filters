@@ -46,15 +46,15 @@
     <Filter Include="3rdparty\SpookyHash">
       <UniqueIdentifier>{ce57e5f4-39ec-4104-bbd6-91304190ef81}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Debug">
+      <UniqueIdentifier>{d93e08ca-3b33-4538-8edf-46ea71343648}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Core.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Core\Delegate.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\EngineAssert.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Core\Game.h">
@@ -174,11 +174,14 @@
     <ClInclude Include="Core\Math\Vector3f.h">
       <Filter>Core\Math</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Debug\Debug.h">
+      <Filter>Core\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Assert.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Core\EngineAssert.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Game.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -271,6 +274,12 @@
     </ClCompile>
     <ClCompile Include="Core\Math\Vector3f.cpp">
       <Filter>Core\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Debug\Debug.cpp">
+      <Filter>Core\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Assert.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

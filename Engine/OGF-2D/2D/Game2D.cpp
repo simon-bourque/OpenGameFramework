@@ -16,7 +16,7 @@
 
 #include "2D/Physics/Collision/CollisionSystem.h"
 
-#include "2D/Debug.h"
+#include "2D/DebugOLD.h"
 
 #include <GL/glew.h>
 
@@ -41,14 +41,14 @@ Game2D::Game2D(const string& title, int32 width, int32 height, const geo::Rectan
 //	//SoundEngine::init();
 //
 #ifdef DEBUG_BUILD
-	Singleton<Debug>::init();
+	Singleton<DebugOLD>::init();
 #endif
 }
 
 Game2D::~Game2D() {
 	DEBUG_LOG("Destroying game");
 #ifdef DEBUG_BUILD
-	Singleton<Debug>::destroy();
+	Singleton<DebugOLD>::destroy();
 #endif
 //	//SoundEngine::destroy();
 	Singleton<SceneManager2D>::destroy();
@@ -63,7 +63,7 @@ void Game2D::tick(float32 deltaSeconds) {
 	getSceneManager2DInstance()->tickCurrentScene(deltaSeconds);
 	getSceneManager2DInstance()->getCurrentScene().getCollisionSystem()->narrowScan();
 #ifdef DEBUG_BUILD
-	getDebugInstance()->tick(m_fps);
+	getDebugOLDInstance()->tick(m_fps);
 #endif
 }
 
@@ -73,6 +73,6 @@ void Game2D::render() {
 	getSceneManager2DInstance()->renderCurrentScene();
 
 #ifdef DEBUG_BUILD
-	getDebugInstance()->render();
+	getDebugOLDInstance()->render();
 #endif
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/EngineAssert.h"
+#include "Core/Assert.h"
 
 #define SINGLETON_DECLARATION(Type) friend Singleton<Type>;\
 									Type(const Type&) = delete;\
@@ -18,13 +18,13 @@ public:
 	virtual ~Singleton() {}
 
 	static T* get() {
-		ASSERT(s_instance, "Singleton must be initialized before use.");
+		OGF_ASSERT(s_instance, "Singleton must be initialized before use.");
 		return s_instance;
 	}
 
 	template<typename... Params>
 	static void init(Params... args) {
-		ASSERT(!s_instance, "Singleton is already initialized.");
+		OGF_ASSERT(!s_instance, "Singleton is already initialized.");
 		s_instance = new T(args...);
 	}
 

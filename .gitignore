@@ -248,3 +248,5 @@ ModelManifest.xml
 !dependencies/lib/x86
 !dependencies/lib/x86/Debug
 !dependencies/lib/x86/Release
+
+!Engine/OGF-Core/Core/Debug

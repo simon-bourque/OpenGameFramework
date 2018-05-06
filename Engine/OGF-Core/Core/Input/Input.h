@@ -2,7 +2,7 @@
 
 #include "Core/Core.h"
 #include "Core/Delegate.h"
-#include "Core/EngineAssert.h"
+#include "Core/Assert.h"
 #include "Core/Singleton.h"
 
 #include <vector>

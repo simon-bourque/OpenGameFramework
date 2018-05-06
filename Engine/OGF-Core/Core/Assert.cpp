@@ -120,7 +120,7 @@ bool showAssertDialogWindows(const std::wstring& msg) {
 	size_t space = BUFF_SIZE - sizeof(LPDLGTEMPLATE) - (20 * sizeof(wchar_t)) - (3 * sizeof(WORD));
 
 	// Add buttons
-	addButtonToDialog(&buffer, space, 5, 230, ID_IGNORE, STYLE_BUTTON, L"Ignore", 6);
+	addButtonToDialog(&buffer, space, 5, 230, ID_IGNORE, STYLE_DEFAULT_BUTTON, L"Ignore", 6);
 	addButtonToDialog(&buffer, space, 60, 230, ID_BREAK, STYLE_BUTTON | (Debug::isDebuggerAttached() ? 0 : WS_DISABLED), L"Break", 5);
 	addButtonToDialog(&buffer, space, 115, 230, ID_TERMINATE, STYLE_BUTTON, L"Terminate", 9);
 

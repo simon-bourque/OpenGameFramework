@@ -22,6 +22,7 @@
     <ProjectGuid>{9C1CF1DD-F507-4776-8A21-1EBF66D25C3B}</ProjectGuid>
     <RootNamespace>Tools</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>OGF-Build</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -69,16 +70,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <TargetName>conv</TargetName>
+    <TargetName>build</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <TargetName>conv</TargetName>
+    <TargetName>build</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <TargetName>conv</TargetName>
+    <TargetName>build</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <TargetName>conv</TargetName>
+    <TargetName>build</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -140,10 +141,10 @@
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Engine\OGF-2D\OGF-2D.vcxproj">
+    <ProjectReference Include="..\..\Engine\OGF-2D\OGF-2D.vcxproj">
       <Project>{a75cdacf-0386-484b-bc3d-55fe64d5e3cd}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\Engine\OGF-Core\OGF-Core.vcxproj">
+    <ProjectReference Include="..\..\Engine\OGF-Core\OGF-Core.vcxproj">
       <Project>{4b5c8478-ee0c-4cc8-8b7f-15ac2e8b1e47}</Project>
     </ProjectReference>
   </ItemGroup>

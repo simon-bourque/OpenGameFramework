@@ -1,0 +1,5 @@
+<texture name="player_duck" type="2d" filtering="nearestneighbor" horizontalwrap="clamptoedge" verticalwrap="clamptoedge">
+	<image path="p1_spritesheet.png">
+		<subimage x="365" y="98" width="69" height="71"/>
+	</image>
+</texture>

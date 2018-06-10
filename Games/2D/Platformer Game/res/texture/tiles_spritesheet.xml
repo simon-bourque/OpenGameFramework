@@ -1,0 +1,5 @@
+<texture name="tiles_spritesheet" type="2darray" filtering="nearestneighbor" horizontalwrap="clamptoedge" verticalwrap="clamptoedge">
+	<image path="tiles_spritesheet.png">
+		<tilesheet margin="0" spacing="2" tilewidth="70" tileheight="70"/>
+	</image>
+</texture>

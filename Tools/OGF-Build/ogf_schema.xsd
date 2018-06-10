@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified">
+
+	<xs:simpleType name="textureType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="2d"/>
+			<xs:enumeration value="2darray"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="textureFilterType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="nearestneighbor"/>
+			<xs:enumeration value="linear"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="textureWrapType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="clamptoedge"/>
+			<xs:enumeration value="clamptoborder"/>
+			<xs:enumeration value="mirroredrepeat"/>
+			<xs:enumeration value="repeat"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:element name="texture">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="image" maxOccurs="unbounded" minOccurs="1">
+					<xs:complexType>
+						<xs:choice>
+								<xs:element name="subimage" maxOccurs="unbounded" minOccurs="0">
+									<xs:complexType>
+										<xs:attribute name="x" type="xs:unsignedInt" use="required"/>
+										<xs:attribute name="y" type="xs:unsignedInt" use="required"/>
+										<xs:attribute name="width" type="xs:unsignedInt" use="required"/>
+										<xs:attribute name="height" type="xs:unsignedInt" use="required"/>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="tilesheet" maxOccurs="1" minOccurs="0">
+									<xs:complexType>
+										<xs:attribute name="margin" type="xs:unsignedInt" use="optional" default="0"/>
+										<xs:attribute name="spacing" type="xs:unsignedInt" use="optional" default="0"/>
+										<xs:attribute name="tilewidth" type="xs:unsignedInt" use="required"/>
+										<xs:attribute name="tileheight" type="xs:unsignedInt" use="required"/>
+									</xs:complexType>								
+								</xs:element>
+						</xs:choice>
+						<xs:attribute name="path" type="xs:string" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+			<xs:attribute name="type" type="textureType" use="required"/>
+			<xs:attribute name="filtering" type="textureFilterType" use="required"/>
+			<xs:attribute name="horizontalwrap" type="textureWrapType" use="optional" default="clamptoedge"/>
+			<xs:attribute name="verticalwrap" type="textureWrapType" use="optional" default="clamptoedge"/>
+		</xs:complexType>
+	</xs:element>
+	
+</xs:schema>

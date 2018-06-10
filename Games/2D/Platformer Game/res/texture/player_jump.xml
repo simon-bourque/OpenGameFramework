@@ -1,0 +1,5 @@
+<texture name="player_jump" type="2d" filtering="nearestneighbor" horizontalwrap="clamptoedge" verticalwrap="clamptoedge">
+	<image path="p1_spritesheet.png">
+		<subimage x="438" y="93" width="67" height="94"/>
+	</image>
+</texture>

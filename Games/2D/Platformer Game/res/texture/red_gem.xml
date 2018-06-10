@@ -1,0 +1,3 @@
+<texture name="red_gem" type="2d" filtering="nearestneighbor" horizontalwrap="clamptoedge" verticalwrap="clamptoedge">
+	<image path="gemRed.png"/>
+</texture>

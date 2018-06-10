@@ -132,11 +132,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BuildTextures.cpp" />
     <ClCompile Include="ConvertLevel.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BuildTextures.h" />
     <ClInclude Include="ConvertLevel.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>

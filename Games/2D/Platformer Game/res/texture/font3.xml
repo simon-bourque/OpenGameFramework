@@ -1,0 +1,3 @@
+<texture name="font3" type="2d" filtering="linear" horizontalwrap="clamptoedge" verticalwrap="clamptoedge">
+	<image path="font3.png"/>
+</texture>

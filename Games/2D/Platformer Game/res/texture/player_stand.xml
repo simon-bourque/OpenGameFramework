@@ -1,0 +1,5 @@
+<texture name="player_stand" type="2d" filtering="nearestneighbor" horizontalwrap="clamptoedge" verticalwrap="clamptoedge">
+	<image path="p1_spritesheet.png">
+		<subimage x="67" y="196" width="66" height="92"/>
+	</image>
+</texture>

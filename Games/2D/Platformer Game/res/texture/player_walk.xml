@@ -1,0 +1,15 @@
+<texture name="player_walk" type="2darray" filtering="nearestneighbor" horizontalwrap="clamptoedge" verticalwrap="clamptoedge">
+	<image path="p1_spritesheet.png">
+		<subimage x="0" y="0" width="72" height="97"/>
+		<subimage x="73" y="0" width="72" height="97"/>
+		<subimage x="146" y="0" width="72" height="97"/>
+		<subimage x="0" y="98" width="72" height="97"/>
+		<subimage x="73" y="98" width="72" height="97"/>
+		<subimage x="146" y="98" width="72" height="97"/>
+		<subimage x="219" y="0" width="72" height="97"/>
+		<subimage x="292" y="0" width="72" height="97"/>
+		<subimage x="219" y="98" width="72" height="97"/>
+		<subimage x="365" y="0" width="72" height="97"/>
+		<subimage x="292" y="98" width="72" height="97"/>
+	</image>
+</texture>

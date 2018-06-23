@@ -180,6 +180,12 @@
     <ClInclude Include="Core\Assert.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Graphics\Framebuffer.h">
+      <Filter>Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Graphics\FramebufferCache.h">
+      <Filter>Core\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Game.cpp">
@@ -280,6 +286,12 @@
     </ClCompile>
     <ClCompile Include="Core\Assert.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Graphics\Framebuffer.cpp">
+      <Filter>Core\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Graphics\FramebufferCache.cpp">
+      <Filter>Core\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

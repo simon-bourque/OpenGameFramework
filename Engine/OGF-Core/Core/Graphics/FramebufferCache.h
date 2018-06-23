@@ -19,17 +19,23 @@ private:
 
 	std::unordered_map<FbRef, Framebuffer*, FbReferenceHash> _loadedFbs;
 
+	// Current number of framebuffers in the cache
 	uint32 _size;
 
+	// The generated framebuffers will use these dimensions
+	uint32 _width;
+	uint32 _height;
+
 public:
-	FramebufferCache();
+	FramebufferCache(uint32 width, uint32 height);
 	~FramebufferCache();
 
-	FbRef genFramebuffer(std::string name);
+	FbRef genFramebuffer(const std::string& name);
+	void destroyFramebuffer(FbRef framebufferRef);
 	//std::vector<FbRef> genFramebuffer(std::vector<std::string> names);
 
 	bool isValid(FbRef framebufferRef) const;
 
 	uint32 getSize() const noexcept { return _size; }
-	Framebuffer* getFramebuffer(FbRef reference) const noexcept;
+	Framebuffer* getFramebuffer(FbRef reference) const;
 };

@@ -31,6 +31,12 @@ public:
 		CLAMP_TO_BORDER = GL_CLAMP_TO_BORDER
 	};
 
+	enum class Attachment : GLenum {
+		COLOR_ATTACH = GL_COLOR_ATTACHMENT0,
+		DEPTH_ATTACH = GL_DEPTH_ATTACHMENT,
+		STENCIL_ATTACH = GL_STENCIL_ATTACHMENT
+	};
+
 	enum class Unit : GLenum {
 		UNIT_0 = GL_TEXTURE0,
 		UNIT_1 = GL_TEXTURE1,
@@ -40,8 +46,8 @@ public:
 	};
 
 private:
-	GLuint m_name;
-	Target m_target;
+	GLuint _texid;
+	Target _target;
 	Texture(Target target);
 public:
 	virtual ~Texture();
@@ -49,7 +55,8 @@ public:
 	void bind(Unit unit) const;
 	void unbind() const;
 
-	Target getTarget() const { return m_target; };
+	Target getTarget() const { return _target; };
+	GLuint getId() const { return _texid; };
 
 	// Prevent copying of texture
 	Texture(const Texture&) = delete;

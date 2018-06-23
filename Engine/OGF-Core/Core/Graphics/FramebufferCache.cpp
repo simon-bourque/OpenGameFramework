@@ -8,13 +8,15 @@
 
 #define HASH_SEED 0xCCFA2B3C4D5E6FFF
 
-FramebufferCache::FramebufferCache()
+FramebufferCache::FramebufferCache(uint32 width, uint32 height)
+	: _width(width)
+	, _height(height)
 {
 	// Default null framebuffer. Used when returning errors
 	_loadedFbs[0] = nullptr;
 }
 
-FbRef FramebufferCache::genFramebuffer(std::string name)
+FbRef FramebufferCache::genFramebuffer(const std::string& name)
 {
 	uint64 nameHash = SpookyHash::Hash64(name.c_str(), name.length(), HASH_SEED);
 
@@ -28,11 +30,23 @@ FbRef FramebufferCache::genFramebuffer(std::string name)
 	uint32 fbid;
 	glGenFramebuffers(1, &fbid);
 
-	Framebuffer* framebuffer = new Framebuffer(name, fbid);
+	Framebuffer* framebuffer = new Framebuffer(name);
 
 	_loadedFbs[nameHash] = framebuffer;
 
+	_size++;
+
 	return nameHash;
+}
+
+void FramebufferCache::destroyFramebuffer(FbRef framebufferRef)
+{
+	auto iter = _loadedFbs.find(framebufferRef);
+
+	if (iter != _loadedFbs.end())
+	{
+		_loadedFbs.erase(framebufferRef);
+	}
 }
 
 bool FramebufferCache::isValid(FbRef framebufferRef) const

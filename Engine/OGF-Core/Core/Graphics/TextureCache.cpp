@@ -29,11 +29,11 @@ TextureCache::TextureCache() {
 	Texture* tex = new Texture(Texture::Target::TEXTURE_2D);
 	tex->bind(Texture::Unit::UNIT_0);
 
-	glTexImage2D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, 2, 2, 0, GL_RGBA, GL_FLOAT, data);
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filtering));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filtering));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(textureWrapS));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(textureWrapT));
+	glTexImage2D(static_cast<GLenum>(tex->_target), 0, GL_RGBA, 2, 2, 0, GL_RGBA, GL_FLOAT, data);
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filtering));
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filtering));
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(textureWrapS));
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(textureWrapT));
 
 	tex->unbind();
 
@@ -125,11 +125,11 @@ Texture* TextureCache::loadTexture2DFromFile(FileReader& input) const {
 
 	tex->bind(Texture::Unit::UNIT_0);
 
-	glTexImage2D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filter));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filter));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(wrapS));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(wrapT));
+	glTexImage2D(static_cast<GLenum>(tex->_target), 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filter));
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filter));
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(wrapS));
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(wrapT));
 
 	tex->unbind();
 
@@ -158,11 +158,11 @@ Texture* TextureCache::loadTexture2DArrayFromFile(FileReader& input) const {
 	
 	tex->bind(Texture::Unit::UNIT_0);
 
-	glTexImage3D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, width, height, depth, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filter));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filter));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(wrapS));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(wrapT));
+	glTexImage3D(static_cast<GLenum>(tex->_target), 0, GL_RGBA, width, height, depth, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filter));
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filter));
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(wrapS));
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(wrapT));
 	
 	tex->unbind();
 

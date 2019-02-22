@@ -16,7 +16,7 @@ FramebufferCache::FramebufferCache(uint32 width, uint32 height)
 	_loadedFbs[0] = nullptr;
 }
 
-FbRef FramebufferCache::genFramebuffer(const std::string& name)
+FbRef FramebufferCache::genFramebuffer(const std::string& name, Framebuffer::Attachment att)
 {
 	uint64 nameHash = SpookyHash::Hash64(name.c_str(), name.length(), HASH_SEED);
 
@@ -30,7 +30,7 @@ FbRef FramebufferCache::genFramebuffer(const std::string& name)
 	uint32 fbid;
 	glGenFramebuffers(1, &fbid);
 
-	Framebuffer* framebuffer = new Framebuffer(name);
+	Framebuffer* framebuffer = new Framebuffer(name, att);
 
 	_loadedFbs[nameHash] = framebuffer;
 

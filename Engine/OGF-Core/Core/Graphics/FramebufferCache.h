@@ -30,7 +30,7 @@ public:
 	FramebufferCache(uint32 width, uint32 height);
 	~FramebufferCache();
 
-	FbRef genFramebuffer(const std::string& name);
+	FbRef genFramebuffer(const std::string& name, Framebuffer::Attachment att);
 	void destroyFramebuffer(FbRef framebufferRef);
 	//std::vector<FbRef> genFramebuffer(std::vector<std::string> names);
 

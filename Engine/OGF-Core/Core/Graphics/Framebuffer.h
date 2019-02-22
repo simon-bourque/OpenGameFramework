@@ -10,14 +10,22 @@
 class Framebuffer
 {
 	friend class FramebufferCache;
+
+public:
+	enum class Attachment : GLenum {
+		COLOR_ATTACH = GL_COLOR_ATTACHMENT0,
+		DEPTH_ATTACH = GL_DEPTH_ATTACHMENT,
+		STENCIL_ATTACH = GL_STENCIL_ATTACHMENT
+	};
+
 private:
 	uint32 _fbid;
-	Texture::Attachment _attachment;
+	Framebuffer::Attachment _attachment;
 	const Texture* _attachedTex;
 	std::string _name;
 
 public:
-	Framebuffer(const std::string& name, Texture::Attachment att);
+	Framebuffer(const std::string& name, Framebuffer::Attachment att);
 
 	// Prevent copying of framebuffers
 	Framebuffer(const Framebuffer&) = delete;
@@ -34,7 +42,7 @@ public:
 	void unbind() const;
 
 	uint32 getId() const noexcept { return _fbid; }
-	Texture::Attachment getAttachment() const noexcept { return _attachment;  }
+	Framebuffer::Attachment getAttachment() const noexcept { return _attachment;  }
 	std::string getName() const noexcept { return _name; }
 	const Texture* getTex() const noexcept { return _attachedTex; }
 

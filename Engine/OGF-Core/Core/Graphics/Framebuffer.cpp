@@ -1,6 +1,6 @@
 #include "Framebuffer.h"
 
-Framebuffer::Framebuffer(const std::string& name, Texture::Attachment att)
+Framebuffer::Framebuffer(const std::string& name, Framebuffer::Attachment att)
 	: _attachment(att)
 	, _attachedTex(nullptr)
 	, _name(name)

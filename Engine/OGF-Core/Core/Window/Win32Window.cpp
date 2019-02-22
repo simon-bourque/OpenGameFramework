@@ -143,14 +143,21 @@ Window::Window(const string& title, int32 width, int32 height) : m_title(title),
 		y = (dm.dmPelsHeight - height) / 2;
 	}
 
+	RECT windowSize;
+	windowSize.left = x;
+	windowSize.top = y;
+	windowSize.right = x + width;
+	windowSize.bottom = y + height;
+	AdjustWindowRect(&windowSize, WS_OVERLAPPEDWINDOW, false);
+
 	m_handle = CreateWindowEx(0,
 		"MainWindow",
 		title.c_str(),
-		WS_OVERLAPPEDWINDOW,          
-		x,
-		y,
-		width,
-		height,
+		WS_OVERLAPPEDWINDOW,
+		windowSize.left,
+		windowSize.top,
+		windowSize.right - windowSize.left,
+		windowSize.bottom - windowSize.top,
 		(HWND)NULL,            // no parent or owner window    
 		(HMENU)NULL,           // class menu used              
 		instance,              // instance handle              

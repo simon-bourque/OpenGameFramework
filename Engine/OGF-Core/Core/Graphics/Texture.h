@@ -7,7 +7,6 @@
 class Texture
 {
 
-	friend class TextureManager;
 	friend class TextureCache;
 
 public:
@@ -17,6 +16,31 @@ public:
 		TEXTURE_2D_ARRAY = GL_TEXTURE_2D_ARRAY,
 		TEXTURE_BUFFER = GL_TEXTURE_BUFFER,
 		TEXTURE_CUBE_MAP = GL_TEXTURE_CUBE_MAP
+	};
+
+	enum class InternalFormat : GLenum {
+		RGBA = GL_RGBA,
+		RGB = GL_RGB,
+		DEPTH_COMP = GL_DEPTH_COMPONENT,
+		DEPTH_STENCIL = GL_DEPTH_STENCIL
+	};
+
+	enum class Format : GLenum {
+		RGBA = GL_RGBA,
+		RGB = GL_RGB,
+		DEPTH_COMP = GL_DEPTH_COMPONENT,
+		DEPTH_STENCIL = GL_DEPTH_STENCIL
+	};
+
+	enum class Type : GLenum {
+		UBYTE = GL_UNSIGNED_BYTE,
+		BYTE = GL_BYTE,
+		USHORT = GL_UNSIGNED_SHORT,
+		SHORT = GL_SHORT,
+		UINT = GL_UNSIGNED_INT,
+		INT = GL_INT,
+		HALF_FLOAT = GL_HALF_FLOAT,
+		FLOAT = GL_FLOAT
 	};
 
 	enum class Filter : GLint {
@@ -42,12 +66,17 @@ public:
 private:
 	GLuint _texid;
 	Target _target;
-	Texture(Target target);
+	InternalFormat _internalFormat;
+	Format _format;
+	Type _type;
+
+	Texture(Target target, InternalFormat internalFormat, Format format, Type type);
 public:
 	virtual ~Texture();
 
 	void bind(Unit unit) const;
 	void unbind() const;
+	void resize(const int32 width, const int32 height) const;
 
 	Target getTarget() const { return _target; };
 	GLuint getId() const { return _texid; };

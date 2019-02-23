@@ -1,7 +1,10 @@
 #include "Texture.h"
 
-Texture::Texture(Target target) 
+Texture::Texture(Target target, InternalFormat internalFormat, Format format, Type type) 
 	: _target(target)
+	, _internalFormat(internalFormat)
+	, _format(format)
+	, _type(type)
 	, _texid(0)
 {
 	glGenTextures(1, &_texid);
@@ -18,5 +21,22 @@ void Texture::bind(Unit unit) const {
 }
 
 void Texture::unbind() const {
+	glBindTexture(static_cast<GLenum>(_target), 0);
+}
+
+void Texture::resize(const int32 width, const int32 height) const {
+	glBindTexture(static_cast<GLenum>(_target), _texid);
+
+	glTexImage2D(
+		static_cast<GLenum>(_target),
+		0,
+		static_cast<GLenum>(_internalFormat),
+		width,
+		height,
+		0,
+		static_cast<GLenum>(_format),
+		static_cast<GLenum>(_type),
+		0);
+
 	glBindTexture(static_cast<GLenum>(_target), 0);
 }

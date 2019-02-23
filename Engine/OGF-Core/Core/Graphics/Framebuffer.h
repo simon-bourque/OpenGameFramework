@@ -21,7 +21,7 @@ public:
 private:
 	uint32 _fbid;
 	Framebuffer::Attachment _attachment;
-	const Texture* _attachedTex;
+	const Texture* _attachedTex = nullptr;
 	std::string _name;
 
 public:
@@ -45,6 +45,7 @@ public:
 	Framebuffer::Attachment getAttachment() const noexcept { return _attachment;  }
 	std::string getName() const noexcept { return _name; }
 	const Texture* getTex() const noexcept { return _attachedTex; }
+	void resize(const int32 width, const int32 height); // Will resize the texture attached to this framebuffer
 
 	virtual ~Framebuffer();
 }; 

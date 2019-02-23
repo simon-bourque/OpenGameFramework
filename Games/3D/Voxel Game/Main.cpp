@@ -15,6 +15,7 @@
 #include "Core/Window/Window.h"
 #include "Core/Graphics/TextureCache.h"
 #include "Core/Graphics/Texture.h"
+#include "Core/Graphics/GraphicsContext.h"
 
 // OGF 3D
 #include "3D/Graphics/Camera.h"
@@ -78,6 +79,8 @@ int main() {
 		Singleton<Window>::init("Voxel Game", SCREENWIDTH, SCREENHEIGHT);
 		Singleton<Input>::init();
 
+		Singleton<GraphicsContext>::init();
+
 		RenderingContext::init();
 		RenderingContext::get()->camera.setPerspective(45, SCREENWIDTH/(float32)SCREENHEIGHT);
 		chunkShader = RenderingContext::get()->shaderCache.loadShaderProgram("chunk_shader", "Resources/Shaders/chunk_vert.glsl", "Resources/Shaders/chunk_frag.glsl");
@@ -93,7 +96,6 @@ int main() {
 		paths.rt = "Resources/Images/MCLITErt.tga";
 		skyboxShader = RenderingContext::get()->shaderCache.loadShaderProgram("skybox_shader", "Resources/Shaders/skybox_vert.glsl", "Resources/Shaders/skybox_frag.glsl");
 		skyboxTexture = RenderingContext::get()->textureCache.loadTextureCubeMap("skybox_texture", paths);
-
 		initSkybox();
 
 #ifdef COMPILE_DRAW_NORMALS
@@ -101,7 +103,6 @@ int main() {
 		//glLineWidth(3.0f);
 #endif
 		initTestCube();
-
 		WaterRenderer::init();
 		WaterRenderer::get()->buildFBO(SCREENWIDTH, SCREENHEIGHT);
 	}
@@ -176,6 +177,8 @@ int main() {
 
 	WaterRenderer::destroy();
 	RenderingContext::destroy();
+
+	Singleton<GraphicsContext>::destroy();
 
 	return 0;
 }
@@ -264,7 +267,8 @@ void render() {
 	//std::cout << visibleChunks.size() << std::endl;
 
 	// Second Pass (render refraction texture)
-	glBindFramebuffer(GL_FRAMEBUFFER, WaterRenderer::get()->getRefractionFBO());
+	//glBindFramebuffer(GL_FRAMEBUFFER, WaterRenderer::get()->getRefractionFBO());
+	WaterRenderer::get()->bindFBO();
 	chunkShader->use();
 	chunkShader->setUniform("vpMatrix", RenderingContext::get()->camera.getViewProjectionMatrix());
 	chunkShader->setUniform("waterPlaneHeight", WaterRenderer::get()->getY());

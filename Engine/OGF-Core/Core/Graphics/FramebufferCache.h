@@ -6,18 +6,18 @@
 
 #include <unordered_map>
 
-typedef uint64 FbRef;
+typedef uint64 FramebufRef;
 
 class FramebufferCache
 {
 private:
-	class FbReferenceHash
+	class FramebufRefHash
 	{
 	public:
-		size_t operator()(const FbRef& k) const { return k; }
+		size_t operator()(const FramebufRef& k) const { return k; }
 	};
 
-	std::unordered_map<FbRef, Framebuffer*, FbReferenceHash> _loadedFbs;
+	std::unordered_map<FramebufRef, Framebuffer*, FramebufRefHash> _loadedFbs;
 
 	// Current number of framebuffers in the cache
 	uint32 _size;
@@ -27,13 +27,13 @@ private:
 	int32 _height;
 
 public:
-	FramebufferCache(uint32 width, uint32 height);
+	FramebufferCache();
 	~FramebufferCache();
 
-	FbRef genFramebuffer(const std::string& name, Framebuffer::Attachment att);
-	void destroyFramebuffer(FbRef framebufferRef);
+	FramebufRef genFramebuffer(const std::string& name);
+	void destroyFramebuffer(FramebufRef ref);
 
-	bool isValid(FbRef framebufferRef) const;
+	bool isValid(FramebufRef ref) const;
 
 	uint32 getSize() const noexcept { return _size; }
 
@@ -41,5 +41,5 @@ public:
 	// framebuffer cache. Only textures generated at/during runtime can be resized this way.
 	void resizeAll(const int32 width, const int32 height);
 
-	Framebuffer* getFramebuffer(FbRef reference) const;
+	Framebuffer* getFramebuffer(FramebufRef ref) const;
 };

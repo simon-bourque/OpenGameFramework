@@ -99,6 +99,52 @@ TextureRef TextureCache::loadTexture(const string& path) {
 	return pathHash;
 }
 
+TextureRef TextureCache::genTexture(
+	const string& name,
+	const int32 width,
+	const int32 height,
+	Texture::Target target,
+	Texture::InternalFormat internalFormat,
+	Texture::Format format,
+	Texture::Type type) 
+{
+	uint64 nameHash = SpookyHash::Hash64(name.c_str(), name.length(), HASH_SEED);
+
+	// Check if texture with same name exists
+	auto iter = m_loadedTextures.find(nameHash);
+	if (iter != m_loadedTextures.end()) {
+		// TODO Add a warning message here
+		return nameHash;
+	}
+
+	Texture* tex = new Texture(target, internalFormat, format, type);
+
+	tex->bind(Texture::Unit::UNIT_0);
+
+	// Allocating GPU memory for texture
+	glTexImage2D(
+		static_cast<GLenum>(tex->_target),
+		0,
+		static_cast<GLenum>(tex->_internalFormat),
+		width,
+		height,
+		0,
+		static_cast<GLenum>(tex->_format),
+		static_cast<GLenum>(tex->_type),
+		0);
+
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+	tex->unbind();
+
+	m_loadedTextures[nameHash] = tex;
+
+	return nameHash;
+}
+
 bool TextureCache::isValid(TextureRef textureRef) const {
 	auto iter = m_loadedTextures.find(textureRef);
 
@@ -202,4 +248,12 @@ Texture* TextureCache::loadTexture2DArrayFromFile(FileReader& input) const {
 	delete[] data;
 
 	return tex;
+}
+
+void TextureCache::destroyTexture(TextureRef ref) {
+	auto iter = m_loadedTextures.find(ref);
+
+	if (iter != m_loadedTextures.end()) {
+		m_loadedTextures.erase(ref);
+	}
 }

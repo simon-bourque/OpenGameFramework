@@ -6,6 +6,9 @@
 
 #include "Core/Input/Input.h"
 
+#include "Core/Graphics/GraphicsContext.h"
+#include "Core/Graphics/FramebufferCache.h"
+
 #include <Windowsx.h>
 
 LRESULT CALLBACK MainWndProc(HWND handle, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -20,6 +23,9 @@ LRESULT CALLBACK MainWndProc(HWND handle, UINT msg, WPARAM wParam, LPARAM lParam
 			getWindowInstance()->m_width = LOWORD(lParam);
 			getWindowInstance()->m_height = HIWORD(lParam);
 			glViewport(0, 0, LOWORD(lParam), HIWORD(lParam));
+		}
+		if (Singleton<GraphicsContext>::isInitialized()) {
+			getGraphicsContextInstance()->getFramebufferCache()->resizeAll(LOWORD(lParam), HIWORD(lParam));
 		}
 		return 0;
 	case WM_SYSKEYDOWN:

@@ -24,7 +24,7 @@ void Texture::unbind() const {
 	glBindTexture(static_cast<GLenum>(_target), 0);
 }
 
-void Texture::resize(const int32 width, const int32 height) const {
+void Texture::resize(const int32 width, const int32 height) {
 	glBindTexture(static_cast<GLenum>(_target), _texid);
 
 	glTexImage2D(

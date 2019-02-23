@@ -76,7 +76,7 @@ public:
 
 	void bind(Unit unit) const;
 	void unbind() const;
-	void resize(const int32 width, const int32 height) const;
+	void resize(const int32 width, const int32 height);
 
 	Target getTarget() const { return _target; };
 	GLuint getId() const { return _texid; };

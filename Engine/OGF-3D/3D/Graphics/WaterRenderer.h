@@ -4,6 +4,9 @@
 
 #include "Core/Types.h"
 
+#include "Core/Graphics/TextureCache.h"
+#include "Core/Graphics/FramebufferCache.h"
+
 #include "3D/Graphics/Lighting/LightSource.h"
 
 class ShaderProgramOld;
@@ -28,22 +31,20 @@ private:
 	Texture* m_waterNormal2;
 	Texture* m_waterDuDv;
 
-	uint32 m_refractionFBO;
-	uint32 m_refractionDepthRenderBuffer;
-	uint32 m_refractionColorTexture;
+	FramebufRef m_refractionFBO;
+	TextureRef m_refractionColorTexture;
 	
 	WaterRenderer();
 	virtual ~WaterRenderer();
 public:
 
-	void resizeFBO(uint32 width, uint32 height);
 	void buildFBO(uint32 width, uint32 height);
 	
 	void prepare();
 	void render(float32 x, float32 z, float32 scale);
 
 	float32 getY() const { return m_y; };
-	uint32 getRefractionFBO() const { return m_refractionFBO; };
+	void bindFBO() const;
 
 	void setLightUniforms(const LightSource& light);
 

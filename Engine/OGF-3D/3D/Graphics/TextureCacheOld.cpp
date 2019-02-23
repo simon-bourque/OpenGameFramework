@@ -47,7 +47,7 @@ Texture* TextureCacheOld::loadTexture2D(const std::string& name, const std::stri
 
 	stbi_image_free(data);
 
-	m_textures[name] = new Texture(texture, Texture::Type::TEXTURE_2D);
+	m_textures[name] = new Texture(texture, Texture::PixelDataType::TEXTURE_2D);
 	return m_textures[name];
 }
 
@@ -80,7 +80,7 @@ Texture* TextureCacheOld::loadTexture2DArray(const std::string& name, uint32 num
 	glBindTexture(GL_TEXTURE_2D_ARRAY, 0);
 	stbi_image_free(data);
 
-	m_textures[name] = new Texture(texture, Texture::Type::TEXTURE_2D_ARRAY);
+	m_textures[name] = new Texture(texture, Texture::PixelDataType::TEXTURE_2D_ARRAY);
 	return m_textures[name];
 }
 
@@ -130,6 +130,6 @@ Texture* TextureCacheOld::loadTextureCubeMap(const std::string& name, const Cube
 		stbi_image_free(data[i]);
 	}
 
-	m_textures[name] = new Texture(texture, Texture::Type::TEXTURE_CUBE_MAP);
+	m_textures[name] = new Texture(texture, Texture::PixelDataType::TEXTURE_CUBE_MAP);
 	return m_textures[name];
 }

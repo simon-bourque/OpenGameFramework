@@ -26,10 +26,21 @@ private:
 public:
 	TextureCache();
 	~TextureCache();
+	
+	TextureRef genTexture(
+		const string& name,
+		const int32 width,
+		const int32 height,
+		Texture::Target target,
+		Texture::InternalFormat internalFormat,
+		Texture::Format format,
+		Texture::PixelDataType type
+	);
 
 	TextureRef loadTexture(const string& path);
 	bool isValid(TextureRef textureRef) const;
 
 	Texture* getTexture(TextureRef reference) const;
+	void destroyTexture(TextureRef reference);
 
 };

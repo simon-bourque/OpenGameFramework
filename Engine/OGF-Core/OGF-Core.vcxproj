@@ -175,6 +175,8 @@
     <ClInclude Include="Core\Game.h" />
     <ClInclude Include="Core\Graphics\Color.h" />
     <ClInclude Include="Core\Graphics\Coordinates.h" />
+    <ClInclude Include="Core\Graphics\Framebuffer.h" />
+    <ClInclude Include="Core\Graphics\FramebufferCache.h" />
     <ClInclude Include="Core\Graphics\GraphicsContext.h" />
     <ClInclude Include="Core\Graphics\Memory\Buffer.h" />
     <ClInclude Include="Core\Graphics\Memory\VertexArrayObject.h" />
@@ -218,6 +220,8 @@
     <ClCompile Include="Core\Game.cpp" />
     <ClCompile Include="Core\Graphics\Color.cpp" />
     <ClCompile Include="Core\Graphics\Coordinates.cpp" />
+    <ClCompile Include="Core\Graphics\Framebuffer.cpp" />
+    <ClCompile Include="Core\Graphics\FramebufferCache.cpp" />
     <ClCompile Include="Core\Graphics\GraphicsContext.cpp" />
     <ClCompile Include="Core\Graphics\Memory\Buffer.cpp" />
     <ClCompile Include="Core\Graphics\Memory\VertexArrayObject.cpp" />

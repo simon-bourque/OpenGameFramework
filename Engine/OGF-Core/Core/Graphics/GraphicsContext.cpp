@@ -5,6 +5,7 @@
 #include "Core/Graphics/Text/FontManager.h"
 #include "Core/Graphics/Text/TextManager.h"
 #include "Core/Graphics/TextureCache.h"
+#include "Core/Graphics/FramebufferCache.h"
 
 #include "Core/Graphics/Color.h"
 
@@ -62,7 +63,7 @@ GraphicsContext::GraphicsContext() {
 
 	//glPixelStorei(GL_PACK_ALIGNMENT, 1);
 	m_textRenderer.reset(new TextRenderer());
-
+	m_framebufferCache.reset(new FramebufferCache());
 	m_textureCache.reset(new TextureCache());
 	m_fontManager.reset(new FontManager());
 	m_textManager.reset(new TextManager());

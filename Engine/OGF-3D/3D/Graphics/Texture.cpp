@@ -1,7 +1,7 @@
 #include "Texture.h"
 
 
-Texture::Texture(GLuint texture, Type type) : m_texture(texture), m_type(type) {}
+Texture::Texture(GLuint texture, PixelDataType type) : m_texture(texture), m_type(type) {}
 
 Texture::~Texture() {}
 

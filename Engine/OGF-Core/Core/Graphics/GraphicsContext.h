@@ -10,6 +10,7 @@ class TextRenderer;
 class RawImage;
 
 class TextureCache;
+class FramebufferCache;
 
 class FontManager;
 class TextManager;
@@ -23,6 +24,7 @@ private:
 	std::unique_ptr<TextRenderer> m_textRenderer;
 
 	std::unique_ptr<TextureCache> m_textureCache;
+	std::unique_ptr<FramebufferCache> m_framebufferCache;
 	std::unique_ptr<FontManager> m_fontManager;
 	std::unique_ptr<TextManager> m_textManager;
 
@@ -32,6 +34,7 @@ public:
 
 	TextRenderer* getTextRenderer() const { return m_textRenderer.get(); }
 
+	FramebufferCache* getFramebufferCache() const { return m_framebufferCache.get(); }
 	TextureCache* getTextureCache() const { return m_textureCache.get(); }
 	FontManager* getFontManager() const { return m_fontManager.get(); }
 	TextManager* getTextManager() const { return m_textManager.get(); }

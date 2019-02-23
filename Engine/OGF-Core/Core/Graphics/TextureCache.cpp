@@ -26,14 +26,24 @@ TextureCache::TextureCache() {
 	Texture::Wrap textureWrapS = Texture::Wrap::CLAMP_TO_EDGE;
 	Texture::Wrap textureWrapT = Texture::Wrap::CLAMP_TO_EDGE;
 
-	Texture* tex = new Texture(Texture::Target::TEXTURE_2D);
+	Texture* tex = new Texture(Texture::Target::TEXTURE_2D, Texture::InternalFormat::RGBA, Texture::Format::RGBA, Texture::PixelDataType::FLOAT);
 	tex->bind(Texture::Unit::UNIT_0);
 
-	glTexImage2D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, 2, 2, 0, GL_RGBA, GL_FLOAT, data);
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filtering));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filtering));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(textureWrapS));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(textureWrapT));
+	glTexImage2D(
+		static_cast<GLenum>(tex->_target),
+		0,
+		static_cast<GLenum>(tex->_internalFormat),
+		2,
+		2,
+		0,
+		static_cast<GLenum>(tex->_format),
+		static_cast<GLenum>(tex->_type),
+		data);
+
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filtering));
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filtering));
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(textureWrapS));
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(textureWrapT));
 
 	tex->unbind();
 
@@ -89,6 +99,52 @@ TextureRef TextureCache::loadTexture(const string& path) {
 	return pathHash;
 }
 
+TextureRef TextureCache::genTexture(
+	const string& name,
+	const int32 width,
+	const int32 height,
+	Texture::Target target,
+	Texture::InternalFormat internalFormat,
+	Texture::Format format,
+	Texture::PixelDataType type) 
+{
+	uint64 nameHash = SpookyHash::Hash64(name.c_str(), name.length(), HASH_SEED);
+
+	// Check if texture with same name exists
+	auto iter = m_loadedTextures.find(nameHash);
+	if (iter != m_loadedTextures.end()) {
+		// TODO Add a warning message here
+		return nameHash;
+	}
+
+	Texture* tex = new Texture(target, internalFormat, format, type);
+
+	tex->bind(Texture::Unit::UNIT_0);
+
+	// Allocating GPU memory for texture
+	glTexImage2D(
+		static_cast<GLenum>(tex->_target),
+		0,
+		static_cast<GLenum>(tex->_internalFormat),
+		width,
+		height,
+		0,
+		static_cast<GLenum>(tex->_format),
+		static_cast<GLenum>(tex->_type),
+		0);
+
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+	tex->unbind();
+
+	m_loadedTextures[nameHash] = tex;
+
+	return nameHash;
+}
+
 bool TextureCache::isValid(TextureRef textureRef) const {
 	auto iter = m_loadedTextures.find(textureRef);
 
@@ -121,15 +177,26 @@ Texture* TextureCache::loadTexture2DFromFile(FileReader& input) const {
 	uint32 bytesRead = 0;
 	input.read(data, numBytes, bytesRead);
 
-	Texture* tex = new Texture(Texture::Target::TEXTURE_2D);
+	Texture* tex = new Texture(Texture::Target::TEXTURE_2D, Texture::InternalFormat::RGBA, Texture::Format::RGBA, Texture::PixelDataType::UBYTE);
 
 	tex->bind(Texture::Unit::UNIT_0);
 
-	glTexImage2D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filter));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filter));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(wrapS));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(wrapT));
+	// Allocating GPU memory for texture
+	glTexImage2D(
+		static_cast<GLenum>(tex->_target),
+		0,
+		static_cast<GLenum>(tex->_internalFormat),
+		width,
+		height,
+		0,
+		static_cast<GLenum>(tex->_format),
+		static_cast<GLenum>(tex->_type),
+		data);
+
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filter));
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filter));
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(wrapS));
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(wrapT));
 
 	tex->unbind();
 
@@ -154,19 +221,39 @@ Texture* TextureCache::loadTexture2DArrayFromFile(FileReader& input) const {
 	uint32 bytesRead = 0;
 	input.read(data, numBytes, bytesRead);
 
-	Texture* tex = new Texture(Texture::Target::TEXTURE_2D_ARRAY);
+	Texture* tex = new Texture(Texture::Target::TEXTURE_2D_ARRAY, Texture::InternalFormat::RGBA, Texture::Format::RGBA, Texture::PixelDataType::UBYTE);
 	
 	tex->bind(Texture::Unit::UNIT_0);
 
-	glTexImage3D(static_cast<GLenum>(tex->m_target), 0, GL_RGBA, width, height, depth, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filter));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filter));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(wrapS));
-	glTexParameteri(static_cast<GLenum>(tex->m_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(wrapT));
+	// Allocating GPU memory for texture
+	glTexImage3D(
+		static_cast<GLenum>(tex->_target),
+		0,
+		static_cast<GLenum>(tex->_internalFormat),
+		width,
+		height,
+		depth,
+		0,
+		static_cast<GLenum>(tex->_format),
+		static_cast<GLenum>(tex->_type),
+		data);
+
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(filter));
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(filter));
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_WRAP_S, static_cast<GLint>(wrapS));
+	glTexParameteri(static_cast<GLenum>(tex->_target), GL_TEXTURE_WRAP_T, static_cast<GLint>(wrapT));
 	
 	tex->unbind();
 
 	delete[] data;
 
 	return tex;
+}
+
+void TextureCache::destroyTexture(TextureRef ref) {
+	auto iter = m_loadedTextures.find(ref);
+
+	if (iter != m_loadedTextures.end()) {
+		m_loadedTextures.erase(ref);
+	}
 }

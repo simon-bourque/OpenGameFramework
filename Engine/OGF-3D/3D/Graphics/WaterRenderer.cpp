@@ -7,6 +7,7 @@
 #include "3D/Graphics/Renderer/RenderingContext.h"
 #include "3D/Graphics/Shader/ShaderProgramOld.h"
 #include "Core/Graphics/Texture.h"
+#include "Core/Graphics/GraphicsContext.h"
 
 WaterRenderer* WaterRenderer::s_instance = nullptr;
 
@@ -75,44 +76,41 @@ WaterRenderer::WaterRenderer() :
 WaterRenderer::~WaterRenderer() {
 	glDeleteBuffers(m_vbos.size(), m_vbos.data());
 	glDeleteVertexArrays(1, &m_vao);
-	glDeleteRenderbuffers(1, &m_refractionDepthRenderBuffer);
-	glDeleteTextures(1, &m_refractionColorTexture);
-	glDeleteFramebuffers(1, &m_refractionFBO);
-}
 
-void WaterRenderer::resizeFBO(uint32 width, uint32 height) {
-	glDeleteRenderbuffers(1, &m_refractionDepthRenderBuffer);
-	glDeleteTextures(1, &m_refractionColorTexture);
-	glDeleteFramebuffers(1, &m_refractionFBO);
-	buildFBO(width, height);
+	getGraphicsContextInstance()->getFramebufferCache()->destroyFramebuffer(m_refractionFBO);
+	getGraphicsContextInstance()->getTextureCache()->destroyTexture(m_refractionColorTexture);
 }
 
 void WaterRenderer::buildFBO(uint32 width, uint32 height) {
-	
-	// Color
-	glGenTextures(1, &m_refractionColorTexture);
-	glBindTexture(GL_TEXTURE_2D, m_refractionColorTexture);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_FLOAT, 0);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	m_refractionColorTexture = getGraphicsContextInstance()->getTextureCache()->genTexture(
+		"WaterRefractionTexture",
+		width,
+		height,
+		Texture::Target::TEXTURE_2D,
+		Texture::InternalFormat::RGB,
+		Texture::Format::RGB,
+		Texture::PixelDataType::FLOAT
+	);
 
-	// Depth
-	glGenRenderbuffers(1, &m_refractionDepthRenderBuffer);
-	glBindRenderbuffer(GL_RENDERBUFFER, m_refractionDepthRenderBuffer);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
-	glBindRenderbuffer(GL_RENDERBUFFER, 0);
+	m_refractionFBO = getGraphicsContextInstance()->getFramebufferCache()->genFramebuffer(
+		"WaterRefractionFramebuffer"
+	);
 
+	Framebuffer* fb = getGraphicsContextInstance()->getFramebufferCache()->getFramebuffer(m_refractionFBO);
+	if (fb) {
+		fb->attachRenderBuffer(Texture::InternalFormat::DEPTH_COMP, Framebuffer::Attachment::DEPTH_ATTACH, width, height);
+		Texture* tex = getGraphicsContextInstance()->getTextureCache()->getTexture(m_refractionColorTexture);
+		if (tex) {
+			fb->attachTex2D(*tex, Framebuffer::Attachment::COLOR_ATTACH);
+		}
+	}
+}
 
-	glGenFramebuffers(1, &m_refractionFBO);
-	glBindFramebuffer(GL_FRAMEBUFFER, m_refractionFBO);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_refractionColorTexture, 0);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_refractionDepthRenderBuffer);
-	glDrawBuffer(GL_COLOR_ATTACHMENT0);
-
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+void WaterRenderer::bindFBO() const {
+	Framebuffer* fb = getGraphicsContextInstance()->getFramebufferCache()->getFramebuffer(m_refractionFBO);
+	if (fb) {
+		fb->bind();
+	}
 }
 
 void WaterRenderer::prepare() {
@@ -122,8 +120,10 @@ void WaterRenderer::prepare() {
 	m_waterNormal2->bind(Texture::Unit::UNIT_1);
 	m_waterDuDv->bind(Texture::Unit::UNIT_2);
 
-	glActiveTexture(GL_TEXTURE3);
-	glBindTexture(GL_TEXTURE_2D, m_refractionColorTexture);
+	Texture* tex = getGraphicsContextInstance()->getTextureCache()->getTexture(m_refractionColorTexture);
+	if (tex) {
+		tex->bind(Texture::Unit::UNIT_3);
+	}
 }
 
 void WaterRenderer::render(float32 x, float32 z, float32 scale) {

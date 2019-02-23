@@ -32,7 +32,7 @@ public:
 		DEPTH_STENCIL = GL_DEPTH_STENCIL
 	};
 
-	enum class Type : GLenum {
+	enum class PixelDataType : GLenum {
 		UBYTE = GL_UNSIGNED_BYTE,
 		BYTE = GL_BYTE,
 		USHORT = GL_UNSIGNED_SHORT,
@@ -64,13 +64,13 @@ public:
 	};
 
 private:
-	GLuint _texid;
+	uint32 _texid;
 	Target _target;
 	InternalFormat _internalFormat;
 	Format _format;
-	Type _type;
+	PixelDataType _type;
 
-	Texture(Target target, InternalFormat internalFormat, Format format, Type type);
+	Texture(Target target, InternalFormat internalFormat, Format format, PixelDataType type);
 public:
 	virtual ~Texture();
 
@@ -79,7 +79,7 @@ public:
 	void resize(const int32 width, const int32 height);
 
 	Target getTarget() const { return _target; };
-	GLuint getId() const { return _texid; };
+	uint32 getId() const { return _texid; };
 
 	// Prevent copying of texture
 	Texture(const Texture&) = delete;

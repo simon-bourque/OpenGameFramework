@@ -5,7 +5,7 @@
 class Texture {
 	friend class TextureCacheOld;
 public:
-	enum Type : GLenum {
+	enum PixelDataType : GLenum {
 		TEXTURE_2D = GL_TEXTURE_2D,
 		TEXTURE_2D_ARRAY = GL_TEXTURE_2D_ARRAY,
 		TEXTURE_CUBE_MAP = GL_TEXTURE_CUBE_MAP
@@ -20,9 +20,9 @@ public:
 	};
 private:
 	GLuint m_texture;
-	Type m_type;
+	PixelDataType m_type;
 
-	Texture(GLuint texture, Type type);
+	Texture(GLuint texture, PixelDataType type);
 	virtual ~Texture();
 public:
 	Texture(const Texture&) = delete;

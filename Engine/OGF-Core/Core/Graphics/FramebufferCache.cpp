@@ -30,8 +30,6 @@ FramebufRef FramebufferCache::genFramebuffer(const std::string& name) {
 
 	_loadedFbs[nameHash] = framebuffer;
 
-	_size++;
-
 	return nameHash;
 }
 

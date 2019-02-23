@@ -89,7 +89,7 @@ void WaterRenderer::buildFBO(uint32 width, uint32 height) {
 		Texture::Target::TEXTURE_2D,
 		Texture::InternalFormat::RGB,
 		Texture::Format::RGB,
-		Texture::Type::FLOAT
+		Texture::PixelDataType::FLOAT
 	);
 
 	m_refractionFBO = getGraphicsContextInstance()->getFramebufferCache()->genFramebuffer(

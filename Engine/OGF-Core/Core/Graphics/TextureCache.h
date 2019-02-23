@@ -34,7 +34,7 @@ public:
 		Texture::Target target,
 		Texture::InternalFormat internalFormat,
 		Texture::Format format,
-		Texture::Type type
+		Texture::PixelDataType type
 	);
 
 	TextureRef loadTexture(const string& path);

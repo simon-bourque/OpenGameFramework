@@ -26,7 +26,7 @@ TextureCache::TextureCache() {
 	Texture::Wrap textureWrapS = Texture::Wrap::CLAMP_TO_EDGE;
 	Texture::Wrap textureWrapT = Texture::Wrap::CLAMP_TO_EDGE;
 
-	Texture* tex = new Texture(Texture::Target::TEXTURE_2D, Texture::InternalFormat::RGBA, Texture::Format::RGBA, Texture::Type::FLOAT);
+	Texture* tex = new Texture(Texture::Target::TEXTURE_2D, Texture::InternalFormat::RGBA, Texture::Format::RGBA, Texture::PixelDataType::FLOAT);
 	tex->bind(Texture::Unit::UNIT_0);
 
 	glTexImage2D(
@@ -106,7 +106,7 @@ TextureRef TextureCache::genTexture(
 	Texture::Target target,
 	Texture::InternalFormat internalFormat,
 	Texture::Format format,
-	Texture::Type type) 
+	Texture::PixelDataType type) 
 {
 	uint64 nameHash = SpookyHash::Hash64(name.c_str(), name.length(), HASH_SEED);
 
@@ -177,7 +177,7 @@ Texture* TextureCache::loadTexture2DFromFile(FileReader& input) const {
 	uint32 bytesRead = 0;
 	input.read(data, numBytes, bytesRead);
 
-	Texture* tex = new Texture(Texture::Target::TEXTURE_2D, Texture::InternalFormat::RGBA, Texture::Format::RGBA, Texture::Type::UBYTE);
+	Texture* tex = new Texture(Texture::Target::TEXTURE_2D, Texture::InternalFormat::RGBA, Texture::Format::RGBA, Texture::PixelDataType::UBYTE);
 
 	tex->bind(Texture::Unit::UNIT_0);
 
@@ -221,7 +221,7 @@ Texture* TextureCache::loadTexture2DArrayFromFile(FileReader& input) const {
 	uint32 bytesRead = 0;
 	input.read(data, numBytes, bytesRead);
 
-	Texture* tex = new Texture(Texture::Target::TEXTURE_2D_ARRAY, Texture::InternalFormat::RGBA, Texture::Format::RGBA, Texture::Type::UBYTE);
+	Texture* tex = new Texture(Texture::Target::TEXTURE_2D_ARRAY, Texture::InternalFormat::RGBA, Texture::Format::RGBA, Texture::PixelDataType::UBYTE);
 	
 	tex->bind(Texture::Unit::UNIT_0);
 

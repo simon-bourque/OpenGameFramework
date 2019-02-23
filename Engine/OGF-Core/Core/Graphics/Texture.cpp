@@ -1,6 +1,6 @@
 #include "Texture.h"
 
-Texture::Texture(Target target, InternalFormat internalFormat, Format format, Type type) 
+Texture::Texture(Target target, InternalFormat internalFormat, Format format, PixelDataType type) 
 	: _target(target)
 	, _internalFormat(internalFormat)
 	, _format(format)

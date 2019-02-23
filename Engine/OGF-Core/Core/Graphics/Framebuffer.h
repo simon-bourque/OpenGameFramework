@@ -36,9 +36,9 @@ public:
 
 	// Prevent copying of framebuffers
 	Framebuffer(const Framebuffer&) = delete;
-	Framebuffer(Framebuffer&&) = default;
-	Framebuffer& operator=(const Framebuffer&) & = delete;
-	Framebuffer& operator=(Framebuffer&&) & = default;
+	Framebuffer(Framebuffer&&) = delete;
+	Framebuffer& operator=(const Framebuffer&) = delete;
+	Framebuffer& operator=(Framebuffer&&) = delete;
 
 	void bind() const;
 	void bindAsRead() const;

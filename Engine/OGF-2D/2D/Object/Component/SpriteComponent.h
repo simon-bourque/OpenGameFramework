@@ -7,6 +7,8 @@
 
 #include "2D/Object/Component/ComponentType.h"
 
+#include <string>
+
 class GameObject;
 class Game;
 class RenderSystem;
@@ -25,6 +27,8 @@ public:
 	bool isVerticallyFlipped() const { return m_verticalFlip; };
 	void setHorizontalFlip(bool horizontalFlip) { m_horizontalFlip = horizontalFlip; }
 	void setVerticalFlip(bool verticalFlip) { m_verticalFlip = verticalFlip; }
+
+	void replaceTexture(std::string newTexture);
 
 	virtual void tick(float32 delta) override;
 	virtual void render() override;

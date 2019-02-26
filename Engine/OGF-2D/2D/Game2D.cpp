@@ -9,6 +9,8 @@
 
 #include "Core/Input/Input.h"
 
+#include "Core/Threads/ThreadPool.h"
+
 #include "Core/Graphics/GraphicsContext.h"
 #include "2D/Graphics/Graphics2D.h"
 
@@ -36,6 +38,9 @@ Game2D::Game2D(const string& title, int32 width, int32 height, const geo::Rectan
 
 	DEBUG_LOG("Initializing scene manager...");
 	Singleton<SceneManager2D>::init();
+
+	DEBUG_LOG("Initializing thread pool...");
+	Singleton<ThreadPool>::init();
 //
 //	//DEBUG_LOG("Initializing sound engine...");
 //	//SoundEngine::init();

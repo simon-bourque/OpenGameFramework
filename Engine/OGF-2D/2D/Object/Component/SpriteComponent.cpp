@@ -7,6 +7,8 @@
 
 #include "2D/Event.h"
 
+#include "Core/Graphics/GraphicsContext.h"
+
 GET_COMPONENT_TYPE_DEFINITION(SpriteComponent)
 
 SpriteComponent::SpriteComponent(GameObject* parentObject, TextureRef textureRef) : RenderableComponent(parentObject),
@@ -14,7 +16,6 @@ SpriteComponent::SpriteComponent(GameObject* parentObject, TextureRef textureRef
 	m_horizontalFlip(false),
 	m_verticalFlip(false) 
 {}
-
 
 SpriteComponent::~SpriteComponent() {}
 
@@ -33,6 +34,11 @@ void SpriteComponent::receiveEvent(const Event& event) {
 	default:
 		break;
 	}
+}
+
+void SpriteComponent::replaceTexture(std::string newTexture) {
+	getGraphicsContextInstance()->getTextureCache()->destroyTexture(m_textureRef);
+	m_textureRef = getGraphicsContextInstance()->getTextureCache()->loadTexture(newTexture);
 }
 
 #ifdef DEBUG_BUILD

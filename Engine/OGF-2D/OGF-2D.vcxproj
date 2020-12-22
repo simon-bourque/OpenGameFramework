@@ -28,6 +28,7 @@
     <ClCompile Include="2D\Graphics\Animation\SpriteSequenceAnimState.cpp" />
     <ClCompile Include="2D\Graphics\Camera.cpp" />
     <ClCompile Include="2D\Graphics\Graphics2D.cpp" />
+    <ClCompile Include="2D\Graphics\Renderer\EmitterRenderer.cpp" />
     <ClCompile Include="2D\Graphics\Renderer\SceneRenderer.cpp" />
     <ClCompile Include="2D\Graphics\Renderer\ShapeRenderer.cpp" />
     <ClCompile Include="2D\Graphics\Renderer\SpriteRenderer.cpp" />
@@ -35,6 +36,7 @@
     <ClCompile Include="2D\Object\Component\AnimatorComponent.cpp" />
     <ClCompile Include="2D\Object\Component\CameraComponent.cpp" />
     <ClCompile Include="2D\Object\Component\ComponentType.cpp" />
+    <ClCompile Include="2D\Object\Component\EmitterComponent.cpp" />
     <ClCompile Include="2D\Object\Component\ObjectComponent.cpp" />
     <ClCompile Include="2D\Object\Component\RenderableComponent.cpp" />
     <ClCompile Include="2D\Object\Component\RigidBodyComponent.cpp" />
@@ -64,6 +66,8 @@
     <ClInclude Include="2D\Graphics\Animation\SpriteSequenceAnimState.h" />
     <ClInclude Include="2D\Graphics\Camera.h" />
     <ClInclude Include="2D\Graphics\Graphics2D.h" />
+    <ClInclude Include="2D\Graphics\Particle2D.h" />
+    <ClInclude Include="2D\Graphics\Renderer\EmitterRenderer.h" />
     <ClInclude Include="2D\Graphics\Renderer\SceneRenderer.h" />
     <ClInclude Include="2D\Graphics\Renderer\ShapeRenderer.h" />
     <ClInclude Include="2D\Graphics\Renderer\SpriteRenderer.h" />
@@ -71,6 +75,7 @@
     <ClInclude Include="2D\Object\Component\AnimatorComponent.h" />
     <ClInclude Include="2D\Object\Component\CameraComponent.h" />
     <ClInclude Include="2D\Object\Component\ComponentType.h" />
+    <ClInclude Include="2D\Object\Component\EmitterComponent.h" />
     <ClInclude Include="2D\Object\Component\ObjectComponent.h" />
     <ClInclude Include="2D\Object\Component\RenderableComponent.h" />
     <ClInclude Include="2D\Object\Component\RigidBodyComponent.h" />

@@ -45,7 +45,7 @@ void AABBColliderComponent::resetPosition() {
 
 void AABBColliderComponent::onIntersectLevel(const Manifold& manifold) {
 	
-	Vector2f delta = manifold.direction * manifold.depth;
+	Vector2f delta = manifold.direction * manifold.minDepth;
 	getParentObject()->transform.translate(delta.x, delta.y);
 	getParentObject()->broadcastEvent(Event(Event::Type::COLLISION_LEVEL, static_cast<const void*>(&manifold)));
 }

@@ -49,6 +49,9 @@
     <Filter Include="Core\Debug">
       <UniqueIdentifier>{d93e08ca-3b33-4538-8edf-46ea71343648}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Threads">
+      <UniqueIdentifier>{5ed9e222-5b25-4acc-b5e6-3efb7de9483e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Core.h">
@@ -186,6 +189,15 @@
     <ClInclude Include="Core\Graphics\FramebufferCache.h">
       <Filter>Core\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Threads\ThreadPool.h">
+      <Filter>Core\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Threads\ThreadSafeQueue.h">
+      <Filter>Core\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Math\Vector4f.h">
+      <Filter>Core\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Game.cpp">
@@ -292,6 +304,12 @@
     </ClCompile>
     <ClCompile Include="Core\Graphics\FramebufferCache.cpp">
       <Filter>Core\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Threads\ThreadPool.cpp">
+      <Filter>Core\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Math\Vector4f.cpp">
+      <Filter>Core\Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

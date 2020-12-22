@@ -34,6 +34,9 @@ namespace geo {
 		float32 getHalfWidth() const { return m_halfWidth; }
 		float32 getHalfHeight() const { return m_halfHeight; }
 
+		Point getMin() const { return m_bottomLeft; }
+		Point getMax() const { return m_topRight; }
+
 		void setWidth(float32 width);
 		void setHeight(float32 height);
 		virtual void setX(float32 x) override;

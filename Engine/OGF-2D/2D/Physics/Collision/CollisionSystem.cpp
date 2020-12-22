@@ -6,6 +6,7 @@
 #include "2D/Object/Component/AABBColliderComponent.h"
 
 #include <cmath>
+#include <algorithm>
 
 CollisionSystem::CollisionSystem(const geo::Rectangle& bounds) {
 	m_tree = new QuadTree(bounds);
@@ -32,7 +33,7 @@ void CollisionSystem::narrowScan() {
 
 		for (uint32 j = i + 1; j < m_objects.size(); j++) {
 			AABBColliderComponent* other = m_objects[j];
-			geo::Rectangle rB = collider->getRectangle();
+			geo::Rectangle rB = other->getRectangle();
 
 			if (rA.intersects(rB)) {
 				Manifold manifold = generateManifold(rA, rB);
@@ -55,8 +56,9 @@ void CollisionSystem::narrowScan() {
 }
 
 Manifold CollisionSystem::generateManifold(const geo::Rectangle& rA, const geo::Rectangle& rB) {
-	Vector2f direction;
-	float32 depth = 0;
+	Manifold manifold;
+	manifold.colA = (Shape*)&rA;
+	manifold.colB = (Shape*)&rB;
 
 	// Calculate distance between rectangles
 	//Vector2f dist = new Vector2f(rB.getX(), rB.getY()).subtract(new Vector2f(rA.getX(), rA.getY()));
@@ -69,6 +71,7 @@ Manifold CollisionSystem::generateManifold(const geo::Rectangle& rA, const geo::
 	float32 xOverlap = halfWidthA + halfWidthB - abs(dist.x);
 
 	if (xOverlap > 0) {
+		manifold.depth.x = xOverlap;
 
 		float32 halfHeightA = rA.getHeight() / 2.0f;
 		float32 halfHeightB = rB.getHeight() / 2.0f;
@@ -76,35 +79,43 @@ Manifold CollisionSystem::generateManifold(const geo::Rectangle& rA, const geo::
 		// Calculate overlap in y
 		float32 yOverlap = halfHeightA + halfHeightB - abs(dist.y);
 
-
 		// TODO these checks arent necessary if I i already know they're overlapping
 		if (yOverlap > 0) {
+			Vector2f c1, c2;
+			c1.x = std::max(rA.getMin().x, rB.getMin().x);
+			c1.y = std::max(rA.getMin().y, rB.getMin().y);
+			c2.x = std::min(rA.getMax().x, rB.getMax().x);
+			c2.y = std::min(rA.getMax().y, rB.getMax().y);
 
+			manifold.contactPoints.push_back(c1);
+			manifold.contactPoints.push_back(c2);
+
+			manifold.depth.y = yOverlap;
 
 			if (xOverlap < yOverlap) {
 
 				if (dist.x < 0) {
-					direction = { 1, 0 };
+					manifold.direction = { 1, 0 };
 				}
 				else {
-					direction = { -1, 0 };
+					manifold.direction = { -1, 0 };
 				}
-				depth = xOverlap;
+				manifold.minDepth = xOverlap;
 
 			}
 			else {
 				if (dist.y < 0) {
-					direction = { 0, 1 };
+					manifold.direction = { 0, 1 };
 				}
 				else {
-					direction = { 0, -1 };
+					manifold.direction = { 0, -1 };
 				}
-				depth = yOverlap;
+				manifold.minDepth = yOverlap;
 			}
 
 		}
 
 	}
 
-	return Manifold((Shape*)(&rA), (Shape*)(&rB), depth, direction);
+	return manifold;
 }

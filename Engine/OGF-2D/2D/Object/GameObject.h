@@ -27,7 +27,7 @@ public:
 	virtual ~GameObject();
 
 	virtual void tick(float32 delta);
-	void render();
+	virtual void render();
 
 	void addComponent(ObjectComponent* component);
 	void addComponent(RenderableComponent* component);

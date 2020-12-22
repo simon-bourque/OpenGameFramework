@@ -135,6 +135,12 @@
     <ClCompile Include="2D\DebugOLD.cpp">
       <Filter>2D</Filter>
     </ClCompile>
+    <ClCompile Include="2D\Object\Component\EmitterComponent.cpp">
+      <Filter>2D\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="2D\Graphics\Renderer\EmitterRenderer.cpp">
+      <Filter>2D\Graphics\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2D\Object\Component\AABBColliderComponent.h">
@@ -241,6 +247,15 @@
     </ClInclude>
     <ClInclude Include="2D\DebugOLD.h">
       <Filter>2D</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Object\Component\EmitterComponent.h">
+      <Filter>2D\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Graphics\Particle2D.h">
+      <Filter>2D\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="2D\Graphics\Renderer\EmitterRenderer.h">
+      <Filter>2D\Graphics\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
